@@ -1,0 +1,36 @@
+name: Upload Website
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout branch
+      uses: actions/checkout@master
+
+    - name: deploy
+      uses: jakejarvis/s3-sync-action@master
+      with:
+        args: --acl public-read --follow-symlinks --delete --exclude '.git/*' --exclude '.github' --exclude '.gitignore'
+      env:
+        AWS_S3_BUCKET: ${{ secrets.HAMER_AWS_S3_BUCKET }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.HAMER_AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.HAMER_AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: 'us-east-1'   # optional: defaults to us-east-1
+        DESTINATION_DIR: '/'
+
+    - name: invalidate
+      uses: chetan/invalidate-cloudfront-action@master
+      env:
+        DISTRIBUTION: ${{ secrets.HAMER_AWS_CF_DISTRIBUTION_ID }}
+        PATHS: '/'
+        AWS_REGION: 'us-east-1'
+        AWS_ACCESS_KEY_ID: ${{ secrets.HAMER_AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.HAMER_AWS_SECRET_ACCESS_KEY }}
