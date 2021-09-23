@@ -26,6 +26,7 @@ jobs:
         AWS_REGION: 'us-east-1'   # optional: defaults to us-east-1
         DESTINATION_DIR: '/'
   invalidate-cf:
+    needs: deploy-s3
     runs-on: ubuntu-latest
     steps:
     - name: invalidate
