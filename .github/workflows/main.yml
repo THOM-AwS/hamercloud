@@ -26,6 +26,8 @@ jobs:
         AWS_REGION: 'us-east-1'   # optional: defaults to us-east-1
         DESTINATION_DIR: '/'
   invalidate-cf:
+    runs-on: ubuntu-latest
+    steps:
     - name: invalidate
       uses: chetan/invalidate-cloudfront-action@master
       env:
