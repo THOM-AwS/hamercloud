@@ -32,21 +32,22 @@
 				const tom = { lat: -33.8688, lng: 151.2093 };
 				// The map, centered at Uluru
 				const map = new google.maps.Map(document.getElementById("map"), {
-					mapId: "77615f037bd48591"
+			  		mapTypeId: 'coordinate'
 					zoom: 14,
 					center: tom,
 				});
 				// The marker, positioned at Uluru
-				// const marker = new google.maps.Circle({
-				// 	strokeColor: "#FF0000",
-				// 	strokeOpacity: 0.8,
-				// 	strokeWeight: 2,
-				// 	fillColor: "#FF0000",
-				// 	fillOpacity: 0.35,
-				// 	radius: 200,
-				// 	center: tom,
-				// 	map: map,
-				// });
+				const marker = new google.maps.Circle({
+					strokeColor: "#FF0000",
+					strokeOpacity: 0.8,
+					strokeWeight: 2,
+					fillColor: "#FF0000",
+					fillOpacity: 0.35,
+					radius: 200,
+					center: tom,
+					map: map,
+				});
+				map.setTilt(45);
 			}
 		</script>
 
