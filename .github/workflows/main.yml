@@ -9,6 +9,15 @@ on:
     - main
 
 jobs:
+  validate: 
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout branch
+      uses: actions/checkout@master
+
+    - name: HTML5 Validator
+      uses: Cyb3r-Jak3/html5validator-action@v0.6.1
+
   deploy-s3:
     runs-on: ubuntu-latest
     steps:
@@ -25,6 +34,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: 'us-east-1'   # optional: defaults to us-east-1
         DESTINATION_DIR: '/'
+        
   invalidate-cf:
     needs: deploy-s3
     runs-on: ubuntu-latest
