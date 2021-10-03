@@ -35,7 +35,6 @@
 					center: tom,
 					disableDefaultUI: true,
 				});
-				document.getElementById("rotate").addEventListener("click", autoRotate);
 				// The marker
 				const marker = new google.maps.Circle({
 					strokeColor: "#FF0000",
@@ -48,18 +47,6 @@
 					map: map,
 				});
 			}
-			function rotate90() {
-				const heading = map.getHeading() || 0;
-
-				map.setHeading(heading + 90);
-			}
-			function autoRotate() {
-				// Determine if we're showing aerial imagery.
-				if (map.getTilt() !== 0) {
-					window.setInterval(rotate90, 3000);
-			}
-
-
 		</script>
 
 
@@ -106,8 +93,8 @@
 								<h2 class="major">Intro</h2>
 								<span class="image main;"><img src="images/thomas.jpg" alt="Thomas Hamer" style="width:200px;height:200px;" /></span><br>
 								<p>Im Thomas. </p>
+								<img src="images/suitNgongs.jpg" alt="Thomas Hamer" style="width:200px;height:470px;float:right;" />								
 								<p>I live and breathe travelling, and ive worked in countries around the world. In all, Ive been to about 45 countries. Ive had a blast at every one of them. <br><br>No, I cant pick a favorite, Yes, I am planning on going to all ~200 of them.</p>
-								<img src="images/suitNgongs.jpg" alt="Thomas Hamer" style="width:200px;height:470px;clear:both;" />
 								<p>Im obsessive about snowboarding. I have spent a few seasons boarding in southern Europe. Its as good as they say. My next stop is very likely the snowfields of Hakuba, Japan <i class="fas fa-snowboarding"></i></p>
 								<p>In the past, I did a few different jobs. Now that I have found the best job in the world,<br><br> I am a qualified AWS Solutions Architect Professional.  <i class="fab fa-aws"></i></p>
 							</article>
