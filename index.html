@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<title>Thomas Hamer Cloud Consulting</title>
-		<link rel="shortcut icon" type="image/jpg" href="/favicon.ico"/>
+		<link rel="shortcut icon" type="image/jpg" href="favicon.ico"/>
 		<meta charset="utf-8" />
 		<meta name="keywords" content="AWS, Thomas Hamer, Cloud, Consulting, Freelance, solution, architect">
 		<meta name="description" content="AWS Cloud Solutions Architect. Make cool AWS things.">
@@ -31,9 +31,14 @@
 				const tom = { lat: -33.8750, lng: 151.2100 };
 				const map = new google.maps.Map(document.getElementById("map"), {
 					zoom: 13,
+					mapTypeId: 'satellite',
 					center: tom,
+					heading: 90,
+					tilt: 45,
+					disableDefaultUI: true,
 				});
-				// The marker, positioned at Uluru
+				document.getElementById("rotate").addEventListener("click", autoRotate);
+				// The marker
 				const marker = new google.maps.Circle({
 					strokeColor: "#FF0000",
 					strokeOpacity: 0.5,
@@ -45,6 +50,18 @@
 					map: map,
 				});
 			}
+			function rotate90() {
+				const heading = map.getHeading() || 0;
+
+				map.setHeading(heading + 90);
+			}
+			function autoRotate() {
+				// Determine if we're showing aerial imagery.
+				if (map.getTilt() !== 0) {
+					window.setInterval(rotate90, 3000);
+			}
+
+
 		</script>
 
 
