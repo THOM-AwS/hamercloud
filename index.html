@@ -15,6 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 		<style type="text/css">
 			/* Set the size of the div element that contains the map */
@@ -472,6 +473,16 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				<!-- Footer -->
 					<footer id="footer">
 						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a><br> Thomas Hamer ABN <a href="https://www.abr.business.gov.au/ABN/View?abn=87430826790">87430826790</a> Sydney, Australia. July 2021.<br> This website runs on AWS S3, Cloudfront, Route53, ACM & Lambda@Edge for security headers.</p>
+						
+						<div id="ip" class="copyright">
+						</div>
+						<script>
+							$.get("http://ipinfo.io", function(response) {
+								document.getElementById("ip").innerHTML = "Your public IP address is: " + response.ip + "<br>Your location is: " + response.city + ", " + response.region + ", " + response.country + ". <br>Your ISP is: " + response.org;
+							}, "jsonp");
+
+							</script>
+
 					</footer>
 
 			</div>
