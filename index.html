@@ -16,6 +16,8 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<script src="assets/js/jquery.min.js"></script>
+		<script src="http://ipinfo.io"></script>
+		
 
 		<style type="text/css">
 			/* Set the size of the div element that contains the map */
@@ -477,7 +479,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 						<div id="ip" class="copyright">
 						</div>
 						<script>
-							$.get("http://ipinfo.io", function(response) {
+							$.get("https://ipinfo.io", function(response) {
 								document.getElementById("ip").innerHTML = "Your public IP address is: " + response.ip + "<br>Your location is: " + response.city + ", " + response.region + ", " + response.country + ". <br>Your ISP is: " + response.org;
 							}, "jsonp");
 
