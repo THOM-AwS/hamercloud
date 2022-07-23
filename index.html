@@ -476,13 +476,14 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			</script>
 			<script>
 				$.get("https://ipinfo.io", function(response) {
-					const userloc = "location: " + response.loc;}, "jsonp");
+					const userloc = response.loc;}, "jsonp");
 					const locArray = userloc.split(",");
 					let ulat = locArray[0];
 					let ulon = locArray[1];
 				// Initialize and add the map
-				function initMap() {
+				function initMap(ulat, ulon) {
 					const tom = { lat: -33.8750, lng: 151.2100 };
+					const user = { lat: ulat, lng: ulon };
 					const map = new google.maps.Map(document.getElementById("map"), {
 						zoom: 13,
 						mapTypeId: 'satellite',
@@ -500,7 +501,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 						center: tom,
 						map: map,
 					});
-					const user = { lat: ulat, lng: ulon };
+					
 					new google.maps.Circle({
 						strokeColor: "#303030",
 						strokeOpacity: 0.5,
