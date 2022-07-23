@@ -248,7 +248,7 @@
 				</p>
 				<h3 class="major">You:</h3>
 				<div id="ip" class="major">
-					You have an ad blocker active.
+					You are blocking this script from running.
 				</div>
 
 
@@ -550,7 +550,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 	<script src="assets/js/main.js"></script>
 	<script>
 		$.get("https://ipinfo.io", function (response) {
-			document.getElementById("ip").innerHTML = "Your public IP address is: " + response.ip + "<br>Your location is: " + response.city + ", " + response.region + ", " + response.country + ". <br>Your ISP is: " + response.org;
+			document.getElementById("ip").innerHTML = "Your public IP address is: " + response.ip + "<br>Your location is: " + response.city + ", " + response.region + ", " + response.country + ". <br>Your ISP is: " + response.org + "<br> Your coordinates are: " + response.loc;
 		}, "jsonp");
 	</script>
 	<script>
