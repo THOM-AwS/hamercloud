@@ -561,7 +561,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 		function getloc(){
 			$.get("https://ipinfo.io", function (response) {
 				console.log(JSON.stringify("response location is: " + response.loc));
-				return (JSON.stringify("response location is: " + response.loc));
+				return (JSON.stringify(response.loc));
 			}
 				, "jsonp");
 		}
