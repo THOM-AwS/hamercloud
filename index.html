@@ -476,7 +476,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			</script>
 			<script>
 				$.get("https://ipinfo.io", function(response) {
-					let userloc = "location: " + response.loc;}, "jsonp");
+					const userloc = "location: " + response.loc;}, "jsonp");
 					const locArray = userloc.split(",");
 					let ulat = locArray[0];
 					let ulon = locArray[1];
