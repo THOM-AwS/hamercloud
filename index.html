@@ -568,7 +568,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 		console.log("before func");
 		userloc = getloc();
 		console.log("after func");
-		console.log(JSON.stringify(userloc));
+		console.log(userloc);
 		const locArray = userloc.split(",");
 		console.log(locArray);
 		ulat = locArray[0];
@@ -577,7 +577,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 		console.log(ulat, ulon);
 		// Initialize and add the map
 		function initMap() {
-			console.log(ulat, ulon);
+			console.log(JSON.stringify(ulat), JSON.stringify(ulon));
 			const tom = { lat: -33.8750, lng: 151.2100 };
 			const user = { lat: ulat, lng: ulon };
 			const map = new google.maps.Map(document.getElementById("map"), {
