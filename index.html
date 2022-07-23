@@ -558,12 +558,12 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 		var ulat = "default value ulat";
 		var ulon = "default value ulon";
 
-		function getloc(userloc){
+		function getloc(){
 			$.get("https://ipinfo.io", function (response, callback) {
 				console.log(JSON.stringify("response location is: " + response.loc));
 				console.log(response.loc);
 				console.log(JSON.stringify(response.loc));
-				userloc = (JSON.stringify(response.loc));
+				let userloc = JSON.stringify(response.loc);
 				return userloc;
 			}
 				, "jsonp");
@@ -571,7 +571,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 		console.log("before func");
 		console.log(userloc);
-		userloc = getloc(userloc);
+		userloc = getloc();
 		console.log("after func");
 		console.log(userloc);
 		const locArray = userloc.split(",");
