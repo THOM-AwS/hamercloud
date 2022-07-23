@@ -27,30 +27,6 @@
 				/* The width is the width of the web page */
 			}
 		</style>
-		<script>
-			// Initialize and add the map
-			function initMap() {
-				const tom = { lat: -33.8750, lng: 151.2100 };
-				const map = new google.maps.Map(document.getElementById("map"), {
-					zoom: 13,
-					mapTypeId: 'satellite',
-					center: tom,
-					disableDefaultUI: true,
-				});
-				// The marker
-				const marker = new google.maps.Circle({
-					strokeColor: "#FF0000",
-					strokeOpacity: 0.5,
-					strokeWeight: 2,
-					fillColor: "#FF0000",
-					fillOpacity: 0.1,
-					radius: 2500,
-					center: tom,
-					map: map,
-				});
-			}
-		</script>
-
 
 	</head>
 	<body class="is-preload">
@@ -192,6 +168,7 @@
 						<!-- Contact -->
 							<article id="contact">
 								<h2 class="major">Contact</h2>
+								<h3 class="major">Me:</h3>
 								<p>You can reach me on my mobile by voice or text, and on Signal at: <br> <i class="fa fa-phone" aria-hidden="true"> </i><a href="tel:+61403255489"> +61403255489</a></p>
 								<p>Im also available via Email at: <br> <i class="fas fa-at"></i> <a href="mailto:tom@hamer.cloud"> tom@hamer.cloud</a></p>
 								<p>You will normally find me somewhere here:</p>
@@ -202,6 +179,10 @@
 										src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxyRHImShMxEssA12vkUWDYhv0Q6X7q1Y&callback=initMap&libraries=&v=weekly"
 										async></script>
 								</p>
+								<h3 class="major">You:</h3>
+								<div id="ip" class="major">
+								</div>
+
 								
 								<!-- <form method="post" action="#">
 									<div class="fields">
@@ -474,15 +455,6 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				<!-- Footer -->
 					<footer id="footer">
 						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a><br> Thomas Hamer ABN <a href="https://www.abr.business.gov.au/ABN/View?abn=87430826790">87430826790</a> Sydney, Australia. July 2021.<br> This website runs on AWS S3, Cloudfront, Route53, ACM & Lambda@Edge for security headers.</p>
-						
-						<div id="ip" class="copyright">
-						</div>
-						<script>
-							$.get("https://ipinfo.io", function(response) {
-								document.getElementById("ip").innerHTML = "Your public IP address is: " + response.ip + "<br>Your location is: " + response.city + ", " + response.region + ", " + response.country + ". <br>Your ISP is: " + response.org;
-							}, "jsonp");
-
-							</script>
 
 					</footer>
 
@@ -497,6 +469,45 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+				$.get("https://ipinfo.io", function(response) {
+					document.getElementById("ip").innerHTML = "Your public IP address is: " + response.ip + "<br>Your location is: " + response.city + ", " + response.region + ", " + response.country + ". <br>Your ISP is: " + response.org;
+				}, "jsonp");
+			</script>
+			<script>
+				// Initialize and add the map
+				function initMap() {
+					const tom = { lat: -33.8750, lng: 151.2100 };
+					const map = new google.maps.Map(document.getElementById("map"), {
+						zoom: 13,
+						mapTypeId: 'satellite',
+						center: tom,
+						disableDefaultUI: true,
+					});
+					// The marker
+					const marker = new google.maps.Circle({
+						strokeColor: "#FF0000",
+						strokeOpacity: 0.5,
+						strokeWeight: 2,
+						fillColor: "#FF0000",
+						fillOpacity: 0.1,
+						radius: 2500,
+						center: tom,
+						map: map,
+					});
+					// const user = new google.maps.Circle({
+					// 	strokeColor: "#303030",
+					// 	strokeOpacity: 0.5,
+					// 	strokeWeight: 2,
+					// 	fillColor: "#303030",
+					// 	fillOpacity: 0.1,
+					// 	radius: 2500,
+					// 	center: $.get("https://ipinfo.io", function(response.lat, resoponse.lon),
+					// 	map: map,
+					// });
+				}
+			</script>
+
 
 	</body>
 </html>
