@@ -565,12 +565,14 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				return JSON.stringify(response.loc);
 		}
 
+		console.log("before func");
 		userloc = getloc();
+		console.log("after func");
 		console.log(JSON.stringify(userloc));
 		const locArray = userloc.split(",");
 		console.log(locArray);
-		ulat = locArray[0] + '"';
-		ulon = '"' + locArray[1];
+		ulat = locArray[0];
+		ulon = locArray[1];
 		console.log(userloc);
 		console.log(ulat, ulon);
 		// Initialize and add the map
