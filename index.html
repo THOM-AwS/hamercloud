@@ -562,7 +562,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				console.log(JSON.stringify("response location is: " + response.loc));
 			}
 				, "jsonp");
-				return response.loc;
+				return JSON.stringify(response.loc);
 		}
 
 		userloc = getloc();
