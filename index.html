@@ -558,7 +558,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 		var ulat = "default value ulat";
 		var ulon = "default value ulon";
 
-		function getloc(){
+		function getloc() {
 			$.get("https://ipinfo.io", function (response, callback) {
 				console.log(JSON.stringify("response location is: " + response.loc));
 				console.log(response.loc);
@@ -573,7 +573,10 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 		console.log(userloc);
 		userloc = getloc();
 		console.log("after func");
-		console.log(userloc);
+		if (userloc !== undefined && foo !== null) {
+			console.log(userloc);
+		} else { console.log("userloc is undef or null")}
+
 		const locArray = userloc.split(",");
 		console.log(locArray);
 		ulat = locArray[0];
