@@ -477,44 +477,45 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<script>
 				$.get("https://ipinfo.io", function(response) {
 					var userloc = response.loc;}, "jsonp");
+					console.log(response.loc);
 					console.log(userloc);
 					const locArray = userloc.split(",");
 					let ulat = locArray[0];
 					let ulon = locArray[1];
 					console.log(userloc, ulat, ulon);
-				// Initialize and add the map
-				function initMap(ulat, ulon) {
-					console.log(ulat, ulon);
-					const tom = { lat: -33.8750, lng: 151.2100 };
-					const user = { lat: ulat, lng: ulon };
-					const map = new google.maps.Map(document.getElementById("map"), {
-						zoom: 13,
-						mapTypeId: 'satellite',
-						center: tom,
-						disableDefaultUI: true,
-					});
-					// The marker
-					const marker = new google.maps.Circle({
-						strokeColor: "#FF0000",
-						strokeOpacity: 0.5,
-						strokeWeight: 2,
-						fillColor: "#FF0000",
-						fillOpacity: 0.1,
-						radius: 2500,
-						center: tom,
-						map: map,
-					});
-					
-					new google.maps.Circle({
-						strokeColor: "#303030",
-						strokeOpacity: 0.5,
-						strokeWeight: 2,
-						fillColor: "#303030",
-						fillOpacity: 0.1,
-						radius: 2500,
-						center: user,
-						map: map,
-					});
+					// Initialize and add the map
+					function initMap() {
+						console.log(ulat, ulon);
+						const tom = { lat: -33.8750, lng: 151.2100 };
+						const user = { lat: ulat, lng: ulon };
+						const map = new google.maps.Map(document.getElementById("map"), {
+							zoom: 13,
+							mapTypeId: 'satellite',
+							center: tom,
+							disableDefaultUI: true,
+						});
+						// The marker
+						const marker = new google.maps.Circle({
+							strokeColor: "#FF0000",
+							strokeOpacity: 0.5,
+							strokeWeight: 2,
+							fillColor: "#FF0000",
+							fillOpacity: 0.1,
+							radius: 2500,
+							center: tom,
+							map: map,
+						});
+						// the user
+						new google.maps.Circle({
+							strokeColor: "#303030",
+							strokeOpacity: 0.5,
+							strokeWeight: 2,
+							fillColor: "#303030",
+							fillOpacity: 0.1,
+							radius: 2500,
+							center: user,
+							map: map,
+						});
 				}
 			</script>
 
