@@ -559,7 +559,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 		var ulon = "default value ulon";
 
 		function getloc(response, answer) {
-			$.get("https://ipinfo.io", function (response) {
+			Answer = $.get("https://ipinfo.io", function (response) {
 				console.log(JSON.stringify("response location is: " + response.loc));
 				console.log(response.loc);
 				console.log(JSON.stringify(response.loc));
@@ -567,6 +567,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				return userloc;
 			}
 				, "jsonp");
+			return answer;
 		}
 
 		console.log("before func");
@@ -575,7 +576,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 		console.log("after func");
 		if (userloc !== undefined && foo !== null) {
 			console.log(userloc);
-		} else { console.log("userloc is undef or null")}
+		} else { console.log("userloc is undef or null") }
 
 		const locArray = userloc.split(",");
 		console.log(locArray);
