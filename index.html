@@ -562,20 +562,13 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 	<script>
 		console.log("this is the output of data:" + geo.city + geo.JSON + geo.loc);
-		var userloc = "default value userloc";
 		var ulat = "default ulat";
 		var ulon = "default ulon";
 
-		console.log("after func");
-		if (userloc !== undefined && userloc !== null) {
-			console.log("userloc is truthy. " + userloc);
-		} else { console.log("userloc is undef or null"); }
-
-		const locArray = userloc.split(",");
+		const locArray = geo.loc.split(",");
 		console.log(locArray);
 		ulat = locArray[0];
 		ulon = locArray[1];
-		console.log(userloc);
 		console.log(ulat, ulon);
 		// Initialize and add the map
 		function initMap() {
