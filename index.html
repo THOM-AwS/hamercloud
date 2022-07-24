@@ -596,14 +596,15 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				center: user,
 				map: map,
 			});
-			directionsService = new google.maps.DirectionsService,
-				directionsDisplay = new google.maps.DirectionsRenderer({
-					map: map
-				}),
-
-			// get route from A to B
 			try {
-				calculateAndDisplayRoute(directionsService, directionsDisplay, user, tom);
+				directionsService = new google.maps.DirectionsService,
+					directionsDisplay = new google.maps.DirectionsRenderer({
+						map: map
+					}),
+
+					// get route from A to B
+
+					calculateAndDisplayRoute(directionsService, directionsDisplay, user, tom);
 			} catch (error) {
 				console.log("unable to find path between locations." + error);
 				map.zoom = 4;
