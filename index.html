@@ -602,7 +602,11 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				}),
 
 			// get route from A to B
-			calculateAndDisplayRoute(directionsService, directionsDisplay, user, tom);
+			try {
+				calculateAndDisplayRoute(directionsService, directionsDisplay, user, tom);
+			} catch (error) {
+				console.log("unable to find path between locations." + error);
+			}
 
 		}
 
