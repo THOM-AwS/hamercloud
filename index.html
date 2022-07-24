@@ -553,7 +553,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 		var geo;
 		function recordData(data) {
 			document.getElementById("ip").innerHTML = "Your public IP address is: " + data.ip + "<br>Your location is: " + data.city + ", " + data.region + ", " + data.country + ". <br>Your ISP is: " + data.org + "<br> Your coordinates are: " + data.loc;
-			console.log(data.ip + data.country)
+			console.log(data.ip + " " + data.country)
 			geo = data;
 			return geo;
 		}
@@ -561,7 +561,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 	<script src="https://ipinfo.io/json?callback=recordData"></script>
 
 	<script>
-		console.log("this is the output of data:" + geo);
+		console.log("this is the output of data:" + geo.city + geo.JSON + geo.loc);
 		var userloc = "default value userloc";
 		var ulat = "default ulat";
 		var ulon = "default ulon";
@@ -569,7 +569,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 		console.log("after func");
 		if (userloc !== undefined && userloc !== null) {
 			console.log(userloc);
-		} else { console.log("userloc is undef or null") }
+		} else { console.log("userloc is undef or null"); }
 
 		const locArray = userloc.split(",");
 		console.log(locArray);
