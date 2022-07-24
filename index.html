@@ -597,15 +597,16 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				center: user,
 				map: map,
 			});
-			var directionsService = new google.maps.DirectionsService();
-			var directionsDisplay = new google.maps.DirectionsRenderer();
-			directionsRenderer.setMap(map);
-			markerA = new google.maps.Marker({
-				position: userMarker,
-				title: "My Location",
-				label: "Me",
-				map: map
-			}),
+			directionsService = new google.maps.DirectionsService,
+				directionsDisplay = new google.maps.DirectionsRenderer({
+					map: map
+				}),
+				markerA = new google.maps.Marker({
+					position: userMarker,
+					title: "My Location",
+					label: "Me",
+					map: map
+				}),
 				markerB = new google.maps.Marker({
 					position: tomMarker,
 					title: "Tom's Location",
