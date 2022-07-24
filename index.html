@@ -614,13 +614,13 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				});
 
 			// get route from A to B
-			calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
+			calculateAndDisplayRoute(directionsService, directionsDisplay, markerA, markerB);
 
 		}
 
 
 
-		function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
+		function calculateAndDisplayRoute(directionsService, directionsDisplay, markerA, markerB) {
 			directionsService.route({
 				origin: pointA,
 				destination: pointB,
