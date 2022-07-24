@@ -596,20 +596,11 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				center: user,
 				map: map,
 			});
-			try {
 				directionsService = new google.maps.DirectionsService,
 					directionsDisplay = new google.maps.DirectionsRenderer({
 						map: map
 					}),
-
-					// get route from A to B
-
 					calculateAndDisplayRoute(directionsService, directionsDisplay, user, tom);
-			} catch (error) {
-				console.log("unable to find path between locations." + error);
-				map.zoom = 4;
-			}
-
 		}
 
 
@@ -622,10 +613,10 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				avoidHighways: false,
 				travelMode: google.maps.TravelMode.WALKING
 			}, function (response, status) {
-				if (status == google.maps.DirectionsStatus.OK) {
+				try (status == google.maps.DirectionsStatus.OK) {
 					directionsDisplay.setDirections(response);
-				} else {
-					console.log('Directions API for google maps route request failed due to ' + status);
+				}  catch(error) {
+					console.log('Directions API for google maps route request failed due to ' + status + error);
 				}
 			});
 		}
