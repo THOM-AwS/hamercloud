@@ -606,6 +606,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				calculateAndDisplayRoute(directionsService, directionsDisplay, user, tom);
 			} catch (error) {
 				console.log("unable to find path between locations." + error);
+				map.zoom = 4;
 			}
 
 		}
