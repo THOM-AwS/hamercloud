@@ -552,7 +552,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 	<script>
 		var geo;
 		function recordData(data) {
-			document.getElementById("ip").innerHTML = "Your public IP address is: " + data.ip + "<br>Your location is: " + data.city + ", " + data.region + ", " + data.country + ". <br>Your ISP is: " + data.org + "<br> Your coordinates are: " + data.loc;
+			document.getElementById("ip").innerHTML = "Your public IP address is: " + data.ip + "<br>Your location is: " + data.city + ", " + data.region + ", " + data.country + ". <br>Your ISP is: " + data.org;
 			geo = data;
 		}
 	</script>
@@ -590,7 +590,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				strokeOpacity: 0,
 				fillColor: "#2fff00",
 				fillOpacity: 0.1,
-				radius: 50000,
+				radius: 5000,
 				center: user,
 				map: map,
 			});
