@@ -570,34 +570,36 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 		function initMap() {
 			const tom = { lat: -33.8750, lng: 151.2100 };
 			const user = { lat: parseFloat(ulat), lng: parseFloat(ulon) };
+			// The marker
+			const tomMarker = new google.maps.Circle({
+				strokeColor: "#FF0000",
+				strokeOpacity: 0.5,
+				strokeWeight: 2,
+				fillColor: "#FF0000",
+				fillOpacity: 0.1,
+				radius: 2500,
+				center: tom,
+				map: map,
+			});
+			// the user
+			const userMarker = new google.maps.Circle({
+				strokeOpacity: 0,
+				fillColor: "#2fff00",
+				fillOpacity: 0.1,
+				radius: 5000,
+				center: user,
+				map: map,
+			});
+			// the map
 			const map = new google.maps.Map(document.getElementById("map"), {
 				zoom: 11,
 				mapTypeId: 'satellite',
 				center: tom,
 				disableDefaultUI: true,
 				origin: userMarker,
-			    destination: tomMarker,
+				destination: tomMarker,
 			});
-		// The marker
-		const tomMarker = new google.maps.Circle({
-			strokeColor: "#FF0000",
-			strokeOpacity: 0.5,
-			strokeWeight: 2,
-			fillColor: "#FF0000",
-			fillOpacity: 0.1,
-			radius: 2500,
-			center: tom,
-			map: map,
-		});
-		// the user
-		const userMarker = new google.maps.Circle({
-			strokeOpacity: 0,
-			fillColor: "#2fff00",
-			fillOpacity: 0.1,
-			radius: 5000,
-			center: user,
-			map: map,
-		});
+
 		}
 	</script>
 
