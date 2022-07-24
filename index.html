@@ -567,8 +567,8 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 		ulon = locArray[1];
 		// Initialize and add the map
 		function initMap() {
-			const tom = new google.maps.LatLng(-33.8750, 151.2100)
-			const user = new google.maps.LatLng(ulat, ulon)
+			const tom = new google.maps.LatLng(-33.8750, 151.2100);
+			const user = new google.maps.LatLng(parseFloat(ulat), parseFloat(ulon));
 		// the map
 		const map = new google.maps.Map(document.getElementById("map"), {
 			zoom: 11,
