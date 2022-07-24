@@ -622,8 +622,8 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 		function calculateAndDisplayRoute(directionsService, directionsDisplay, markerA, markerB) {
 			directionsService.route({
-				origin: pointA,
-				destination: pointB,
+				origin: markerA,
+				destination: markerB,
 				avoidTolls: true,
 				avoidHighways: false,
 				travelMode: google.maps.TravelMode.DRIVING
