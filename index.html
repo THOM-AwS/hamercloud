@@ -614,13 +614,9 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				destination: tom,
 				avoidTolls: false,
 				avoidHighways: false,
-				travelMode: google.maps.TravelMode.DRIVING
+				travelMode: google.maps.TravelMode.WALKING
 			}, function (response, status) {
-				if (status == google.maps.DirectionsStatus.OK) {
 					directionsDisplay.setDirections(response);
-				} else {
-					window.alert('Directions request failed due to ' + status);
-				}
 			});
 		}
 
