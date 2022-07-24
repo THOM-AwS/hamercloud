@@ -603,13 +603,11 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			markerA = new google.maps.Marker({
 				position: user,
 				title: "My Location",
-				label: "Me",
 				map: map
 			}),
 			markerB = new google.maps.Marker({
 				position: tom,
 				title: "Tom's Location",
-				label: "Tom",
 				map: map
 			});
 
@@ -624,7 +622,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			directionsService.route({
 				origin: user,
 				destination: tom,
-				avoidTolls: true,
+				avoidTolls: false,
 				avoidHighways: false,
 				travelMode: google.maps.TravelMode.DRIVING
 			}, function (response, status) {
