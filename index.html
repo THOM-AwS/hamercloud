@@ -248,7 +248,7 @@
 					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxyRHImShMxEssA12vkUWDYhv0Q6X7q1Y&callback=initMap&libraries=&v=weekly"
 					async></script>
 				</p>
-				<div id="ip" class="major">
+				<div id="user" class="major">
 					You are blocking this script from running.
 				</div>
 
@@ -550,21 +550,55 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
 
-	<script>
-		var geo;
-		function recordData(data) {
-			document.getElementById("ip").innerHTML = "Your public IP address is: " + data.ip + "<br>Your location is: " + data.city + ", " + data.region + ", " + data.country + ". <br>Your ISP is: " + data.org;
-			geo = data;
-		}
-	</script>
-	<script src="https://ipinfo.io/json?callback=recordData"></script>
+	<script src="https://geoip-js.com/js/apis/geoip2/v2.1/geoip2.js" type="text/javascript"></script>
 
-	<script>
+	<script>// demo.js
+		var city;
+		var ip;
+		var network;
+		var provider;
+		var country;
 		var ulat;
 		var ulon;
-		const locArray = geo.loc.split(",");
-		ulat = locArray[0];
-		ulon = locArray[1];
+		var acc;
+		
+		var fillInPage = (function () {
+			var updateCityText = function (geoipResponse) {
+				city = geoipResponse.city.names.en;
+				ip = geoipResponse.traits.ip_address;
+				network = geoipResponse.traits.network;
+				provider = geoipResponse.traits.autonomous_system_organization;
+				state = geoipResponse.subdivisions[0].names.en;
+				country = geoipResponse.country.names.en;
+				ulat = geoipResponse.location.latitude;
+				ulon = geoipResponse.location.longitude;
+				acc = geoipResponse.location.accuracy_radius;
+				document.getElementById('user').innerHTML =  "Your public IP address is: " + ip + "<br>Your location is: " + city + ", " + state + ", " + country + ". <br>Your ISP is: " + provider;
+			};
+
+			var onSuccess = function (geoipResponse) {
+				updateCityText(geoipResponse);
+			};
+
+			// If we get an error, we will display an error message
+			var onError = function (error) {
+				document.getElementById('user').innerHTML = 'an error!  Please try again..'
+			};
+
+			return function () {
+				if (typeof geoip2 !== 'undefined') {
+					geoip2.city(onSuccess, onError);
+				} else {
+					document.getElementById('user').innerHTML = 'a browser that blocks GeoIP2 requests'
+				}
+			};
+		}());
+
+		fillInPage();
+	</script>
+
+
+	<script>
 		// Initialize and add the map
 		function initMap() {
 			const tom = new google.maps.LatLng(-33.8750, 151.2100);
@@ -589,10 +623,12 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			});
 			// the user
 			const userMarker = new google.maps.Circle({
-				strokeOpacity: 0,
+				strokeColor: "#2fff00",
+				strokeOpacity: 0.5,
+				strokeWeight: 2,
 				fillColor: "#2fff00",
 				fillOpacity: 0.1,
-				radius: 5000,
+				radius: acc,
 				center: user,
 				map: map,
 			});
@@ -600,7 +636,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				directionsDisplay = new google.maps.DirectionsRenderer({
 					map: map
 				}),
-			calculateAndDisplayRoute(directionsService, directionsDisplay, user, tom);
+				calculateAndDisplayRoute(directionsService, directionsDisplay, user, tom);
 		}
 
 
@@ -615,9 +651,9 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			}, function (response, status) {
 				try {
 					if (status == google.maps.DirectionsStatus.OK) {
-					directionsDisplay.setDirections(response);
-				}
-				}  catch(error) {
+						directionsDisplay.setDirections(response);
+					}
+				} catch (error) {
 					console.log('Directions API for google maps route request failed due to ' + status + error);
 				}
 			});
