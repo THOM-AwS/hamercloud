@@ -559,7 +559,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 		var ulon = "default value ulon";
 
 		function getloc(response, answer) {
-			$.get("https://ipinfo.io", function (response, answer) {
+			$.get("https://ipinfo.io", function (response) {
 				console.log(JSON.stringify("response location is: " + response.loc));
 				console.log(response.loc);
 				console.log(JSON.stringify(response.loc));
