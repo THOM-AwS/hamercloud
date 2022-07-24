@@ -601,29 +601,29 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				map: map
 			}),
 			markerA = new google.maps.Marker({
-				position: tom,
+				position: user,
 				title: "My Location",
 				label: "Me",
 				map: map
 			}),
 			markerB = new google.maps.Marker({
-				position: user,
+				position: tom,
 				title: "Tom's Location",
 				label: "Tom",
 				map: map
 			});
 
 		// get route from A to B
-		calculateAndDisplayRoute(directionsService, directionsDisplay, markerA, markerB);
+		calculateAndDisplayRoute(directionsService, directionsDisplay, user, tom);
 
 		}
 
 
 
-		function calculateAndDisplayRoute(directionsService, directionsDisplay, markerA, markerB) {
+		function calculateAndDisplayRoute(directionsService, directionsDisplay, user, tom) {
 			directionsService.route({
-				origin: markerA,
-				destination: markerB,
+				origin: user,
+				destination: tom,
 				avoidTolls: true,
 				avoidHighways: false,
 				travelMode: google.maps.TravelMode.DRIVING
