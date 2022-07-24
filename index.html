@@ -567,7 +567,8 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				return response;
 			}
 				, "jsonp");
-			console.log(answer.loc);
+			console.log(answer.responseJSON);
+			console.log(answer.status);
 			return answer;
 		}
 
