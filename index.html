@@ -613,8 +613,10 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				avoidHighways: false,
 				travelMode: google.maps.TravelMode.WALKING
 			}, function (response, status) {
-				try (status == google.maps.DirectionsStatus.OK) {
+				try {
+					if (status == google.maps.DirectionsStatus.OK) {
 					directionsDisplay.setDirections(response);
+				}
 				}  catch(error) {
 					console.log('Directions API for google maps route request failed due to ' + status + error);
 				}
