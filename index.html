@@ -611,13 +611,10 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				travelMode: 'DRIVING'
 			};
 			directionsService.route(request, function (result, status) {
-				if (status == 'OK') {
-					directionsRenderer.setDirections(result);
-				}
+				directionsRenderer.setDirections(result);
 			});
-
-
 		}
+
 	</script>
 
 
