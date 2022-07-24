@@ -548,36 +548,23 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
+
 	<script>
-		$.get("https://ipinfo.io", function (response) {
-			document.getElementById("ip").innerHTML = "Your public IP address is: " + response.ip + "<br>Your location is: " + response.city + ", " + response.region + ", " + response.country + ". <br>Your ISP is: " + response.org + "<br> Your coordinates are: " + response.loc;
-		}, "jsonp");
+		function recordData(data) {
+			var geo;
+			document.getElementById("ip").innerHTML = "Your public IP address is: " + data.ip + "<br>Your location is: " + data.city + ", " + data.region + ", " + data.country + ". <br>Your ISP is: " + data.org + "<br> Your coordinates are: " + data.loc;
+			console.log(data.ip, data.country)
+			geo = data;
+		}
 	</script>
+	<script src="https://ipinfo.io/json?callback=recordData"></script>
+
 	<script>
+		console.lot("this is the output of data:" + geo);
 		var userloc = "default value userloc";
 		var ulat = "default ulat";
 		var ulon = "default ulon";
 
-		function getloc(answer) {
-			answer = $.get("https://ipinfo.io", function (response) {
-				console.log(JSON.stringify("response location is: " + response.loc));
-				console.log(response.loc);
-				console.log(JSON.stringify(response.loc));
-				response = response.loc;
-				return response;
-			}
-				, "jsonp");
-			console.log(answer.response);
-			console.log(answer.status());
-			console.log(answer.readyState);
-
-			
-			return answer;
-		}
-
-		console.log("before func");
-		console.log(userloc);
-		userloc = getloc();
 		console.log("after func");
 		if (userloc !== undefined && userloc !== null) {
 			console.log(userloc);
