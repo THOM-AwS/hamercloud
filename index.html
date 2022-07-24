@@ -567,6 +567,8 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 		ulat = locArray[0];
 		ulon = locArray[1];
 		console.log(ulat, ulon);
+		console.log("float: " + parseFloat(ulat) + "float " + parseFloat(ulon));
+		console.log("type: " + typeOf(parseFloat(ulat)) + "type " + typeOf(parseFloat(ulon)));
 		// Initialize and add the map
 		function initMap() {
 			const tom = { lat: -33.8750, lng: 151.2100 };
