@@ -599,17 +599,6 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			directionsDisplay = new google.maps.DirectionsRenderer({
 				map: map
 			}),
-			markerA = new google.maps.Marker({
-				position: user,
-				title: "My Location",
-				map: map
-
-			}),
-			markerB = new google.maps.Marker({
-				position: tom,
-				title: "Tom's Location",
-				map: map
-			});
 
 		// get route from A to B
 		calculateAndDisplayRoute(directionsService, directionsDisplay, user, tom);
