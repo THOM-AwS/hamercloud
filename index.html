@@ -616,7 +616,11 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				avoidHighways: false,
 				travelMode: google.maps.TravelMode.WALKING
 			}, function (response, status) {
+				if (status == google.maps.DirectionsStatus.OK) {
 					directionsDisplay.setDirections(response);
+				} else {
+					console.log('Directions API for google maps route request failed due to ' + status);
+				}
 			});
 		}
 
