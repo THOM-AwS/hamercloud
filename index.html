@@ -567,54 +567,54 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 		ulon = locArray[1];
 		// Initialize and add the map
 		function initMap() {
-			const tom = { lat: -33.8750, lng: 151.2100 };
-			const user = { lat: parseFloat(ulat), lng: parseFloat(ulon) };
-			// the map
-			const map = new google.maps.Map(document.getElementById("map"), {
-				zoom: 11,
-				mapTypeId: 'satellite',
-				center: tom,
-				disableDefaultUI: true,
+			const tom = new google.maps.LatLng(-33.8750, 151.2100)
+			const user = new google.maps.LatLng(ulat, ulon)
+		// the map
+		const map = new google.maps.Map(document.getElementById("map"), {
+			zoom: 11,
+			mapTypeId: 'satellite',
+			center: tom,
+			disableDefaultUI: true,
+		});
+		// The marker
+		const tomMarker = new google.maps.Circle({
+			strokeColor: "#FF0000",
+			strokeOpacity: 0.5,
+			strokeWeight: 2,
+			fillColor: "#FF0000",
+			fillOpacity: 0.1,
+			radius: 2500,
+			center: tom,
+			map: map,
+		});
+		// the user
+		const userMarker = new google.maps.Circle({
+			strokeOpacity: 0,
+			fillColor: "#2fff00",
+			fillOpacity: 0.1,
+			radius: 5000,
+			center: user,
+			map: map,
+		});
+		directionsService = new google.maps.DirectionsService,
+			directionsDisplay = new google.maps.DirectionsRenderer({
+				map: map
+			}),
+			markerA = new google.maps.Marker({
+				position: tom,
+				title: "My Location",
+				label: "Me",
+				map: map
+			}),
+			markerB = new google.maps.Marker({
+				position: user,
+				title: "Tom's Location",
+				label: "Tom",
+				map: map
 			});
-			// The marker
-			const tomMarker = new google.maps.Circle({
-				strokeColor: "#FF0000",
-				strokeOpacity: 0.5,
-				strokeWeight: 2,
-				fillColor: "#FF0000",
-				fillOpacity: 0.1,
-				radius: 2500,
-				center: tom,
-				map: map,
-			});
-			// the user
-			const userMarker = new google.maps.Circle({
-				strokeOpacity: 0,
-				fillColor: "#2fff00",
-				fillOpacity: 0.1,
-				radius: 5000,
-				center: user,
-				map: map,
-			});
-			directionsService = new google.maps.DirectionsService,
-				directionsDisplay = new google.maps.DirectionsRenderer({
-					map: map
-				}),
-				markerA = new google.maps.Marker({
-					position: geo.loc,
-					title: "My Location",
-					label: "Me",
-					map: map
-				}),
-				markerB = new google.maps.Marker({
-					position: tom,
-					title: "Tom's Location",
-					label: "Tom",
-					map: map
-				});
 
-			// get route from A to B
-			calculateAndDisplayRoute(directionsService, directionsDisplay, markerA, markerB);
+		// get route from A to B
+		calculateAndDisplayRoute(directionsService, directionsDisplay, markerA, markerB);
 
 		}
 
