@@ -574,8 +574,6 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				ulat = geoipResponse.location.latitude;
 				ulon = geoipResponse.location.longitude;
 				acc = geoipResponse.location.accuracy_radius;
-				console.log(ulat, ulon);
-				console.log(geoipResponse);
 				document.getElementById('user').innerHTML = "Your public IP address is: " + ip + "<br>Your location is: " + city + ", " + state + ", " + country + ". <br>Your ISP is: " + provider;
 			};
 
