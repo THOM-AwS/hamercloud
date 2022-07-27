@@ -633,28 +633,28 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				center: user,
 				map: map,
 			});
-			// 	directionsService = new google.maps.DirectionsService,
-			// 		directionsDisplay = new google.maps.DirectionsRenderer({
-			// 			map: map
-			// 		}),
-			// 		calculateAndDisplayRoute(directionsService, directionsDisplay, user, tom);
-			// }
-			// function calculateAndDisplayRoute(directionsService, directionsDisplay, user, tom) {
-			// 	directionsService.route({
-			// 		origin: user,
-			// 		destination: tom,
-			// 		avoidTolls: false,
-			// 		avoidHighways: false,
-			// 		travelMode: google.maps.TravelMode.WALKING
-			// 	}, function (response, status) {
-			// 		try {
-			// 			if (status == google.maps.DirectionsStatus.OK) {
-			// 				directionsDisplay.setDirections(response);
-			// 			}
-			// 		} catch (error) {
-			// 			console.log('Directions API for google maps route request failed due to ' + status + error);
-			// 		}
-			// 	});
+				directionsService = new google.maps.DirectionsService,
+					directionsDisplay = new google.maps.DirectionsRenderer({
+						map: map
+					}),
+					calculateAndDisplayRoute(directionsService, directionsDisplay, user, tom);
+			}
+			function calculateAndDisplayRoute(directionsService, directionsDisplay, user, tom) {
+				directionsService.route({
+					origin: user,
+					destination: tom,
+					avoidTolls: false,
+					avoidHighways: false,
+					travelMode: google.maps.TravelMode.WALKING
+				}, function (response, status) {
+					try {
+						if (status == google.maps.DirectionsStatus.OK) {
+							directionsDisplay.setDirections(response);
+						}
+					} catch (error) {
+						console.log('Directions API for google maps route request failed due to ' + status + error);
+					}
+				});
 		}
 		
 	</script>
