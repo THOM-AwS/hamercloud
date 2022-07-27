@@ -27,8 +27,8 @@
 		var provider;
 		var state;
 		var country;
-		var ulat = parseFloat(-33.9000);
-		var ulon = parseFloat(151.0000);
+		var ulat = parseFloat(-33.8500);
+		var ulon = parseFloat(151.2000);
 		var acc = 200;
 		// get geo data
 		var fillInPage = (function () {
@@ -43,6 +43,7 @@
 				ulon = geoipResponse.location.longitude;
 				acc = geoipResponse.location.accuracy_radius;
 				document.getElementById('user').innerHTML = "Your public IP address is: " + ip + "<br>Your location is: " + city + ", " + state + ", " + country + ". <br>Your ISP is: " + provider;
+				initMap();
 				// Initialize and add the map
 
 			};
@@ -288,7 +289,7 @@
 				<div id="map"></div>
 				<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
 				<script
-					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxyRHImShMxEssA12vkUWDYhv0Q6X7q1Y&callback=initMap&libraries=&v=weekly"
+					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxyRHImShMxEssA12vkUWDYhv0Q6X7q1Y&libraries=&v=weekly"
 					async></script>
 				</p>
 				<div id="user" class="major">
@@ -597,6 +598,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 
 	<script>
+
 		function initMap() {
 			const tom = new google.maps.LatLng(-33.8750, 151.2100);
 			console.log(city, ip, network, provider, state, country, ulat, ulon, acc)
@@ -654,6 +656,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			// 		}
 			// 	});
 		}
+		
 	</script>
 
 
