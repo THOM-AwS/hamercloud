@@ -646,8 +646,8 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				// Initialize and add the map
 				function initMap() {
 					const tom = new google.maps.LatLng(-33.8750, 151.2100);
-					console.log(ulat, ulon);
-					const user = new google.maps.LatLng(parseFloat(ulat), parseFloat(ulon));
+					// console.log(ulat, ulon);
+					// const user = new google.maps.LatLng(parseFloat(ulat), parseFloat(ulon));
 					// the map
 					const map = new google.maps.Map(document.getElementById("map"), {
 						zoom: 11,
@@ -667,16 +667,16 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 						map: map,
 					});
 					// the user
-					const userMarker = new google.maps.Circle({
-						strokeColor: "#2fff00",
-						strokeOpacity: 0.5,
-						strokeWeight: 2,
-						fillColor: "#2fff00",
-						fillOpacity: 0.1,
-						radius: 100, //acc,
-						center: user,
-						map: map,
-					});
+					// const userMarker = new google.maps.Circle({
+					// 	strokeColor: "#2fff00",
+					// 	strokeOpacity: 0.5,
+					// 	strokeWeight: 2,
+					// 	fillColor: "#2fff00",
+					// 	fillOpacity: 0.1,
+					// 	radius: 100, //acc,
+					// 	center: user,
+					// 	map: map,
+					// });
 				// 	directionsService = new google.maps.DirectionsService,
 				// 		directionsDisplay = new google.maps.DirectionsRenderer({
 				// 			map: map
