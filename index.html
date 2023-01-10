@@ -556,6 +556,17 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				center: tom,
 				disableDefaultUI: true,
 			});
+			// The marker
+			const tomMarker = new google.maps.Circle({
+				strokeColor: "#FF0000",
+				strokeOpacity: 0.5,
+				strokeWeight: 2,
+				fillColor: "#FF0000",
+				fillOpacity: 0.1,
+				radius: 2500,
+				center: tom,
+				map: map,
+			});
 		}
 	</script>
 
