@@ -19,7 +19,6 @@
 		<link rel="stylesheet" href="assets/css/noscript.css" />
 	</noscript>
 	<script src="assets/js/jquery.min.js"></script>
-	<script>initMap();</script>
 	<style type="text/css">
 		/* Set the size of the div element that contains the map */
 		#map {
@@ -241,9 +240,9 @@
 				<p>
 				<div id="map"></div>
 				<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-				<script
-					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxyRHImShMxEssA12vkUWDYhv0Q6X7q1Y&libraries=&v=weekly"
-					async></script>
+				<script async defer
+					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxyRHImShMxEssA12vkUWDYhv0Q6X7q1Y&libraries=&v=weekly&callback=initMap">
+					</script>
 				</p>
 				<div id="user" class="major">
 					You are blocking this script from running.
@@ -564,7 +563,6 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				disableDefaultUI: true,
 			});
 		}
-		initMap();
 	</script>
 
 
