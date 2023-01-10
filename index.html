@@ -244,9 +244,6 @@
 					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxyRHImShMxEssA12vkUWDYhv0Q6X7q1Y&libraries=&v=weekly&callback=initMap">
 					</script>
 				</p>
-				<div id="user" class="major">
-					You are blocking this script from running.
-				</div>
 
 
 				<!-- <form method="post" action="#">
@@ -552,9 +549,6 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 		function initMap() {
 			const tom = new google.maps.LatLng(-33.8750, 151.2100);
-			console.log(city, ip, network, provider, state, country, ulat, ulon, acc)
-			console.log(ulat, ulon);
-			const user = new google.maps.LatLng(parseFloat(ulat), parseFloat(ulon));
 			// the map
 			const map = new google.maps.Map(document.getElementById("map"), {
 				zoom: 11,
