@@ -1,5 +1,5 @@
-www.hamer.cloud
-https://hamer.cloud/#intro
-https://hamer.cloud/#work
-https://hamer.cloud/#services
-https://hamer.cloud/#contact
+https://www.hamer.cloud
+https://www.hamer.cloud/#intro
+https://www.hamer.cloud/#work
+https://www.hamer.cloud/#services
+https://www.hamer.cloud/#contact
