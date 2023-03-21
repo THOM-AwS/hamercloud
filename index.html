@@ -289,6 +289,27 @@
 				<p>You will normally find me somewhere in the red area in the Sydney CBD.</p>
 				<p>
 				<div id="map"></div>
+				<script>
+					function initMap() {
+						const tom = new google.maps.LatLng(-33.8750, 151.2100);
+						const map = new google.maps.Map(document.getElementById("map"), {
+							zoom: 11,
+							mapTypeId: "satellite",
+							center: tom,
+							disableDefaultUI: true,
+						});
+						const tomMarker = new google.maps.Circle({
+							strokeColor: "#FF0000",
+							strokeOpacity: 0.5,
+							strokeWeight: 2,
+							fillColor: "#FF0000",
+							fillOpacity: 0.1,
+							radius: 2500,
+							center: tom,
+							map: map,
+						});
+					}
+				</script>
 				<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
 				<script async defer
 					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxyRHImShMxEssA12vkUWDYhv0Q6X7q1Y&libraries=&v=weekly&callback=initMap">
@@ -315,27 +336,5 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
-	
-	<script>
-		function initMap() {
-			const tom = new google.maps.LatLng(-33.8750, 151.2100);
-			const map = new google.maps.Map(document.getElementById("map"), {
-				zoom: 11,
-				mapTypeId: "satellite",
-				center: tom,
-				disableDefaultUI: true,
-			});
-			const tomMarker = new google.maps.Circle({
-				strokeColor: "#FF0000",
-				strokeOpacity: 0.5,
-				strokeWeight: 2,
-				fillColor: "#FF0000",
-				fillOpacity: 0.1,
-				radius: 2500,
-				center: tom,
-				map: map,
-			});
-		}
-	</script>
 </body>
 </html>
