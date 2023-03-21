@@ -16,7 +16,8 @@
 	<link rel="shortcut icon" type="image/jpg" href="favicon.ico" />
 	<meta charset="utf-8" />
 	<meta name="keywords" content="AWS, Thomas Hamer, Cloud, Consulting, Freelance, solution, architect">
-	<meta name="description" content="Senior AWS Cloud Solutions Architect, Technical Lead, and consultant. Making cool AWS things.">
+	<meta name="description"
+		content="Senior AWS Cloud Solutions Architect, Technical Lead, and consultant. Making cool AWS things.">
 	<meta name="author" content="Thomas Hamer">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="assets/css/main.css" />
@@ -67,46 +68,46 @@
 
 					<ul class="icons">
 						<li>
-						  <div class="icon-container">
-							<a href="https://github.com/THOM-AwS">
-							  <i class="icon brands fa-github"></i>
-							</a>
-							<span>GitHub</span>
-						  </div>
+							<div class="icon-container">
+								<a href="https://github.com/THOM-AwS">
+									<i class="icon brands fa-github"></i>
+								</a>
+								<span>GitHub</span>
+							</div>
 						</li>
 						<li>
-						  <div class="icon-container">
-							<a href="https://www.credly.com/users/thomas-hamer.e6d54a9e/badges">
-							  <i class="fas fa-user-graduate"></i>
-							</a>
-							<span>Certs</span>
-						  </div>
+							<div class="icon-container">
+								<a href="https://www.credly.com/users/thomas-hamer.e6d54a9e/badges">
+									<i class="fas fa-user-graduate"></i>
+								</a>
+								<span>Certs</span>
+							</div>
 						</li>
 						<li>
-						  <div class="icon-container">
-							<a href="https://www.linkedin.com/in/thomas-hamer-28b510186/">
-							  <i class="fab fa-linkedin-in"></i>
-							</a>
-							<span>Linkedin</span>
-						  </div>
+							<div class="icon-container">
+								<a href="https://www.linkedin.com/in/thomas-hamer-28b510186/">
+									<i class="fab fa-linkedin-in"></i>
+								</a>
+								<span>Linkedin</span>
+							</div>
 						</li>
 						<li>
-						  <div class="icon-container">
-							<a href="https://www.youtube.com/channel/UCLDJEHICJL3rpzmyeGPX-Sw">
-							  <i class="fab fa-youtube"></i>
-							</a>
-							<span>YouTube</span>
-						  </div>
+							<div class="icon-container">
+								<a href="https://www.youtube.com/channel/UCLDJEHICJL3rpzmyeGPX-Sw">
+									<i class="fab fa-youtube"></i>
+								</a>
+								<span>YouTube</span>
+							</div>
 						</li>
 						<li>
-						  <div class="icon-container">
-							<a href="https://www.chess.com/member/spartan00117">
-							  <i class="fas fa-chess"></i>
-							</a>
-							<span>Chess</span>
-						  </div>
+							<div class="icon-container">
+								<a href="https://www.chess.com/member/spartan00117">
+									<i class="fas fa-chess"></i>
+								</a>
+								<span>Chess</span>
+							</div>
 						</li>
-					  </ul>					  
+					</ul>
 				</div>
 			</div>
 			<nav>
@@ -277,7 +278,6 @@
 				</p>
 			</article>
 
-
 			<!-- Contact -->
 			<article id="contact">
 				<h2 class="major">Contact</h2>
@@ -294,33 +294,8 @@
 					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxyRHImShMxEssA12vkUWDYhv0Q6X7q1Y&libraries=&v=weekly&callback=initMap">
 					</script>
 				</p>
-
-
-				<!-- <form method="post" action="#">
-									<div class="fields">
-										<div class="field half">
-											<label for="name">Name</label>
-											<input type="text" name="name" id="name" />
-										</div>
-										<div class="field half">
-											<label for="email">Email</label>
-											<input type="text" name="email" id="email" />
-										</div>
-										<div class="field">
-											<label for="message">Message</label>
-											<textarea name="message" id="message" rows="4"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="primary" /></li>
-										<li><input type="reset" value="Reset" /></li>
-									</ul>
-								</form> -->
-
-
 			</article>
 		</div>
-
 		<!-- Footer -->
 		<footer id="footer">
 			<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a><br> Thomas Hamer
@@ -328,9 +303,7 @@
 				Australia. July 2021.<br> This website runs on AWS S3, Cloudfront, Route53, ACM & Lambda@Edge for
 				security headers.
 			</p>
-
 		</footer>
-
 	</div>
 
 	<!-- BG -->
@@ -342,20 +315,16 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
-
-
+	
 	<script>
-
 		function initMap() {
 			const tom = new google.maps.LatLng(-33.8750, 151.2100);
-			// the map
 			const map = new google.maps.Map(document.getElementById("map"), {
 				zoom: 11,
-				mapTypeId: 'satellite',
+				mapTypeId: "satellite",
 				center: tom,
 				disableDefaultUI: true,
 			});
-			// The marker
 			const tomMarker = new google.maps.Circle({
 				strokeColor: "#FF0000",
 				strokeOpacity: 0.5,
@@ -366,10 +335,8 @@
 				center: tom,
 				map: map,
 			});
+			tomMarker.catch(error => console.error(error));
 		}
 	</script>
-
-
 </body>
-
 </html>
