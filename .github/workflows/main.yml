@@ -3,39 +3,38 @@ name: Upload Website
 on:
   push:
     branches:
-    - main
+      - main
   pull_request:
     branches:
-    - main
+      - main
 
 jobs:
-
   deploy-s3:
     runs-on: ubuntu-latest
     steps:
-    - name: checkout branch
-      uses: actions/checkout@master
+      - name: checkout branch
+        uses: actions/checkout@master
 
-    - name: deploy
-      uses: jakejarvis/s3-sync-action@master
-      with:
-        args: --acl public-read --follow-symlinks --delete --exclude '.git/*' --exclude '.github' --exclude '.gitignore'
-      env:
-        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: 'us-east-1'   # optional: defaults to us-east-1
-        DESTINATION_DIR: '/'
+      - name: deploy
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --follow-symlinks --delete --exclude '.git/*' --exclude '.github' --exclude '.gitignore'
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: "us-east-1"
+          DESTINATION_DIR: "/"
 
   invalidate-cf:
     needs: deploy-s3
     runs-on: ubuntu-latest
     steps:
-    - name: invalidate
-      uses: chetan/invalidate-cloudfront-action@master
-      env:
-        DISTRIBUTION: ${{ secrets.AWS_CF_DISTRIBUTION_ID }}
-        PATHS: '/'
-        AWS_REGION: 'us-east-1'
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: invalidate
+        uses: chetan/invalidate-cloudfront-action@master
+        env:
+          DISTRIBUTION: ${{ secrets.AWS_CF_DISTRIBUTION_ID }}
+          PATHS: "/"
+          AWS_REGION: "us-east-1"
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
