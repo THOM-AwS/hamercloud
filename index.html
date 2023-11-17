@@ -288,23 +288,38 @@
 				<div id="map"></div>
 				<script>
 					function initMap() {
-						const tom = new google.maps.LatLng(-33.8750, 151.2100);
 						const map = new google.maps.Map(document.getElementById("map"), {
-							zoom: 11,
+							zoom: 10,
 							mapTypeId: "satellite",
-							center: tom,
 							disableDefaultUI: true,
 						});
-						const tomMarker = new google.maps.Circle({
-							strokeColor: "#FF0000",
-							strokeOpacity: 0.5,
-							strokeWeight: 2,
-							fillColor: "#FF0000",
-							fillOpacity: 0.1,
-							radius: 2500,
-							center: tom,
-							map: map,
-						});
+
+						// Fetch data from your API and update the map
+						fetchDataAndUpdateMap(map);
+					}
+
+					function fetchDataAndUpdateMap(map) {
+						fetch('https://api.hamer.cloud/data')
+							.then(response => response.json())
+							.then(data => {
+								// Process and use the data to update the map
+								// Assuming each item in the data array has 'lat', 'lon', and 'timestamp'
+								data.forEach(item => {
+									const position = new google.maps.LatLng(item.lat, item.lon);
+									const marker = new google.maps.Marker({
+										position: position,
+										map: map,
+										title: `Event Time: ${new Date(item.timestamp).toLocaleString()}`
+									});
+								});
+
+								// Adjust the map center and zoom based on the data
+								if (data.length > 0) {
+									map.setCenter(new google.maps.LatLng(data[0].lat, data[0].lon));
+									map.setZoom(12);
+								}
+							})
+							.catch(error => console.error('Error fetching data:', error));
 					}
 				</script>
 				<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
