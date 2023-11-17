@@ -283,7 +283,7 @@
 						aria-hidden="true"> </i><a href="tel:+61403255489"> +61403255489</a><br><i
 						class="fas fa-at"></i> <a href="mailto:tom@hamer.cloud">
 						tom@hamer.cloud</a></p>
-				<p>You will normally find me somewhere in the red area in the Sydney CBD.</p>
+				<p>This may or may not be working when you look here, but this should be a live location.</p>
 				<p>
 				<div id="map"></div>
 				<script>
@@ -306,10 +306,25 @@
 								// Assuming each item in the data array has 'lat', 'lon', and 'timestamp'
 								data.forEach(item => {
 									const position = new google.maps.LatLng(item.lat, item.lon);
-									const marker = new google.maps.Marker({
-										position: position,
+									const circle = new google.maps.Circle({
+										strokeColor: '#FF0000', // Circle border color
+										strokeOpacity: 0.8,     // Circle border opacity
+										strokeWeight: 2,        // Circle border weight
+										fillColor: '#FF0000',   // Circle fill color
+										fillOpacity: 0.35,      // Circle fill opacity
 										map: map,
-										title: `Event Time: ${new Date(item.timestamp).toLocaleString()}`
+										center: position,
+										radius: 100            // Circle radius in meters
+									});
+
+									// Optional: Add info window to the circle
+									const infowindow = new google.maps.InfoWindow({
+										content: `Event Time: ${new Date(item.timestamp * 1000).toLocaleString()}`,
+										position: position
+									});
+
+									circle.addListener('click', () => {
+										infowindow.open(map);
 									});
 								});
 
@@ -321,6 +336,7 @@
 							})
 							.catch(error => console.error('Error fetching data:', error));
 					}
+
 				</script>
 				<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
 				<script async defer
