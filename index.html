@@ -302,10 +302,15 @@
 						fetch('https://api.hamer.cloud/data')
 							.then(response => response.json())
 							.then(data => {
+
 								const currentTime = Date.now(); // Current time in milliseconds
 								if (data && data.length > 1) { // Ensure there are at least two locations
 									data.sort((a, b) => a.timestamp - b.timestamp);
-									const pathCoordinates = data.map(item => new google.maps.LatLng(item.lat, item.lon));
+									console.log("Raw data:", data);
+									const pathCoordinates = data.map(item => {
+										console.log("Mapping item:", item);
+										return new google.maps.LatLng(item.lat, item.lon);
+									});
 									// Animate the polyline
 									animatePolyline(map, lineCoordinates, 100);
 								} else {
