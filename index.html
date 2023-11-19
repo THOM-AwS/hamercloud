@@ -302,7 +302,6 @@
 						fetch('https://api.hamer.cloud/data')
 							.then(response => response.json())
 							.then(data => {
-
 								const currentTime = Date.now(); // Current time in milliseconds
 								if (data && data.length > 1) { // Ensure there are at least two locations
 									data.sort((a, b) => a.timestamp - b.timestamp);
@@ -320,9 +319,14 @@
 								let previousPosition = null;
 								let previousTimestamp = null;
 
+								console.log('Creating marker/circle/polyline with coordinates:', item.lat, item.lon);
 								// Process and use the data to update the map
 								data.forEach((item, index) => {
-									console.log("Latitude:", item.lat, "Longitude:", item.lon);
+
+									if (isNaN(item.lat) || isNaN(item.lon)) {
+										console.error('Invalid coordinates:', item);
+									}
+
 									const position = new google.maps.LatLng(item.lat, item.lon);
 
 									// Determine if this is the latest point
@@ -405,9 +409,7 @@
 								// Adjust the map center and zoom based on the data
 								if (data.length > 0) {
 									const firstPoint = data[0];
-									console.log("Point:", firstPoint);
 									addWeatherToMap(map, firstPoint.lat, firstPoint.lon);
-									console.log(data[0].lat, data[0].lon)
 									map.setCenter(new google.maps.LatLng(data[0].lat, data[0].lon));
 									map.setZoom(14);
 								}
