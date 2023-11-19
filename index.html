@@ -398,10 +398,11 @@
 								});
 
 								// Adjust the map center and zoom based on the data
-								if (data.length > 1) {
+								if (data.length > 0) {
 									const firstPoint = data[0];
 									console.log("Point:", firstPoint);
 									addWeatherToMap(map, firstPoint.lat, firstPoint.lon);
+									console.log(data[0].lat, data[0].lon)
 									map.setCenter(new google.maps.LatLng(data[0].lat, data[0].lon));
 									map.setZoom(14);
 								}
