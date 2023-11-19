@@ -306,7 +306,8 @@
 								data.sort((a, b) => a.timestamp - b.timestamp);
 								const lineCoordinates = data.map(item => new google.maps.LatLng(item.lat, item.lon));
 								// Animate the polyline
-								animatePolyline(map, lineCoordinates);
+								animatePolyline(map, lineCoordinates, 100);
+
 								let previousPosition = null;
 								let previousTimestamp = null;
 
@@ -393,6 +394,8 @@
 
 								// Adjust the map center and zoom based on the data
 								if (data.length > 0) {
+									const firstPoint = data[0];
+									addWeatherToMap(map, firstPoint.lat, firstPoint.lon);
 									map.setCenter(new google.maps.LatLng(data[0].lat, data[0].lon));
 									map.setZoom(12);
 								}
@@ -400,35 +403,63 @@
 							.catch(error => console.error('Error fetching data:', error));
 					}
 
-					function animatePolyline(map, pathCoordinates) {
+					function animatePolyline(map, pathCoordinates, speed) {
 						let linePath = new google.maps.Polyline({
 							path: [],
 							geodesic: true,
-							strokeColor: '#34eb49',
+							strokeColor: '#FF0000',
 							strokeOpacity: 1.0,
-							strokeWeight: 1,
+							strokeWeight: 2,
 							map: map
 						});
 
 						let step = 0;
 						const numSteps = pathCoordinates.length;
+						let lastTime = performance.now();
 
-						function drawLine() {
-							if (step >= numSteps) {
-								step = 0; // Reset step to start
-								linePath.setPath([]); // Clear the existing path
+						function drawLine(timestamp) {
+							const progress = timestamp - lastTime;
+							if (progress >= speed) {
+								if (step < numSteps) {
+									linePath.getPath().push(pathCoordinates[step]);
+									step++;
+									lastTime = timestamp;
+								} else {
+									return; // Stop the animation when all points are drawn
+								}
 							}
-
-							linePath.getPath().push(pathCoordinates[step]);
-							step++;
-
-							// Continue the animation
 							requestAnimationFrame(drawLine);
 						}
-
-						drawLine();
+						requestAnimationFrame(drawLine);
 					}
 
+					function addWeatherToMap(map, lat, lon) {
+						const apiKey = '27dd553d3274c2f0760332bb947b1802';
+						const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+
+						fetch(url)
+							.then(response => response.json())
+							.then(data => {
+								const weatherInfo = data.weather[0].description;
+								const iconUrl = "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
+
+								const marker = new google.maps.Marker({
+									position: { lat, lng: lon },
+									map: map,
+									icon: iconUrl,
+									title: weatherInfo
+								});
+
+								const infowindow = new google.maps.InfoWindow({
+									content: `<div><h3>Weather</h3><p>${weatherInfo}</p></div>`
+								});
+
+								marker.addListener('click', () => {
+									infowindow.open(map, marker);
+								});
+							})
+							.catch(error => console.error('Error fetching weather data:', error));
+					}
 				</script>
 
 				<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
