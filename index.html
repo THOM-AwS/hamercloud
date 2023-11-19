@@ -293,7 +293,6 @@
 							mapTypeId: "satellite",
 							disableDefaultUI: true,
 						});
-
 						// Fetch data from your API and update the map
 						fetchDataAndUpdateMap(map);
 					}
@@ -303,23 +302,36 @@
 							.then(response => response.json())
 							.then(data => {
 								// Process and use the data to update the map
-								// Assuming each item in the data array has 'lat', 'lon', and 'timestamp'
 								data.forEach(item => {
-									const position = new google.maps.LatLng(item.lat, item.lon, item.acc);
+									const position = new google.maps.LatLng(item.lat, item.lon);
 									const circle = new google.maps.Circle({
-										strokeColor: '#FF0000', // Circle border color
-										strokeOpacity: 0.8,     // Circle border opacity
-										strokeWeight: 2,        // Circle border weight
-										fillColor: '#FF0000',   // Circle fill color
-										fillOpacity: 0.35,      // Circle fill opacity
+										strokeColor: '#FF0000',
+										strokeOpacity: 0.8,
+										strokeWeight: 2,
+										fillColor: '#FF0000',
+										fillOpacity: 0.35,
 										map: map,
 										center: position,
-										radius: item.acc     // Circle radius in meters
+										radius: item.acc // Circle radius set to accuracy in meters
 									});
 
-									// Optional: Add info window to the circle
+									// Add info window to the circle
+									const infowindowContent = `
+										<div>
+											<p>Time: ${new Date(item.timestamp * 1000).toLocaleString()}</p>
+											<p>Latitude: ${item.lat}</p>
+											<p>Longitude: ${item.lon}</p>
+											<p>Altitude: ${item.alt} meters</p>
+											<p>Accuracy: ${item.acc} meters</p>
+											<p>Battery: ${item.bat}%</p>
+											<p>Satellites: ${item.sat}</p>
+											<p>User Agent: ${item.useragent}</p>
+											<p>Speed: ${item.speed} m/s</p>
+											<p>Bearing: ${item.bearing}°</p>
+										</div>
+									`;
 									const infowindow = new google.maps.InfoWindow({
-										content: `Event Time: ${new Date(item.timestamp * 1000).toLocaleString()}`,
+										content: infowindowContent,
 										position: position
 									});
 
@@ -327,7 +339,6 @@
 										infowindow.open(map);
 									});
 								});
-
 
 								// Adjust the map center and zoom based on the data
 								if (data.length > 0) {
@@ -337,8 +348,8 @@
 							})
 							.catch(error => console.error('Error fetching data:', error));
 					}
-
 				</script>
+
 				<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
 				<script async defer
 					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxyRHImShMxEssA12vkUWDYhv0Q6X7q1Y&libraries=&v=weekly&callback=initMap">
