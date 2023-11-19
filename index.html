@@ -455,15 +455,15 @@
 
 									const infowindowContent = `
 										<div style="color: black;">
-											<h3>${name} Weather</h3>
+											<h3><span>${name} Weather</span></h3>
 											<img src="${iconUrl}" alt="${weather.description}" />
-											<p><strong>${weather.main}</strong>: ${weather.description}</p>
-											<p><strong>Temperature</strong>: ${main.temp} K</p>
-											<p><strong>Feels Like</strong>: ${main.feels_like} K</p>
-											<p><strong>Humidity</strong>: ${main.humidity}%</p>
-											<p><strong>Wind Speed</strong>: ${wind.speed} m/s</p>
-											<p><strong>Sunrise</strong>: ${new Date(sys.sunrise * 1000).toLocaleTimeString()}</p>
-											<p><strong>Sunset</strong>: ${new Date(sys.sunset * 1000).toLocaleTimeString()}</p>
+											<span><strong>Condition:</strong> ${weather.main} (${weather.description})</span><br>
+											<span><strong>Temperature:</strong> ${main.temp} K</span><br>
+											<span><strong>Feels Like:</strong> ${main.feels_like} K</span><br>
+											<span><strong>Humidity:</strong> ${main.humidity}%</span><br>
+											<span><strong>Wind Speed:</strong> ${wind.speed} m/s</span><br>
+											<span><strong>Sunrise:</strong> ${new Date(sys.sunrise * 1000).toLocaleTimeString()}</span><br>
+											<span><strong>Sunset:</strong> ${new Date(sys.sunset * 1000).toLocaleTimeString()}</span>
 										</div>
 									`;
 
