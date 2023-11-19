@@ -284,7 +284,7 @@
 						class="fas fa-at"></i> <a href="mailto:tom@hamer.cloud">
 						tom@hamer.cloud</a></p>
 				<p>If I have been outside in the last 3 hours, you will be able to see where I am, if not it will
-					default to Sydney and a single point.</p>
+					default to Sydney City.</p>
 				<p>
 				<div id="map"></div>
 				<script>
@@ -302,8 +302,8 @@
 						fetch('https://api.hamer.cloud/data')
 							.then(response => response.json())
 							.then(data => {
+								const currentTime = Date.now(); // Current time in milliseconds
 								if (data && data.length > 1) { // Ensure there are at least two locations
-									const currentTime = Date.now(); // Current time in milliseconds
 									data.sort((a, b) => a.timestamp - b.timestamp);
 									const pathCoordinates = data.map(item => new google.maps.LatLng(item.lat, item.lon));
 									// Animate the polyline
