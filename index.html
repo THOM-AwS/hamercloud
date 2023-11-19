@@ -451,7 +451,6 @@
 									const wind = data.wind;
 									const sys = data.sys;
 									const name = data.name;
-									const iconUrl = "http://openweathermap.org/img/w/" + weather.icon + ".png";
 
 									const infowindowContent = `
 										<div style="color: black;">
@@ -468,7 +467,7 @@
 									`;
 
 									const weatherInfo = data.weather[0].description;
-									const iconUrl = "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
+									const iconUrl = "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
 
 									const marker = new google.maps.Marker({
 										position: { lat, lng: lon },
