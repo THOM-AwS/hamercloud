@@ -302,6 +302,7 @@
 							.then(response => response.json())
 							.then(data => {
 								const currentTime = Date.now(); // Current time in milliseconds
+								data.sort((a, b) => a.timestamp - b.timestamp);
 								const lineCoordinates = []; // Array to hold coordinates for the polyline
 
 								// Process and use the data to update the map
