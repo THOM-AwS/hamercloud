@@ -398,7 +398,7 @@
 								});
 
 								// Adjust the map center and zoom based on the data
-								if (data.length > 0) {
+								if (data.length > 1) {
 									const firstPoint = data[0];
 									console.log("Point:", firstPoint);
 									addWeatherToMap(map, firstPoint.lat, firstPoint.lon);
