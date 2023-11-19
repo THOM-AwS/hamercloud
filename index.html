@@ -319,13 +319,13 @@
 
 									// Optional: Add info window to the circle
 									// Add info window to the circle
-const infowindow = new google.maps.InfoWindow({
+               const infowindow = new google.maps.InfoWindow({
     content: `Event Time: ${new Date(item.timestamp * 1000).toLocaleString()}`,
     position: position
 });
 
 // Add a click event listener to the circle
-circle.addListener('click', () => {
+        circle.addListener('click', () => {
     infowindow.open(map);
 });
 
