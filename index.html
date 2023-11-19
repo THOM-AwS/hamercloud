@@ -395,6 +395,7 @@
 								// Adjust the map center and zoom based on the data
 								if (data.length > 0) {
 									const firstPoint = data[0];
+									console.log("Point:", firstPoint);
 									addWeatherToMap(map, firstPoint.lat, firstPoint.lon);
 									map.setCenter(new google.maps.LatLng(data[0].lat, data[0].lon));
 									map.setZoom(12);
@@ -436,6 +437,7 @@
 					function addWeatherToMap(map, lat, lon) {
 						const apiKey = '27dd553d3274c2f0760332bb947b1802';
 						const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+						console.log("Latitude:", lat, "Longitude:", lon); // Log the coordinates
 
 						fetch(url)
 							.then(response => {
@@ -448,6 +450,7 @@
 								if (data && data.weather) {
 									const weather = data.weather[0];
 									const main = data.main;
+									const clouds = data.clouds;
 									const wind = data.wind;
 									const sys = data.sys;
 									const name = data.name;
