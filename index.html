@@ -302,11 +302,15 @@
 						fetch('https://api.hamer.cloud/data')
 							.then(response => response.json())
 							.then(data => {
-								const currentTime = Date.now(); // Current time in milliseconds
-								data.sort((a, b) => a.timestamp - b.timestamp);
-								const lineCoordinates = data.map(item => new google.maps.LatLng(item.lat, item.lon));
-								// Animate the polyline
-								animatePolyline(map, lineCoordinates, 100);
+								if (data && data.length > 1) { // Ensure there are at least two locations
+									const currentTime = Date.now(); // Current time in milliseconds
+									data.sort((a, b) => a.timestamp - b.timestamp);
+									const pathCoordinates = data.map(item => new google.maps.LatLng(item.lat, item.lon));
+									// Animate the polyline
+									animatePolyline(map, lineCoordinates, 100);
+								} else {
+									console.log("Not enough data points for polyline animation.");
+								}
 
 								let previousPosition = null;
 								let previousTimestamp = null;
@@ -463,17 +467,17 @@
 
 									const infowindowContent = `
 										<div style="color: black;">
-											<h3 style="color: black;">${data.name} Weather</h3>
-											<img src="${iconUrl}" alt="${weather.description}" />
-											<span>Condition: ${weather.main} (${weather.description})</span>
-											<span>Temperature: ${tempCelsius} °C (Feels like: ${feelsLikeCelsius} °C)</span>
-											<span>Min/Max Temp: ${minTempCelsius} °C / ${maxTempCelsius} °C</span>
-											<span>Pressure: ${main.pressure} hPa</span>
-											<span>Humidity: ${main.humidity}%</span>
-											<span>Wind: ${wind.speed} m/s, ${wind.deg} degrees</span>
-											<span>Cloudiness: ${clouds.all}%</span>
-											<span>Sunrise: ${new Date(sys.sunrise * 1000).toLocaleTimeString()}</span>
-											<span>Sunset: ${new Date(sys.sunset * 1000).toLocaleTimeString()}</span>
+											<h3 style="color: black;">${data.name} Weather</h3><br>
+											<img src="${iconUrl}" alt="${weather.description}" /><br>
+											<span>Condition: ${weather.main} (${weather.description})</span><br>
+											<span>Temperature: ${tempCelsius} °C (Feels like: ${feelsLikeCelsius} °C)</span><br>
+											<span>Min/Max Temp: ${minTempCelsius} °C / ${maxTempCelsius} °C</span><br>
+											<span>Pressure: ${main.pressure} hPa</span><br>
+											<span>Humidity: ${main.humidity}%</span><br>
+											<span>Wind: ${wind.speed} m/s, ${wind.deg} degrees</span><br>
+											<span>Cloudiness: ${clouds.all}%</span><br>
+											<span>Sunrise: ${new Date(sys.sunrise * 1000).toLocaleTimeString()}</span><br>
+											<span>Sunset: ${new Date(sys.sunset * 1000).toLocaleTimeString()}</span><br>
 										</div>
 									`;
 
