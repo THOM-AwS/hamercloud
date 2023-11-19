@@ -453,17 +453,24 @@
 									const name = data.name;
 									const iconUrl = "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
 
+									const tempCelsius = (main.temp - 273.15).toFixed(1); // Convert to Celsius
+									const feelsLikeCelsius = (main.feels_like - 273.15).toFixed(1); // Convert to Celsius
+									const minTempCelsius = (main.temp_min - 273.15).toFixed(1); // Convert to Celsius
+									const maxTempCelsius = (main.temp_max - 273.15).toFixed(1); // Convert to Celsius
+
 									const infowindowContent = `
 										<div style="color: black;">
-											<h3><span style="color: black;">${name} Weather</span></h3>
+											<h3>${data.name} Weather</h3>
 											<img src="${iconUrl}" alt="${weather.description}" />
-											<span style="color: black;">Condition: ${weather.main} (${weather.description})</span><br>
-											<span style="color: black;">Temperature: ${main.temp} K</span><br>
-											<span style="color: black;">Feels Like: ${main.feels_like} K</span><br>
-											<span style="color: black;">Humidity: ${main.humidity}%</span><br>
-											<span style="color: black;">Wind Speed: ${wind.speed} m/s</span><br>
-											<span style="color: black;">Sunrise: ${new Date(sys.sunrise * 1000).toLocaleTimeString()}</span><br>
-											<span style="color: black;">Sunset: ${new Date(sys.sunset * 1000).toLocaleTimeString()}</span>
+											<p>Condition: ${weather.main} (${weather.description})</p>
+											<p>Temperature: ${tempCelsius} °C (Feels like: ${feelsLikeCelsius} °C)</p>
+											<p>Min/Max Temp: ${minTempCelsius} °C / ${maxTempCelsius} °C</p>
+											<p>Pressure: ${main.pressure} hPa</p>
+											<p>Humidity: ${main.humidity}%</p>
+											<p>Wind: ${wind.speed} m/s, ${wind.deg} degrees</p>
+											<p>Cloudiness: ${clouds.all}%</p>
+											<p>Sunrise: ${new Date(sys.sunrise * 1000).toLocaleTimeString()}</p>
+											<p>Sunset: ${new Date(sys.sunset * 1000).toLocaleTimeString()}</p>
 										</div>
 									`;
 
