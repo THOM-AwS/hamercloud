@@ -309,12 +309,26 @@
 								// Process and use the data to update the map
 								data.forEach((item, index) => {
 									const position = new google.maps.LatLng(item.lat, item.lon);
+
+									// Determine if this is the latest point
+									const isLatestPoint = index === data.length - 1;
+
 									// Calculate the age of the point in hours
 									const ageHours = (currentTime - (item.timestamp * 1000)) / (1000 * 60 * 60);
 									let opacity = 1 - (ageHours / 3);
 									opacity = Math.max(opacity, 0); // Ensure opacity is not negative
 
-									const circle = new google.maps.Circle({
+									// Different style for the latest point
+									const circleOptions = isLatestPoint ? {
+										strokeColor: '#00FF00', // Different color for the latest point
+										strokeOpacity: 1,
+										strokeWeight: 3,
+										fillColor: '#00FF00',
+										fillOpacity: 1,
+										map: map,
+										center: position,
+										radius: item.acc * 2 // Larger radius for the latest point
+									} : {
 										strokeColor: '#FF0000',
 										strokeOpacity: opacity,
 										strokeWeight: 2,
@@ -322,8 +336,10 @@
 										fillOpacity: opacity,
 										map: map,
 										center: position,
-										radius: item.acc // Circle radius set to accuracy in meters
-									});
+										radius: item.acc
+									};
+
+									const circle = new google.maps.Circle(circleOptions);
 
 									// Add info window to the circle
 									const infowindowContent = `
