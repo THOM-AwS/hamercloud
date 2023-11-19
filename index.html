@@ -303,14 +303,16 @@
 							.then(response => response.json())
 							.then(data => {
 								const currentTime = Date.now(); // Current time in milliseconds
-								if (data && data.length > 1) { // Ensure there are at least two locations
+								if (data && data.length > 1) {
 									data.sort((a, b) => a.timestamp - b.timestamp);
 									console.log("Raw data:", data);
-									const pathCoordinates = data.map(item => new google.maps.LatLng(item.lat, item.lon));
-									return new google.maps.LatLng(item.lat, item.lon);
+									const pathCoordinates = data.map(item => {
+										console.log('Creating LatLng with coordinates:', item.lat, item.lon);
+										return new google.maps.LatLng(item.lat, item.lon);
+									});
 
 									// Animate the polyline
-									animatePolyline(map, lineCoordinates, 100);
+									animatePolyline(map, pathCoordinates);
 								} else {
 									console.log("Not enough data points for polyline animation.");
 								}
