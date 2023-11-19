@@ -317,18 +317,18 @@
 
 									// Add info window to the circle
 									const infowindowContent = `
-										<div>
-											<p>Time: ${new Date(item.timestamp * 1000).toLocaleString()}</p>
-											<p>Latitude: ${item.lat}</p>
-											<p>Longitude: ${item.lon}</p>
-											<p>Altitude: ${item.alt} meters</p>
-											<p>Accuracy: ${item.acc} meters</p>
-											<p>Battery: ${item.bat}%</p>
-											<p>Satellites: ${item.sat}</p>
-											<p>User Agent: ${item.useragent}</p>
-											<p>Speed: ${item.speed} m/s</p>
-											<p>Bearing: ${item.bearing}°</p>
-										</div>
+									<div>
+										<span style="color: black;">Time: ${new Date(item.timestamp * 1000).toLocaleString()}</span><br>
+										<span style="color: black;">Latitude: ${item.lat}</span><br>
+										<span style="color: black;">Longitude: ${item.lon}</span><br>
+										<span style="color: black;">Altitude: ${item.alt} meters</span><br>
+										<span style="color: black;">Accuracy: ${item.acc} meters</span><br>
+										<span style="color: black;">Battery: ${item.bat}%</span><br>
+										<span style="color: black;">Satellites: ${item.sat}</span><br>
+										<span style="color: black;">User Agent: ${item.useragent}</span><br>
+										<span style="color: black;">Speed: ${item.speed} m/s</span><br>
+										<span style="color: black;">Bearing: ${item.bearing}°</span>
+									</div>
 									`;
 									const infowindow = new google.maps.InfoWindow({
 										content: infowindowContent,
