@@ -319,8 +319,11 @@
 
 								let previousPosition = null;
 								let previousTimestamp = null;
-
-								console.log('Creating marker/circle/polyline with coordinates:', item.lat, item.lon);
+								try {
+									console.log('Creating marker/circle/polyline with coordinates:', lat, lon);
+								} catch {
+									console.log("cant log coords.")
+								}
 								// Process and use the data to update the map
 								data.forEach((item, index) => {
 
