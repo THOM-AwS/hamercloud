@@ -457,13 +457,13 @@
 										<div style="color: black;">
 											<h3><span style="color: black;">${name} Weather</span></h3>
 											<img src="${iconUrl}" alt="${weather.description}" />
-											<span style="color: black;"><strong>Condition:</strong> ${weather.main} (${weather.description})</span><br>
-											<span style="color: black;"><strong>Temperature:</strong> ${main.temp} K</span><br>
-											<span style="color: black;"><strong>Feels Like:</strong> ${main.feels_like} K</span><br>
-											<span style="color: black;"><strong>Humidity:</strong> ${main.humidity}%</span><br>
-											<span style="color: black;"><strong>Wind Speed:</strong> ${wind.speed} m/s</span><br>
-											<span style="color: black;"><strong>Sunrise:</strong> ${new Date(sys.sunrise * 1000).toLocaleTimeString()}</span><br>
-											<span style="color: black;"><strong>Sunset:</strong> ${new Date(sys.sunset * 1000).toLocaleTimeString()}</span>
+											<span style="color: black;">Condition: ${weather.main} (${weather.description})</span><br>
+											<span style="color: black;">Temperature: ${main.temp} K</span><br>
+											<span style="color: black;">Feels Like: ${main.feels_like} K</span><br>
+											<span style="color: black;">Humidity: ${main.humidity}%</span><br>
+											<span style="color: black;">Wind Speed: ${wind.speed} m/s</span><br>
+											<span style="color: black;">Sunrise: ${new Date(sys.sunrise * 1000).toLocaleTimeString()}</span><br>
+											<span style="color: black;">Sunset: ${new Date(sys.sunset * 1000).toLocaleTimeString()}</span>
 										</div>
 									`;
 
