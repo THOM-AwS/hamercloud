@@ -302,9 +302,12 @@
 							.then(response => response.json())
 							.then(data => {
 								const currentTime = Date.now(); // Current time in milliseconds
+								const lineCoordinates = []; // Array to hold coordinates for the polyline
+
 								// Process and use the data to update the map
 								data.forEach(item => {
 									const position = new google.maps.LatLng(item.lat, item.lon);
+									lineCoordinates.push(position); // Add position to line coordinates
 									// Calculate the age of the point in hours
 									const ageHours = (currentTime - (item.timestamp * 1000)) / (1000 * 60 * 60);
 									let opacity = 1 - (ageHours / 3);
@@ -345,6 +348,16 @@
 										infowindow.open(map);
 									});
 								});
+
+								const linePath = new google.maps.Polyline({
+									path: lineCoordinates,
+									geodesic: true,
+									strokeColor: '#FF0000',
+									strokeOpacity: 0.8,
+									strokeWeight: 2
+								});
+
+								linePath.setMap(map);
 
 								// Adjust the map center and zoom based on the data
 								if (data.length > 0) {
