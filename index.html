@@ -301,18 +301,24 @@
 						fetch('https://api.hamer.cloud/data')
 							.then(response => response.json())
 							.then(data => {
+								const currentTime = Date.now(); // Current time in milliseconds
 								// Process and use the data to update the map
 								data.forEach(item => {
 									const position = new google.maps.LatLng(item.lat, item.lon);
+									// Calculate the age of the point in hours
+									const ageHours = (currentTime - (item.timestamp * 1000)) / (1000 * 60 * 60);
+									let opacity = 1 - (ageHours / 3);
+									opacity = Math.max(opacity, 0); // Ensure opacity is not negative
+
 									const circle = new google.maps.Circle({
 										strokeColor: '#FF0000',
-										strokeOpacity: 0.8,
+										strokeOpacity: opacity,
 										strokeWeight: 2,
 										fillColor: '#FF0000',
-										fillOpacity: 0.35,
+										fillOpacity: opacity,
 										map: map,
 										center: position,
-										radius: 20 // Circle radius set to accuracy in meters
+										radius: item.acc // Circle radius set to accuracy in meters
 									});
 
 									// Add info window to the circle
