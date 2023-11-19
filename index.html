@@ -312,12 +312,12 @@
 									console.log("Not enough data points for polyline animation.");
 								}
 
-								console.log("Latitude:", item.lat, "Longitude:", item.lon);
 								let previousPosition = null;
 								let previousTimestamp = null;
 
 								// Process and use the data to update the map
 								data.forEach((item, index) => {
+									console.log("Latitude:", item.lat, "Longitude:", item.lon);
 									const position = new google.maps.LatLng(item.lat, item.lon);
 
 									// Determine if this is the latest point
