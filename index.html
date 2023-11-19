@@ -308,55 +308,55 @@
 									console.log("Raw data:", data);
 									const pathCoordinates = data.map(item => new google.maps.LatLng(item.lat, item.lon));
 									return new google.maps.LatLng(item.lat, item.lon);
-								});
-						// Animate the polyline
-						animatePolyline(map, lineCoordinates, 100);
-					} else {
-						console.log("Not enough data points for polyline animation.");
-					}
 
-					let previousPosition = null;
-					let previousTimestamp = null;
+									// Animate the polyline
+									animatePolyline(map, lineCoordinates, 100);
+								} else {
+									console.log("Not enough data points for polyline animation.");
+								}
 
-					console.log('Creating marker/circle/polyline with coordinates:', item.lat, item.lon);
-					// Process and use the data to update the map
-					data.forEach((item, index) => {
+								let previousPosition = null;
+								let previousTimestamp = null;
 
-						const position = new google.maps.LatLng(item.lat, item.lon);
+								console.log('Creating marker/circle/polyline with coordinates:', item.lat, item.lon);
+								// Process and use the data to update the map
+								data.forEach((item, index) => {
 
-						// Determine if this is the latest point
-						const isLatestPoint = index === data.length - 1 || data.length <= 1;
+									const position = new google.maps.LatLng(item.lat, item.lon);
 
-						// Calculate the age of the point in hours
-						const ageHours = (currentTime - (item.timestamp * 1000)) / (1000 * 60 * 60);
-						let opacity = 1 - (ageHours / 4);
-						opacity = Math.max(opacity, 0); // Ensure opacity is not negative
+									// Determine if this is the latest point
+									const isLatestPoint = index === data.length - 1 || data.length <= 1;
 
-						// Different style for the latest point
-						const circleOptions = isLatestPoint ? {
-							strokeColor: '#26de51',
-							strokeOpacity: 1,
-							strokeWeight: 3,
-							fillColor: '#4285F4',
-							fillOpacity: 0.2,
-							map: map,
-							center: position,
-							radius: item.acc * 10 // Larger radius for the latest point
-						} : {
-							strokeColor: '#4285F4',
-							strokeOpacity: opacity,
-							strokeWeight: 2,
-							fillColor: '#4285F4',
-							fillOpacity: opacity,
-							map: map,
-							center: position,
-							radius: item.acc
-						};
+									// Calculate the age of the point in hours
+									const ageHours = (currentTime - (item.timestamp * 1000)) / (1000 * 60 * 60);
+									let opacity = 1 - (ageHours / 4);
+									opacity = Math.max(opacity, 0); // Ensure opacity is not negative
 
-						const circle = new google.maps.Circle(circleOptions);
+									// Different style for the latest point
+									const circleOptions = isLatestPoint ? {
+										strokeColor: '#26de51',
+										strokeOpacity: 1,
+										strokeWeight: 3,
+										fillColor: '#4285F4',
+										fillOpacity: 0.2,
+										map: map,
+										center: position,
+										radius: item.acc * 10 // Larger radius for the latest point
+									} : {
+										strokeColor: '#4285F4',
+										strokeOpacity: opacity,
+										strokeWeight: 2,
+										fillColor: '#4285F4',
+										fillOpacity: opacity,
+										map: map,
+										center: position,
+										radius: item.acc
+									};
 
-						// Add info window to the circle
-						const infowindowContent = `
+									const circle = new google.maps.Circle(circleOptions);
+
+									// Add info window to the circle
+									const infowindowContent = `
 									<div>
 										<span style="color: black;">Time: ${new Date(item.timestamp * 1000).toLocaleString()}</span><br>
 										<span style="color: black;">Latitude: ${item.lat}</span><br>
@@ -370,46 +370,46 @@
 										<span style="color: black;">Bearing: ${item.bearing}°</span>
 									</div>
 									`;
-						const infowindow = new google.maps.InfoWindow({
-							content: infowindowContent,
-							position: position
-						});
+									const infowindow = new google.maps.InfoWindow({
+										content: infowindowContent,
+										position: position
+									});
 
-						circle.addListener('click', () => {
-							infowindow.open(map);
-						});
+									circle.addListener('click', () => {
+										infowindow.open(map);
+									});
 
-						if (previousPosition && previousTimestamp) {
-							// Calculate age of the line segment in hours
-							const segmentAgeHours = (currentTime - ((item.timestamp + previousTimestamp) / 2 * 1000)) / (1000 * 60 * 60);
-							let segmentOpacity = 1 - (segmentAgeHours / 3);
-							segmentOpacity = Math.max(segmentOpacity, 0); // Ensure opacity is not negative
+									if (previousPosition && previousTimestamp) {
+										// Calculate age of the line segment in hours
+										const segmentAgeHours = (currentTime - ((item.timestamp + previousTimestamp) / 2 * 1000)) / (1000 * 60 * 60);
+										let segmentOpacity = 1 - (segmentAgeHours / 3);
+										segmentOpacity = Math.max(segmentOpacity, 0); // Ensure opacity is not negative
 
-							// Create a polyline segment
-							const lineSegment = new google.maps.Polyline({
-								path: [previousPosition, position],
-								geodesic: true,
-								strokeColor: '#4285F4',
-								strokeOpacity: segmentOpacity,
-								strokeWeight: 2
-							});
+										// Create a polyline segment
+										const lineSegment = new google.maps.Polyline({
+											path: [previousPosition, position],
+											geodesic: true,
+											strokeColor: '#4285F4',
+											strokeOpacity: segmentOpacity,
+											strokeWeight: 2
+										});
 
-							lineSegment.setMap(map);
-						}
+										lineSegment.setMap(map);
+									}
 
-						previousPosition = position;
-						previousTimestamp = item.timestamp;
-					});
+									previousPosition = position;
+									previousTimestamp = item.timestamp;
+								});
 
-					// Adjust the map center and zoom based on the data
-					if (data.length > 0) {
-						const firstPoint = data[0];
-						addWeatherToMap(map, firstPoint.lat, firstPoint.lon);
-						map.setCenter(new google.maps.LatLng(data[0].lat, data[0].lon));
-						map.setZoom(14);
-					}
+								// Adjust the map center and zoom based on the data
+								if (data.length > 0) {
+									const firstPoint = data[0];
+									addWeatherToMap(map, firstPoint.lat, firstPoint.lon);
+									map.setCenter(new google.maps.LatLng(data[0].lat, data[0].lon));
+									map.setZoom(14);
+								}
 							})
-							.catch (error => console.error('Error fetching data:', error));
+							.catch(error => console.error('Error fetching data:', error));
 					}
 
 					function animatePolyline(map, pathCoordinates) {
