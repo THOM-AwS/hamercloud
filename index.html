@@ -307,7 +307,7 @@
 								let previousTimestamp = null;
 
 								// Process and use the data to update the map
-								data.forEach(item => {
+								data.forEach((item, index) => {
 									const position = new google.maps.LatLng(item.lat, item.lon);
 									// Calculate the age of the point in hours
 									const ageHours = (currentTime - (item.timestamp * 1000)) / (1000 * 60 * 60);
@@ -348,37 +348,36 @@
 									circle.addListener('click', () => {
 										infowindow.open(map);
 									});
+
+									if (previousPosition && previousTimestamp) {
+										// Calculate age of the line segment in hours
+										const segmentAgeHours = (currentTime - ((item.timestamp + previousTimestamp) / 2 * 1000)) / (1000 * 60 * 60);
+										let segmentOpacity = 1 - (segmentAgeHours / 3);
+										segmentOpacity = Math.max(segmentOpacity, 0); // Ensure opacity is not negative
+
+										// Create a polyline segment
+										const lineSegment = new google.maps.Polyline({
+											path: [previousPosition, position],
+											geodesic: true,
+											strokeColor: '#FF0000',
+											strokeOpacity: segmentOpacity,
+											strokeWeight: 2
+										});
+
+										lineSegment.setMap(map);
+									}
+
+									previousPosition = position;
+									previousTimestamp = item.timestamp;
 								});
 
-								if (previousPosition) {
-									// Calculate age of the line segment in hours
-									const segmentAgeHours = (currentTime - ((item.timestamp + previousTimestamp) / 2 * 1000)) / (1000 * 60 * 60);
-									let segmentOpacity = 1 - (segmentAgeHours / 3);
-									segmentOpacity = Math.max(segmentOpacity, 0); // Ensure opacity is not negative
-
-									// Create a polyline segment
-									const lineSegment = new google.maps.Polyline({
-										path: [previousPosition, position],
-										geodesic: true,
-										strokeColor: '#FF0000',
-										strokeOpacity: segmentOpacity,
-										strokeWeight: 2
-									});
-
-									lineSegment.setMap(map);
+								// Adjust the map center and zoom based on the data
+								if (data.length > 0) {
+									map.setCenter(new google.maps.LatLng(data[0].lat, data[0].lon));
+									map.setZoom(12);
 								}
-
-								previousPosition = position;
-								previousTimestamp = item.timestamp;
-							});
-
-						// Adjust the map center and zoom based on the data
-						if (data.length > 0) {
-							map.setCenter(new google.maps.LatLng(data[0].lat, data[0].lon));
-							map.setZoom(12);
-						}
-					})
-							.catch (error => console.error('Error fetching data:', error));
+							})
+							.catch(error => console.error('Error fetching data:', error));
 					}
 				</script>
 
