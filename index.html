@@ -404,22 +404,31 @@
 						let linePath = new google.maps.Polyline({
 							path: [],
 							geodesic: true,
-							strokeColor: '#FF0000',
+							strokeColor: '#34eb49',
 							strokeOpacity: 1.0,
-							strokeWeight: 2,
+							strokeWeight: 1,
 							map: map
 						});
 
 						let step = 0;
 						const numSteps = pathCoordinates.length;
-						let interval = setInterval(() => {
+
+						function drawLine() {
+							if (step >= numSteps) {
+								step = 0; // Reset step to start
+								linePath.setPath([]); // Clear the existing path
+							}
+
 							linePath.getPath().push(pathCoordinates[step]);
 							step++;
-							if (step >= numSteps) {
-								clearInterval(interval);
-							}
-						}, 200); // Adjust time interval for different speeds
+
+							// Continue the animation
+							requestAnimationFrame(drawLine);
+						}
+
+						drawLine();
 					}
+
 				</script>
 
 				<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
