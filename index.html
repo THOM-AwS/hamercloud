@@ -323,10 +323,6 @@
 								// Process and use the data to update the map
 								data.forEach((item, index) => {
 
-									if (isNaN(item.lat) || isNaN(item.lon)) {
-										console.error('Invalid coordinates:', item);
-									}
-
 									const position = new google.maps.LatLng(item.lat, item.lon);
 
 									// Determine if this is the latest point
