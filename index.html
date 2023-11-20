@@ -346,7 +346,7 @@
 										fillOpacity: 0.2,
 										map: map,
 										center: position,
-										radius: item.acc * 10 // Larger radius for the latest point
+										radius: 40 // Larger radius for the latest point
 									} : {
 										strokeColor: '#4285F4',
 										strokeOpacity: opacity,
@@ -408,9 +408,9 @@
 
 								// Adjust the map center and zoom based on the data
 								if (data.length > 0) {
-									const firstPoint = data[0];
+									const firstPoint = data[-1];
 									addWeatherToMap(map, firstPoint.lat, firstPoint.lon);
-									map.setCenter(new google.maps.LatLng(data[0].lat, data[0].lon));
+									map.setCenter(new google.maps.LatLng(data[-1].lat, data[-1].lon));
 									map.setZoom(14);
 								}
 							})
