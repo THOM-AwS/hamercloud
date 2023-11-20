@@ -426,9 +426,9 @@
 
 					function adjustMapCenterAndZoom(data, map) {
 						if (data.length > 0) {
-							const firstPoint = data[data.length - 1];
+							const firstPoint = data[data.length - 2];
 							addWeatherToMap(map, firstPoint.lat, firstPoint.lon);
-							map.setCenter(new google.maps.LatLng(data[data.length - 1].lat, data[data.length - 1].lon));
+							map.setCenter(new google.maps.LatLng(data[data.length - 2].lat, data[data.length - 2].lon));
 							map.setZoom(14);
 						}
 					}
