@@ -490,24 +490,28 @@
 
 									const infowindowContent = `
 										<div style="color: black;">
-											<h3>${data.name} Weather</h3><br>
+											<h3 style="color: black;">${data.name} Weather</h3><br>
 											<img src="${iconUrl}" alt="${weather.description}" /><br>
-											<span>Condition: ${weather.main} (${weather.description})</span><br>
-											<span>Temperature: ${tempCelsius} °C (Feels like: ${feelsLikeCelsius} °C)</span><br>
-											<span>Min/Max Temp: ${minTempCelsius} °C / ${maxTempCelsius} °C</span><br>
-											<span>Pressure: ${main.pressure} hPa</span><br>
-											<span>Humidity: ${main.humidity}%</span><br>
-											<span>Wind: ${(wind.speed * 3.6).toFixed(2)} km/h, ${wind.deg} degrees</span><br>
-											<span>Cloudiness: ${clouds.all}%</span><br>
-											<span>Sunrise: ${new Date(sys.sunrise * 1000).toLocaleTimeString()}</span><br>
-											<span>Sunset: ${new Date(sys.sunset * 1000).toLocaleTimeString()}</span><br>
+											<span style="color: black;">Condition: ${weather.main} (${weather.description})</span><br>
+											<span style="color: black;">Temperature: ${tempCelsius} °C (Feels like: ${feelsLikeCelsius} °C)</span><br>
+											<span style="color: black;">Min/Max Temp: ${minTempCelsius} °C / ${maxTempCelsius} °C</span><br>
+											<span style="color: black;">Pressure: ${main.pressure} hPa</span><br>
+											<span style="color: black;">Humidity: ${main.humidity}%</span><br>
+											<span style="color: black;">Wind: ${(wind.speed * 3.6).toFixed(2)} km/h, ${wind.deg} degrees</span><br>
+											<span style="color: black;">Cloudiness: ${clouds.all}%</span><br>
+											<span style="color: black;">Sunrise: ${new Date(sys.sunrise * 1000).toLocaleTimeString()}</span><br>
+											<span style="color: black;">Sunset: ${new Date(sys.sunset * 1000).toLocaleTimeString()}</span><br>
 										</div>
 									`;
 
 									const marker = new google.maps.Marker({
 										position: { lat, lng: lon },
 										map: map,
-										icon: iconUrl,
+										icon: {
+											url: iconUrl,
+											// Set the anchor to offset the icon vertically
+											anchor: new google.maps.Point(-30, 30) // Adjust the second parameter to change vertical offset
+										},
 										title: weather.description
 									});
 
