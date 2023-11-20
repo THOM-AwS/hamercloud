@@ -303,6 +303,7 @@
 							.then(response => response.json())
 							.then(data => {
 								const currentTime = Date.now(); // Current time in milliseconds
+								console.log(data)
 								if (data && data.length > 1) {
 									data.sort((a, b) => a.timestamp - b.timestamp);
 									console.log("Raw data:", data);
@@ -322,7 +323,7 @@
 								try {
 									console.log('Creating marker/circle/polyline with coordinates:', lat, lon);
 								} catch {
-									console.log("cant log coords.", lat, lon)
+									console.log("cant log coords.")
 								}
 								// Process and use the data to update the map
 								data.forEach((item, index) => {
