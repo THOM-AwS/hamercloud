@@ -326,9 +326,7 @@
 								}
 								// Process and use the data to update the map
 								data.forEach((item, index) => {
-
 									const position = new google.maps.LatLng(item.lat, item.lon);
-
 									// Determine if this is the latest point
 									const isLatestPoint = index === data.length - 1 || data.length <= 1;
 
@@ -408,9 +406,9 @@
 
 								// Adjust the map center and zoom based on the data
 								if (data.length > 0) {
-									const firstPoint = data[-2];
+									const firstPoint = data[0];
 									addWeatherToMap(map, firstPoint.lat, firstPoint.lon);
-									map.setCenter(new google.maps.LatLng(data[-2].lat, data[-2].lon));
+									map.setCenter(new google.maps.LatLng(data[0].lat, data[0].lon));
 									map.setZoom(14);
 								}
 							})
