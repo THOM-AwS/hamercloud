@@ -370,7 +370,21 @@
 					}
 
 					function addInfoWindowToCircle(circle, item, position, map) {
-						const infowindowContent = `...`; // Your existing content
+						const infowindowContent = `
+						<div>
+							<span style="color: black;">Time: ${new Date(item.timestamp * 1000).toLocaleString()}</span><br>
+							<span style="color: black;">Latitude: ${item.lat}</span><br>
+							<span style="color: black;">Longitude: ${item.lon}</span><br>
+							<span style="color: black;">Altitude: ${item.alt} meters</span><br>
+							<span style="color: black;">Accuracy: ${item.acc} meters</span><br>
+							<span style="color: black;">Battery: ${item.bat}%</span><br>
+							<span style="color: black;">Satellites: ${item.sat}</span><br>
+							<span style="color: black;">User Agent: ${item.useragent}</span><br>
+							<span style="color: black;">Speed: ${(item.speed * 3.6).toFixed(2)} km/h</span><br>
+							<span style="color: black;">Bearing: ${item.bearing}°</span>
+						</div>
+						`;
+
 						const infowindow = new google.maps.InfoWindow({
 							content: infowindowContent,
 							position: position
@@ -470,7 +484,21 @@
 									const minTempCelsius = (main.temp_min - 273.15).toFixed(1);
 									const maxTempCelsius = (main.temp_max - 273.15).toFixed(1);
 
-									const infowindowContent = `...`; // Your existing content
+									const infowindowContent = `
+									<div style="color: black;">
+										<h3>${data.name} Weather</h3>
+										<img src="${iconUrl}" alt="${weather.description}" />
+										<p>Condition: ${weather.main} (${weather.description})</p>
+										<p>Temperature: ${tempCelsius} °C (Feels like: ${feelsLikeCelsius} °C)</p>
+										<p>Min/Max Temp: ${minTempCelsius} °C / ${maxTempCelsius} °C</p>
+										<p>Pressure: ${main.pressure} hPa</p>
+										<p>Humidity: ${main.humidity}%</p>
+										<p>Wind: ${(wind.speed * 3.6).toFixed(2)} km/h, ${wind.deg} degrees</p>
+										<p>Cloudiness: ${clouds.all}%</p>
+										<p>Sunrise: ${new Date(sys.sunrise * 1000).toLocaleTimeString()}</p>
+										<p>Sunset: ${new Date(sys.sunset * 1000).toLocaleTimeString()}</p>
+									</div>
+									`;
 
 									const marker = new google.maps.Marker({
 										position: { lat, lng: lon },
