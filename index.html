@@ -408,9 +408,9 @@
 
 								// Adjust the map center and zoom based on the data
 								if (data.length > 0) {
-									const firstPoint = data[-1];
+									const firstPoint = data[-2];
 									addWeatherToMap(map, firstPoint.lat, firstPoint.lon);
-									map.setCenter(new google.maps.LatLng(data[-1].lat, data[-1].lon));
+									map.setCenter(new google.maps.LatLng(data[-2].lat, data[-2].lon));
 									map.setZoom(14);
 								}
 							})
