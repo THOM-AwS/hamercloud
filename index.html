@@ -490,17 +490,17 @@
 
 									const infowindowContent = `
 										<div style="color: black;">
-											<h3>${data.name} Weather</h3>
-											<img src="${iconUrl}" alt="${weather.description}" />
-											<p>Condition: ${weather.main} (${weather.description})</p>
-											<p>Temperature: ${tempCelsius} °C (Feels like: ${feelsLikeCelsius} °C)</p>
-											<p>Min/Max Temp: ${minTempCelsius} °C / ${maxTempCelsius} °C</p>
-											<p>Pressure: ${main.pressure} hPa</p>
-											<p>Humidity: ${main.humidity}%</p>
-											<p>Wind: ${(wind.speed * 3.6).toFixed(2)} km/h, ${wind.deg} degrees</p>
-											<p>Cloudiness: ${clouds.all}%</p>
-											<p>Sunrise: ${new Date(sys.sunrise * 1000).toLocaleTimeString()}</p>
-											<p>Sunset: ${new Date(sys.sunset * 1000).toLocaleTimeString()}</p>
+											<h3>${data.name} Weather</h3><br>
+											<img src="${iconUrl}" alt="${weather.description}" /><br>
+											<span>Condition: ${weather.main} (${weather.description})</span><br>
+											<span>Temperature: ${tempCelsius} °C (Feels like: ${feelsLikeCelsius} °C)</span><br>
+											<span>Min/Max Temp: ${minTempCelsius} °C / ${maxTempCelsius} °C</span><br>
+											<span>Pressure: ${main.pressure} hPa</span><br>
+											<span>Humidity: ${main.humidity}%</span><br>
+											<span>Wind: ${(wind.speed * 3.6).toFixed(2)} km/h, ${wind.deg} degrees</span><br>
+											<span>Cloudiness: ${clouds.all}%</span><br>
+											<span>Sunrise: ${new Date(sys.sunrise * 1000).toLocaleTimeString()}</span><br>
+											<span>Sunset: ${new Date(sys.sunset * 1000).toLocaleTimeString()}</span><br>
 										</div>
 									`;
 
