@@ -312,10 +312,17 @@
 								let previousPosition = null;
 								let previousTimestamp = null;
 
-								data.forEach((item, index, array) => {
-									const isLatestPoint = index === array.length - 1;
-									processEachDataPoint(item, isLatestPoint, currentTime, map);
-									previousPosition = new google.maps.LatLng(item.lat, item.lon);
+								data.forEach((item, index) => {
+									const position = new google.maps.LatLng(item.lat, item.lon);
+									const isLatestPoint = index === data.length - 1;
+
+									processEachDataPoint(item, isLatestPoint, position, currentTime, map);
+
+									if (previousPosition && previousTimestamp) {
+										createPolylineSegment(previousPosition, position, item, previousTimestamp, currentTime, map);
+									}
+
+									previousPosition = position;
 									previousTimestamp = item.timestamp;
 								});
 
@@ -325,24 +332,7 @@
 							.catch(error => console.error('Error fetching data:', error));
 					}
 
-					function createPolylineSegment(previousPosition, position, item, previousTimestamp, currentTime, map) {
-						const segmentAgeHours = (currentTime - ((item.timestamp + previousTimestamp) / 2 * 1000)) / (1000 * 60 * 60);
-						let segmentOpacity = Math.max(1 - (segmentAgeHours / 3), 0);
-
-						// Create a polyline segment
-						const lineSegment = new google.maps.Polyline({
-							path: [previousPosition, position],
-							geodesic: true,
-							strokeColor: '#4285F4',
-							strokeOpacity: segmentOpacity,
-							strokeWeight: 2
-						});
-
-						lineSegment.setMap(map);
-					}
-
-					function processEachDataPoint(item, isLatestPoint, currentTime, map) {
-						const position = new google.maps.LatLng(item.lat, item.lon);
+					function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
 						const ageHours = (currentTime - (item.timestamp * 1000)) / (1000 * 60 * 60);
 						let opacity = Math.max(1 - (ageHours / 4), 0);
 
@@ -351,13 +341,9 @@
 						circle.setMap(map); // Ensure map is set for the circle
 
 						addInfoWindowToCircle(circle, item, position, map);
-
-						if (previousPosition && previousTimestamp) {
-							createPolylineSegment(previousPosition, position, item, previousTimestamp, currentTime, map);
-						}
 					}
 
-					function getCircleOptions(isLatestPoint, position, item, opacity) {
+					function getCircleOptions(isLatestPoint, position, item, opacity, map) {
 						if (isLatestPoint) {
 							return {
 								strokeColor: '#26de51',
@@ -393,6 +379,21 @@
 						circle.addListener('click', () => {
 							infowindow.open(map);
 						});
+					}
+
+					function createPolylineSegment(previousPosition, position, item, previousTimestamp, currentTime, map) {
+						const segmentAgeHours = (currentTime - ((item.timestamp + previousTimestamp) / 2 * 1000)) / (1000 * 60 * 60);
+						let segmentOpacity = Math.max(1 - (segmentAgeHours / 3), 0);
+
+						const lineSegment = new google.maps.Polyline({
+							path: [previousPosition, position],
+							geodesic: true,
+							strokeColor: '#4285F4',
+							strokeOpacity: segmentOpacity,
+							strokeWeight: 2
+						});
+
+						lineSegment.setMap(map);
 					}
 
 					function handlePolylineAnimation(data, map) {
