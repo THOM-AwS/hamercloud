@@ -284,10 +284,10 @@
 						class="fas fa-at"></i> <a href="mailto:tom@hamer.cloud">
 						tom@hamer.cloud</a></p>
 				<p>If I have been outside in the last 3 hours, you will be able to see where I am, if not it will
-					default to Sydney City.</p>
+					default to Sydney City. Zoom out to see where I have been.</p>
 
 
-				<h2>Visited Countries</h2>
+				<h3>Visited Countries</h3>
 				<p>Count: <span id="countriesCount"></span></p>
 
 				<p>
@@ -534,12 +534,47 @@
 										strokeWeight: 1
 									};
 								});
+								map.data.forEach(function (feature) {
+									// Get the centroid of the feature (country)
+									var centroid = getCentroid(feature.getGeometry());
+									var countryName = feature.getProperty('name'); // Adjust 'name' based on your GeoJSON properties
+
+									// Create a marker for the label
+									var marker = new google.maps.Marker({
+										position: centroid,
+										map: map,
+										label: {
+											text: countryName,
+											color: 'black', // adjust label style as needed
+											fontSize: '12px'
+										},
+										icon: {
+											path: google.maps.SymbolPath.CIRCLE,
+											fillOpacity: 0,
+											strokeOpacity: 0,
+											scale: 0  // to create an invisible icon
+										}
+									});
+								});
 							})
 							.catch(error => console.error('Error loading GeoJSON data:', error));
 
 						fetchDataAndUpdateMap(map);
 					}
 
+					// Function to calculate the centroid of a geometry
+					function getCentroid(geometry) {
+						var lat = 0;
+						var lng = 0;
+						var coordinates = geometry.getArray()[0].getArray(); // Assuming the feature is a Polygon
+						coordinates.forEach(function (latlng) {
+							lat += latlng.lat();
+							lng += latlng.lng();
+						});
+						lat = lat / coordinates.length;
+						lng = lng / coordinates.length;
+						return { lat: lat, lng: lng };
+					}
 
 					function fetchDataAndUpdateMap(map) {
 						fetch('https://api.hamer.cloud/data')
