@@ -285,6 +285,11 @@
 						tom@hamer.cloud</a></p>
 				<p>If I have been outside in the last 3 hours, you will be able to see where I am, if not it will
 					default to Sydney City.</p>
+
+
+				<h2>Visited Countries</h2>
+				<p>Count: <span id="countriesCount"></span></p>
+
 				<p>
 				<div id="map"></div>
 				<script>
@@ -498,6 +503,13 @@
 							//'Zimbabwe',
 						];
 
+						function updateCountriesCount() {
+							let count = visitedCountries.length;
+							document.getElementById('countriesCount').textContent = count;
+						}
+						// Call the function to update the count
+						updateCountriesCount();
+
 						fetch(geoJsonUrl)
 							.then(response => response.json())
 							.then(data => {
@@ -505,7 +517,7 @@
 
 								map.data.setStyle(function (feature) {
 									var countryName = feature.getProperty('ADMIN');
-									var color = visitedCountries.includes(countryName) ? 'green' : 'gray'; // Green for visited, gray for not visited
+									var color = visitedCountries.includes(countryName) ? 'green' : 'red'; // Green for visited
 
 									return {
 										fillColor: color,
