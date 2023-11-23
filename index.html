@@ -566,15 +566,22 @@
 					function getCentroid(geometry) {
 						var lat = 0;
 						var lng = 0;
-						var coordinates = geometry.getArray()[0].getArray(); // Assuming the feature is a Polygon
-						coordinates.forEach(function (latlng) {
+						var numPoints = 0;
+
+						// Process each geometry in the GeoJSON GeometryCollection
+						geometry.forEachLatLng(function (latlng) {
 							lat += latlng.lat();
 							lng += latlng.lng();
+							numPoints++;
 						});
-						lat = lat / coordinates.length;
-						lng = lng / coordinates.length;
+
+						// Calculate the average coordinates
+						lat = lat / numPoints;
+						lng = lng / numPoints;
+
 						return { lat: lat, lng: lng };
 					}
+
 
 					function fetchDataAndUpdateMap(map) {
 						fetch('https://api.hamer.cloud/data')
