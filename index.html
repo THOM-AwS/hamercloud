@@ -537,24 +537,27 @@
 								map.data.forEach(function (feature) {
 									// Get the centroid of the feature (country)
 									var centroid = getCentroid(feature.getGeometry());
-									var countryName = feature.getProperty('name'); // Adjust 'name' based on your GeoJSON properties
+									var countryName = feature.getProperty('ADMIN'); // Use 'ADMIN' to get the country name
 
-									// Create a marker for the label
-									var marker = new google.maps.Marker({
-										position: centroid,
-										map: map,
-										label: {
-											text: countryName,
-											color: 'black', // adjust label style as needed
-											fontSize: '12px'
-										},
-										icon: {
-											path: google.maps.SymbolPath.CIRCLE,
-											fillOpacity: 0,
-											strokeOpacity: 0,
-											scale: 0  // to create an invisible icon
-										}
-									});
+									// Check if countryName is defined and is a string
+									if (typeof countryName === 'string') {
+										// Create a marker for the label
+										var marker = new google.maps.Marker({
+											position: centroid,
+											map: map,
+											label: {
+												text: countryName, // Use countryName as label text
+												color: 'black', // Adjust label style as needed
+												fontSize: '12px'
+											},
+											icon: {
+												path: google.maps.SymbolPath.CIRCLE,
+												fillOpacity: 0,
+												strokeOpacity: 0,
+												scale: 0  // to create an invisible icon
+											}
+										});
+									}
 								});
 							})
 							.catch(error => console.error('Error loading GeoJSON data:', error));
