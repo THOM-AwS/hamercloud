@@ -300,9 +300,14 @@
 							disableDefaultUI: true,
 						});
 
+						// listener for updating map polys
 						var geoJsonUrl = 'https://datahub.io/core/geo-countries/r/countries.geojson';
+						google.maps.event.addListener(map, 'bounds_changed', function () {
+							// Call your render function
+							renderPolylines(map, pathCoordinates);
+						});
 
-						// List of countries you've visited
+						// List of countries Ive visited
 						var visitedCountries = [
 							//"Aruba",
 							//"Afghanistan",
@@ -878,10 +883,6 @@
 						});
 					}
 
-					google.maps.event.addListener(map, 'bounds_changed', function () {
-						// Call your render function
-						renderPolylines(map, pathCoordinates);
-					});
 				</script>
 
 				<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
