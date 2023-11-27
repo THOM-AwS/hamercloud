@@ -300,6 +300,8 @@
 							disableDefaultUI: true,
 						});
 
+						let pathCoordinates = [];
+
 						// listener for updating map polys
 						var geoJsonUrl = 'https://datahub.io/core/geo-countries/r/countries.geojson';
 						google.maps.event.addListener(map, 'bounds_changed', function () {
