@@ -678,6 +678,30 @@
 						}
 					}
 
+					function renderPolylines(map, pathCoordinates) {
+						let bounds = map.getBounds();
+
+						pathCoordinates.forEach((path) => {
+							// Check if the path is within the map bounds
+							if (bounds.contains(path)) {
+								new google.maps.Polyline({
+									path: path,
+									geodesic: true,
+									strokeColor: '#FF0000',
+									strokeOpacity: 1.0,
+									strokeWeight: 2,
+									map: map
+								});
+							}
+						});
+					}
+
+					google.maps.event.addListener(map, 'bounds_changed', function () {
+						// Call your render function
+						renderPolylines(map, pathCoordinates);
+					});
+
+
 					function getCircleOptions(isLatestPoint, position, item, opacity, map) {
 						if (isLatestPoint) {
 							return {
