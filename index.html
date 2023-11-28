@@ -295,7 +295,7 @@
 				<script>
 					function initMap() {
 						const map = new google.maps.Map(document.getElementById("map"), {
-							zoom: 14,
+							zoom: 12,
 							mapTypeId: "satellite",
 							disableDefaultUI: true,
 						});
@@ -768,7 +768,7 @@
 							const firstPoint = data[data.length - 1];
 							addWeatherToMap(map, firstPoint.lat, firstPoint.lon);
 							map.setCenter(new google.maps.LatLng(data[data.length - 1].lat, data[data.length - 1].lon));
-							map.setZoom(14);
+							map.setZoom(12);
 						}
 					}
 
