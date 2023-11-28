@@ -695,7 +695,8 @@
 								fillOpacity: 0.2,
 								map: map,
 								center: position,
-								radius: 40
+								radius: 40,
+								zIndex: 2
 							};
 						} else {
 							return {
@@ -706,7 +707,8 @@
 								fillOpacity: 0.2,
 								map: map,
 								center: position,
-								radius: item.acc
+								radius: item.acc,
+								zIndex: 2
 							};
 						}
 					}
@@ -885,6 +887,33 @@
 						});
 					}
 
+					// Function to draw polygons from GeoJSON features
+					function drawGeoJsonPolygons(map, features, visitedCountries) {
+						// Clear existing polygons
+						map.data.forEach(function (feature) {
+							map.data.remove(feature);
+						});
+
+						// Filter and add only the features within the current map bounds
+						features.forEach(feature => {
+							var countryName = feature.properties.ADMIN;
+							var isInBounds = map.getBounds().contains(getCentroid(feature.geometry)); // You need to implement getCentroid
+							var isVisited = visitedCountries.includes(countryName);
+
+							if (isInBounds) {
+								map.data.addGeoJson(feature);
+
+								// Set the style of the polygon
+								map.data.setStyle(function (feature) {
+									var color = isVisited ? 'green' : 'red';
+									return {
+										fillColor: color,
+										strokeWeight: 1
+									};
+								});
+							}
+						});
+					}
 				</script>
 
 				<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
