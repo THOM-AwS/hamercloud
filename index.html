@@ -679,6 +679,11 @@
 
 						addInfoWindowToCircle(circle, item, position, map);
 
+						// Check if bearing is available and add a direction marker
+						if (item.bearing !== "N/A") {
+							addDirectionMarker(map, position, item.bearing);
+						}
+
 						// Add weather to the newest point
 						if (isLatestPoint) {
 							addWeatherToMap(map, item.lat, item.lon);
@@ -801,6 +806,21 @@
 							requestAnimationFrame(drawLine);
 						}
 						requestAnimationFrame(drawLine);
+					}
+
+					function addDirectionMarker(map, position, bearing) {
+						const icon = {
+							path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+							scale: 3,
+							strokeColor: '#0000FF', // Blue color
+							rotation: bearing
+						};
+
+						const marker = new google.maps.Marker({
+							position: position,
+							map: map,
+							icon: icon,
+						});
 					}
 
 					function addWeatherToMap(map, lat, lon) {
