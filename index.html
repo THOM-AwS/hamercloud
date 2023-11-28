@@ -791,7 +791,7 @@
 					}
 
 					function calculateScaleForZoom(zoom) {
-						return zoom / 2;
+						return 0.5 + zoom / 2;
 					}
 
 					function animatePolyline(map, pathCoordinates) {
