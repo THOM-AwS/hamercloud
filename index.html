@@ -300,7 +300,18 @@
 							disableDefaultUI: true,
 						});
 
+						map.addListener('zoom_changed', function () {
+							let zoom = map.getZoom();
+							directionMarkers.forEach(marker => {
+								let newScale = calculateScaleForZoom(zoom);
+								let newIcon = marker.getIcon();
+								newIcon.scale = newScale;
+								marker.setIcon(newIcon);
+							});
+						});
+
 						let pathCoordinates = [];
+						let directionMarkers = [];
 
 						// listener for updating map polys
 						var geoJsonUrl = 'https://datahub.io/core/geo-countries/r/countries.geojson';
@@ -681,7 +692,7 @@
 
 						// Check if bearing is available and add a direction marker
 						if (item.bearing !== "N/A") {
-							addDirectionMarker(map, position, item.bearing);
+							addDirectionMarker(map, position, item.bearing, map.getZoom());
 						}
 
 						// Add weather to the newest point
@@ -777,6 +788,10 @@
 						}
 					}
 
+					function calculateScaleForZoom(zoom) {
+						return zoom / 2;
+					}
+
 					function animatePolyline(map, pathCoordinates) {
 						let linePath = new google.maps.Polyline({
 							path: [],
@@ -808,11 +823,13 @@
 						requestAnimationFrame(drawLine);
 					}
 
-					function addDirectionMarker(map, position, bearing) {
+					function addDirectionMarker(map, position, bearing, zoom) {
+						const scale = calculateScaleForZoom(zoom);
+
 						const icon = {
 							path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-							scale: 3,
-							strokeColor: '#0000FF', // Blue color
+							scale: scale,
+							strokeColor: '#0000FF',
 							rotation: bearing
 						};
 
@@ -820,7 +837,10 @@
 							position: position,
 							map: map,
 							icon: icon,
+							zIndex: 3
 						});
+
+						directionMarkers.push(marker);
 					}
 
 					function addWeatherToMap(map, lat, lon) {
