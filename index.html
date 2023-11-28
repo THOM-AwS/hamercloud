@@ -296,7 +296,7 @@
 					let directionMarkers = [];
 					function initMap() {
 						const map = new google.maps.Map(document.getElementById("map"), {
-							zoom: 12,
+							zoom: 10,
 							mapTypeId: "satellite",
 							disableDefaultUI: true,
 						});
@@ -786,12 +786,12 @@
 							const firstPoint = data[data.length - 1];
 							addWeatherToMap(map, firstPoint.lat, firstPoint.lon);
 							map.setCenter(new google.maps.LatLng(data[data.length - 1].lat, data[data.length - 1].lon));
-							map.setZoom(12);
+							map.setZoom(10);
 						}
 					}
 
 					function calculateScaleForZoom(zoom) {
-						return 0.5 + zoom / 2;
+						return 0.5 + zoom / 6;
 					}
 
 					function animatePolyline(map, pathCoordinates) {
