@@ -293,6 +293,7 @@
 				<p>
 				<div id="map"></div>
 				<script>
+					let directionMarkers = [];
 					function initMap() {
 						const map = new google.maps.Map(document.getElementById("map"), {
 							zoom: 12,
@@ -311,7 +312,6 @@
 						});
 
 						let pathCoordinates = [];
-						let directionMarkers = [];
 
 						// listener for updating map polys
 						var geoJsonUrl = 'https://datahub.io/core/geo-countries/r/countries.geojson';
@@ -825,12 +825,14 @@
 
 					function addDirectionMarker(map, position, bearing, zoom) {
 						const scale = calculateScaleForZoom(zoom);
+						const iconAnchor = new google.maps.Point(0, scale * 10);
 
 						const icon = {
 							path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
 							scale: scale,
 							strokeColor: '#0000FF',
-							rotation: bearing
+							rotation: bearing,
+							anchor: iconAnchor
 						};
 
 						const marker = new google.maps.Marker({
