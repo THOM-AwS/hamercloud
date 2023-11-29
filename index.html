@@ -692,7 +692,6 @@
 
 						addInfoWindowToCircle(circle, item, position, map);
 
-						console.log("Bearing:", item.bearing, "Type:", typeof item.bearing);
 						// Check if bearing is available and add a direction marker
 						if (item.bearing !== "N/A" && item.bearing != null) {
 							addDirectionMarker(map, position, item.bearing, map.getZoom());
