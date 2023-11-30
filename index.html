@@ -315,22 +315,6 @@
 						});
 
 						let pathCoordinates = [];
-						function generateInfoWindowContent(item) {
-							return `
-								<div>
-									<span style="color: black;">Time: ${new Date(item.timestamp * 1000).toLocaleString()}</span><br>
-									<span style="color: black;">Latitude: ${item.lat}</span><br>
-									<span style="color: black;">Longitude: ${item.lon}</span><br>
-									<span style="color: black;">Altitude: ${item.alt ? item.alt + ' meters' : 'N/A'}</span><br>
-									<span style="color: black;">Accuracy: ${item.acc ? item.acc + ' meters' : 'N/A'}</span><br>
-									<span style="color: black;">Battery: ${item.bat ? item.bat + '%' : 'N/A'}</span><br>
-									<span style="color: black;">Satellites: ${item.sat ? item.sat : 'N/A'}</span><br>
-									<span style="color: black;">User Agent: ${item.useragent ? item.useragent : 'N/A'}</span><br>
-									<span style="color: black;">Speed: ${item.speed ? (item.speed * 3.6).toFixed(2) + ' km/h' : 'N/A'}</span><br>
-									<span style="color: black;">Bearing: ${item.bearing ? item.bearing + '°' : 'N/A'}</span>
-								</div>
-							`;
-						}
 
 						// listener for updating map polys
 						var geoJsonUrl = 'https://datahub.io/core/geo-countries/r/countries.geojson';
@@ -641,6 +625,23 @@
 							.catch(error => console.error('Error loading GeoJSON data:', error));
 
 						fetchDataAndUpdateMap(map);
+					}
+
+					function generateInfoWindowContent(item) {
+						return `
+							<div>
+								<span style="color: black;">Time: ${new Date(item.timestamp * 1000).toLocaleString()}</span><br>
+								<span style="color: black;">Latitude: ${item.lat}</span><br>
+								<span style="color: black;">Longitude: ${item.lon}</span><br>
+								<span style="color: black;">Altitude: ${item.alt ? item.alt + ' meters' : 'N/A'}</span><br>
+								<span style="color: black;">Accuracy: ${item.acc ? item.acc + ' meters' : 'N/A'}</span><br>
+								<span style="color: black;">Battery: ${item.bat ? item.bat + '%' : 'N/A'}</span><br>
+								<span style="color: black;">Satellites: ${item.sat ? item.sat : 'N/A'}</span><br>
+								<span style="color: black;">User Agent: ${item.useragent ? item.useragent : 'N/A'}</span><br>
+								<span style="color: black;">Speed: ${item.speed ? (item.speed * 3.6).toFixed(2) + ' km/h' : 'N/A'}</span><br>
+								<span style="color: black;">Bearing: ${item.bearing ? item.bearing + '°' : 'N/A'}</span>
+							</div>
+						`;
 					}
 
 					// Function to calculate the centroid of a geometry
