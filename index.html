@@ -315,20 +315,22 @@
 						});
 
 						let pathCoordinates = [];
-						const infowindowContent = `
-							<div>
-								<span style="color: black;">Time: ${new Date(item.timestamp * 1000).toLocaleString()}</span><br>
-								<span style="color: black;">Latitude: ${item.lat}</span><br>
-								<span style="color: black;">Longitude: ${item.lon}</span><br>
-								<span style="color: black;">Altitude: ${item.alt ? item.alt + ' meters' : 'N/A'}</span><br>
-								<span style="color: black;">Accuracy: ${item.acc ? item.acc + ' meters' : 'N/A'}</span><br>
-								<span style="color: black;">Battery: ${item.bat ? item.bat + '%' : 'N/A'}</span><br>
-								<span style="color: black;">Satellites: ${item.sat ? item.sat : 'N/A'}</span><br>
-								<span style="color: black;">User Agent: ${item.useragent ? item.useragent : 'N/A'}</span><br>
-								<span style="color: black;">Speed: ${item.speed ? (item.speed * 3.6).toFixed(2) + ' km/h' : 'N/A'}</span><br>
-								<span style="color: black;">Bearing: ${item.bearing ? item.bearing + '°' : 'N/A'}</span>
-							</div>
-						`;
+						function generateInfoWindowContent(item) {
+							return `
+								<div>
+									<span style="color: black;">Time: ${new Date(item.timestamp * 1000).toLocaleString()}</span><br>
+									<span style="color: black;">Latitude: ${item.lat}</span><br>
+									<span style="color: black;">Longitude: ${item.lon}</span><br>
+									<span style="color: black;">Altitude: ${item.alt ? item.alt + ' meters' : 'N/A'}</span><br>
+									<span style="color: black;">Accuracy: ${item.acc ? item.acc + ' meters' : 'N/A'}</span><br>
+									<span style="color: black;">Battery: ${item.bat ? item.bat + '%' : 'N/A'}</span><br>
+									<span style="color: black;">Satellites: ${item.sat ? item.sat : 'N/A'}</span><br>
+									<span style="color: black;">User Agent: ${item.useragent ? item.useragent : 'N/A'}</span><br>
+									<span style="color: black;">Speed: ${item.speed ? (item.speed * 3.6).toFixed(2) + ' km/h' : 'N/A'}</span><br>
+									<span style="color: black;">Bearing: ${item.bearing ? item.bearing + '°' : 'N/A'}</span>
+								</div>
+							`;
+						}
 
 						// listener for updating map polys
 						var geoJsonUrl = 'https://datahub.io/core/geo-countries/r/countries.geojson';
@@ -705,11 +707,12 @@
 						const circle = new google.maps.Circle(circleOptions);
 						circle.setMap(map);
 
-						addInfoWindowToCircle(circle, item, position, map);
+						const content = generateInfoWindowContent(item);
+						addInfoWindowToCircle(circle, position, map, content);
 
 						// Check if bearing is available and add a direction marker
 						if (item.bearing !== "N/A" && item.bearing != null) {
-							addDirectionMarker(map, position, item.bearing, map.getZoom(), item);
+							addDirectionMarker(map, position, item.bearing, map.getZoom(), content);
 						}
 
 						// Add weather to the newest point
@@ -746,9 +749,9 @@
 						}
 					}
 
-					function addInfoWindowToCircle(circle, item, position, map, infowindowContent) {
+					function addInfoWindowToCircle(circle, position, map, content) {
 						const infowindow = new google.maps.InfoWindow({
-							content: infowindowContent,
+							content: content,
 							position: position
 						});
 
@@ -825,7 +828,7 @@
 						requestAnimationFrame(drawLine);
 					}
 
-					function addDirectionMarker(map, position, bearing, zoom, infowindowContent) {
+					function addDirectionMarker(map, position, bearing, zoom, content) {
 						const scale = calculateScaleForZoom(zoom);
 						const iconAnchor = new google.maps.Point(0, scale * 10);
 
@@ -846,7 +849,7 @@
 						});
 
 						const infowindow = new google.maps.InfoWindow({
-							content: infowindowContent
+							content: content
 						});
 
 						marker.addListener('click', () => {
