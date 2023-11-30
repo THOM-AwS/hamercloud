@@ -802,7 +802,7 @@
 							strokeOpacity: 1.0,
 							strokeWeight: 2,
 							map: map,
-							zIndex: 1
+							zIndex: 4
 						});
 
 						let step = 0;
@@ -834,7 +834,8 @@
 							scale: scale,
 							strokeColor: '#0000FF',
 							rotation: bearing,
-							anchor: new google.maps.Point(0, 2) // Example values, adjust as needed
+							anchor: new google.maps.Point(0, 2),
+							zIndex: 1
 						};
 
 						const marker = new google.maps.Marker({
