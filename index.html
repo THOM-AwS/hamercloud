@@ -138,6 +138,10 @@
 				<img src="images/boarding.jpg" alt="Thomas Hamer" style="width:200px;float:left;padding: 20px;" />
 				<p>In the past, I had a few different jobs. Now that I have found the best job in the world,<br><br> I
 					am an AWS Solutions Architect.<i class="fab fa-aws"></i></p>
+
+				<p>I have been making an impact for <span id="timeLived"></span> so far.</p>
+				<p>I have approximately <span id="timeLeft"></span> left to make the positive impact I want on the
+					world.</p>
 			</article>
 
 			<!-- Work -->
@@ -971,6 +975,52 @@
 							}
 						});
 					}
+				</script>
+				<script>
+					function calculateLifeTime() {
+						const birthDate = new Date("1983-05-23");
+						const currentDate = new Date();
+						const averageLifespan = 83; // in years
+
+						// Calculate milliseconds lived
+						const millisecondsLived = currentDate - birthDate;
+
+						// Calculate total milliseconds in average lifespan
+						const totalLifespanMilliseconds = averageLifespan * 365.25 * 24 * 60 * 60 * 1000; // accounts for leap years
+
+						// Calculate milliseconds left
+						const millisecondsLeft = totalLifespanMilliseconds - millisecondsLived;
+
+						// Convert milliseconds to years, days, hours, minutes, and seconds
+						const lived = convertMilliseconds(millisecondsLived);
+						const left = convertMilliseconds(millisecondsLeft);
+
+						// Update HTML elements with IDs 'timeLived' and 'timeLeft'
+						document.getElementById('timeLived').textContent = formatTime(lived);
+						document.getElementById('timeLeft').textContent = formatTime(left);
+					}
+
+					function convertMilliseconds(milliseconds) {
+						let seconds = Math.floor(milliseconds / 1000);
+						let minutes = Math.floor(seconds / 60);
+						let hours = Math.floor(minutes / 60);
+						let days = Math.floor(hours / 24);
+						let years = Math.floor(days / 365.25);
+
+						days = days % 365.25;
+						hours = hours % 24;
+						minutes = minutes % 60;
+						seconds = seconds % 60;
+
+						return { years, days, hours, minutes, seconds };
+					}
+
+					function formatTime(time) {
+						return `${time.years} years, ${time.days} days, ${time.hours} hours, ${time.minutes} minutes, and ${time.seconds} seconds`;
+					}
+
+					// Call the function on page load
+					window.onload = calculateLifeTime;
 				</script>
 
 				<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
