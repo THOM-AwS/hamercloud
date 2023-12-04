@@ -979,25 +979,27 @@
 				<script>
 					function calculateLifeTime() {
 						const birthDate = new Date("1983-05-23");
-						const currentDate = new Date();
 						const averageLifespan = 83; // in years
 
-						// Calculate milliseconds lived
-						const millisecondsLived = currentDate - birthDate;
+						// Function to update time
+						const updateTime = () => {
+							const currentDate = new Date();
 
-						// Calculate total milliseconds in average lifespan
-						const totalLifespanMilliseconds = averageLifespan * 365.25 * 24 * 60 * 60 * 1000; // accounts for leap years
+							// Calculate milliseconds lived and left
+							const millisecondsLived = currentDate - birthDate;
+							const totalLifespanMilliseconds = averageLifespan * 365.25 * 24 * 60 * 60 * 1000; // accounts for leap years
+							const millisecondsLeft = totalLifespanMilliseconds - millisecondsLived;
 
-						// Calculate milliseconds left
-						const millisecondsLeft = totalLifespanMilliseconds - millisecondsLived;
+							// Convert and update
+							document.getElementById('timeLived').textContent = formatTime(convertMilliseconds(millisecondsLived));
+							document.getElementById('timeLeft').textContent = formatTime(convertMilliseconds(millisecondsLeft));
+						};
 
-						// Convert milliseconds to years, days, hours, minutes, and seconds
-						const lived = convertMilliseconds(millisecondsLived);
-						const left = convertMilliseconds(millisecondsLeft);
+						// Initial update
+						updateTime();
 
-						// Update HTML elements with IDs 'timeLived' and 'timeLeft'
-						document.getElementById('timeLived').textContent = formatTime(lived);
-						document.getElementById('timeLeft').textContent = formatTime(left);
+						// Update every second (1000 milliseconds)
+						setInterval(updateTime, 1000);
 					}
 
 					function convertMilliseconds(milliseconds) {
@@ -1007,10 +1009,10 @@
 						let days = Math.floor(hours / 24);
 						let years = Math.floor(days / 365.25);
 
-						days = days % 365.25;
-						hours = hours % 24;
-						minutes = minutes % 60;
-						seconds = seconds % 60;
+						days %= 365.25;
+						hours %= 24;
+						minutes %= 60;
+						seconds %= 60;
 
 						return { years, days, hours, minutes, seconds };
 					}
@@ -1022,6 +1024,7 @@
 					// Call the function on page load
 					window.onload = calculateLifeTime;
 				</script>
+
 
 				<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
 				<script async defer
