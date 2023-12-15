@@ -674,7 +674,7 @@
 
 
 					function fetchDataAndUpdateMap(map) {
-      setInterval(() => {
+                        setInterval(() => {
 						  fetch('https://api.hamer.cloud/data')
 							  .then(response => response.json())
 							  .then(data => {
@@ -682,7 +682,7 @@
 						  			console.error('Error: No data received.');
 									  return;
 							  	}
-      }, 30000);
+                        }, 30000);
 
 								const currentTime = Date.now();
 								data.sort((a, b) => a.timestamp - b.timestamp);
