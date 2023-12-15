@@ -673,16 +673,14 @@
 					}
 
 
-					function fetchDataAndUpdateMap(map) {
-                                              setInterval(() => {
-						  fetch('https://api.hamer.cloud/data')
-							  .then(response => response.json())
-							  .then(data => {
-								  if (!data || data.length === 0) {
-						  			console.error('Error: No data received.');
-									  return;
-							  	}
-                                              }, 30000);
+			function fetchDataAndUpdateMap(map) {
+						fetch('https://api.hamer.cloud/data')
+							.then(response => response.json())
+							.then(data => {
+								if (!data || data.length === 0) {
+						  	console.error('Error: No data received.');
+									return;
+							 }
 
 								const currentTime = Date.now();
 								data.sort((a, b) => a.timestamp - b.timestamp);
