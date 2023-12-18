@@ -116,6 +116,39 @@
 					<!--<li><a href="#elements">Elements</a></li>-->
 				</ul>
 			</nav>
+
+			<div id="GitHub build Status:">Loading...</div>
+
+			<script>
+				document.addEventListener('DOMContentLoaded', function () {
+					const owner = 'THOM-AwS';
+					const repo = 'hamercloud';
+					const apiUrl = `https://api.github.com/repos/${owner}/${repo}/actions/runs`;
+
+					fetch(apiUrl)
+						.then(response => response.json())
+						.then(data => {
+							if (!data.workflow_runs || data.workflow_runs.length === 0) {
+								document.getElementById('buildStatus').textContent = 'No runs found.';
+								return;
+							}
+
+							const latestRun = data.workflow_runs[0]; // The latest run
+
+							// Displaying basic information about the latest run
+							const statusElement = document.getElementById('buildStatus');
+							statusElement.innerHTML = `Latest Run: <br>
+												   ID: ${latestRun.id} <br>
+												   Status: ${latestRun.status} <br>
+												   Conclusion: ${latestRun.conclusion || 'N/A'} <br>
+												   Created at: ${new Date(latestRun.created_at).toLocaleString()}`;
+						})
+						.catch(error => {
+							console.error('Error fetching data:', error);
+							document.getElementById('buildStatus').textContent = 'Error fetching data.';
+						});
+				});
+			</script>
 		</header>
 
 		<!-- Main -->
@@ -674,8 +707,8 @@
 
 
 					function fetchDataAndUpdateMap(map) {
-						const interval = 30000;
-						setInterval(() => {
+						const interval = 30000; // 30 seconds
+						const fetchData = () => {
 							fetch('https://api.hamer.cloud/data')
 								.then(response => response.json())
 								.then(data => {
@@ -708,7 +741,9 @@
 									adjustMapCenterAndZoom(data, map);
 								})
 								.catch(error => console.error('Error fetching data:', error));
-						}, interval);
+						};
+						fetchData();
+						setInterval(fetchData, interval);
 					}
 
 					function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
