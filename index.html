@@ -674,38 +674,41 @@
 
 
 					function fetchDataAndUpdateMap(map) {
-						fetch('https://api.hamer.cloud/data')
-							.then(response => response.json())
-							.then(data => {
-								if (!data || data.length === 0) {
-									console.error('Error: No data received.');
-									return;
-								}
-
-								const currentTime = Date.now();
-								data.sort((a, b) => a.timestamp - b.timestamp);
-
-								let previousPosition = null;
-								let previousTimestamp = null;
-
-								data.forEach((item, index) => {
-									const position = new google.maps.LatLng(item.lat, item.lon);
-									const isLatestPoint = index === data.length - 1;
-
-									processEachDataPoint(item, isLatestPoint, position, currentTime, map);
-
-									if (previousPosition && previousTimestamp) {
-										createPolylineSegment(previousPosition, position, item, previousTimestamp, currentTime, map);
+						const interval = 30000;
+						setInterval(() => {
+							fetch('https://api.hamer.cloud/data')
+								.then(response => response.json())
+								.then(data => {
+									if (!data || data.length === 0) {
+										console.error('Error: No data received.');
+										return;
 									}
 
-									previousPosition = position;
-									previousTimestamp = item.timestamp;
-								});
+									const currentTime = Date.now();
+									data.sort((a, b) => a.timestamp - b.timestamp);
 
-								handlePolylineAnimation(data, map);
-								adjustMapCenterAndZoom(data, map);
-							})
-							.catch(error => console.error('Error fetching data:', error));
+									let previousPosition = null;
+									let previousTimestamp = null;
+
+									data.forEach((item, index) => {
+										const position = new google.maps.LatLng(item.lat, item.lon);
+										const isLatestPoint = index === data.length - 1;
+
+										processEachDataPoint(item, isLatestPoint, position, currentTime, map);
+
+										if (previousPosition && previousTimestamp) {
+											createPolylineSegment(previousPosition, position, item, previousTimestamp, currentTime, map);
+										}
+
+										previousPosition = position;
+										previousTimestamp = item.timestamp;
+									});
+
+									handlePolylineAnimation(data, map);
+									adjustMapCenterAndZoom(data, map);
+								})
+								.catch(error => console.error('Error fetching data:', error));
+						}, interval);
 					}
 
 					function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
