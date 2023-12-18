@@ -137,11 +137,8 @@
 
 							// Displaying basic information about the latest run
 							const statusElement = document.getElementById('buildStatus');
-							statusElement.innerHTML = `Latest Run: <br>
-												   ID: ${latestRun.id} <br>
-												   Status: ${latestRun.status} <br>
-												   Conclusion: ${latestRun.conclusion || 'N/A'} <br>
-												   Created at: ${new Date(latestRun.created_at).toLocaleString()}`;
+							statusElement.innerHTML = `Last Pipeline Run Commit Id: ${latestRun.id} <br>
+												   Status: ${latestRun.status} Conclusion: ${latestRun.conclusion || 'N/A'}, Created at ${new Date(latestRun.created_at).toLocaleString()}`;
 						})
 						.catch(error => {
 							console.error('Error fetching data:', error);
