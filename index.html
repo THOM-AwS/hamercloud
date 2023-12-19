@@ -133,7 +133,7 @@
 							}
 							const latestRun = data.workflow_runs[0];
 							const statusElement = document.getElementById('buildStatus');
-							statusElement.innerHTML = `<i class="fa-solid fa-code-merge"></i> Last Pipeline Run Commit Id: <b>${latestRun.id}</b>, Status: <b>${latestRun.status}</b>, Conclusion: <b>${latestRun.conclusion || 'N/A'}</b>, Created at <b>${new Date(latestRun.created_at).toLocaleString()}</b>`;
+							statusElement.innerHTML = `<i class="fa-solid fa-code-merge"></i> Last Pipeline Run Id: <b>${latestRun.id}</b>, Status: <b>${latestRun.status}</b>, Conclusion: <b>${latestRun.conclusion || 'N/A'}</b>, Created at <b>${new Date(latestRun.created_at).toLocaleString()}</b>`;
 						})
 						.catch(error => {
 							console.error('Error fetching data:', error);
