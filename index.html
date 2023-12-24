@@ -620,8 +620,7 @@
 						fetch(geoJsonUrl)
 							.then(response => response.json())
 							.then(data => {
-								const simplifiedData = simplifyGeoJsonData(data, 0.01);
-								map.data.addGeoJson(simplifiedData);
+								map.data.addGeoJson(data);
 								map.data.setStyle(function (feature) {
 									var countryName = feature.getProperty('ADMIN');
 									var color = visitedCountries.includes(countryName) ? 'green' : 'red'; // Green for visited
@@ -1106,83 +1105,6 @@
 					// Call the function on page load
 					window.onload = calculateLifeTime;
 				</script>
-				<script>
-					// Ramer-Douglas-Peucker Algorithm
-					function ramerDouglasPeucker(points, epsilon) {
-						console.log("Original points:", points);
-						if (points.length < 2) return points;
-
-						let dmax = 0;
-						let index = 0;
-						for (let i = 1; i < points.length - 1; i++) {
-							let d = perpendicularDistance(points[i], points[0], points[points.length - 1]);
-							if (d > dmax) {
-								index = i;
-								dmax = d;
-							}
-						}
-
-						if (dmax > epsilon) {
-							let recResults1 = ramerDouglasPeucker(points.slice(0, index + 1), epsilon);
-							let recResults2 = ramerDouglasPeucker(points.slice(index, points.length), epsilon);
-
-							let simplifiedPoints = recResults1.slice(0, recResults1.length - 1).concat(recResults2);
-							console.log("Simplified points:", simplifiedPoints);
-							return simplifiedPoints;
-						} else {
-							return [points[0], points[points.length - 1]];
-						}
-					}
-
-					function perpendicularDistance(point, lineStart, lineEnd) {
-						let x0 = point[0];
-						let y0 = point[1];
-						let x1 = lineStart[0];
-						let y1 = lineStart[1];
-						let x2 = lineEnd[0];
-						let y2 = lineEnd[1];
-						let numerator = Math.abs((y2 - y1) * x0 - (x2 - x1) * y0 + x2 * y1 - y2 * x1);
-						let denominator = Math.sqrt((y2 - y1) ** 2 + (x2 - x1) ** 2);
-						return numerator / denominator;
-					}
-
-					// Simplify GeoJSON Data
-					function simplifyGeoJsonData(geoJson, epsilon) {
-						console.log("Original GeoJSON Data:", geoJson);
-						return {
-							...geoJson,
-							features: geoJson.features.map(feature => {
-								if (feature.geometry.type === 'Polygon') {
-									return {
-										...feature,
-										geometry: {
-											...feature.geometry,
-											coordinates: feature.geometry.coordinates.map(ring =>
-												ramerDouglasPeucker(ring, epsilon)
-											)
-										}
-									};
-								} else if (feature.geometry.type === 'MultiPolygon') {
-									return {
-										...feature,
-										geometry: {
-											...feature.geometry,
-											coordinates: feature.geometry.coordinates.map(polygon =>
-												polygon.map(ring =>
-													ramerDouglasPeucker(ring, epsilon)
-												)
-											)
-										}
-									};
-								}
-								console.log("Simplified GeoJSON Data:", feature);
-								return feature;
-							})
-						};
-					}
-				</script>
-
-
 
 				<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
 				<script
