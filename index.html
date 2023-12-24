@@ -703,50 +703,53 @@
 						let isFirstLoad = true;
 
 						const fetchData = () => {
-							let currentCenter, currentZoom;
-							if (!isFirstLoad) {
-								// Store current center and zoom only if it's not the first load
-								currentCenter = map.getCenter();
-								currentZoom = map.getZoom();
-							}
 
 							console.log(isFirstLoad);
 							console.log(currentZoom);
 							console.log(currentCenter);
 							console.log(data);
+
 							fetch('https://api.hamer.cloud/data')
 								.then(response => response.json())
 								.then(data => {
-									if (!data || data.length === 0) {
-										console.error('Error: No data received.');
-										return;
-									}
+									if (data.length > 0) {
+										let currentCenter, currentZoom;
 
-									const currentTime = Date.now();
-									data.sort((a, b) => a.timestamp - b.timestamp);
-
-									let previousPosition = null;
-									let previousTimestamp = null;
-
-									data.forEach((item, index) => {
-										const position = new google.maps.LatLng(item.lat, item.lon);
-										const isLatestPoint = index === data.length - 1;
-
-										processEachDataPoint(item, isLatestPoint, position, currentTime, map);
-
-										if (previousPosition && previousTimestamp) {
-											createPolylineSegment(previousPosition, position, item, previousTimestamp, currentTime, map);
+										if (isFirstLoad) {
+											// On first load, set center and zoom based on the last data point
+											currentCenter = new google.maps.LatLng(data[data.length - 1].lat, data[data.length - 1].lon);
+											currentZoom = 15; // Set a default zoom level, or adjust based on your data
+											isFirstLoad = false;
+										} else {
+											// On subsequent loads, use the current map center and zoom
+											currentCenter = map.getCenter();
+											currentZoom = map.getZoom();
 										}
 
-										previousPosition = position;
-										previousTimestamp = item.timestamp;
-									});
+										const currentTime = Date.now();
+										data.sort((a, b) => a.timestamp - b.timestamp);
 
-									handlePolylineAnimation(data, map);
-									adjustMapCenterAndZoom(data, map, currentCenter, currentZoom, isFirstLoad); map.setCenter(currentCenter);
-									isFirstLoad = false;
-									map.setZoom(currentZoom);
-								})
+										let previousPosition = null;
+										let previousTimestamp = null;
+
+										data.forEach((item, index) => {
+											const position = new google.maps.LatLng(item.lat, item.lon);
+											const isLatestPoint = index === data.length - 1;
+
+											processEachDataPoint(item, isLatestPoint, position, currentTime, map);
+
+											if (previousPosition && previousTimestamp) {
+												createPolylineSegment(previousPosition, position, item, previousTimestamp, currentTime, map);
+											}
+
+											previousPosition = position;
+											previousTimestamp = item.timestamp;
+										});
+
+										handlePolylineAnimation(data, map);
+										adjustMapCenterAndZoom(map, currentCenter, currentZoom);
+										map.setZoom(currentZoom);
+									})
 								.catch(error => console.error('Error fetching data:', error));
 						};
 						fetchData();
@@ -838,16 +841,9 @@
 						}
 					}
 
-					function adjustMapCenterAndZoom(data, map, currentCenter, currentZoom, isFirstLoad) {
-						if (isFirstLoad) {
-							// On first load, center the map based on the first data point
-							map.setCenter(new google.maps.LatLng(data[0].lat, data[0].lon));
-							map.setZoom(15);
-						} else if (currentCenter && currentZoom) {
-							// Restore previous center and zoom
-							map.setCenter(currentCenter);
-							map.setZoom(currentZoom);
-						}
+					function adjustMapCenterAndZoom(map, currentCenter, currentZoom) {
+						map.setCenter(currentCenter);
+						map.setZoom(currentZoom);
 					}
 
 					function calculateScaleForZoom(zoom) {
