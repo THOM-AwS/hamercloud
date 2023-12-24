@@ -620,7 +620,7 @@
 						fetch(geoJsonUrl)
 							.then(response => response.json())
 							.then(data => {
-								const simplifiedData = simplifyGeoJsonData(data);
+								const simplifiedData = simplifyGeoJsonData(data, 0.01);
 								map.data.addGeoJson(simplifiedData);
 								map.data.setStyle(function (feature) {
 									var countryName = feature.getProperty('ADMIN');
