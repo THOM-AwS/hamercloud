@@ -620,7 +620,8 @@
 						fetch(geoJsonUrl)
 							.then(response => response.json())
 							.then(data => {
-								map.data.addGeoJson(data);
+								const simplifiedData = simplifyGeoJsonData(data);
+								map.data.addGeoJson(simplifiedData);
 
 								map.data.setStyle(function (feature) {
 									var countryName = feature.getProperty('ADMIN');
@@ -1056,6 +1057,25 @@
 							}
 						});
 					}
+					function simplifyGeoJsonData(geoJson) {
+						return {
+							...geoJson,
+							features: geoJson.features.map(feature => {
+								if (feature.geometry.type === 'Polygon') {
+									return {
+										...feature,
+										geometry: {
+											...feature.geometry,
+											coordinates: feature.geometry.coordinates.map(polygon =>
+												polygon.filter((_, index) => index % 3 === 0))
+										}
+									};
+								}
+								return feature;
+							})
+						};
+					}
+
 				</script>
 				<script>
 					function calculateLifeTime() {
