@@ -878,10 +878,10 @@
 						return 0.5 + zoom / 10;
 					}
 
+					let animationFrameId;
 					function animatePolyline(map, pathCoordinates) {
 						if (animationFrameId) {
 							cancelAnimationFrame(animationFrameId);
-							animationFrameId = null;
 						}
 						let linePath = new google.maps.Polyline({
 							path: [],
@@ -909,9 +909,9 @@
 								step++;
 								lastTime = timestamp;
 							}
-							requestAnimationFrame(drawLine);
+							animationFrameId = requestAnimationFrame(drawLine);
 						}
-						requestAnimationFrame(drawLine);
+						animationFrameId = requestAnimationFrame(drawLine);
 					}
 
 					function addDirectionMarker(map, position, bearing, zoom, content) {
