@@ -24,7 +24,7 @@
 	<noscript>
 		<link rel="stylesheet" href="assets/css/noscript.css" />
 	</noscript>
-	<script src="assets/js/jquery.min.js"></script>
+	<script async src="assets/js/jquery.min.js"></script>
 	<style type="text/css">
 		/* Set the size of the div element that contains the map */
 		#map {
@@ -236,7 +236,7 @@
 				<p>
 				<div class="github-card" data-github="thom-aws" data-width="400" data-height="152" data-theme="default">
 				</div>
-				<script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+				<script async src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
 				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 				</p>
 				<p>
@@ -1068,7 +1068,7 @@
 											...feature.geometry,
 											coordinates: feature.geometry.coordinates.map(polygon => {
 												// Filter to keep only every third point
-												const simplifiedPolygon = polygon.filter((_, index) => index % 5 === 0);
+												const simplifiedPolygon = polygon.filter((_, index) => index % 10 === 0);
 
 												// Ensure the last point is the same as the first
 												if (simplifiedPolygon[0] !== simplifiedPolygon[simplifiedPolygon.length - 1]) {
@@ -1158,11 +1158,11 @@
 	<div id="bg"></div>
 
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
+	<script async src="assets/js/jquery.min.js"></script>
+	<script async src="assets/js/browser.min.js"></script>
+	<script async src="assets/js/breakpoints.min.js"></script>
+	<script async src="assets/js/util.js"></script>
+	<script async src="assets/js/main.js"></script>
 </body>
 
 </html>
