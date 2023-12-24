@@ -1068,7 +1068,7 @@
 											...feature.geometry,
 											coordinates: feature.geometry.coordinates.map(polygon => {
 												// Filter to keep only every third point
-												const simplifiedPolygon = polygon.filter((_, index) => index % 3 === 0);
+												const simplifiedPolygon = polygon.filter((_, index) => index % 2 === 0);
 
 												// Ensure the last point is the same as the first
 												if (simplifiedPolygon[0] !== simplifiedPolygon[simplifiedPolygon.length - 1]) {
