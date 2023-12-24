@@ -761,9 +761,14 @@
 						const ageHours = (currentTime - (item.timestamp * 1000)) / (1000 * 60 * 60);
 						let opacity = Math.max(1 - (ageHours / 4), 0);
 
-						const circleOptions = getCircleOptions(isLatestPoint, position, item, opacity, map);
-						const circle = new google.maps.Circle(circleOptions);
-						circle.setMap(map);
+						const circleOptionsArray = getCircleOptions(isLatestPoint, position, item, opacity, map);
+
+						// Create circles from options
+						circleOptionsArray.forEach(circleOptions => {
+							const circle = new google.maps.Circle(circleOptions);
+							circle.setMap(map);
+							// Add additional logic if needed, such as event listeners
+						});
 
 						const content = generateInfoWindowContent(item);
 						addInfoWindowToCircle(circle, position, map, content);
