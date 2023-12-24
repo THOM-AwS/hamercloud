@@ -1145,7 +1145,7 @@
 					}
 
 					// Simplify GeoJSON Data
-					function simplifyGeoJsonData(geoJson, epsilon = 0.01) {
+					function simplifyGeoJsonData(geoJson, epsilon = 0.03) {
 						return {
 							...geoJson,
 							features: geoJson.features.map(feature => {
