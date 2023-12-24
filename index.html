@@ -1109,6 +1109,7 @@
 				<script>
 					// Ramer-Douglas-Peucker Algorithm
 					function ramerDouglasPeucker(points, epsilon) {
+						console.log("Original points:", points);
 						if (points.length < 2) return points;
 
 						let dmax = 0;
@@ -1125,7 +1126,9 @@
 							let recResults1 = ramerDouglasPeucker(points.slice(0, index + 1), epsilon);
 							let recResults2 = ramerDouglasPeucker(points.slice(index, points.length), epsilon);
 
-							return recResults1.slice(0, recResults1.length - 1).concat(recResults2);
+							let simplifiedPoints = recResults1.slice(0, recResults1.length - 1).concat(recResults2);
+							console.log("Simplified points:", simplifiedPoints);
+							return simplifiedPoints;
 						} else {
 							return [points[0], points[points.length - 1]];
 						}
@@ -1145,6 +1148,7 @@
 
 					// Simplify GeoJSON Data
 					function simplifyGeoJsonData(geoJson, epsilon) {
+						console.log("Original GeoJSON Data:", geoJson);
 						return {
 							...geoJson,
 							features: geoJson.features.map(feature => {
@@ -1171,11 +1175,11 @@
 										}
 									};
 								}
+								console.log("Simplified GeoJSON Data:", feature);
 								return feature;
 							})
 						};
 					}
-
 				</script>
 
 
