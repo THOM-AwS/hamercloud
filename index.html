@@ -769,6 +769,8 @@
 							}
 						});
 
+						const content = generateInfoWindowContent(item);
+
 						if (infoWindowCircle) {
 							const content = generateInfoWindowContent(item);
 							addInfoWindowToCircle(infoWindowCircle, position, map, content);
@@ -815,17 +817,19 @@
 								}
 							];
 						} else {
-							return {
-								strokeColor: '#4285F4',
-								strokeOpacity: opacity,
-								strokeWeight: 1,
-								fillColor: '#4285F4',
-								fillOpacity: 0.1,
-								map: map,
-								center: position,
-								radius: item.acc,
-								zIndex: 5
-							};
+							return [
+								{
+									strokeColor: '#4285F4',
+									strokeOpacity: opacity,
+									strokeWeight: 1,
+									fillColor: '#4285F4',
+									fillOpacity: 0.1,
+									map: map,
+									center: position,
+									radius: item.acc,
+									zIndex: 5
+								}
+							];
 						}
 					}
 
