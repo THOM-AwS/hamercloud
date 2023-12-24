@@ -740,11 +740,6 @@
 											previousTimestamp = item.timestamp;
 										});
 
-										console.log(isFirstLoad);
-										console.log(currentZoom);
-										console.log(currentCenter);
-										console.log(data);
-
 										handlePolylineAnimation(data, map);
 										adjustMapCenterAndZoom(map, currentCenter, currentZoom);
 									} else {
@@ -809,13 +804,13 @@
 								{
 									// Second circle (outer)
 									strokeColor: '#26de51',
-									strokeOpacity: 0.2,
+									strokeOpacity: 0.4,
 									strokeWeight: 2,
 									fillColor: '#4285F4',
 									fillOpacity: 0,
 									map: map,
 									center: position,
-									radius: 200,
+									radius: 200000,
 									zIndex: 4
 								}
 							];
