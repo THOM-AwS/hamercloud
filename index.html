@@ -879,11 +879,15 @@
 					}
 
 					function animatePolyline(map, pathCoordinates) {
+						if (animationFrameId) {
+							cancelAnimationFrame(animationFrameId);
+							animationFrameId = null;
+						}
 						let linePath = new google.maps.Polyline({
 							path: [],
 							geodesic: true,
 							strokeColor: '#FF0000',
-							strokeOpacity: 1.0,
+							strokeOpacity: 0.8,
 							strokeWeight: 2,
 							map: map,
 							zIndex: 4
@@ -897,6 +901,7 @@
 							if (step >= numSteps) {
 								step = 0;
 								linePath.setPath([]);
+								console.log('Animation reset');
 							}
 							const progress = timestamp - lastTime;
 							if (progress >= 200) {
@@ -1034,7 +1039,7 @@
 						// Filter and add only the features within the current map bounds
 						features.forEach(feature => {
 							var countryName = feature.properties.ADMIN;
-							var isInBounds = map.getBounds().contains(getCentroid(feature.geometry)); // You need to implement getCentroid
+							var isInBounds = map.getBounds().contains(getCentroid(feature.geometry));
 							var isVisited = visitedCountries.includes(countryName);
 
 							if (isInBounds) {
