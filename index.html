@@ -698,10 +698,9 @@
 						return { lat: lat, lng: lng };
 					}
 
-
+					let isFirstLoad = true;
 					function fetchDataAndUpdateMap(map) {
 						const interval = 30000; // 30 seconds
-						let isFirstLoad = true;
 
 						const fetchData = () => {
 							const currentCenter = map.getCenter();
