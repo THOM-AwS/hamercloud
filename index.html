@@ -703,12 +703,6 @@
 						let isFirstLoad = true;
 
 						const fetchData = () => {
-
-							console.log(isFirstLoad);
-							console.log(currentZoom);
-							console.log(currentCenter);
-							console.log(data);
-
 							fetch('https://api.hamer.cloud/data')
 								.then(response => response.json())
 								.then(data => {
@@ -746,10 +740,17 @@
 											previousTimestamp = item.timestamp;
 										});
 
+										console.log(isFirstLoad);
+										console.log(currentZoom);
+										console.log(currentCenter);
+										console.log(data);
+
 										handlePolylineAnimation(data, map);
 										adjustMapCenterAndZoom(map, currentCenter, currentZoom);
-										map.setZoom(currentZoom);
-									})
+									} else {
+										console.error('No data available to update the map.');
+									}
+								})
 								.catch(error => console.error('Error fetching data:', error));
 						};
 						fetchData();
