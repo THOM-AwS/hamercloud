@@ -1144,18 +1144,30 @@
 					}
 
 					// Simplify GeoJSON Data
-					function simplifyGeoJsonData(geoJson, epsilon = 0.02) {
+					function simplifyGeoJsonData(geoJson, epsilon) {
 						return {
 							...geoJson,
 							features: geoJson.features.map(feature => {
-								if (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
+								if (feature.geometry.type === 'Polygon') {
 									return {
 										...feature,
 										geometry: {
 											...feature.geometry,
-											coordinates: feature.geometry.coordinates.map(polygon => {
-												return polygon.map(ring => ramerDouglasPeucker(ring, epsilon));
-											})
+											coordinates: feature.geometry.coordinates.map(ring =>
+												ramerDouglasPeucker(ring, epsilon)
+											)
+										}
+									};
+								} else if (feature.geometry.type === 'MultiPolygon') {
+									return {
+										...feature,
+										geometry: {
+											...feature.geometry,
+											coordinates: feature.geometry.coordinates.map(polygon =>
+												polygon.map(ring =>
+													ramerDouglasPeucker(ring, epsilon)
+												)
+											)
 										}
 									};
 								}
@@ -1163,6 +1175,7 @@
 							})
 						};
 					}
+
 				</script>
 
 
