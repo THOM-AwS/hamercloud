@@ -762,16 +762,22 @@
 						let opacity = Math.max(1 - (ageHours / 4), 0);
 
 						const circleOptionsArray = getCircleOptions(isLatestPoint, position, item, opacity, map);
+						let infoWindowCircle;
 
 						// Create circles from options
-						circleOptionsArray.forEach(circleOptions => {
+						circleOptionsArray.forEach((circleOptions, index) => {
 							const circle = new google.maps.Circle(circleOptions);
 							circle.setMap(map);
-							// Add additional logic if needed, such as event listeners
+
+							if (index === 0) {
+								infoWindowCircle = circle;
+							}
 						});
 
-						const content = generateInfoWindowContent(item);
-						addInfoWindowToCircle(circle, position, map, content);
+						if (infoWindowCircle) {
+							const content = generateInfoWindowContent(item);
+							addInfoWindowToCircle(infoWindowCircle, position, map, content);
+						}
 
 						// Check if bearing is available and add a direction marker
 						if (item.bearing !== "N/A" && item.bearing != null) {
