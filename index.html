@@ -620,8 +620,8 @@
 						fetch(geoJsonUrl)
 							.then(response => response.json())
 							.then(data => {
-								const simplifiedData = simplifyGeoJsonData(data);
-								map.data.addGeoJson(simplifiedData);
+								<!-- const simplifiedData = simplifyGeoJsonData(data); -->
+								map.data.addGeoJson(data);
 
 								map.data.setStyle(function (feature) {
 									var countryName = feature.getProperty('ADMIN');
@@ -1057,7 +1057,7 @@
 							}
 						});
 					}
-					function simplifyGeoJsonData(geoJson) {
+					< !-- function simplifyGeoJsonData(geoJson) {
 						return {
 							...geoJson,
 							features: geoJson.features.map(feature => {
@@ -1083,34 +1083,34 @@
 								return feature;
 							})
 						};
-					}
+					} -->
 
 				</script>
 				<script>
-					function calculateLifeTime() {
-						const birthDate = new Date("1983-05-23");
-						const averageLifespan = 83; // in years
+						function calculateLifeTime() {
+							const birthDate = new Date("1983-05-23");
+							const averageLifespan = 83; // in years
 
-						// Function to update time
-						const updateTime = () => {
-							const currentDate = new Date();
+							// Function to update time
+							const updateTime = () => {
+								const currentDate = new Date();
 
-							// Calculate milliseconds lived and left
-							const millisecondsLived = currentDate - birthDate;
-							const totalLifespanMilliseconds = averageLifespan * 365.25 * 24 * 60 * 60 * 1000; // accounts for leap years
-							const millisecondsLeft = totalLifespanMilliseconds - millisecondsLived;
+								// Calculate milliseconds lived and left
+								const millisecondsLived = currentDate - birthDate;
+								const totalLifespanMilliseconds = averageLifespan * 365.25 * 24 * 60 * 60 * 1000; // accounts for leap years
+								const millisecondsLeft = totalLifespanMilliseconds - millisecondsLived;
 
-							// Convert and update
-							document.getElementById('timeLived').textContent = formatTime(convertMilliseconds(millisecondsLived));
-							document.getElementById('timeLeft').textContent = formatTime(convertMilliseconds(millisecondsLeft));
-						};
+								// Convert and update
+								document.getElementById('timeLived').textContent = formatTime(convertMilliseconds(millisecondsLived));
+								document.getElementById('timeLeft').textContent = formatTime(convertMilliseconds(millisecondsLeft));
+							};
 
-						// Initial update
-						updateTime();
+							// Initial update
+							updateTime();
 
-						// Update every second (1000 milliseconds)
-						setInterval(updateTime, 1000);
-					}
+							// Update every second (1000 milliseconds)
+							setInterval(updateTime, 1000);
+						}
 
 					function convertMilliseconds(milliseconds) {
 						let seconds = Math.floor(milliseconds / 1000);
