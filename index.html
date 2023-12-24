@@ -620,7 +620,6 @@
 						fetch(geoJsonUrl)
 							.then(response => response.json())
 							.then(data => {
-								<!-- const simplifiedData = simplifyGeoJsonData(data); -->
 								const simplifiedData = simplifyGeoJsonData(data);
 								map.data.addGeoJson(simplifiedData);
 								map.data.setStyle(function (feature) {
@@ -1145,7 +1144,7 @@
 					}
 
 					// Simplify GeoJSON Data
-					function simplifyGeoJsonData(geoJson, epsilon = 0.03) {
+					function simplifyGeoJsonData(geoJson, epsilon = 0.02) {
 						return {
 							...geoJson,
 							features: geoJson.features.map(feature => {
