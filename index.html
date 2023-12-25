@@ -883,22 +883,26 @@
 					}
 
 					let animationFrameId;
+					let linePath;
+
 					function animatePolyline(map, pathCoordinates) {
+						// Initialize linePath if it does not exist
+						if (!linePath) {
+							linePath = new google.maps.Polyline({
+								path: [],
+								geodesic: true,
+								strokeColor: '#FF0000',
+								strokeOpacity: 0.8,
+								strokeWeight: 2,
+								map: map,
+								zIndex: 4
+							});
+						}
+
+						// Cancel any existing animation frame
 						if (animationFrameId) {
 							cancelAnimationFrame(animationFrameId);
-							if (linePath) {
-								linePath.setMap(null);
-							}
 						}
-						let linePath = new google.maps.Polyline({
-							path: [],
-							geodesic: true,
-							strokeColor: '#FF0000',
-							strokeOpacity: 0.8,
-							strokeWeight: 2,
-							map: map,
-							zIndex: 4
-						});
 
 						let step = 0;
 						const numSteps = pathCoordinates.length;
@@ -907,27 +911,21 @@
 						function drawLine(timestamp) {
 							if (step >= numSteps) {
 								step = 0;
-								linePath.setPath([]);
-								linePath = new google.maps.Polyline({
-									path: [],
-									geodesic: true,
-									strokeColor: '#FF0000',
-									strokeOpacity: 0.8,
-									strokeWeight: 2,
-									map: map,
-									zIndex: 4
-								});
-							}
-							const progress = timestamp - lastTime;
-							if (progress >= 200) {
-								linePath.getPath().push(pathCoordinates[step]);
-								step++;
-								lastTime = timestamp;
+								linePath.setPath([]); // Clear the existing path
+							} else {
+								const progress = timestamp - lastTime;
+								if (progress >= 200) {
+									linePath.getPath().push(pathCoordinates[step]);
+									step++;
+									lastTime = timestamp;
+								}
 							}
 							animationFrameId = requestAnimationFrame(drawLine);
 						}
+
 						animationFrameId = requestAnimationFrame(drawLine);
 					}
+
 
 					function addDirectionMarker(map, position, bearing, zoom, content) {
 						const scale = calculateScaleForZoom(zoom);
