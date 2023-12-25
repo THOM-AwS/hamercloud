@@ -908,8 +908,15 @@
 							if (step >= numSteps) {
 								step = 0;
 								linePath.setPath([]);
-								linePath.setMap(null);
-								return;
+								linePath = new google.maps.Polyline({
+									path: [],
+									geodesic: true,
+									strokeColor: '#FF0000',
+									strokeOpacity: 0.8,
+									strokeWeight: 2,
+									map: map,
+									zIndex: 4
+								});
 							}
 							const progress = timestamp - lastTime;
 							if (progress >= 200) {
