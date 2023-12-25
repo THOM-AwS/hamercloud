@@ -760,10 +760,13 @@
 						const circleOptionsArray = getCircleOptions(isLatestPoint, position, item, opacity, map);
 						let infoWindowCircle;
 
-						// Create circles from options
+						circles.forEach(circle => circle.setMap(null));
+						circles = [];
+
 						circleOptionsArray.forEach((circleOptions, index) => {
 							const circle = new google.maps.Circle(circleOptions);
 							circle.setMap(map);
+							circles.push(circle);
 
 							if (index === 0) {
 								infoWindowCircle = circle;
@@ -882,6 +885,9 @@
 					function animatePolyline(map, pathCoordinates) {
 						if (animationFrameId) {
 							cancelAnimationFrame(animationFrameId);
+							if (linePath) {
+								linePath.setMap(null);
+							}
 						}
 						let linePath = new google.maps.Polyline({
 							path: [],
@@ -901,7 +907,8 @@
 							if (step >= numSteps) {
 								step = 0;
 								linePath.setPath([]);
-								console.log('Animation reset');
+								linePath.setMap(null);
+								return;
 							}
 							const progress = timestamp - lastTime;
 							if (progress >= 200) {
