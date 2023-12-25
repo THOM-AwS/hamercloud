@@ -753,6 +753,7 @@
 						setInterval(fetchData, interval);
 					}
 
+					let circles = [];
 					function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
 						const ageHours = (currentTime - (item.timestamp * 1000)) / (1000 * 60 * 60);
 						let opacity = Math.max(1 - (ageHours / 4), 0);
