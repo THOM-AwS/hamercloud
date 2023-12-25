@@ -884,20 +884,17 @@
 
 					let animationFrameId;
 					let linePath;
-
 					function animatePolyline(map, pathCoordinates) {
 						// Initialize linePath if it does not exist
-						if (!linePath) {
-							linePath = new google.maps.Polyline({
-								path: [],
-								geodesic: true,
-								strokeColor: '#FF0000',
-								strokeOpacity: 0.8,
-								strokeWeight: 2,
-								map: map,
-								zIndex: 4
-							});
-						}
+						linePath = new google.maps.Polyline({
+							path: [],
+							geodesic: true,
+							strokeColor: '#FF0000',
+							strokeOpacity: 0.8,
+							strokeWeight: 2,
+							map: map,
+							zIndex: 4
+						});
 
 						// Cancel any existing animation frame
 						if (animationFrameId) {
