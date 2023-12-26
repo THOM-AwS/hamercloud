@@ -896,28 +896,24 @@
 							zIndex: 4
 						});
 
-						// Cancel any existing animation frame
-						if (animationFrameId) {
-							cancelAnimationFrame(animationFrameId);
-						}
-
 						let step = 0;
 						const numSteps = pathCoordinates.length;
 						let lastTime = performance.now();
 
 						function drawLine(timestamp) {
-							if (step < numSteps) {
-								const progress = timestamp - lastTime;
-								// Compare progress against a fixed time interval, e.g., 200 milliseconds
-								if (progress >= 200) { // This value controls the speed of the animation
+							const progress = timestamp - lastTime;
+							if (progress >= 200) {
+								if (step < numSteps) {
 									linePath.getPath().push(pathCoordinates[step]);
 									step++;
-									lastTime = timestamp;
+								} else {
+									// Reset for looping
+									step = 0;
+									linePath.setPath([]);
 								}
-								animationFrameId = requestAnimationFrame(drawLine);
-							} else {
-								cancelAnimationFrame(animationFrameId); // Stops the animation when all points are drawn
+								lastTime = timestamp;
 							}
+							animationFrameId = requestAnimationFrame(drawLine);
 						}
 
 						animationFrameId = requestAnimationFrame(drawLine);
