@@ -330,6 +330,7 @@
 				<script>
 					let directionMarkers = [];
 					function initMap() {
+						console.log("Initializing map...");
 						const map = new google.maps.Map(document.getElementById("map"), {
 							zoom: 15,
 							mapTypeId: "satellite",
@@ -620,6 +621,7 @@
 						fetch(geoJsonUrl)
 							.then(response => response.json())
 							.then(data => {
+								console.log("GeoJSON data loaded:", data);
 								map.data.addGeoJson(data, { idPropertyName: 'ADMIN' });
 								map.data.setStyle(function (feature) {
 									var countryName = feature.getProperty('ADMIN');
@@ -630,6 +632,7 @@
 										visible: false // Set features to invisible by default
 									};
 								});
+
 								map.data.forEach(function (feature) {
 									var centroid = getCentroid(feature.getGeometry());
 									var countryName = feature.getProperty('ADMIN'); // Use 'ADMIN' to get the country name
@@ -658,10 +661,15 @@
 							.catch(error => console.error('Error loading GeoJSON data:', error));
 						fetchDataAndUpdateMap(map);
 						map.addListener('bounds_changed', () => {
+							console.log("Bounds changed event triggered.");
+							console.time("updateVisiblePolys");
 							updateVisiblePolys(map);
+							console.timeEnd("updateVisiblePolys");
+
 						});
 					}
 					function updateVisiblePolys(map) {
+						console.log("Updating visible polygons...");
 						const bounds = map.getBounds();
 
 						map.data.forEach((feature) => {
@@ -669,6 +677,7 @@
 
 							// Set the visibility of the feature depending on whether its bounds intersect with the viewport.
 							const isVisible = bounds.intersects(featureBounds);
+							console.log(`Feature ${feature.getProperty('ADMIN')} visibility: ${isVisible}`);
 							map.data.overrideStyle(feature, { visible: isVisible });
 						});
 					}
@@ -691,7 +700,7 @@
 						} else if (geometry instanceof google.maps.Data.Point) {
 							bounds.extend(geometry.get());
 						} // You can add more conditions for other types if needed.
-
+						console.log("Feature bounds:", bounds.toString());
 						return bounds;
 					}
 				</script>
@@ -789,6 +798,7 @@
 
 					let circles = [];
 					function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
+						console.log(`Processing data point - Latest: ${isLatestPoint}, Position: ${position.toString()}, Time: ${currentTime}`);
 						const ageHours = (currentTime - (item.timestamp * 1000)) / (1000 * 60 * 60);
 						let opacity = Math.max(1 - (ageHours / 4), 0);
 
@@ -919,6 +929,7 @@
 					let animationFrameId;
 					let linePath;
 					function animatePolyline(map, pathCoordinates) {
+						console.log("Starting polyline animation...");
 						// Initialize linePath if it does not exist
 						linePath = new google.maps.Polyline({
 							path: [],
@@ -946,6 +957,7 @@
 									linePath.setPath([]);
 								}
 								lastTime = timestamp;
+								console.log(`Animating step: ${step}`);
 							}
 							animationFrameId = requestAnimationFrame(drawLine);
 						}
