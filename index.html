@@ -928,18 +928,26 @@
 
 					let animationFrameId;
 					let linePath;
-					function animatePolyline(map, pathCoordinates) {
-						console.log("Starting polyline animation...");
+					function animatePolyline(map, pathData) {
+						console.log("Received path data for animation", pathData);
+
+						// Sort pathData by timestamp
+						pathData.sort((a, b) => a.timestamp - b.timestamp);
+
+						// Extract the sorted coordinates from the pathData
+						const pathCoordinates = pathData.map(data => new google.maps.LatLng(data.lat, data.lng));
+
 						// Initialize linePath if it does not exist
-						linePath = new google.maps.Polyline({
-							path: [],
-							geodesic: true,
-							strokeColor: '#FF0000',
-							strokeOpacity: 0.8,
-							strokeWeight: 2,
-							map: map,
-							zIndex: 4
-						});
+						if (!linePath) {
+							linePath = new google.maps.Polyline({
+								path: [],
+								geodesic: true,
+								strokeColor: '#FF0000',
+								strokeOpacity: 0.8,
+								strokeWeight: 2,
+								map: map
+							});
+						}
 
 						let step = 0;
 						const numSteps = pathCoordinates.length;
@@ -949,21 +957,22 @@
 							const progress = timestamp - lastTime;
 							if (progress >= 200) {
 								if (step < numSteps) {
+									console.log(`Drawing step ${step} at timestamp ${pathData[step].timestamp}:`, pathCoordinates[step]);
 									linePath.getPath().push(pathCoordinates[step]);
 									step++;
 								} else {
-									// Reset for looping
+									console.log("Completed drawing all steps. Resetting animation.");
 									step = 0;
 									linePath.setPath([]);
 								}
 								lastTime = timestamp;
-								console.log(`Animating step: ${step}`);
 							}
 							animationFrameId = requestAnimationFrame(drawLine);
 						}
 
 						animationFrameId = requestAnimationFrame(drawLine);
 					}
+
 
 					function addDirectionMarker(map, position, bearing, zoom, content) {
 						const scale = calculateScaleForZoom(zoom);
