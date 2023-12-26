@@ -683,26 +683,42 @@
 					}
 
 					// Custom logic to check if two bounds intersect
-					function boundsIntersect(bounds1, bounds2) {
-						return bounds1.intersects(bounds2) || bounds2.intersects(bounds1);
-					}
-
-					// Helper function to get bounds of a feature's geometry.
 					function getFeatureBounds(geometry) {
 						const bounds = new google.maps.LatLngBounds();
 
 						if (geometry instanceof google.maps.Data.Polygon) {
-							geometry.getArray().forEach((path) => {
-								path.getArray().forEach((latLng) => {
+							geometry.getArray().forEach((linearRing) => {
+								linearRing.getArray().forEach((latLng) => {
 									bounds.extend(latLng);
+								});
+							});
+						} else if (geometry instanceof google.maps.Data.MultiPolygon) {
+							geometry.getArray().forEach((polygon) => {
+								polygon.getArray().forEach((linearRing) => {
+									linearRing.getArray().forEach((latLng) => {
+										bounds.extend(latLng);
+									});
 								});
 							});
 						} else if (geometry instanceof google.maps.Data.Point) {
 							bounds.extend(geometry.get());
-						} // You can add more conditions for other types if needed.
-						console.log("Feature bounds:", bounds.toString());
+						} else if (geometry instanceof google.maps.Data.LineString) {
+							geometry.getArray().forEach((latLng) => {
+								bounds.extend(latLng);
+							});
+						} else if (geometry instanceof google.maps.Data.MultiLineString) {
+							geometry.getArray().forEach((lineString) => {
+								lineString.getArray().forEach((latLng) => {
+									bounds.extend(latLng);
+								});
+							});
+						} else {
+							console.error('Unsupported geometry type:', geometry.getType());
+						}
+
 						return bounds;
 					}
+
 				</script>
 				<script>
 					function generateInfoWindowContent(item) {
