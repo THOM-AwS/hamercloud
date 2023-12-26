@@ -824,7 +824,7 @@
 
 					let circles = [];
 					function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
-						console.log(`Processing data point - Latest: ${isLatestPoint}, Position: ${position.toString()}, Time: ${currentTime}`);
+						// console.log(`Processing data point - Latest: ${isLatestPoint}, Position: ${position.toString()}, Time: ${currentTime}`);
 						const ageHours = (currentTime - (item.timestamp * 1000)) / (1000 * 60 * 60);
 						let opacity = Math.max(1 - (ageHours / 4), 0);
 
@@ -962,25 +962,26 @@
 
 						// Extract the sorted coordinates from the pathData
 						const pathCoordinates = pathData.map(data => {
-							// Ensure the data is numeric
-							if (typeof data.lat === 'number' && typeof data.lng === 'number') {
-								return new google.maps.LatLng(data.lat, data.lon, data.timestamp, data.alt, data.bat, data.wind, data.useragent, data.speed, data.bearing, data.directionMarkers);
+							if (typeof data.lat === 'number' && typeof data.lon === 'number') {
+								return new google.maps.LatLng(data.lat, data.lon);
 							} else {
 								console.error('Invalid data point:', data);
-								return null; // This will need to be filtered out before animation
+								return null;
 							}
-						}).filter(coord => coord !== null); // Remove any null values
+						}).filter(coord => coord !== null);
 
-						// Initialize linePath if it does not exist
+						// Initialize or update linePath
 						if (!linePath) {
 							linePath = new google.maps.Polyline({
-								path: [],
+								path: pathCoordinates,
 								geodesic: true,
 								strokeColor: '#FF0000',
 								strokeOpacity: 0.8,
 								strokeWeight: 2,
 								map: map
 							});
+						} else {
+							linePath.setPath(pathCoordinates);
 						}
 
 						let step = 0;
