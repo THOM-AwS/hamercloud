@@ -986,7 +986,8 @@
 						}).filter(coord => coord !== null);
 
 						if (linePath) {
-							linePath.setPath([]);
+							linePath.setPath(pathCoordinates);
+							// If there's an existing animation, cancel it
 							if (animationFrameId) {
 								cancelAnimationFrame(animationFrameId);
 							}
@@ -1000,8 +1001,6 @@
 								strokeWeight: 2,
 								map: map
 							});
-						} else {
-							linePath.setPath(pathCoordinates);
 						}
 
 						let step = 0;
