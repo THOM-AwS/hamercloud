@@ -906,81 +906,80 @@
 						let lastTime = performance.now();
 
 						function drawLine(timestamp) {
-							if (step >= numSteps) {
-								step = 0;
-								linePath.setPath([]); // Clear the existing path
-							} else {
+							if (step < numSteps) {
 								const progress = timestamp - lastTime;
-								if (progress >= 200) {
+								if (progress >= numSteps) {
 									linePath.getPath().push(pathCoordinates[step]);
 									step++;
 									lastTime = timestamp;
 								}
+								animationFrameId = requestAnimationFrame(drawLine);
+							} else {
+								cancelAnimationFrame(animationFrameId); // Stops the animation when all points are drawn
 							}
-							animationFrameId = requestAnimationFrame(drawLine);
 						}
 
 						animationFrameId = requestAnimationFrame(drawLine);
-					}
 
 
-					function addDirectionMarker(map, position, bearing, zoom, content) {
-						const scale = calculateScaleForZoom(zoom);
-						const iconAnchor = new google.maps.Point(0, scale * 10);
 
-						const icon = {
-							path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-							scale: scale,
-							strokeColor: '#0000FF',
-							rotation: bearing,
-							anchor: new google.maps.Point(0, 2),
-							zIndex: 1
-						};
+						function addDirectionMarker(map, position, bearing, zoom, content) {
+							const scale = calculateScaleForZoom(zoom);
+							const iconAnchor = new google.maps.Point(0, scale * 10);
 
-						const marker = new google.maps.Marker({
-							position: position,
-							map: map,
-							icon: icon,
-							zIndex: 1
-						});
+							const icon = {
+								path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+								scale: scale,
+								strokeColor: '#0000FF',
+								rotation: bearing,
+								anchor: new google.maps.Point(0, 2),
+								zIndex: 1
+							};
 
-						const infowindow = new google.maps.InfoWindow({
-							content: content
-						});
+							const marker = new google.maps.Marker({
+								position: position,
+								map: map,
+								icon: icon,
+								zIndex: 1
+							});
 
-						marker.addListener('click', () => {
-							infowindow.open(map, marker);
-						});
+							const infowindow = new google.maps.InfoWindow({
+								content: content
+							});
 
-						directionMarkers.push(marker);
-					}
+							marker.addListener('click', () => {
+								infowindow.open(map, marker);
+							});
 
-					function addWeatherToMap(map, lat, lon) {
-						const apiKey = '27dd553d3274c2f0760332bb947b1802';
-						const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+							directionMarkers.push(marker);
+						}
 
-						fetch(url)
-							.then(response => {
-								if (!response.ok) {
-									throw new Error(`HTTP error! status: ${response.status}`);
-								}
-								return response.json();
-							})
-							.then(data => {
-								if (data && data.weather) {
-									const weather = data.weather[0];
-									const main = data.main;
-									const clouds = data.clouds;
-									const wind = data.wind;
-									const sys = data.sys;
-									const iconUrl = "https://openweathermap.org/img/w/" + weather.icon + ".png";
+						function addWeatherToMap(map, lat, lon) {
+							const apiKey = '27dd553d3274c2f0760332bb947b1802';
+							const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
-									const tempCelsius = (main.temp - 273.15).toFixed(1);
-									const feelsLikeCelsius = (main.feels_like - 273.15).toFixed(1);
-									const minTempCelsius = (main.temp_min - 273.15).toFixed(1);
-									const maxTempCelsius = (main.temp_max - 273.15).toFixed(1);
+							fetch(url)
+								.then(response => {
+									if (!response.ok) {
+										throw new Error(`HTTP error! status: ${response.status}`);
+									}
+									return response.json();
+								})
+								.then(data => {
+									if (data && data.weather) {
+										const weather = data.weather[0];
+										const main = data.main;
+										const clouds = data.clouds;
+										const wind = data.wind;
+										const sys = data.sys;
+										const iconUrl = "https://openweathermap.org/img/w/" + weather.icon + ".png";
 
-									const infowindowContent = `
+										const tempCelsius = (main.temp - 273.15).toFixed(1);
+										const feelsLikeCelsius = (main.feels_like - 273.15).toFixed(1);
+										const minTempCelsius = (main.temp_min - 273.15).toFixed(1);
+										const maxTempCelsius = (main.temp_max - 273.15).toFixed(1);
+
+										const infowindowContent = `
 										<div style="color: black;">
 											<h3 style="color: black;">${data.name} Weather</h3><br>
 											<img src="${iconUrl}" alt="${weather.description}" /><br>
@@ -996,124 +995,124 @@
 										</div>
 									`;
 
-									const marker = new google.maps.Marker({
-										position: { lat, lng: lon },
-										map: map,
-										icon: {
-											url: iconUrl,
-											// Set the anchor to offset the icon vertically
-											anchor: new google.maps.Point(0, -35) // Adjust the second parameter to change vertical offset
-										},
-										title: weather.description
-									});
+										const marker = new google.maps.Marker({
+											position: { lat, lng: lon },
+											map: map,
+											icon: {
+												url: iconUrl,
+												// Set the anchor to offset the icon vertically
+												anchor: new google.maps.Point(0, -35) // Adjust the second parameter to change vertical offset
+											},
+											title: weather.description
+										});
 
-									const infowindow = new google.maps.InfoWindow({
-										content: infowindowContent
-									});
+										const infowindow = new google.maps.InfoWindow({
+											content: infowindowContent
+										});
 
-									marker.addListener('click', () => {
-										infowindow.open(map, marker);
+										marker.addListener('click', () => {
+											infowindow.open(map, marker);
+										});
+									} else {
+										console.error('Weather data is missing');
+									}
+								})
+								.catch(error => console.error('Error fetching weather data:', error));
+						}
+
+						function renderPolylines(map, pathCoordinates) {
+							let bounds = map.getBounds();
+
+							pathCoordinates.forEach((path) => {
+								// Check if the path is within the map bounds
+								if (bounds.contains(path)) {
+									new google.maps.Polyline({
+										path: path,
+										geodesic: true,
+										strokeColor: '#FF0000',
+										strokeOpacity: 1.0,
+										strokeWeight: 2,
+										map: map
 									});
-								} else {
-									console.error('Weather data is missing');
 								}
-							})
-							.catch(error => console.error('Error fetching weather data:', error));
-					}
+							});
+						}
 
-					function renderPolylines(map, pathCoordinates) {
-						let bounds = map.getBounds();
+						// Function to draw polygons from GeoJSON features
+						function drawGeoJsonPolygons(map, features, visitedCountries) {
+							// Clear existing polygons
+							map.data.forEach(function (feature) {
+								map.data.remove(feature);
+							});
 
-						pathCoordinates.forEach((path) => {
-							// Check if the path is within the map bounds
-							if (bounds.contains(path)) {
-								new google.maps.Polyline({
-									path: path,
-									geodesic: true,
-									strokeColor: '#FF0000',
-									strokeOpacity: 1.0,
-									strokeWeight: 2,
-									map: map
-								});
-							}
-						});
-					}
+							// Filter and add only the features within the current map bounds
+							features.forEach(feature => {
+								var countryName = feature.properties.ADMIN;
+								var isInBounds = map.getBounds().contains(getCentroid(feature.geometry));
+								var isVisited = visitedCountries.includes(countryName);
 
-					// Function to draw polygons from GeoJSON features
-					function drawGeoJsonPolygons(map, features, visitedCountries) {
-						// Clear existing polygons
-						map.data.forEach(function (feature) {
-							map.data.remove(feature);
-						});
+								if (isInBounds) {
+									map.data.addGeoJson(feature);
 
-						// Filter and add only the features within the current map bounds
-						features.forEach(feature => {
-							var countryName = feature.properties.ADMIN;
-							var isInBounds = map.getBounds().contains(getCentroid(feature.geometry));
-							var isVisited = visitedCountries.includes(countryName);
-
-							if (isInBounds) {
-								map.data.addGeoJson(feature);
-
-								// Set the style of the polygon
-								map.data.setStyle(function (feature) {
-									var color = isVisited ? 'green' : 'red';
-									return {
-										fillColor: color,
-										strokeWeight: 1
-									};
-								});
-							}
-						});
-					}
+									// Set the style of the polygon
+									map.data.setStyle(function (feature) {
+										var color = isVisited ? 'green' : 'red';
+										return {
+											fillColor: color,
+											strokeWeight: 1
+										};
+									});
+								}
+							});
+						}
 				</script>
 				<script>
-					function calculateLifeTime() {
-						const birthDate = new Date("1983-05-23");
-						const averageLifespan = 83; // in years
+						function calculateLifeTime() {
+							const birthDate = new Date("1983-05-23");
+							const averageLifespan = 83; // in years
 
-						// Function to update time
-						const updateTime = () => {
-							const currentDate = new Date();
+							// Function to update time
+							const updateTime = () => {
+								const currentDate = new Date();
 
-							// Calculate milliseconds lived and left
-							const millisecondsLived = currentDate - birthDate;
-							const totalLifespanMilliseconds = averageLifespan * 365.25 * 24 * 60 * 60 * 1000; // accounts for leap years
-							const millisecondsLeft = totalLifespanMilliseconds - millisecondsLived;
+								// Calculate milliseconds lived and left
+								const millisecondsLived = currentDate - birthDate;
+								const totalLifespanMilliseconds = averageLifespan * 365.25 * 24 * 60 * 60 * 1000; // accounts for leap years
+								const millisecondsLeft = totalLifespanMilliseconds - millisecondsLived;
 
-							// Convert and update
-							document.getElementById('timeLived').textContent = formatTime(convertMilliseconds(millisecondsLived));
-							document.getElementById('timeLeft').textContent = formatTime(convertMilliseconds(millisecondsLeft));
-						};
+								// Convert and update
+								document.getElementById('timeLived').textContent = formatTime(convertMilliseconds(millisecondsLived));
+								document.getElementById('timeLeft').textContent = formatTime(convertMilliseconds(millisecondsLeft));
+							};
 
-						// Initial update
-						updateTime();
+							// Initial update
+							updateTime();
 
-						// Update every second (1000 milliseconds)
-						setInterval(updateTime, 1000);
-					}
+							// Update every second (1000 milliseconds)
+							setInterval(updateTime, 1000);
+						}
 
-					function convertMilliseconds(milliseconds) {
-						let seconds = Math.floor(milliseconds / 1000);
-						let minutes = Math.floor(seconds / 60);
-						let hours = Math.floor(minutes / 60);
-						let days = Math.floor(hours / 24);
-						let years = Math.floor(days / 365.25);
+						function convertMilliseconds(milliseconds) {
+							let seconds = Math.floor(milliseconds / 1000);
+							let minutes = Math.floor(seconds / 60);
+							let hours = Math.floor(minutes / 60);
+							let days = Math.floor(hours / 24);
+							let years = Math.floor(days / 365.25);
 
-						days %= 365.25;
-						hours %= 24;
-						minutes %= 60;
-						seconds %= 60;
+							days %= 365.25;
+							hours %= 24;
+							minutes %= 60;
+							seconds %= 60;
 
-						return { years, days, hours, minutes, seconds };
-					}
+							return { years, days, hours, minutes, seconds };
+						}
 
-					function formatTime(time) {
-						return `${time.years} years, ${time.days} days, ${time.hours} hours, ${time.minutes} minutes, and ${time.seconds} seconds`;
-					}
+						function formatTime(time) {
+							return `${time.years} years, ${time.days} days, ${time.hours} hours, ${time.minutes} minutes, and ${time.seconds} seconds`;
+						}
 
-					// Call the function on page load
-					window.onload = calculateLifeTime;
+						// Call the function on page load
+						window.onload = calculateLifeTime;
 				</script>
 
 				<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
