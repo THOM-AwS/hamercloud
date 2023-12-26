@@ -352,7 +352,7 @@
 						let pathCoordinates = [];
 
 						// listener for updating map polys
-						var geoJsonUrl = 'https://datahub.io/core/geo-countries/r/countries.geojson';
+						const geoJsonUrl = 'https://datahub.io/core/geo-countries/r/countries.geojson';
 						google.maps.event.addListener(map, 'bounds_changed', function () {
 							// Call your render function
 							renderPolylines(map, pathCoordinates);
@@ -620,18 +620,17 @@
 						fetch(geoJsonUrl)
 							.then(response => response.json())
 							.then(data => {
-								map.data.addGeoJson(data);
+								map.data.addGeoJson(data, { idPropertyName: 'ADMIN' });
 								map.data.setStyle(function (feature) {
 									var countryName = feature.getProperty('ADMIN');
 									var color = visitedCountries.includes(countryName) ? 'green' : 'red'; // Green for visited
-
 									return {
 										fillColor: color,
-										strokeWeight: 1
+										strokeWeight: 1,
+										visible: false // Set features to invisible by default
 									};
 								});
 								map.data.forEach(function (feature) {
-									// Get the centroid of the feature (country)
 									var centroid = getCentroid(feature.getGeometry());
 									var countryName = feature.getProperty('ADMIN'); // Use 'ADMIN' to get the country name
 
@@ -657,8 +656,41 @@
 								});
 							})
 							.catch(error => console.error('Error loading GeoJSON data:', error));
-
 						fetchDataAndUpdateMap(map);
+						map.addListener('bounds_changed', () => {
+							updateVisiblePolys(map);
+						});
+					}
+					function updateVisiblePolys(map) {
+						const bounds = map.getBounds();
+
+						map.data.forEach((feature) => {
+							const featureBounds = getFeatureBounds(feature.getGeometry());
+
+							// Set the visibility of the feature depending on whether its bounds intersect with the viewport.
+							const isVisible = bounds.intersects(featureBounds);
+							map.data.overrideStyle(feature, { visible: isVisible });
+						});
+					}
+
+					// Custom logic to check if two bounds intersect
+					function boundsIntersect(bounds1, bounds2) {
+						return bounds1.intersects(bounds2) || bounds2.intersects(bounds1);
+					}
+
+					// Helper function to get bounds of a feature's geometry.
+					function getFeatureBounds(geometry) {
+						const bounds = new google.maps.LatLngBounds();
+
+						geometry.getArray().forEach((geom) => {
+							geom.getArray().forEach((path) => {
+								path.getArray().forEach((latLng) => {
+									bounds.extend(latLng);
+								});
+							});
+						});
+
+						return bounds;
 					}
 				</script>
 				<script>
