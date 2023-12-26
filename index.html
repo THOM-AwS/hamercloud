@@ -330,7 +330,7 @@
 				<script>
 					let directionMarkers = [];
 					function initMap() {
-						console.log("Initializing map...");
+						// console.log("Initializing map...");
 						const map = new google.maps.Map(document.getElementById("map"), {
 							zoom: 15,
 							mapTypeId: "satellite",
@@ -766,7 +766,7 @@
 							fetch('https://api.hamer.cloud/data')
 								.then(response => response.json())
 								.then(data => {
-									console.log("Fetched data:", data); // Log the raw fetched data
+									// console.log("Fetched data:", data); // Log the raw fetched data
 									const validData = data.map(item => ({
 										lat: parseFloat(item.lat), // Ensure latitude is a float
 										lon: parseFloat(item.lon), // Ensure longitude is a float
@@ -955,7 +955,7 @@
 					let animationFrameId;
 					let linePath;
 					function animatePolyline(map, pathData) {
-						console.log("Received path data for animation", pathData);
+						// console.log("Received path data for animation", pathData);
 
 						// Sort pathData by timestamp
 						pathData.sort((a, b) => a.timestamp - b.timestamp);
@@ -1015,7 +1015,7 @@
 									linePath.getPath().push(pathCoordinates[step]);
 									step++;
 								} else {
-									console.log("Completed drawing all steps. Resetting animation.");
+									// console.log("Completed drawing all steps. Resetting animation.");
 									step = 0;
 									linePath.setPath([]);
 								}
