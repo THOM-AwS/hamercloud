@@ -621,7 +621,7 @@
 						fetch(geoJsonUrl)
 							.then(response => response.json())
 							.then(data => {
-								console.log("GeoJSON data loaded:", data);
+								// console.log("GeoJSON data loaded:", data);
 								map.data.addGeoJson(data, { idPropertyName: 'ADMIN' });
 								map.data.setStyle(function (feature) {
 									var countryName = feature.getProperty('ADMIN');
@@ -662,9 +662,9 @@
 						fetchDataAndUpdateMap(map);
 						map.addListener('bounds_changed', () => {
 							// console.log("Bounds changed event triggered.");
-							console.time("updateVisiblePolys");
+							// console.time("updateVisiblePolys");
 							updateVisiblePolys(map);
-							console.timeEnd("updateVisiblePolys");
+							// console.timeEnd("updateVisiblePolys");
 
 						});
 					}
