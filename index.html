@@ -750,6 +750,16 @@
 							fetch('https://api.hamer.cloud/data')
 								.then(response => response.json())
 								.then(data => {
+									console.log("Fetched data:", data); // Log the raw fetched data
+									const validData = data.map(item => ({
+										lat: parseFloat(item.lat), // Ensure latitude is a float
+										lon: parseFloat(item.lon), // Ensure longitude is a float
+										timestamp: parseInt(item.timestamp, 10) // Ensure timestamp is an integer
+									}));
+									console.log("Validated data:", validData);
+									validData.sort((a, b) => a.timestamp - b.timestamp);
+									console.log("Sorted data:", validData);
+
 									if (data.length > 0) {
 										let currentCenter, currentZoom;
 
@@ -935,7 +945,15 @@
 						pathData.sort((a, b) => a.timestamp - b.timestamp);
 
 						// Extract the sorted coordinates from the pathData
-						const pathCoordinates = pathData.map(data => new google.maps.LatLng(data.lat, data.lng));
+						const pathCoordinates = pathData.map(data => {
+							// Ensure the data is numeric
+							if (typeof data.lat === 'number' && typeof data.lng === 'number') {
+								return new google.maps.LatLng(data.lat, data.lng);
+							} else {
+								console.error('Invalid data point:', data);
+								return null; // This will need to be filtered out before animation
+							}
+						}).filter(coord => coord !== null); // Remove any null values
 
 						// Initialize linePath if it does not exist
 						if (!linePath) {
