@@ -985,8 +985,13 @@
 							}
 						}).filter(coord => coord !== null);
 
-						// Initialize or update linePath
-						if (!linePath) {
+						if (linePath) {
+							linePath.setPath([]);
+							if (animationFrameId) {
+								cancelAnimationFrame(animationFrameId);
+							}
+						} else {
+							// Initialize linePath if it does not exist
 							linePath = new google.maps.Polyline({
 								path: pathCoordinates,
 								geodesic: true,
@@ -1007,7 +1012,7 @@
 							const progress = timestamp - lastTime;
 							if (progress >= 200) {
 								if (step < numSteps) {
-									console.log(`Drawing step ${step} at timestamp ${pathData[step].timestamp}:`, pathCoordinates[step]);
+									// console.log(`Drawing step ${step} at timestamp ${pathData[step].timestamp}:`, pathCoordinates[step]);
 									linePath.getPath().push(pathCoordinates[step]);
 									step++;
 								} else {
