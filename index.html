@@ -962,8 +962,23 @@
 
 						// Extract the sorted coordinates from the pathData
 						const pathCoordinates = pathData.map(data => {
-							if (typeof data.lat === 'number' && typeof data.lon === 'number') {
-								return new google.maps.LatLng(data.lat, data.lon);
+							let latitude, longitude;
+
+							if (typeof data.lat === 'function') {
+								latitude = data.lat();
+							} else {
+								latitude = data.lat;
+							}
+
+							if (typeof data.lon === 'function' || typeof data.lng === 'function') {
+								longitude = data.lon ? data.lon() : data.lng();
+							} else {
+								longitude = data.lon || data.lng;
+							}
+
+							// Validate the extracted values
+							if (typeof latitude === 'number' && typeof longitude === 'number') {
+								return new google.maps.LatLng(latitude, longitude);
 							} else {
 								console.error('Invalid data point:', data);
 								return null;
