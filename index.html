@@ -677,7 +677,7 @@
 
 							// Set the visibility of the feature depending on whether its bounds intersect with the viewport.
 							const isVisible = bounds.intersects(featureBounds);
-							console.log(`Feature ${feature.getProperty('ADMIN')} visibility: ${isVisible}`);
+							// console.log(`Feature ${feature.getProperty('ADMIN')} visibility: ${isVisible}`);
 							map.data.overrideStyle(feature, { visible: isVisible });
 						});
 					}
@@ -964,7 +964,7 @@
 						const pathCoordinates = pathData.map(data => {
 							// Ensure the data is numeric
 							if (typeof data.lat === 'number' && typeof data.lng === 'number') {
-								return new google.maps.LatLng(data.lat, data.lng);
+								return new google.maps.LatLng(data.lat, data.lon, data.timestamp, data.alt, data.bat, data.wind, data.useragent, data.speed, data.bearing, data.directionMarkers);
 							} else {
 								console.error('Invalid data point:', data);
 								return null; // This will need to be filtered out before animation
