@@ -661,7 +661,7 @@
 							.catch(error => console.error('Error loading GeoJSON data:', error));
 						fetchDataAndUpdateMap(map);
 						map.addListener('bounds_changed', () => {
-							console.log("Bounds changed event triggered.");
+							// console.log("Bounds changed event triggered.");
 							console.time("updateVisiblePolys");
 							updateVisiblePolys(map);
 							console.timeEnd("updateVisiblePolys");
@@ -669,7 +669,7 @@
 						});
 					}
 					function updateVisiblePolys(map) {
-						console.log("Updating visible polygons...");
+						// console.log("Updating visible polygons...");
 						const bounds = map.getBounds();
 
 						map.data.forEach((feature) => {
@@ -772,9 +772,9 @@
 										lon: parseFloat(item.lon), // Ensure longitude is a float
 										timestamp: parseInt(item.timestamp, 10) // Ensure timestamp is an integer
 									}));
-									console.log("Validated data:", validData);
+									// console.log("Validated data:", validData);
 									validData.sort((a, b) => a.timestamp - b.timestamp);
-									console.log("Sorted data:", validData);
+									// console.log("Sorted data:", validData);
 
 									if (data.length > 0) {
 										let currentCenter, currentZoom;
