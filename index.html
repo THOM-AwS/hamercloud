@@ -682,13 +682,15 @@
 					function getFeatureBounds(geometry) {
 						const bounds = new google.maps.LatLngBounds();
 
-						geometry.getArray().forEach((geom) => {
-							geom.getArray().forEach((path) => {
+						if (geometry instanceof google.maps.Data.Polygon) {
+							geometry.getArray().forEach((path) => {
 								path.getArray().forEach((latLng) => {
 									bounds.extend(latLng);
 								});
 							});
-						});
+						} else if (geometry instanceof google.maps.Data.Point) {
+							bounds.extend(geometry.get());
+						} // You can add more conditions for other types if needed.
 
 						return bounds;
 					}
