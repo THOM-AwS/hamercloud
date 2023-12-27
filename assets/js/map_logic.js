@@ -1,6 +1,5 @@
 let animationFrameId;
 let linePath;
-let circles = [];
 
 function fetchDataAndUpdateMap(map) {
   const interval = 30000; // 30 seconds
@@ -69,7 +68,6 @@ function fetchDataAndUpdateMap(map) {
 }
 
 function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
-  // console.log(`Processing data point - Latest: ${isLatestPoint}, Position: ${position.toString()}, Time: ${currentTime}`);
   const ageHours = (currentTime - item.timestamp * 1000) / (1000 * 60 * 60);
   let infoWindowCircle;
   let opacity = Math.max(1 - ageHours / 4, 0);
@@ -85,7 +83,6 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
   circleOptionsArray.forEach((circleOptions, index) => {
     const circle = new google.maps.Circle(circleOptions);
     circle.setMap(map);
-    circles.push(circle);
 
     if (index === 0) {
       infoWindowCircle = circle;
