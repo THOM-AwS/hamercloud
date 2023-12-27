@@ -236,7 +236,9 @@ function animatePolyline(map, pathData) {
       if (!isNaN(latitude) && !isNaN(longitude)) {
         return new google.maps.LatLng(latitude, longitude);
       } else {
-        console.error(`Invalid coordinates: lat=${data.lat}, lon=${data.lon}`);
+        console.error(
+          `Invalid coordinates: lat=${data.lat}, lng=${data.lng}, {data.timestamp}}`
+        );
         return null; // Return null for invalid coordinates
       }
     })
