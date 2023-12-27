@@ -81,36 +81,6 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
       map
     );
 
-    circleOptionsArray.forEach((circleOptions, index) => {
-      const circle = new google.maps.Circle(circleOptions);
-      circle.setMap(map);
-
-      if (index === 0) {
-        infoWindowCircle = circle;
-      }
-    });
-
-    const content = generateInfoWindowContent(item);
-
-    if (infoWindowCircle) {
-      addInfoWindowToCircle(infoWindowCircle, position, map, content);
-    }
-
-    // Check if bearing is available and add a direction marker
-    if (item.bearing !== "N/A" && item.bearing != null) {
-      addDirectionMarker(map, position, item.bearing, map.getZoom(), content);
-    }
-
-    // Add weather to the newest point
-    if (isLatestPoint) {
-      addWeatherToMap(map, item.lat, item.lng);
-    }
-  } else {
-    console.error("Invalid data point:", item);
-  }
-}
-
-
   circleOptionsArray.forEach((circleOptions, index) => {
     const circle = new google.maps.Circle(circleOptions);
     circle.setMap(map);
