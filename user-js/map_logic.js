@@ -239,6 +239,7 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
     map: map,
     center: position,
     zIndex: 2,
+    visible: true,
   };
   if (isLatestPoint) {
     // Define options for two circles

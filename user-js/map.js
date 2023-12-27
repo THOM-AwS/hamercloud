@@ -17,7 +17,7 @@ function initMap() {
       let newIcon = marker.getIcon();
       newIcon.scale = newScale;
       // Keep the anchor the same
-      newIcon.anchor = new google.maps.Point(0, 2); // Same as defined earlier
+      newIcon.anchor = new google.maps.Point(0, 2);
       marker.setIcon(newIcon);
     });
   });
