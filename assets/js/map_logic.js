@@ -82,9 +82,6 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
     map
   );
 
-  circles.forEach((circle) => circle.setMap(null));
-  circles = [];
-
   circleOptionsArray.forEach((circleOptions, index) => {
     const circle = new google.maps.Circle(circleOptions);
     circle.setMap(map);
