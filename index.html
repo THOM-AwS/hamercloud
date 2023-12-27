@@ -331,14 +331,13 @@
 					let directionMarkers = [];
 					function initMap() {
 						// console.log("Initializing map...");
-						testCircle(map);
 						const map = new google.maps.Map(document.getElementById("map"), {
 							zoom: 15,
 							mapTypeId: "satellite",
 							disableDefaultUI: true,
 							gestureHandling: 'greedy',
 						});
-
+						testCircle(map);
 						map.addListener('zoom_changed', function () {
 							let zoom = map.getZoom();
 							directionMarkers.forEach(marker => {
