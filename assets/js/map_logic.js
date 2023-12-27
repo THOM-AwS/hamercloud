@@ -188,7 +188,6 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
     opacity,
     map
   );
-  console.log("circleOptionsArray", circleOptionsArray);
 
   circles.forEach((circle) => circle.setMap(null));
   circles = [];
