@@ -127,7 +127,7 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
     strokeWeight: 4,
     fillColor: "#4285F4",
     fillOpacity: 1,
-    radius: accuracyRadius,
+    radius: 100, //accuracyRadius,
     map: map,
     center: position,
     zIndex: 5,
@@ -136,26 +136,26 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
   if (isLatestPoint) {
     // Define options for two circles - inner and outer
     return [
-      [
+      {
         // Inner circle
-        Object.assign({}, baseOptions, {
-          strokeColor: "#26de51",
-          strokeWeight: 2,
-          strokeOpacity: 0.5,
-          radius: 50,
-        }),
+        ...baseOptions,
+        strokeColor: "#26de51",
+        strokeWeight: 2,
+        strokeOpacity: 0.5,
+        radius: 50,
+      },
+      {
         // Outer circle
-        Object.assign({}, baseOptions, {
-          strokeColor: "#26de51",
-          strokeWeight: 2,
-          strokeOpacity: 0.5,
-          fillOpacity: 0,
-          radius: 200000,
-        }),
-      ],
+        ...baseOptions,
+        strokeColor: "#26de51",
+        strokeWeight: 2,
+        strokeOpacity: 0.5,
+        fillOpacity: 0,
+        radius: accuracyRadius,
+      },
     ];
   } else {
-    return [Object.assign({}, baseOptions, { radius: item.acc })];
+    return [baseOptions];
   }
 }
 
