@@ -221,19 +221,8 @@ function animatePolyline(map, pathData) {
   // Extract the sorted coordinates from the pathData
   const pathCoordinates = pathData
     .map((data) => {
-      let latitude, longitude;
-
-      if (typeof data.lat === "function") {
-        latitude = data.lat();
-      } else {
-        latitude = data.lat;
-      }
-
-      if (typeof data.lon === "function" || typeof data.lng === "function") {
-        longitude = data.lon ? data.lon() : data.lng();
-      } else {
-        longitude = data.lon || data.lng;
-      }
+      const latitude = data.lat;
+      const longitude = data.lon;
 
       // Validate the extracted values
       if (typeof latitude === "number" && typeof longitude === "number") {
