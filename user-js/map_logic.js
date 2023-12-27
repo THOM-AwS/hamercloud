@@ -184,6 +184,13 @@ function fetchDataAndUpdateMap(map) {
 
 let circles = [];
 function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
+  console.log(
+    "Entering processEachDataPoint",
+    item,
+    isLatestPoint,
+    position,
+    currentTime
+  );
   // console.log(`Processing data point - Latest: ${isLatestPoint}, Position: ${position.toString()}, Time: ${currentTime}`);
   const ageHours = (currentTime - item.timestamp * 1000) / (1000 * 60 * 60);
   let infoWindowCircle;
