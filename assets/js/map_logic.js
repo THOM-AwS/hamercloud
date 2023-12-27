@@ -1,3 +1,5 @@
+import { google } from "google-maps";
+import { getCircleOptions } from "./circle_utils"; // Import the getCircleOptions function
 let animationFrameId;
 let linePath;
 let infoWindowCircle;
