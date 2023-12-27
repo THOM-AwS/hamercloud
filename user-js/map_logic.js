@@ -186,6 +186,7 @@ let circles = [];
 function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
   // console.log(`Processing data point - Latest: ${isLatestPoint}, Position: ${position.toString()}, Time: ${currentTime}`);
   const ageHours = (currentTime - item.timestamp * 1000) / (1000 * 60 * 60);
+  let infoWindowCircle;
   let opacity = Math.max(1 - ageHours / 4, 0);
 
   const circleOptionsArray = getCircleOptions(
@@ -195,7 +196,6 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
     opacity,
     map
   );
-  let infoWindowCircle;
 
   circles.forEach((circle) => circle.setMap(null));
   circles = [];
@@ -226,19 +226,6 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
   if (isLatestPoint) {
     addWeatherToMap(map, item.lat, item.lon);
   }
-}
-
-function testCircle(map) {
-  const circle = new google.maps.Circle({
-    strokeColor: "#FF0000",
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: "#FF0000",
-    fillOpacity: 0.35,
-    map,
-    center: { lat: -34.397, lng: 150.644 }, // Replace with your own coordinates
-    radius: 10000, // Radius in meters
-  });
 }
 
 function getCircleOptions(isLatestPoint, position, item, opacity, map) {

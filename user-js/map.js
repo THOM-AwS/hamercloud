@@ -9,7 +9,7 @@ function initMap() {
     disableDefaultUI: true,
     gestureHandling: "greedy",
   });
-  testCircle(map);
+
   map.addListener("zoom_changed", function () {
     let zoom = map.getZoom();
     directionMarkers.forEach((marker) => {
