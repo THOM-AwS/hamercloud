@@ -221,13 +221,14 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
 }
 
 function getCircleOptions(isLatestPoint, position, item, opacity, map) {
+  const accuracyRadius = parseFloat(item.acc) || 100;
   const baseOptions = {
     strokeColor: "#4285F4", //blue
     strokeOpacity: opacity,
     strokeWeight: 4,
     fillColor: "#4285F4",
     fillOpacity: 1,
-    radius: item.acc,
+    radius: accuracyRadius,
     map: map,
     center: position,
     zIndex: 5,
