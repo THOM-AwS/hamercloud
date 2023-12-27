@@ -196,6 +196,7 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
     opacity,
     map
   );
+  console.log("circleOptionsArray", circleOptionsArray);
 
   circles.forEach((circle) => circle.setMap(null));
   circles = [];
@@ -242,15 +243,7 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
     visible: true,
   };
   if (isLatestPoint) {
-    // Define options for two circles
-    console.log(
-      Object.assign({}, baseOptions, {
-        strokeColor: "#26de51",
-        strokeWeight: 2,
-        strokeOpacity: 0.5,
-        radius: 50,
-      })
-    );
+    // Define options for two circles - inner and outer
     return [
       [
         // Inner circle
