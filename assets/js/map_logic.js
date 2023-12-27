@@ -119,6 +119,7 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
     position,
     isLatestPoint
   );
+  console.log("Item.acc is: ", item.acc);
   const accuracyRadius = parseFloat(item.acc) || 100;
   const baseOptions = {
     strokeColor: "#4285F4", //blue
