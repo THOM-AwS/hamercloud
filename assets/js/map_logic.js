@@ -2,39 +2,6 @@ let animationFrameId;
 let linePath;
 let circles = [];
 
-function generateInfoWindowContent(item) {
-  return `
-							<div>
-								<span style="color: black;">Time: ${new Date(
-                  item.timestamp * 1000
-                ).toLocaleString()}</span><br>
-								<span style="color: black;">Latitude: ${item.lat}</span><br>
-								<span style="color: black;">Longitude: ${item.lon}</span><br>
-								<span style="color: black;">Altitude: ${
-                  item.alt ? item.alt + " meters" : "N/A"
-                }</span><br>
-								<span style="color: black;">Accuracy: ${
-                  item.acc ? item.acc + " meters" : "N/A"
-                }</span><br>
-								<span style="color: black;">Battery: ${
-                  item.bat ? item.bat + "%" : "N/A"
-                }</span><br>
-								<span style="color: black;">Satellites: ${
-                  item.sat ? item.sat : "N/A"
-                }</span><br>
-								<span style="color: black;">User Agent: ${
-                  item.useragent ? item.useragent : "N/A"
-                }</span><br>
-								<span style="color: black;">Speed: ${
-                  item.speed ? (item.speed * 3.6).toFixed(2) + " km/h" : "N/A"
-                }</span><br>
-								<span style="color: black;">Bearing: ${
-                  item.bearing ? item.bearing + "°" : "N/A"
-                }</span>
-							</div>
-						`;
-}
-
 function fetchDataAndUpdateMap(map) {
   const interval = 30000; // 30 seconds
   let isFirstLoad = true;
@@ -364,4 +331,37 @@ function addDirectionMarker(map, position, bearing, zoom, content) {
   });
 
   directionMarkers.push(marker);
+}
+
+function generateInfoWindowContent(item) {
+  return `
+							<div>
+								<span style="color: black;">Time: ${new Date(
+                  item.timestamp * 1000
+                ).toLocaleString()}</span><br>
+								<span style="color: black;">Latitude: ${item.lat}</span><br>
+								<span style="color: black;">Longitude: ${item.lon}</span><br>
+								<span style="color: black;">Altitude: ${
+                  item.alt ? item.alt + " meters" : "N/A"
+                }</span><br>
+								<span style="color: black;">Accuracy: ${
+                  item.acc ? item.acc + " meters" : "N/A"
+                }</span><br>
+								<span style="color: black;">Battery: ${
+                  item.bat ? item.bat + "%" : "N/A"
+                }</span><br>
+								<span style="color: black;">Satellites: ${
+                  item.sat ? item.sat : "N/A"
+                }</span><br>
+								<span style="color: black;">User Agent: ${
+                  item.useragent ? item.useragent : "N/A"
+                }</span><br>
+								<span style="color: black;">Speed: ${
+                  item.speed ? (item.speed * 3.6).toFixed(2) + " km/h" : "N/A"
+                }</span><br>
+								<span style="color: black;">Bearing: ${
+                  item.bearing ? item.bearing + "°" : "N/A"
+                }</span>
+							</div>
+						`;
 }

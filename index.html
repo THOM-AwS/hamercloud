@@ -25,6 +25,12 @@
 		<link rel="stylesheet" href="assets/css/noscript.css" />
 	</noscript>
 	<script async src="assets/js/jquery.min.js"></script>
+	<script async src="assets/js/weather.js"></script>
+	<script async src="assets/js/geojson.js"></script>
+	<script src="assets/js/visited-countries.js"></script>
+	<script async src="assets/js/map.js"></script>
+	<script async src="assets/js/map_logic.js"></script>
+	<script defer src="assets/js/life-data.js"></script>
 	<style type="text/css">
 		/* Set the size of the div element that contains the map */
 		#map {
@@ -161,9 +167,11 @@
 						class="fas fa-snowboarding"></i></p>
 				<img src="images/boarding.jpg" alt="Thomas Hamer" style="width:200px;float:left;padding: 20px;" />
 				<p>I am an AWS specialist, and I really enjoy the work that I do.<i class="fab fa-aws"></i></p>
+				<br><br>
 
-				<p>I have been making an impact for <span id="timeLived" style="font-weight: bold;"></span> so
-					far, I have
+				<p>I have been alive and kicking for <span id="timeLived" style="font-weight: bold;"></span> so
+					far,</p>
+				<p>I have
 					approximately <span id="timeLeft" style="font-weight: bold;"></span> left to make the
 					positive impact I want on the world.</p>
 			</article>
@@ -327,12 +335,6 @@
 
 				<p>
 				<div id="map"></div>
-				<script src="assets/js/weather.js"></script>
-				<script src="assets/js/geojson.js"></script>
-				<script src="assets/js/visited-countries.js"></script>
-				<script src="assets/js/map.js"></script>
-				<script src="assets/js/map_logic.js"></script>
-				<script defer src="assets/js/life-data.js"></script>
 
 				<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
 				<script
