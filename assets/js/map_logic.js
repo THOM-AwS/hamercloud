@@ -222,24 +222,12 @@ function calculateScaleForZoom(zoom) {
 }
 
 function animatePolyline(map, pathData) {
-  // console.log("Received path data for animation", pathData);
-
-  // Sort pathData by timestamp
   pathData.sort((a, b) => a.timestamp - b.timestamp);
-
-  // Extract the sorted coordinates from the pathData
   const pathCoordinates = pathData
     .map((data) => {
       const latitude = data.lat;
       const longitude = data.lon;
-
-      // Validate the extracted values
-      if (typeof latitude === "number" && typeof longitude === "number") {
-        return new google.maps.LatLng(latitude, longitude);
-      } else {
-        console.error("Invalid data point:", data);
-        return null;
-      }
+      return new google.maps.LatLng(latitude, longitude);
     })
     .filter((coord) => coord !== null);
 
