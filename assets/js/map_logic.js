@@ -118,11 +118,10 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
     radius: accuracyRadius,
     map: map,
     center: position,
-    zIndex: 5,
-    visible: true,
   };
   if (isLatestPoint) {
     // Define options for two circles - inner and outer
+    console.log("latest point.", position);
     return [
       {
         // Inner circle
@@ -143,6 +142,7 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
       },
     ];
   } else {
+    console.log("Not Latest point....", position);
     return [
       {
         ...baseOptions,
