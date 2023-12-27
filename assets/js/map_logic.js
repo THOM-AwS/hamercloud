@@ -68,17 +68,48 @@ function fetchDataAndUpdateMap(map) {
 }
 
 function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
-  const ageHours = (currentTime - item.timestamp * 1000) / (1000 * 60 * 60);
-  let infoWindowCircle;
-  let opacity = Math.max(1 - ageHours / 4, 0);
+  if (typeof item.lat === 'number' && typeof item.lng === 'number') {
+    const ageHours = (currentTime - item.timestamp * 1000) / (1000 * 60 * 60);
+    let infoWindowCircle;
+    let opacity = Math.max(1 - ageHours / 4, 0);
 
-  const circleOptionsArray = getCircleOptions(
-    isLatestPoint,
-    position,
-    item,
-    opacity,
-    map
-  );
+    const circleOptionsArray = getCircleOptions(
+      isLatestPoint,
+      position,
+      item,
+      opacity,
+      map
+    );
+
+    circleOptionsArray.forEach((circleOptions, index) => {
+      const circle = new google.maps.Circle(circleOptions);
+      circle.setMap(map);
+
+      if (index === 0) {
+        infoWindowCircle = circle;
+      }
+    });
+
+    const content = generateInfoWindowContent(item);
+
+    if (infoWindowCircle) {
+      addInfoWindowToCircle(infoWindowCircle, position, map, content);
+    }
+
+    // Check if bearing is available and add a direction marker
+    if (item.bearing !== "N/A" && item.bearing != null) {
+      addDirectionMarker(map, position, item.bearing, map.getZoom(), content);
+    }
+
+    // Add weather to the newest point
+    if (isLatestPoint) {
+      addWeatherToMap(map, item.lat, item.lng);
+    }
+  } else {
+    console.error("Invalid data point:", item);
+  }
+}
+
 
   circleOptionsArray.forEach((circleOptions, index) => {
     const circle = new google.maps.Circle(circleOptions);
