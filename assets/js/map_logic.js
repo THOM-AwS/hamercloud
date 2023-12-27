@@ -73,6 +73,7 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
   const ageHours = (currentTime - item.timestamp * 1000) / (1000 * 60 * 60);
   let infoWindowCircle;
   let opacity = Math.max(1 - ageHours / 4, 0);
+  console.log("ITEM: ", item);
   const circleOptionsArray = getCircleOptions(
     isLatestPoint,
     position,
@@ -80,6 +81,7 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
     opacity,
     map
   );
+  console.log("Circle options array: ", circleOptionsArray);
   circleOptionsArray.forEach((circleOptions, index) => {
     const circle = new google.maps.Circle(circleOptions);
     circle.setMap(map);
@@ -90,10 +92,10 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
   if (item.bearing !== "N/A" && item.bearing != null) {
     addDirectionMarker(map, position, item.bearing, map.getZoom(), content);
   }
-  // Add weather to the newest point
-  if (isLatestPoint) {
-    addWeatherToMap(map, item.lat, item.lng);
-  }
+  // Add weather to the newest point api limit met.
+  // if (isLatestPoint) {
+  //   addWeatherToMap(map, item.lat, item.lng);
+  // }
   if (infoWindowCircle) {
     const content = generateInfoWindowContent(item);
     addInfoWindowToCircle(infoWindowCircle, position, map, content);
