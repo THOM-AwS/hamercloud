@@ -8,22 +8,17 @@ function fetchDataAndUpdateMap(map) {
 
   const fetchData = () => {
     fetch("https://api.hamer.cloud/data")
-      .then((response) => response.json())
+      .then((response) => response.json()) // parse JSON from request
       .then((data) => {
-        console.log("Fetched data:", data); // Log the raw fetched data
-        const validData = data.map((item) => ({
-          lat: parseFloat(item.lat), // Ensure latitude is a float
-          lon: parseFloat(item.lon), // Ensure longitude is a float
-          timestamp: parseInt(item.timestamp, 10), // Ensure timestamp is an integer
-        }));
-
         if (data.length > 0) {
           let currentCenter, currentZoom;
           const currentTime = Date.now();
           let previousPosition = null;
           let previousTimestamp = null;
 
-          data.sort((a, b) => a.timestamp - b.timestamp);
+          if (Array.isArray(data)) {
+            data.sort((a, b) => a.timestamp - b.timestamp);
+          }
 
           if (isFirstLoad) {
             currentCenter = new google.maps.LatLng(
