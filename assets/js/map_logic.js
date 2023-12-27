@@ -68,7 +68,8 @@ function fetchDataAndUpdateMap(map) {
 }
 
 function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
-  if (typeof item.lat === 'number' && typeof item.lng === 'number') {
+  const content = generateInfoWindowContent(item);
+  if (typeof item.lat === "number" && typeof item.lng === "number") {
     const ageHours = (currentTime - item.timestamp * 1000) / (1000 * 60 * 60);
     let infoWindowCircle;
     let opacity = Math.max(1 - ageHours / 4, 0);
@@ -81,16 +82,21 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
       map
     );
 
-  circleOptionsArray.forEach((circleOptions, index) => {
-    const circle = new google.maps.Circle(circleOptions);
-    circle.setMap(map);
-
-    if (index === 0) {
-      infoWindowCircle = circle;
+    circleOptionsArray.forEach((circleOptions, index) => {
+      const circle = new google.maps.Circle(circleOptions);
+      circle.setMap(map);
+      if (index === 0) {
+        infoWindowCircle = circle;
+      }
+    });
+    if (item.bearing !== "N/A" && item.bearing != null) {
+      addDirectionMarker(map, position, item.bearing, map.getZoom(), content);
     }
-  });
-
-  const content = generateInfoWindowContent(item);
+    // Add weather to the newest point
+    if (isLatestPoint) {
+      addWeatherToMap(map, item.lat, item.lng);
+    }
+  }
 
   if (infoWindowCircle) {
     const content = generateInfoWindowContent(item);
