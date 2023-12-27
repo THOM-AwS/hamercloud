@@ -97,19 +97,18 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
     if (isLatestPoint) {
       addWeatherToMap(map, item.lat, item.lng);
     }
+  } else {
+    console.error("Invalid data point:", item);
   }
-
   if (infoWindowCircle) {
     const content = generateInfoWindowContent(item);
     addInfoWindowToCircle(infoWindowCircle, position, map, content);
   }
 
-  // Check if bearing is available and add a direction marker
   if (item.bearing !== "N/A" && item.bearing != null) {
     addDirectionMarker(map, position, item.bearing, map.getZoom(), content);
   }
 
-  // Add weather to the newest point
   if (isLatestPoint) {
     addWeatherToMap(map, item.lat, item.lon);
   }
