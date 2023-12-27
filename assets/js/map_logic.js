@@ -16,36 +16,27 @@ function fetchDataAndUpdateMap(map) {
           lon: parseFloat(item.lon), // Ensure longitude is a float
           timestamp: parseInt(item.timestamp, 10), // Ensure timestamp is an integer
         }));
-        // console.log("Validated data:", validData);
-        validData.sort((a, b) => a.timestamp - b.timestamp);
-        console.log("Sorted data:", validData);
 
         if (data.length > 0) {
           let currentCenter, currentZoom;
+          const currentTime = Date.now();
+          let previousPosition = null;
+          let previousTimestamp = null;
+
+          data.sort((a, b) => a.timestamp - b.timestamp);
 
           if (isFirstLoad) {
-            // On first load, set center and zoom based on the last data point
             currentCenter = new google.maps.LatLng(
               data[data.length - 1].lat,
               data[data.length - 1].lon
             );
-            currentZoom = 15; // Set a default zoom level, or adjust based on your data
+            currentZoom = 15;
             isFirstLoad = false;
           } else {
-            // On subsequent loads, use the current map center and zoom
             currentCenter = map.getCenter();
             currentZoom = map.getZoom();
           }
-
-          const currentTime = Date.now();
-          data.sort((a, b) => a.timestamp - b.timestamp);
-
-          let previousPosition = null;
-          let previousTimestamp = null;
-
-          console.log("data", data);
           data.forEach((item, index) => {
-            // console.log("In for each: ", item, index);
             const position = new google.maps.LatLng(item.lat, item.lon);
             const isLatestPoint = index === data.length - 1;
 
@@ -81,7 +72,6 @@ function fetchDataAndUpdateMap(map) {
       .catch((error) => console.error("Error fetching data:", error));
   };
   fetchData();
-  console.log("first fetch.");
   setInterval(fetchData, interval);
 }
 
