@@ -30,7 +30,7 @@ function fetchDataAndUpdateMap(map) {
             currentZoom = map.getZoom();
           }
           data.forEach((item, index) => {
-            const position = new google.maps.LatLng(item.lat, item.lon);
+            const position = {item.lat, item.lon}; //new google.maps.LatLng(item.lat, item.lon);
             const isLatestPoint = index === data.length - 1;
 
             processEachDataPoint(
