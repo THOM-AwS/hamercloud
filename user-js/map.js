@@ -83,6 +83,7 @@ function initMap() {
     // console.log("Bounds changed event triggered.");
     // console.time("updateVisiblePolys");
     updateVisiblePolys(map);
+
     // console.timeEnd("updateVisiblePolys");
   });
 }
