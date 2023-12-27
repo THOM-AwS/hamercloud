@@ -243,6 +243,14 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
   };
   if (isLatestPoint) {
     // Define options for two circles
+    console.log(
+      Object.assign({}, baseOptions, {
+        strokeColor: "#26de51",
+        strokeWeight: 2,
+        strokeOpacity: 0.5,
+        radius: 50,
+      })
+    );
     return [
       [
         // Inner circle
