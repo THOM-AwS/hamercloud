@@ -1,16 +1,6 @@
-function updateVisiblePolys(map) {
-  // console.log("Updating visible polygons...");
-  const bounds = map.getBounds();
-
-  map.data.forEach((feature) => {
-    const featureBounds = getFeatureBounds(feature.getGeometry());
-
-    // Set the visibility of the feature depending on whether its bounds intersect with the viewport.
-    const isVisible = bounds.intersects(featureBounds);
-    // console.log(`Feature ${feature.getProperty('ADMIN')} visibility: ${isVisible}`);
-    map.data.overrideStyle(feature, { visible: isVisible });
-  });
-}
+let animationFrameId;
+let linePath;
+let circles = [];
 
 // Custom logic to check if two bounds intersect
 function getFeatureBounds(geometry) {
@@ -110,7 +100,7 @@ function fetchDataAndUpdateMap(map) {
     fetch("https://api.hamer.cloud/data")
       .then((response) => response.json())
       .then((data) => {
-        // console.log("Fetched data:", data); // Log the raw fetched data
+        console.log("Fetched data:", data); // Log the raw fetched data
         const validData = data.map((item) => ({
           lat: parseFloat(item.lat), // Ensure latitude is a float
           lon: parseFloat(item.lon), // Ensure longitude is a float
@@ -118,7 +108,7 @@ function fetchDataAndUpdateMap(map) {
         }));
         // console.log("Validated data:", validData);
         validData.sort((a, b) => a.timestamp - b.timestamp);
-        // console.log("Sorted data:", validData);
+        console.log("Sorted data:", validData);
 
         if (data.length > 0) {
           let currentCenter, currentZoom;
@@ -181,10 +171,10 @@ function fetchDataAndUpdateMap(map) {
       .catch((error) => console.error("Error fetching data:", error));
   };
   fetchData();
+  console.log("first fetch.");
   setInterval(fetchData, interval);
 }
 
-let circles = [];
 function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
   console.log("processEachDataPoint called", item);
   console.log(
@@ -334,8 +324,6 @@ function calculateScaleForZoom(zoom) {
   return 0.5 + zoom / 10;
 }
 
-let animationFrameId;
-let linePath;
 function animatePolyline(map, pathData) {
   // console.log("Received path data for animation", pathData);
 
@@ -561,5 +549,19 @@ function drawGeoJsonPolygons(map, features, visitedCountries) {
         };
       });
     }
+  });
+}
+
+function updateVisiblePolys(map) {
+  // console.log("Updating visible polygons...");
+  const bounds = map.getBounds();
+
+  map.data.forEach((feature) => {
+    const featureBounds = getFeatureBounds(feature.getGeometry());
+
+    // Set the visibility of the feature depending on whether its bounds intersect with the viewport.
+    const isVisible = bounds.intersects(featureBounds);
+    // console.log(`Feature ${feature.getProperty('ADMIN')} visibility: ${isVisible}`);
+    map.data.overrideStyle(feature, { visible: isVisible });
   });
 }
