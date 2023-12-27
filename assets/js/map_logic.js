@@ -16,9 +16,13 @@ function fetchDataAndUpdateMap(map) {
           let previousPosition = null;
           let previousTimestamp = null;
 
+          console.log("Received data:", data);
+
           if (Array.isArray(data)) {
             data.sort((a, b) => a.timestamp - b.timestamp);
           }
+
+          console.log("Sorted data:", data);
 
           if (isFirstLoad) {
             currentCenter = new google.maps.LatLng(
