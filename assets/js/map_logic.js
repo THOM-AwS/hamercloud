@@ -176,7 +176,6 @@ function fetchDataAndUpdateMap(map) {
 }
 
 function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
-  console.log("processEachDataPoint called", item);
   console.log(
     "Entering processEachDataPoint",
     item,
@@ -233,13 +232,13 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
   const baseOptions = {
     strokeColor: "#4285F4", //blue
     strokeOpacity: opacity,
-    strokeWeight: 1,
+    strokeWeight: 4,
     fillColor: "#4285F4",
-    fillOpacity: 0.2,
+    fillOpacity: 1,
     radius: item.acc,
     map: map,
     center: position,
-    zIndex: 2,
+    zIndex: 5,
     visible: true,
   };
   if (isLatestPoint) {
