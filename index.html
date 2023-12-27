@@ -927,8 +927,9 @@
 							path: [previousPosition, position],
 							geodesic: true,
 							strokeColor: '#4285F4',
-							strokeOpacity: 1, //segmentOpacity,
-							strokeWeight: 2
+							strokeOpacity: segmentOpacity,
+							strokeWeight: 3,
+							zIndex: 1
 						});
 
 						lineSegment.setMap(map);
@@ -999,7 +1000,8 @@
 								strokeColor: '#FF0000',
 								strokeOpacity: 0.8,
 								strokeWeight: 2,
-								map: map
+								map: map,
+								zIndex: 2
 							});
 						}
 
