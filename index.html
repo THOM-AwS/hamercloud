@@ -863,48 +863,29 @@
 					}
 
 					function getCircleOptions(isLatestPoint, position, item, opacity, map) {
+						const baseOptions = {
+							strokeColor: '#4285F4', //blue
+							strokeOpacity: opacity,
+							strokeWeight: 1,
+							fillColor: '#4285F4',
+							fillOpacity: 0.2,
+							radius: item.acc,
+							map: map,
+							center: position,
+							zIndex: 2
+						};
 						if (isLatestPoint) {
 							// Define options for two circles
 							return [
-								{
-									// First circle (inner)
-									strokeColor: '#26de51',
-									strokeOpacity: 0.5,
-									strokeWeight: 2,
-									fillColor: '#4285F4',
-									fillOpacity: 0.2,
-									map: map,
-									center: position,
-									radius: 40,
-									zIndex: 5
-								},
-								{
-									// Second circle (outer)
-									strokeColor: '#26de51',
-									strokeOpacity: 0.4,
-									strokeWeight: 2,
-									fillColor: '#4285F4',
-									fillOpacity: 0,
-									map: map,
-									center: position,
-									radius: 200000,
-									zIndex: 4
-								}
+								[
+									// Inner circle
+									Object.assign({}, baseOptions, { strokeColor: '#26de51', strokeWeight: 2, strokeOpacity: 0.5, radius: 50 }),
+									// Outer circle
+									Object.assign({}, baseOptions, { strokeColor: '#26de51', strokeWeight: 2, strokeOpacity: 0.5, fillOpacity: 0, radius: 200000 })
+								]
 							];
 						} else {
-							return [
-								{
-									strokeColor: '#4285F4',
-									strokeOpacity: opacity,
-									strokeWeight: 1,
-									fillColor: '#4285F4',
-									fillOpacity: 1,
-									map: map,
-									center: position,
-									radius: item.acc,
-									zIndex: 5
-								}
-							];
+							return [Object.assign({}, baseOptions, { radius: item.acc })];
 						}
 					}
 
