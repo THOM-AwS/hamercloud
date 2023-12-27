@@ -143,7 +143,9 @@ function fetchDataAndUpdateMap(map) {
           let previousPosition = null;
           let previousTimestamp = null;
 
+          console.log("data", data);
           data.forEach((item, index) => {
+            console.log("In for each: ", item, index);
             const position = new google.maps.LatLng(item.lat, item.lon);
             const isLatestPoint = index === data.length - 1;
 
@@ -184,6 +186,7 @@ function fetchDataAndUpdateMap(map) {
 
 let circles = [];
 function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
+  console.log("processEachDataPoint called", item);
   console.log(
     "Entering processEachDataPoint",
     item,
