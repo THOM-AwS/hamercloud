@@ -1,5 +1,6 @@
 let animationFrameId;
 let linePath;
+let infoWindowCircle;
 
 function fetchDataAndUpdateMap(map) {
   const interval = 30000; // 30 seconds
