@@ -120,7 +120,7 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
     strokeOpacity: opacity,
     strokeWeight: 4,
     fillColor: "#4285F4",
-    fillOpacity: 1,
+    fillOpacity: 0.3,
     radius: 100, //accuracyRadius,
     map: map,
     center: position,
@@ -136,7 +136,7 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
         strokeColor: "#26de51",
         strokeWeight: 2,
         strokeOpacity: 0.5,
-        radius: 50,
+        radius: accuracyRadius,
       },
       {
         // Outer circle
@@ -145,7 +145,7 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
         strokeWeight: 2,
         strokeOpacity: 0.5,
         fillOpacity: 0,
-        radius: accuracyRadius,
+        radius: 100000,
       },
     ];
   } else {
