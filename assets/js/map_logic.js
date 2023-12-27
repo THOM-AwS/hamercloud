@@ -134,6 +134,7 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
   if (isLatestPoint) {
     // Define options for two circles - inner and outer
     console.log("latest point.", position.lat(), position.lng());
+    console.log("full position object: ", position);
     return [
       {
         // Inner circle
@@ -228,9 +229,16 @@ function animatePolyline(map, pathData) {
   pathData.sort((a, b) => a.timestamp - b.timestamp);
   const pathCoordinates = pathData
     .map((data) => {
-      const latitude = data.lat;
-      const longitude = data.lon;
-      return new google.maps.LatLng(latitude, longitude);
+      const latitude = parseFloat(data.lat);
+      const longitude = parseFloat(data.lon);
+
+      // Check if latitude and longitude are valid numbers
+      if (!isNaN(latitude) && !isNaN(longitude)) {
+        return new google.maps.LatLng(latitude, longitude);
+      } else {
+        console.error(`Invalid coordinates: lat=${data.lat}, lon=${data.lon}`);
+        return null; // Return null for invalid coordinates
+      }
     })
     .filter((coord) => coord !== null);
 
