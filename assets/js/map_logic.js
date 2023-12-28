@@ -202,9 +202,27 @@ function handlePolylineAnimation(data, map) {
   }
 }
 
-function adjustMapCenterAndZoom(map, currentCenter, currentZoom) {
+function adjustMapCenterAndZoom(map, currentCenter, currentZoom, data) {
   map.setCenter(currentCenter);
   map.setZoom(currentZoom);
+
+  // Create a LatLngBounds object to encompass all map points
+  const bounds = new google.maps.LatLngBounds();
+
+  // Iterate through the data and extend the bounds for each point
+  for (const item of data) {
+    const position = new google.maps.LatLng(item.lat, item.lon);
+    bounds.extend(position);
+  }
+
+  // Fit the map to the bounds, adjusting zoom as needed
+  map.fitBounds(bounds);
+
+  // Limit the maximum zoom level to avoid over-zooming
+  const maxZoom = 15;
+  if (map.getZoom() > maxZoom) {
+    map.setZoom(maxZoom);
+  }
 }
 
 function calculateScaleForZoom(zoom) {
