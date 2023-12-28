@@ -132,7 +132,6 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
   if (isLatestPoint) {
     // Define options for two circles - inner and outer
     console.log("latest point.", position.lat(), position.lng());
-    console.log("full position object: ", position);
     return [
       {
         // Inner circle
