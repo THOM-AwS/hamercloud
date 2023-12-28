@@ -7,6 +7,7 @@ function fetchDataAndUpdateMap(map) {
   let isFirstLoad = true;
 
   const fetchData = () => {
+    clearMap(map);
     fetch("https://api.hamer.cloud/data")
       .then((response) => response.json()) // parse JSON from request
       .then((data) => {
@@ -110,13 +111,14 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
 
 function getCircleOptions(isLatestPoint, position, item, opacity, map) {
   const accuracyRadius = parseFloat(item.acc) || 20;
+  console.log(accuracyRadius);
   const baseOptions = {
     strokeColor: "#4285F4", //blue
     strokeOpacity: opacity,
     strokeWeight: 4,
     fillColor: "#4285F4",
     fillOpacity: opacity,
-    radius: accuracyRadius,
+    radius: item.acc,
     map: map,
     center: position,
   };
@@ -331,4 +333,18 @@ function generateInfoWindowContent(item) {
                 }</span>
 							</div>
 						`;
+}
+
+function clearMap(map) {
+  // Clear all circles
+  for (const circle of circles) {
+    circle.setMap(null);
+  }
+
+  // Clear the polyline
+  if (linePath) {
+    linePath.setMap(null);
+  }
+
+  // Clear any other map elements you want to reset
 }
