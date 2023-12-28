@@ -6,8 +6,6 @@ let isFirstLoad = true;
 
 function fetchDataAndUpdateMap(map) {
   const interval = 30000; // 30 seconds
-  let initialCenter;
-  let initialZoom;
 
   const fetchData = () => {
     clearMap(map);
@@ -21,6 +19,8 @@ function fetchDataAndUpdateMap(map) {
           if (Array.isArray(data)) {
             data.sort((a, b) => a.timestamp - b.timestamp);
           }
+          let initialCenter;
+          let initialZoom;
           if (isFirstLoad || !map.getCenter()) {
             // Use initial center and zoom if it's the first load or user hasn't moved the map
             initialCenter = new google.maps.LatLng(
@@ -29,10 +29,6 @@ function fetchDataAndUpdateMap(map) {
             );
             initialZoom = 15;
             isFirstLoad = false;
-          } else {
-            // Use current center and zoom if the user has moved the map
-            initialCenter = map.getCenter();
-            initialZoom = map.getZoom();
           }
           data.forEach((item, index) => {
             const position = new google.maps.LatLng(item.lat, item.lon);
@@ -62,8 +58,7 @@ function fetchDataAndUpdateMap(map) {
           });
 
           handlePolylineAnimation(data, map);
-
-          if (isFirstLoad) {
+          if (initialCenter && initialZoom) {
             // During the initial load, use initialCenter and initialZoom
             adjustMapCenterAndZoom(map, initialCenter, initialZoom, data);
           } else {
