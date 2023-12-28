@@ -2,34 +2,38 @@ let animationFrameId;
 let linePath;
 let infoWindowCircle;
 const circles = [];
+let isFirstLoad = true;
+let initialCenter;
+let initialZoom;
 
 function fetchDataAndUpdateMap(map) {
   const interval = 30000; // 30 seconds
-  let isFirstLoad = true;
 
   const fetchData = () => {
     clearMap(map);
     fetch("https://api.hamer.cloud/data")
-      .then((response) => response.json()) // parse JSON from request
+      .then((response) => response.json())
       .then((data) => {
         if (data.length > 0) {
-          let currentCenter, currentZoom;
           const currentTime = Date.now();
           let previousPosition = null;
           let previousTimestamp = null;
           if (Array.isArray(data)) {
             data.sort((a, b) => a.timestamp - b.timestamp);
           }
-          if (isFirstLoad) {
-            currentCenter = new google.maps.LatLng(
+
+          if (isFirstLoad || !map.getCenter()) {
+            // Use initial center and zoom if it's the first load or user hasn't moved the map
+            initialCenter = new google.maps.LatLng(
               data[data.length - 1].lat,
               data[data.length - 1].lon
             );
-            currentZoom = 15;
+            initialZoom = 15;
             isFirstLoad = false;
           } else {
-            currentCenter = map.getCenter();
-            currentZoom = map.getZoom();
+            // Use current center and zoom if the user has moved the map
+            initialCenter = map.getCenter();
+            initialZoom = map.getZoom();
           }
           data.forEach((item, index) => {
             const position = new google.maps.LatLng(item.lat, item.lon);
@@ -59,7 +63,7 @@ function fetchDataAndUpdateMap(map) {
           });
 
           handlePolylineAnimation(data, map);
-          adjustMapCenterAndZoom(map, currentCenter, currentZoom, data);
+          adjustMapCenterAndZoom(map, initialCenter, initialZoom);
         } else {
           console.error("No data available to update the map.");
         }
