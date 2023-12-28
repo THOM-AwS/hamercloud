@@ -1,6 +1,7 @@
 let animationFrameId;
 let linePath;
 let infoWindowCircle;
+const circles = [];
 
 function fetchDataAndUpdateMap(map) {
   const interval = 30000; // 30 seconds
@@ -87,6 +88,7 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
     if (index === 0) {
       infoWindowCircle = circle;
     }
+    circles.push(circle);
   });
   if (item.bearing !== "N/A" && item.bearing != null) {
     addDirectionMarker(map, position, item.bearing, map.getZoom(), content);
