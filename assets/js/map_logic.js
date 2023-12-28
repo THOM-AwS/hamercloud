@@ -110,15 +110,6 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
 }
 
 function getCircleOptions(isLatestPoint, position, item, opacity, map) {
-  console.log(
-    "Details: ",
-    item.lat,
-    item.lon,
-    item.acc,
-    position.lat(),
-    position.lng(),
-    isLatestPoint
-  );
   const accuracyRadius = parseFloat(item.acc) || 100;
   const baseOptions = {
     strokeColor: "#4285F4", //blue
@@ -132,7 +123,6 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
   };
   if (isLatestPoint) {
     // Define options for two circles - inner and outer
-    console.log("latest point.", position.lat(), position.lng());
     return [
       {
         // Inner circle
@@ -153,7 +143,6 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
       },
     ];
   } else {
-    console.log("Not Latest point....", position.lat(), position.lng());
     return [
       {
         ...baseOptions,
