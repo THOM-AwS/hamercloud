@@ -116,7 +116,7 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
     strokeOpacity: 1,
     strokeWeight: 4,
     fillColor: "#4285F4",
-    fillOpacity: 1,
+    fillOpacity: 0.2,
     radius: 1000, //accuracyRadius,
     map: map,
     center: position,
