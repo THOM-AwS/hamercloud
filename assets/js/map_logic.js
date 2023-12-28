@@ -113,7 +113,6 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
 
 function getCircleOptions(isLatestPoint, position, item, opacity, map) {
   const accuracyRadius = parseFloat(item.acc) || 20;
-  console.log(accuracyRadius);
   const baseOptions = {
     strokeColor: "#4285F4", //blue
     strokeOpacity: opacity,
@@ -257,11 +256,9 @@ function animatePolyline(map, pathData) {
     const progress = timestamp - lastTime;
     if (progress >= 200) {
       if (step < numSteps) {
-        // console.log(`Drawing step ${step} at timestamp ${pathData[step].timestamp}:`, pathCoordinates[step]);
         linePath.getPath().push(pathCoordinates[step]);
         step++;
       } else {
-        // console.log("Completed drawing all steps. Resetting animation.");
         step = 0;
         linePath.setPath([]);
       }
