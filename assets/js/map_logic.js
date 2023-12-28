@@ -59,7 +59,7 @@ function fetchDataAndUpdateMap(map) {
           });
 
           handlePolylineAnimation(data, map);
-          adjustMapCenterAndZoom(map, currentCenter, currentZoom);
+          adjustMapCenterAndZoom(map, currentCenter, currentZoom, data);
         } else {
           console.error("No data available to update the map.");
         }
