@@ -73,7 +73,6 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
   const ageHours = (currentTime - item.timestamp * 1000) / (1000 * 60 * 60);
   let infoWindowCircle;
   let opacity = Math.max(1 - ageHours / 4, 0);
-  console.log("ITEM: ", item);
   const circleOptionsArray = getCircleOptions(
     isLatestPoint,
     position,
@@ -119,7 +118,6 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
     position,
     isLatestPoint
   );
-  console.log("Item.acc is: ", item.acc);
   const accuracyRadius = parseFloat(item.acc) || 100;
   const baseOptions = {
     strokeColor: "#4285F4", //blue
@@ -229,7 +227,7 @@ function animatePolyline(map, pathData) {
   pathData.sort((a, b) => a.timestamp - b.timestamp);
   const pathCoordinates = pathData
     .map((data) => {
-      console.log("data is: ", data);
+      // is a lat and lng
       const latitude = parseFloat(data.lat());
       const longitude = parseFloat(data.lng());
 
