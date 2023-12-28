@@ -80,7 +80,6 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
     opacity,
     map
   );
-  console.log("Circle options array: ", circleOptionsArray);
   circleOptionsArray.forEach((circleOptions, index) => {
     const circle = new google.maps.Circle(circleOptions);
     circle.setMap(map);
@@ -138,7 +137,7 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
         strokeColor: "#26de51",
         strokeWeight: 2,
         strokeOpacity: 1,
-        fillOpacity: 1,
+        fillOpacity: 0,
         radius: 100000,
       },
     ];
@@ -146,10 +145,10 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
     return [
       {
         ...baseOptions,
-        strokeColor: "#26de51",
-        strokeWeight: 2,
+        strokeColor: "#FFC0CB",
+        strokeWeight: 4,
         strokeOpacity: 1,
-        fillOpacity: 0,
+        fillOpacity: 0.5,
         radius: 100,
       },
     ];
