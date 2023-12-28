@@ -3,8 +3,8 @@ let linePath;
 let infoWindowCircle;
 const circles = [];
 let isFirstLoad = true;
-let initialCenter; // Variable to store the initial map center
-let initialZoom; // Variable to store the initial map zoom
+let Center;
+let Zoom;
 
 function fetchDataAndUpdateMap(map) {
   const interval = 30000; // 30 seconds
@@ -27,14 +27,17 @@ function fetchDataAndUpdateMap(map) {
             data.forEach((item) => {
               bounds.extend(new google.maps.LatLng(item.lat, item.lon));
             });
-            // Set initialCenter to the center of the bounds
-            initialCenter = bounds.getCenter();
-            // Set initialZoom based on the bounds and map size
-            initialZoom = calculateInitialZoom(bounds, map);
+            Center = bounds.getCenter();
+            Zoom = map.getZoom() - 1;
             isFirstLoad = false;
+          } else {
+            Center = map.getCenter();
+            Zoom = map.getZoom();
           }
+
           data.forEach((item, index) => {
             const position = new google.maps.LatLng(item.lat, item.lon);
+            data.sort((a, b) => a.timestamp - b.timestamp);
             const isLatestPoint = index === data.length - 1;
 
             processEachDataPoint(
@@ -55,15 +58,12 @@ function fetchDataAndUpdateMap(map) {
                 map
               );
             }
-
             previousPosition = position;
             previousTimestamp = item.timestamp;
           });
-
+          map.setCenter(Center);
+          map.setZoom(Zoom);
           handlePolylineAnimation(data, map);
-
-          // Use the initialCenter and initialZoom on first load, then maintain them
-          adjustMapCenterAndZoom(map, initialCenter, initialZoom, data);
         } else {
           console.error("No data available to update the map.");
         }
@@ -73,6 +73,12 @@ function fetchDataAndUpdateMap(map) {
   fetchData();
   setInterval(fetchData, interval);
 }
+
+// // Add event listener to update Center and Zoom whenever the user interacts with the map
+// google.maps.event.addListener(map, "center_changed", () => {
+//   Center = map.getCenter();
+//   Zoom = map.getZoom();
+// });
 
 function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
   const content = generateInfoWindowContent(item);
@@ -199,51 +205,6 @@ function handlePolylineAnimation(data, map) {
     animatePolyline(map, pathCoordinates);
   } else {
     console.log("Not enough data points for polyline animation.");
-  }
-}
-
-function calculateInitialZoom(bounds, map) {
-  // Calculate the desired zoom level to fit the bounds within the map
-  const maxZoom = 15; // You can adjust this value
-  const padding = 50; // Padding in pixels around the bounds
-  const mapCanvas = {
-    width: map.getDiv().offsetWidth,
-    height: map.getDiv().offsetHeight,
-  };
-  const ne = map.getProjection().fromLatLngToPoint(bounds.getNorthEast());
-  const sw = map.getProjection().fromLatLngToPoint(bounds.getSouthWest());
-  const worldCoordWidth = Math.abs(ne.x - sw.x);
-  const worldCoordHeight = Math.abs(ne.y - sw.y);
-  const fitWidthZoom = Math.floor(
-    Math.log(mapCanvas.width / (worldCoordWidth * 256)) / Math.LN2
-  );
-  const fitHeightZoom = Math.floor(
-    Math.log(mapCanvas.height / (worldCoordHeight * 256)) / Math.LN2
-  );
-  const desiredZoom = Math.min(fitWidthZoom, fitHeightZoom, maxZoom);
-  return desiredZoom;
-}
-
-function adjustMapCenterAndZoom(map, currentCenter, currentZoom, data) {
-  map.setCenter(currentCenter);
-  map.setZoom(currentZoom);
-
-  // Create a LatLngBounds object to encompass all map points
-  const bounds = new google.maps.LatLngBounds();
-
-  // Iterate through the data and extend the bounds for each point
-  for (const item of data) {
-    const position = new google.maps.LatLng(item.lat, item.lon);
-    bounds.extend(position);
-  }
-
-  // Fit the map to the bounds, adjusting zoom as needed
-  map.fitBounds(bounds);
-
-  // Limit the maximum zoom level to avoid over-zooming
-  const maxZoom = 15;
-  if (map.getZoom() > maxZoom) {
-    map.setZoom(maxZoom);
   }
 }
 
