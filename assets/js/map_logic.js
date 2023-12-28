@@ -76,12 +76,6 @@ function fetchDataAndUpdateMap(map) {
   setInterval(fetchData, interval);
 }
 
-// // Add event listener to update Center and Zoom whenever the user interacts with the map
-// google.maps.event.addListener(map, "center_changed", () => {
-//   Center = map.getCenter();
-//   Zoom = map.getZoom();
-// });
-
 function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
   const content = generateInfoWindowContent(item);
   const ageHours = (currentTime - item.timestamp * 1000) / (1000 * 60 * 60);
@@ -203,7 +197,18 @@ function handlePolylineAnimation(data, map) {
     const pathCoordinates = data.map(
       (item) => new google.maps.LatLng(item.lat, item.lon)
     );
-    animatePolyline(map, pathCoordinates);
+
+    // Check if there's animation state in localStorage
+    const animationDataString = localStorage.getItem("animationData");
+    if (animationDataString) {
+      const animationData = JSON.parse(animationDataString);
+
+      // Call animatePolyline with animation state
+      animatePolyline(map, pathCoordinates, animationData.step);
+    } else {
+      // If no animation state, start from the beginning
+      animatePolyline(map, pathCoordinates);
+    }
   } else {
     console.log("Not enough data points for polyline animation.");
   }
