@@ -3,11 +3,11 @@ let linePath;
 let infoWindowCircle;
 const circles = [];
 let isFirstLoad = true;
-let initialCenter;
-let initialZoom;
 
 function fetchDataAndUpdateMap(map) {
   const interval = 30000; // 30 seconds
+  let initialCenter;
+  let initialZoom;
 
   const fetchData = () => {
     clearMap(map);
@@ -62,7 +62,14 @@ function fetchDataAndUpdateMap(map) {
           });
 
           handlePolylineAnimation(data, map);
-          adjustMapCenterAndZoom(map, initialCenter, initialZoom, data);
+
+          if (isFirstLoad) {
+            // During the initial load, use initialCenter and initialZoom
+            adjustMapCenterAndZoom(map, initialCenter, initialZoom, data);
+          } else {
+            // For subsequent updates, use the map's current center and zoom
+            adjustMapCenterAndZoom(map, map.getCenter(), map.getZoom(), data);
+          }
         } else {
           console.error("No data available to update the map.");
         }
@@ -96,10 +103,6 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
   if (item.bearing !== "N/A" && item.bearing != null) {
     addDirectionMarker(map, position, item.bearing, map.getZoom(), content);
   }
-  // Add weather to the newest point api limit met.
-  // if (isLatestPoint) {
-  //   addWeatherToMap(map, item.lat, item.lng);
-  // }
   if (infoWindowCircle) {
     const content = generateInfoWindowContent(item);
     addInfoWindowToCircle(infoWindowCircle, position, map, content);
