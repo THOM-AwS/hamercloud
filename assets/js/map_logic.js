@@ -74,7 +74,7 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
   const content = generateInfoWindowContent(item);
   const ageHours = (currentTime - item.timestamp * 1000) / (1000 * 60 * 60);
   let infoWindowCircle;
-  let opacity = Math.max(1 - ageHours / 4, 0);
+  let opacity = Math.min(Math.max(1 - ageHours / 4, 0), 0.6);
   const circleOptionsArray = getCircleOptions(
     isLatestPoint,
     position,
