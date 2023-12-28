@@ -6,15 +6,10 @@ let isFirstLoad = true;
 let Center;
 let Zoom;
 const polylineSegments = [];
-
-const animationDataString = localStorage.getItem("animationData");
-if (animationDataString) {
-  const animationData = JSON.parse(animationDataString);
-  fetchDataAndUpdateMap(map); // Start fetching data and animation
-}
+let currentAnimationStep = 0;
 
 function fetchDataAndUpdateMap(map) {
-  const interval = 30000; // 30 seconds
+  // const interval = 30000; // 30 seconds
 
   const fetchData = () => {
     clearMap(map);
@@ -79,7 +74,7 @@ function fetchDataAndUpdateMap(map) {
       .catch((error) => console.error("Error fetching data:", error));
   };
   fetchData();
-  setInterval(fetchData, interval);
+  // setInterval(fetchData, interval);
 }
 
 function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
@@ -204,29 +199,25 @@ function handlePolylineAnimation(data, map) {
       (item) => new google.maps.LatLng(item.lat, item.lon)
     );
 
-    // Check if there's animation state in localStorage
-    const animationDataString = localStorage.getItem("animationData");
-    if (animationDataString) {
-      const animationData = JSON.parse(animationDataString);
+    // Cancel any existing animation
+    cancelAnimation();
 
-      // Call animatePolyline with animation state
-      animatePolyline(map, pathCoordinates, animationData.step);
-    } else {
-      // If no animation state, start from the beginning
-      animatePolyline(map, pathCoordinates);
-    }
+    // Start a new animation
+    animatePolyline(map, pathCoordinates);
   } else {
     console.log("Not enough data points for polyline animation.");
   }
 }
 
-function storeAnimationState(pathCoordinates, step) {
-  const animationData = {
-    pathCoordinates,
-    step,
-  };
-  const animationDataString = JSON.stringify(animationData);
-  localStorage.setItem("animationData", animationDataString);
+function cancelAnimation() {
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId);
+    animationFrameId = null;
+  }
+
+  if (linePath) {
+    linePath.setPath([]);
+  }
 }
 
 function calculateScaleForZoom(zoom) {
@@ -236,13 +227,7 @@ function calculateScaleForZoom(zoom) {
 function animatePolyline(map, pathCoordinates) {
   pathCoordinates.sort((a, b) => a.timestamp - b.timestamp);
 
-  if (linePath) {
-    linePath.setPath([]);
-    // If there's an existing animation, cancel it
-    if (animationFrameId) {
-      cancelAnimationFrame(animationFrameId);
-    }
-  } else {
+  if (!linePath) {
     // Initialize linePath if it does not exist
     linePath = new google.maps.Polyline({
       geodesic: true,
@@ -254,7 +239,7 @@ function animatePolyline(map, pathCoordinates) {
     });
   }
 
-  let step = 0;
+  let step = currentAnimationStep; // Start from the current step
   const numSteps = pathCoordinates.length;
   let lastTime = performance.now();
 
@@ -264,11 +249,9 @@ function animatePolyline(map, pathCoordinates) {
       if (step < numSteps) {
         linePath.getPath().push(pathCoordinates[step]);
         step++;
-        storeAnimationState(pathCoordinates, step);
       } else {
         step = 0;
         linePath.setPath([]);
-        localStorage.removeItem("animationData");
       }
       lastTime = timestamp;
     }
@@ -276,6 +259,7 @@ function animatePolyline(map, pathCoordinates) {
   }
 
   animationFrameId = requestAnimationFrame(drawLine);
+  currentAnimationStep = step; // Update the current step
 }
 
 function addDirectionMarker(map, position, bearing, zoom, content) {
