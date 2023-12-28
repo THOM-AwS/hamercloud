@@ -119,7 +119,8 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
     item.lat,
     item.lon,
     item.acc,
-    position,
+    position.lat(),
+    position.lng(),
     isLatestPoint
   );
   const accuracyRadius = parseFloat(item.acc) || 100;
