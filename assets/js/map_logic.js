@@ -229,8 +229,9 @@ function animatePolyline(map, pathData) {
   pathData.sort((a, b) => a.timestamp - b.timestamp);
   const pathCoordinates = pathData
     .map((data) => {
-      const latitude = parseFloat(data.lat);
-      const longitude = parseFloat(data.lng);
+      console.log("data is: ", data);
+      const latitude = parseFloat(data.lat());
+      const longitude = parseFloat(data.lng());
 
       // Check if latitude and longitude are valid numbers
       if (!isNaN(latitude) && !isNaN(longitude)) {
