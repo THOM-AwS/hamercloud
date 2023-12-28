@@ -244,7 +244,7 @@ function animatePolyline(map, pathData) {
       strokeOpacity: 0.8,
       strokeWeight: 2,
       map: map,
-      zIndex: 2,
+      zIndex: 5,
     });
   }
 
