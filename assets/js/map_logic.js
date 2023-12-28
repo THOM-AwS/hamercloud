@@ -7,6 +7,12 @@ let Center;
 let Zoom;
 const polylineSegments = [];
 
+const animationDataString = localStorage.getItem("animationData");
+if (animationDataString) {
+  const animationData = JSON.parse(animationDataString);
+  fetchDataAndUpdateMap(map); // Start fetching data and animation
+}
+
 function fetchDataAndUpdateMap(map) {
   const interval = 30000; // 30 seconds
 
@@ -214,6 +220,15 @@ function handlePolylineAnimation(data, map) {
   }
 }
 
+function storeAnimationState(pathCoordinates, step) {
+  const animationData = {
+    pathCoordinates,
+    step,
+  };
+  const animationDataString = JSON.stringify(animationData);
+  localStorage.setItem("animationData", animationDataString);
+}
+
 function calculateScaleForZoom(zoom) {
   return 0.5 + zoom / 10;
 }
@@ -249,9 +264,11 @@ function animatePolyline(map, pathCoordinates) {
       if (step < numSteps) {
         linePath.getPath().push(pathCoordinates[step]);
         step++;
+        storeAnimationState(pathCoordinates, step);
       } else {
         step = 0;
         linePath.setPath([]);
+        localStorage.removeItem("animationData");
       }
       lastTime = timestamp;
     }
