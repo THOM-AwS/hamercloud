@@ -109,7 +109,7 @@ function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
 }
 
 function getCircleOptions(isLatestPoint, position, item, opacity, map) {
-  const accuracyRadius = parseFloat(item.acc) || 200;
+  const accuracyRadius = parseFloat(item.acc) || 20;
   const baseOptions = {
     strokeColor: "#4285F4", //blue
     strokeOpacity: 1,
@@ -147,9 +147,8 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
         ...baseOptions,
         strokeColor: "#FFC0CB",
         strokeWeight: 2,
-        strokeOpacity: 1,
-        fillOpacity: 0.3,
-        radius: 100,
+        strokeOpacity: 0.9,
+        fillOpacity: 0.2,
       },
     ];
   }
