@@ -30,7 +30,7 @@ function fetchDataAndUpdateMap(map) {
               bounds.extend(new google.maps.LatLng(item.lat, item.lon));
             });
             Center = bounds.getCenter();
-            Zoom = map.getZoom() - 1;
+            Zoom = map.getZoom();
             isFirstLoad = false;
           } else {
             Center = map.getCenter();
