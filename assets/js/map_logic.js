@@ -212,26 +212,11 @@ function calculateScaleForZoom(zoom) {
   return 0.5 + zoom / 10;
 }
 
-function animatePolyline(map, pathData) {
-  pathData.sort((a, b) => a.timestamp - b.timestamp);
-  const pathCoordinates = pathData
-    .map((data) => {
-      // is a lat and lng
-      const latitude = parseFloat(data.lat());
-      const longitude = parseFloat(data.lng());
-
-      // Check if latitude and longitude are valid numbers
-      if (!isNaN(latitude) && !isNaN(longitude)) {
-        return new google.maps.LatLng(latitude, longitude);
-      } else {
-        console.error(`Invalid coordinates: lat=${data.lat}, lng=${data.lng}`);
-        return null; // Return null for invalid coordinates
-      }
-    })
-    .filter((coord) => coord !== null);
+function animatePolyline(map, pathCoordinates) {
+  pathCoordinates.sort((a, b) => a.timestamp - b.timestamp);
 
   if (linePath) {
-    linePath.setPath(pathCoordinates);
+    linePath.setPath([]);
     // If there's an existing animation, cancel it
     if (animationFrameId) {
       cancelAnimationFrame(animationFrameId);
@@ -239,7 +224,6 @@ function animatePolyline(map, pathData) {
   } else {
     // Initialize linePath if it does not exist
     linePath = new google.maps.Polyline({
-      path: pathCoordinates,
       geodesic: true,
       strokeColor: "#FF0000",
       strokeOpacity: 0.8,
