@@ -150,7 +150,7 @@ function getCircleOptions(isLatestPoint, position, item, opacity, map) {
         strokeWeight: 2,
         strokeOpacity: 1,
         fillOpacity: 0,
-        radius: 100000,
+        radius: 100,
       },
     ];
   }
