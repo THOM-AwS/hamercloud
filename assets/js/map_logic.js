@@ -69,10 +69,6 @@ function fetchDataAndUpdateMap(map) {
 }
 
 function processEachDataPoint(item, isLatestPoint, position, currentTime, map) {
-  const position = {
-    lat: parseFloat(item.lat),
-    lng: parseFloat(item.lon),
-  };
   const content = generateInfoWindowContent(item);
   const ageHours = (currentTime - item.timestamp * 1000) / (1000 * 60 * 60);
   let infoWindowCircle;
