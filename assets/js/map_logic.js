@@ -3,6 +3,8 @@ let linePath;
 let infoWindowCircle;
 const circles = [];
 let isFirstLoad = true;
+let currentCenter; // Add this variable to store the current map center
+let currentZoom; // Add this variable to store the current map zoom
 
 function fetchDataAndUpdateMap(map) {
   const interval = 30000; // 30 seconds
@@ -21,7 +23,7 @@ function fetchDataAndUpdateMap(map) {
           }
           let initialCenter;
           let initialZoom;
-          if (isFirstLoad || !map.getCenter()) {
+          if (isFirstLoad || !currentCenter) {
             // Use initial center and zoom if it's the first load or user hasn't moved the map
             initialCenter = new google.maps.LatLng(
               data[data.length - 1].lat,
@@ -58,12 +60,13 @@ function fetchDataAndUpdateMap(map) {
           });
 
           handlePolylineAnimation(data, map);
+
           if (initialCenter && initialZoom) {
             // During the initial load, use initialCenter and initialZoom
             adjustMapCenterAndZoom(map, initialCenter, initialZoom, data);
           } else {
-            // For subsequent updates, use the map's current center and zoom
-            adjustMapCenterAndZoom(map, map.getCenter(), map.getZoom(), data);
+            // For subsequent updates, use the stored currentCenter and currentZoom
+            adjustMapCenterAndZoom(map, currentCenter, currentZoom, data);
           }
         } else {
           console.error("No data available to update the map.");
@@ -71,6 +74,13 @@ function fetchDataAndUpdateMap(map) {
       })
       .catch((error) => console.error("Error fetching data:", error));
   };
+
+  // Add a listener to store the current map center and zoom
+  google.maps.event.addListener(map, "idle", function () {
+    currentCenter = map.getCenter();
+    currentZoom = map.getZoom();
+  });
+
   fetchData();
   setInterval(fetchData, interval);
 }
