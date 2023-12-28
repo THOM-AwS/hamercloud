@@ -21,7 +21,6 @@ function fetchDataAndUpdateMap(map) {
           if (Array.isArray(data)) {
             data.sort((a, b) => a.timestamp - b.timestamp);
           }
-
           if (isFirstLoad || !map.getCenter()) {
             // Use initial center and zoom if it's the first load or user hasn't moved the map
             initialCenter = new google.maps.LatLng(
@@ -63,7 +62,7 @@ function fetchDataAndUpdateMap(map) {
           });
 
           handlePolylineAnimation(data, map);
-          adjustMapCenterAndZoom(map, initialCenter, initialZoom);
+          adjustMapCenterAndZoom(map, initialCenter, initialZoom, data);
         } else {
           console.error("No data available to update the map.");
         }
@@ -366,6 +365,4 @@ function clearMap(map) {
   if (linePath) {
     linePath.setMap(null);
   }
-
-  // Clear any other map elements you want to reset
 }
