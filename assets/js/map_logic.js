@@ -3,8 +3,8 @@ let linePath;
 let infoWindowCircle;
 const circles = [];
 let isFirstLoad = true;
-let currentCenter; // Add this variable to store the current map center
-let currentZoom; // Add this variable to store the current map zoom
+let initialCenter; // Variable to store the initial map center
+let initialZoom; // Variable to store the initial map zoom
 
 function fetchDataAndUpdateMap(map) {
   const interval = 30000; // 30 seconds
@@ -21,15 +21,16 @@ function fetchDataAndUpdateMap(map) {
           if (Array.isArray(data)) {
             data.sort((a, b) => a.timestamp - b.timestamp);
           }
-          let initialCenter;
-          let initialZoom;
-          if (isFirstLoad || !currentCenter) {
-            // Use initial center and zoom if it's the first load or user hasn't moved the map
-            initialCenter = new google.maps.LatLng(
-              data[data.length - 1].lat,
-              data[data.length - 1].lon
-            );
-            initialZoom = 15;
+          if (isFirstLoad) {
+            // Calculate bounds for all data points on the first load
+            const bounds = new google.maps.LatLngBounds();
+            data.forEach((item) => {
+              bounds.extend(new google.maps.LatLng(item.lat, item.lon));
+            });
+            // Set initialCenter to the center of the bounds
+            initialCenter = bounds.getCenter();
+            // Set initialZoom based on the bounds and map size
+            initialZoom = calculateInitialZoom(bounds, map);
             isFirstLoad = false;
           }
           data.forEach((item, index) => {
@@ -61,26 +62,14 @@ function fetchDataAndUpdateMap(map) {
 
           handlePolylineAnimation(data, map);
 
-          if (initialCenter && initialZoom) {
-            // During the initial load, use initialCenter and initialZoom
-            adjustMapCenterAndZoom(map, initialCenter, initialZoom, data);
-          } else {
-            // For subsequent updates, use the stored currentCenter and currentZoom
-            adjustMapCenterAndZoom(map, currentCenter, currentZoom, data);
-          }
+          // Use the initialCenter and initialZoom on first load, then maintain them
+          adjustMapCenterAndZoom(map, initialCenter, initialZoom, data);
         } else {
           console.error("No data available to update the map.");
         }
       })
       .catch((error) => console.error("Error fetching data:", error));
   };
-
-  // Add a listener to store the current map center and zoom
-  google.maps.event.addListener(map, "idle", function () {
-    currentCenter = map.getCenter();
-    currentZoom = map.getZoom();
-  });
-
   fetchData();
   setInterval(fetchData, interval);
 }
@@ -211,6 +200,28 @@ function handlePolylineAnimation(data, map) {
   } else {
     console.log("Not enough data points for polyline animation.");
   }
+}
+
+function calculateInitialZoom(bounds, map) {
+  // Calculate the desired zoom level to fit the bounds within the map
+  const maxZoom = 15; // You can adjust this value
+  const padding = 50; // Padding in pixels around the bounds
+  const mapCanvas = {
+    width: map.getDiv().offsetWidth,
+    height: map.getDiv().offsetHeight,
+  };
+  const ne = map.getProjection().fromLatLngToPoint(bounds.getNorthEast());
+  const sw = map.getProjection().fromLatLngToPoint(bounds.getSouthWest());
+  const worldCoordWidth = Math.abs(ne.x - sw.x);
+  const worldCoordHeight = Math.abs(ne.y - sw.y);
+  const fitWidthZoom = Math.floor(
+    Math.log(mapCanvas.width / (worldCoordWidth * 256)) / Math.LN2
+  );
+  const fitHeightZoom = Math.floor(
+    Math.log(mapCanvas.height / (worldCoordHeight * 256)) / Math.LN2
+  );
+  const desiredZoom = Math.min(fitWidthZoom, fitHeightZoom, maxZoom);
+  return desiredZoom;
 }
 
 function adjustMapCenterAndZoom(map, currentCenter, currentZoom, data) {
