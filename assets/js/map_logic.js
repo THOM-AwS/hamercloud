@@ -5,6 +5,7 @@ const circles = [];
 let isFirstLoad = true;
 let Center;
 let Zoom;
+const polylineSegments = [];
 
 function fetchDataAndUpdateMap(map) {
   const interval = 30000; // 30 seconds
@@ -49,7 +50,7 @@ function fetchDataAndUpdateMap(map) {
             );
 
             if (previousPosition && previousTimestamp) {
-              createPolylineSegment(
+              const segment = createPolylineSegment(
                 previousPosition,
                 position,
                 item,
@@ -57,6 +58,7 @@ function fetchDataAndUpdateMap(map) {
                 currentTime,
                 map
               );
+              polylineSegments.push(segment);
             }
             previousPosition = position;
             previousTimestamp = item.timestamp;
@@ -184,7 +186,6 @@ function createPolylineSegment(
     (currentTime - ((item.timestamp + previousTimestamp) / 2) * 1000) /
     (1000 * 60 * 60);
   let segmentOpacity = Math.max(1 - segmentAgeHours / 3, 0);
-
   const lineSegment = new google.maps.Polyline({
     path: [previousPosition, position],
     geodesic: true,
@@ -193,8 +194,8 @@ function createPolylineSegment(
     strokeWeight: 3,
     zIndex: 1,
   });
-
   lineSegment.setMap(map);
+  return lineSegment; // Return the segment to add to the segments array
 }
 
 function handlePolylineAnimation(data, map) {
