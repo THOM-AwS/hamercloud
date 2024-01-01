@@ -160,12 +160,35 @@
 				<h2 class="major">about</h2>
 				<script src="assets/js/fitbit.js"></script>
 				<script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+				<h3>Lifespan</h3>
 				<p>I have been alive for <br><span id="timeLived" style="font-weight: bold;"></span>.</p>
 				<p>The average human lifespan is 83 years, so, I have approximately <br><span id="timeLeft"
 						style="font-weight: bold;"></span> <br>left to make the positive impact I want on the world.</p>
 
-				<p>Some vital stats:</p>
+				<h3>Vital stats</h3>
 				<div id="chartsContainer"></div>
+
+				<h3>Visited Countries</h3>
+				<p>Count: <span id="countriesCount"></span></p>
+				<p>If I have been outside in the last 3 hours, you will be able to see where I am, if not it will
+					default walking around Darling Harbour. </p>
+				<p>Zoom out to see which Countries I have been to.</p>
+
+				<p>
+				<div id="map" style="width: 100%; height: 400px;"></div>
+				</p>
+				<script src="assets/js/jquery.min.js"></script>
+				<script defer src="assets/js/weather.js"></script>
+				<script defer src="assets/js/geojson.js"></script>
+				<script src="assets/js/visited-countries.js"></script>
+				<script src="assets/js/map.js"></script>
+				<script src="assets/js/map_logic.js"></script>
+				<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+				<script
+					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxyRHImShMxEssA12vkUWDYhv0Q6X7q1Y&libraries=&v=weekly&callback=initMap"
+					async defer></script>
+
 			</article>
 
 			<!-- Work -->
@@ -318,27 +341,6 @@
 						aria-hidden="true"> </i><a href="tel:+61403255489"> +61403255489</a><br><i
 						class="fas fa-at"></i> <a href="mailto:tom@hamer.cloud">
 						tom@hamer.cloud</a></p>
-				<p>If I have been outside in the last 3 hours, you will be able to see where I am, if not it will
-					default walking around Darling Harbour. </p>
-				<p>Zoom out to see which Countries I have been to.</p>
-
-
-				<h3>Visited Countries</h3>
-				<p>Count: <span id="countriesCount"></span></p>
-
-				<p>
-				<div id="map" style="width: 100%; height: 400px;"></div>
-				</p>
-				<script src="assets/js/jquery.min.js"></script>
-				<script defer src="assets/js/weather.js"></script>
-				<script defer src="assets/js/geojson.js"></script>
-				<script src="assets/js/visited-countries.js"></script>
-				<script src="assets/js/map.js"></script>
-				<script src="assets/js/map_logic.js"></script>
-				<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-				<script
-					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxyRHImShMxEssA12vkUWDYhv0Q6X7q1Y&libraries=&v=weekly&callback=initMap"
-					async defer></script>
 
 			</article>
 		</div>
