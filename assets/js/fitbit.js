@@ -12,7 +12,10 @@ async function fetchFitbitData() {
 }
 
 function processSteps(stepsData) {
-  const labels = stepsData.map((item) => item.dateTime);
+  const labels = stepsData.map((item) => {
+    const date = new Date(item.dateTime);
+    return date.getDate(); // Extracts the day of the month
+  });
   const values = stepsData.map((item) => parseInt(item.value, 10));
 
   return { labels, values };
