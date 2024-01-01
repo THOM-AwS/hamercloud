@@ -167,7 +167,7 @@
 						style="font-weight: bold;"></span> <br>left to make the positive impact I want on the world.</p>
 
 				<h3>Vital stats</h3>
-				<div id="chartsContainer"></div>
+				<div id="chartsContainer"></div><br>
 
 				<h3>Visited Countries</h3>
 				<p>Count: <span id="countriesCount"></span></p>
@@ -179,9 +179,14 @@
 				<div id="map" style="width: 100%; height: 400px;"></div>
 				</p>
 				<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+				<script defer src="assets/js/weather.js"></script>
+				<script defer src="assets/js/geojson.js"></script>
+				<script src="assets/js/visited-countries.js"></script>
+				<script src="assets/js/map.js"></script>
+				<script src="assets/js/map_logic.js"></script>
 				<script
 					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxyRHImShMxEssA12vkUWDYhv0Q6X7q1Y&libraries=&v=weekly&callback=initMap"
-					async defer></script>
+					defer></script>
 
 			</article>
 
@@ -357,11 +362,6 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
-	<script defer src="assets/js/weather.js"></script>
-	<script defer src="assets/js/geojson.js"></script>
-	<script src="assets/js/visited-countries.js"></script>
-	<script src="assets/js/map.js"></script>
-	<script src="assets/js/map_logic.js"></script>
 </body>
 
 </html>

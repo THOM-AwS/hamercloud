@@ -11,11 +11,17 @@ async function fetchFitbitData() {
   }
 }
 
+function processSteps(stepsData) {
+  const labels = stepsData.map((item) => item.dateTime);
+  const values = stepsData.map((item) => parseInt(item.value, 10));
+
+  return { labels, values };
+}
+
 function createChart(containerId, data, label) {
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
   document.getElementById(containerId).appendChild(canvas);
-
   new Chart(ctx, {
     type: "line",
     data: {
@@ -25,74 +31,41 @@ function createChart(containerId, data, label) {
           label: label,
           data: data.values,
           borderColor: "rgb(75, 192, 192)",
-          tension: 0.1,
+          backgroundColor: "rgba(75, 192, 192, 0.5)", // Line fill color (not typically visible in line charts)
+          pointBackgroundColor: "rgb(75, 192, 192)", // Point background color
+          pointBorderColor: "rgb(75, 192, 192)", // Point border color
+          pointHoverBackgroundColor: "rgba(255, 99, 132, 0.5)", // Hover background color for points
+          pointHoverBorderColor: "rgb(255, 99, 132)", // Hover border color for points
+          tension: 0.2,
         },
       ],
     },
-    options: { scales: { y: { beginAtZero: false } } },
+    options: {
+      scales: { y: { beginAtZero: false } },
+      animation: { duration: 5000, easing: "easeInOutElastic" },
+      hover: { mode: "nearest", intersect: true, animationDuration: 400 },
+      tooltips: { mode: "nearest", intersect: true, animationDuration: 400 },
+      responsive: true,
+      legend: { display: true, position: "top" },
+    },
   });
 }
 
-function processDataset(dataset, label) {
-  const labels = dataset.map((item) => item.time || item.dateTime);
-  const values = dataset.map((item) => item.value);
-  return { labels, values, label };
-}
-
 function processFitbitData(apiResponse) {
-  apiResponse.forEach((response) => {
-    // Process Heart Rate Intraday Data
-    if (
-      response.statusCode === 200 &&
-      response.body["activities-heart-intraday"]
-    ) {
-      const heartRateData = response.body["activities-heart-intraday"].dataset;
-      const heartRateChartData = processDataset(
-        heartRateData,
-        "Heart Rate Intraday"
-      );
-      createChart(
-        "chartsContainer",
-        heartRateChartData,
-        `Chart for Heart Rate Intraday`
-      );
-    }
-
-    // Process Activity Calories Data
-    if (
-      response.statusCode === 200 &&
-      response.body["activities-activityCalories"]
-    ) {
-      const activityCaloriesData = response.body["activities-activityCalories"];
-      const activityCaloriesChartData = processDataset(
-        activityCaloriesData,
-        "Activity Calories"
-      );
-      createChart(
-        "chartsContainer",
-        activityCaloriesChartData,
-        `Chart for Activity Calories`
-      );
-    }
-
-    // Process Activity Steps Data
-    if (response.statusCode === 200 && response.body["activities-steps"]) {
-      const activitySteps = response.body["activities-steps"];
-      const activityStepsChartData = processDataset(
-        activitySteps,
-        "Activity Steps"
-      );
-      createChart(
-        "chartsContainer",
-        activityStepsChartData,
-        `Chart for Activity Steps`
-      );
+  apiResponse.forEach((responseItem) => {
+    if (responseItem.statusCode === 200) {
+      if (responseItem.body["activities-steps"]) {
+        const stepsData = responseItem.body["activities-steps"];
+        const chartData = processSteps(stepsData);
+        createChart("chartsContainer", chartData, "Daily Steps");
+      }
     }
   });
 }
 
 async function init() {
   const fitbitApiResponse = await fetchFitbitData();
+  console.log(fitbitApiResponse);
   if (fitbitApiResponse) {
     processFitbitData(fitbitApiResponse);
   }
