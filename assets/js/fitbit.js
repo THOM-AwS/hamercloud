@@ -41,16 +41,51 @@ function processDataset(dataset, label) {
 
 function processFitbitData(apiResponse) {
   apiResponse.forEach((response) => {
+    // Process Heart Rate Intraday Data
     if (
       response.statusCode === 200 &&
       response.body["activities-heart-intraday"]
     ) {
-      const intradayData = response.body["activities-heart-intraday"].dataset;
-      const chartData = processDataset(intradayData, "Heart Rate Intraday");
+      const heartRateData = response.body["activities-heart-intraday"].dataset;
+      const heartRateChartData = processDataset(
+        heartRateData,
+        "Heart Rate Intraday"
+      );
       createChart(
         "chartsContainer",
-        chartData,
+        heartRateChartData,
         `Chart for Heart Rate Intraday`
+      );
+    }
+
+    // Process Activity Calories Data
+    if (
+      response.statusCode === 200 &&
+      response.body["activities-activityCalories"]
+    ) {
+      const activityCaloriesData = response.body["activities-activityCalories"];
+      const activityCaloriesChartData = processDataset(
+        activityCaloriesData,
+        "Activity Calories"
+      );
+      createChart(
+        "chartsContainer",
+        activityCaloriesChartData,
+        `Chart for Activity Calories`
+      );
+    }
+
+    // Process Activity Steps Data
+    if (response.statusCode === 200 && response.body["activities-steps"]) {
+      const activitySteps = response.body["activities-steps"];
+      const activityStepsChartData = processDataset(
+        activitySteps,
+        "Activity Steps"
+      );
+      createChart(
+        "chartsContainer",
+        activityStepsChartData,
+        `Chart for Activity Steps`
       );
     }
   });
