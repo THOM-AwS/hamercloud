@@ -7,17 +7,17 @@ function calculateLifeTime() {
     const currentDate = new Date();
 
     // Calculate milliseconds lived and left
-    const millisecondsLived = currentDate - birthDate;
+    const millisecondsLived = currentDate.getTime() - birthDate.getTime();
     const totalLifespanMilliseconds =
       averageLifespan * 365.25 * 24 * 60 * 60 * 1000; // accounts for leap years
     const millisecondsLeft = totalLifespanMilliseconds - millisecondsLived;
 
     // Convert and update
     document.getElementById("timeLived").textContent = formatTime(
-      convertMilliseconds(millisecondsLived)
+      convertMilliseconds(millisecondsLived, birthDate)
     );
     document.getElementById("timeLeft").textContent = formatTime(
-      convertMilliseconds(millisecondsLeft)
+      convertMilliseconds(millisecondsLeft, currentDate)
     );
   };
 
@@ -28,23 +28,47 @@ function calculateLifeTime() {
   setInterval(updateTime, 1000);
 }
 
-function convertMilliseconds(milliseconds) {
-  let seconds = Math.floor(milliseconds / 1000);
-  let minutes = Math.floor(seconds / 60);
-  let hours = Math.floor(minutes / 60);
-  let days = Math.floor(hours / 24);
-  let years = Math.floor(days / 365.25);
+function convertMilliseconds(milliseconds, startDate) {
+  let endDate = new Date(startDate.getTime() + milliseconds);
+  let years = endDate.getUTCFullYear() - startDate.getUTCFullYear();
+  let months = endDate.getUTCMonth() - startDate.getUTCMonth();
+  let days = endDate.getUTCDate() - startDate.getUTCDate();
+  let hours = endDate.getUTCHours() - startDate.getUTCHours();
+  let minutes = endDate.getUTCMinutes() - startDate.getUTCMinutes();
+  let seconds = endDate.getUTCSeconds() - startDate.getUTCSeconds();
 
-  days %= 365.25;
-  hours %= 24;
-  minutes %= 60;
-  seconds %= 60;
+  if (seconds < 0) {
+    seconds += 60;
+    minutes--;
+  }
+  if (minutes < 0) {
+    minutes += 60;
+    hours--;
+  }
+  if (hours < 0) {
+    hours += 24;
+    days--;
+  }
+  if (days < 0) {
+    months--;
+    // Get the number of days in the previous month
+    let daysInPreviousMonth = new Date(
+      endDate.getUTCFullYear(),
+      endDate.getUTCMonth(),
+      0
+    ).getUTCDate();
+    days += daysInPreviousMonth;
+  }
+  if (months < 0) {
+    months += 12;
+    years--;
+  }
 
-  return { years, days, hours, minutes, seconds };
+  return { years, months, days, hours, minutes, seconds };
 }
 
 function formatTime(time) {
-  return `${time.years} years, ${time.days} days, ${time.hours} hours, ${time.minutes} minutes, and ${time.seconds} seconds`;
+  return `${time.years} years, ${time.months} months, ${time.days} days, ${time.hours} hours, ${time.minutes} minutes, and ${time.seconds} seconds`;
 }
 
 // Call the function on page load

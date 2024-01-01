@@ -101,10 +101,10 @@
 			<nav>
 				<ul>
 					<li><a href="#intro">Intro</a></li>
+					<li><a href="#about">about</a></li>
 					<li><a href="#work">Work</a></li>
 					<li><a href="#services">services</a></li>
 					<li><a href="#contact">Contact</a></li>
-					<!--<li><a href="#elements">Elements</a></li>-->
 				</ul>
 			</nav>
 
@@ -153,12 +153,19 @@
 				<img src="images/boarding.jpg" alt="Thomas Hamer" style="width:200px;float:left;padding: 20px;" />
 				<p>I am an AWS specialist, and I really enjoy the work that I do.<i class="fab fa-aws"></i></p>
 				<br><br>
+			</article>
 
-				<p>I have been alive and kicking for <span id="timeLived" style="font-weight: bold;"></span> so
-					far,</p>
-				<p>I have
-					approximately <span id="timeLeft" style="font-weight: bold;"></span> left to make the
-					positive impact I want on the world.</p>
+			<!-- about -->
+			<article id="about">
+				<h2 class="major">about</h2>
+				<script src="assets/js/fitbit.js"></script>
+				<script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+				<p>I have been alive for <br><span id="timeLived" style="font-weight: bold;"></span>.</p>
+				<p>The average human lifespan is 83 years, so, I have approximately <br><span id="timeLeft"
+						style="font-weight: bold;"></span> <br>left to make the positive impact I want on the world.</p>
+
+				<p>Some vital stats:</p>
+				<div id="chartsContainer"></div>
 			</article>
 
 			<!-- Work -->
@@ -227,7 +234,8 @@
 				</ul>
 				<p>I created some really amazing projects for some very cool people. </p>
 				<p>
-				<div class="github-card" data-github="thom-aws" data-width="400" data-height="152" data-theme="default">
+				<div class="github-card" data-github="thom-aws" data-width="100%" data-height="152"
+					data-theme="default">
 				</div>
 				<script async src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
 				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
