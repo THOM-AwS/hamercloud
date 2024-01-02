@@ -1,3 +1,35 @@
+const ctx = document.getElementById("countriesCount").getContext("2d");
+const yourCountriesCount = visitedCountries.length;
+
+const data = {
+  datasets: [
+    {
+      data: [yourCountriesCount, 100 - yourCountriesCount], // Update the count here
+      backgroundColor: ["green", "#eee"],
+      borderWidth: 0,
+    },
+  ],
+};
+
+const options = {
+  rotation: 1 * Math.PI, // Start the chart at 180 degrees
+  circumference: 1 * Math.PI, // Use a half-circle
+  cutout: "80%", // Make the chart look like a gauge
+  plugins: {
+    legend: { display: false }, // Hide legend
+    tooltip: { enabled: false }, // Disable tooltips
+  },
+  animation: {
+    animateRotate: true,
+  },
+};
+
+new Chart(ctx, {
+  type: "doughnut",
+  data: data,
+  options: options,
+});
+
 var visitedCountries = [
   //"Aruba",
   //"Afghanistan",
