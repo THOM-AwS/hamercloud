@@ -13,7 +13,8 @@ async function fetchFitbitData() {
 
 function processHeartRate(heartRateData) {
   const labels = heartRateData.map((item) => {
-    return item.dateTime; // Extracts the date
+    const date = new Date(item.dateTime);
+    return date.getDate().toString(); // Extracts just the day of the month
   });
   const values = heartRateData.map((item) => item.value.restingHeartRate);
 
