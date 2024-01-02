@@ -151,16 +151,17 @@ function processFitbitData(apiResponse) {
         const heartChartData = processHeartRate(heartRateData);
 
         // Check if intraday data is also available
-        if (responseItem.body["activities-heart-intraday"]) {
-          console.log("intraday");
-          const intradayData = responseItem.body["activities-heart-intraday"];
-          const intradayChartData = processIntradayHeartRate(intradayData);
+        // if (responseItem.body["activities-heart-intraday"]) {
+        //   console.log("intraday");
+        //   const intradayData = responseItem.body["activities-heart"];
+        //   const intradayChartData = processIntradayHeartRate(intradayData);
 
-          // Here you can decide how to combine or overlay the data
-          // For example, adding intraday data as another dataset
-          heartChartData.values.push(...intradayChartData.values);
-          heartChartData.labels.push(...intradayChartData.labels);
-        }
+        //   // Here you can decide how to combine or overlay the data
+        //   // For example, adding intraday data as another dataset
+        //   heartChartData.values.push(...intradayChartData.values);
+        //   heartChartData.labels.push(...intradayChartData.labels);
+        // }
+        console.log(heartChartData);
         createChart(
           "chartsContainer",
           heartChartData,
@@ -179,6 +180,7 @@ function displayErrorMessage(message) {
 
 async function init() {
   const fitbitApiResponse = await fetchFitbitData();
+  console.log(fitbitApiResponse);
   if (fitbitApiResponse) {
     processFitbitData(fitbitApiResponse);
   }
