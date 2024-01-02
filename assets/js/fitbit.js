@@ -164,12 +164,12 @@ function processFitbitData(apiResponse) {
 
   if (stepsDataAggregate.length > 0) {
     const chartData = processSteps(stepsDataAggregate);
-    createChart("ChartContainer", chartData, "Daily Steps", true);
+    createChart("chartsContainer", chartData, "Daily Steps", true);
   }
 
   if (heartRateDataAggregate.length > 0) {
     const heartChartData = processHeartRate(heartRateDataAggregate);
-    createChart("ChartContainer", heartChartData, "Resting Heart Rate", false);
+    createChart("chartsContainer", heartChartData, "Resting Heart Rate", false);
   }
 
   if (intradayDataAggregate.length > 0) {
@@ -177,7 +177,7 @@ function processFitbitData(apiResponse) {
       dataset: intradayDataAggregate,
     });
     createChart(
-      "ChartContainer",
+      "chartsContainer",
       intradayChartData,
       "Intraday Heart Rate",
       false
