@@ -45,9 +45,14 @@ function createChart(containerId, data, label) {
     },
     options: {
       scales: { y: { beginAtZero: true } },
-      animation: {
-        duration: 5000,
-        easing: "easeInOutElastic",
+      animations: {
+        tension: {
+          duration: 1000,
+          easing: "linear",
+          from: 1,
+          to: 0,
+          loop: true,
+        },
       },
       hover: { mode: "nearest", intersect: true, animationDuration: 400 },
       tooltips: { mode: "nearest", intersect: true, animationDuration: 400 },
