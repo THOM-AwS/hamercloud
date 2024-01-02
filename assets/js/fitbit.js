@@ -2,12 +2,16 @@ async function fetchFitbitData() {
   try {
     const response = await fetch("https://api.hamer.cloud/fitbit");
     if (!response.ok) {
+      if (response.status === 429) {
+        // Specific handling for rate limit errors
+        return { error: "API requests limited" };
+      }
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     return await response.json();
   } catch (error) {
     console.error("Error fetching Fitbit data:", error);
-    return null;
+    return { error: error.message };
   }
 }
 
@@ -17,6 +21,17 @@ function processHeartRate(heartRateData) {
     return date.getDate().toString(); // Extracts just the day of the month
   });
   const values = heartRateData.map((item) => item.value.restingHeartRate);
+
+  return { labels, values };
+}
+
+function processIntradayHeartRate(intradayData) {
+  const labels = intradayData["activities-heart-intraday"].dataset.map(
+    (item) => item.time
+  );
+  const values = intradayData["activities-heart-intraday"].dataset.map(
+    (item) => item.value
+  );
 
   return { labels, values };
 }
@@ -108,6 +123,13 @@ function createChart(containerId, data, label, includeAnnotations = false) {
 }
 
 function processFitbitData(apiResponse) {
+  const rateLimitExceeded = apiResponse.some(
+    (responseItem) => responseItem.statusCode === 429
+  );
+  if (rateLimitExceeded) {
+    displayErrorMessage("429: API requests limited by Fitbit...");
+    return;
+  }
   apiResponse.forEach((responseItem) => {
     if (responseItem.statusCode === 200) {
       if (responseItem.body["activities-steps"]) {
@@ -122,10 +144,23 @@ function processFitbitData(apiResponse) {
         );
       }
       if (responseItem.body["activities-heart"]) {
+        console.log("HR");
         const heartRateData = responseItem.body["activities-heart"].map(
           (item) => item
         );
         const heartChartData = processHeartRate(heartRateData);
+
+        // Check if intraday data is also available
+        if (responseItem.body["activities-heart-intraday"]) {
+          console.log("intraday");
+          const intradayData = responseItem.body["activities-heart-intraday"];
+          const intradayChartData = processIntradayHeartRate(intradayData);
+
+          // Here you can decide how to combine or overlay the data
+          // For example, adding intraday data as another dataset
+          heartChartData.values.push(...intradayChartData.values);
+          heartChartData.labels.push(...intradayChartData.labels);
+        }
         createChart(
           "chartsContainer",
           heartChartData,
@@ -135,6 +170,11 @@ function processFitbitData(apiResponse) {
       }
     }
   });
+}
+
+function displayErrorMessage(message) {
+  const container = document.getElementById("chartsContainer"); // Update with your container ID
+  container.innerHTML = `<p class="error-message">${message}</p>`; // Display the error message
 }
 
 async function init() {
