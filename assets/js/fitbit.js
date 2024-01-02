@@ -51,6 +51,26 @@ function createChart(containerId, data, label) {
       responsive: true,
       legend: { display: true, position: "top" },
     },
+    plugins: {
+      annotation: {
+        annotations: {
+          line1: {
+            type: "line",
+            yMin: 7500,
+            yMax: 7500,
+            borderColor: "rgba(255, 193, 7, 1)", // Amber color
+            borderWidth: 2,
+          },
+          line2: {
+            type: "line",
+            yMin: 12500,
+            yMax: 12500,
+            borderColor: "rgba(0, 128, 0, 1)", // Green color
+            borderWidth: 2,
+          },
+        },
+      },
+    },
   });
 }
 
