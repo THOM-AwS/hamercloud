@@ -11,6 +11,15 @@ async function fetchFitbitData() {
   }
 }
 
+function processHeartRate(heartRateData) {
+  const labels = heartRateData.map((item) => {
+    return item.dateTime; // Extracts the date
+  });
+  const values = heartRateData.map((item) => item.value.restingHeartRate);
+
+  return { labels, values };
+}
+
 function processSteps(stepsData) {
   const labels = stepsData.map((item) => {
     const date = new Date(item.dateTime);
@@ -21,10 +30,44 @@ function processSteps(stepsData) {
   return { labels, values };
 }
 
-function createChart(containerId, data, label) {
+function createChart(containerId, data, label, includeAnnotations = false) {
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
   document.getElementById(containerId).appendChild(canvas);
+
+  const annotations = includeAnnotations
+    ? {
+        annotations: {
+          line1: {
+            type: "line",
+            yMin: 7500,
+            yMax: 7500,
+            borderColor: "rgba(255, 193, 7, 0.2)", // Amber color
+            borderWidth: 1,
+            label: {
+              content: "Minor Goal",
+              enabled: true,
+              position: "end",
+              backgroundColor: "rgba(255, 193, 7, 0.2)", // Semi-transparent amber
+            },
+          },
+          line2: {
+            type: "line",
+            yMin: 12500,
+            yMax: 12500,
+            borderColor: "rgba(0, 128, 0, 0.2)", // Green color
+            borderWidth: 1,
+            label: {
+              content: "Major Goal",
+              enabled: true,
+              position: "end",
+              backgroundColor: "rgba(0, 128, 0, 0.2)", // Semi-transparent green
+            },
+          },
+        },
+      }
+    : {};
+
   new Chart(ctx, {
     type: "line",
     data: {
@@ -49,8 +92,8 @@ function createChart(containerId, data, label) {
         tension: {
           duration: 1000,
           easing: "easeOutBounce",
-          from: 1,
-          to: 0,
+          from: 0.5,
+          to: 0.2,
           loop: true,
         },
       },
@@ -58,38 +101,7 @@ function createChart(containerId, data, label) {
       tooltips: { mode: "nearest", intersect: true, animationDuration: 400 },
       responsive: true,
       legend: { display: true, position: "top" },
-      plugins: {
-        annotation: {
-          annotations: {
-            line1: {
-              type: "line",
-              yMin: 7500,
-              yMax: 7500,
-              borderColor: "rgba(255, 193, 7, 0.2)", // Amber color
-              borderWidth: 1,
-              label: {
-                content: "Minor Goal",
-                enabled: true,
-                position: "end",
-                backgroundColor: "rgba(255, 193, 7, 0.2)", // Semi-transparent amber
-              },
-            },
-            line2: {
-              type: "line",
-              yMin: 12500,
-              yMax: 12500,
-              borderColor: "rgba(0, 128, 0, 0.2)", // Green color
-              borderWidth: 1,
-              label: {
-                content: "Major Goal",
-                enabled: true,
-                position: "end",
-                backgroundColor: "rgba(0, 128, 0, 0.2)", // Semi-transparent green
-              },
-            },
-          },
-        },
-      },
+      plugins: { annotation: annotations },
     },
   });
 }
@@ -100,7 +112,25 @@ function processFitbitData(apiResponse) {
       if (responseItem.body["activities-steps"]) {
         const stepsData = responseItem.body["activities-steps"];
         const chartData = processSteps(stepsData);
-        createChart("chartsContainer", chartData, "Daily Steps");
+        const shouldIncludeAnnotations = true;
+        createChart(
+          "chartsContainer",
+          chartData,
+          "Daily Steps",
+          shouldIncludeAnnotations
+        );
+      }
+      if (responseItem.body["activities-heart"]) {
+        const heartRateData = responseItem.body["activities-heart"].map(
+          (item) => item
+        );
+        const heartChartData = processHeartRate(heartRateData);
+        createChart(
+          "chartsContainer",
+          heartChartData,
+          "Resting Heart Rate",
+          false
+        );
       }
     }
   });
@@ -108,7 +138,6 @@ function processFitbitData(apiResponse) {
 
 async function init() {
   const fitbitApiResponse = await fetchFitbitData();
-  console.log(fitbitApiResponse);
   if (fitbitApiResponse) {
     processFitbitData(fitbitApiResponse);
   }
