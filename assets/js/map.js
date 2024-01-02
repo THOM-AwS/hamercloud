@@ -30,13 +30,12 @@ function initMap() {
     renderPolylines(map, pathCoordinates);
   });
 
-  // superseeded with the guage.
-  // function updateCountriesCount() {
-  //   let count = visitedCountries.length;
-  //   document.getElementById("countriesCount").textContent = count;
-  // }
-  // // Call the function to update the count
-  // updateCountriesCount();
+  function updateCountriesCount() {
+    let count = visitedCountries.length;
+    document.getElementById("countriesCount").textContent = count;
+  }
+  // Call the function to update the count
+  updateCountriesCount();
 
   fetch(geoJsonUrl)
     .then((response) => response.json())

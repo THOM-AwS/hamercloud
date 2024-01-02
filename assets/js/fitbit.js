@@ -26,14 +26,25 @@ function processHeartRate(heartRateData) {
 }
 
 function processIntradayHeartRate(intradayData) {
-  const labels = intradayData["activities-heart-intraday"].dataset.map(
-    (item) => item.time
-  );
-  const values = intradayData["activities-heart-intraday"].dataset.map(
-    (item) => item.value
-  );
+  // Extracting time and value from the dataset
+  const labels = intradayData.dataset.map((item) => item.time);
+  const dataPoints = intradayData.dataset.map((item) => item.value);
 
-  return { labels, values };
+  // Creating a chart data object
+  const chartData = {
+    labels: labels,
+    datasets: [
+      {
+        label: "Heart Rate",
+        data: dataPoints,
+        fill: false,
+        borderColor: "rgb(75, 192, 192)",
+        tension: 0.1,
+      },
+    ],
+  };
+
+  return chartData;
 }
 
 function processSteps(stepsData) {
@@ -130,48 +141,53 @@ function processFitbitData(apiResponse) {
     displayErrorMessage("429: API requests limited by Fitbit...");
     return;
   }
+
+  let stepsDataAggregate = [];
+  let heartRateDataAggregate = [];
+  let intradayDataAggregate = [];
+
   apiResponse.forEach((responseItem) => {
     if (responseItem.statusCode === 200) {
       if (responseItem.body["activities-steps"]) {
-        const stepsData = responseItem.body["activities-steps"];
-        const chartData = processSteps(stepsData);
-        const shouldIncludeAnnotations = true;
-        createChart(
-          "chartsContainer",
-          chartData,
-          "Daily Steps",
-          shouldIncludeAnnotations
-        );
+        stepsDataAggregate.push(...responseItem.body["activities-steps"]);
       }
       if (responseItem.body["activities-heart"]) {
-        console.log("HR");
-        const heartRateData = responseItem.body["activities-heart"].map(
-          (item) => item
-        );
-        const heartChartData = processHeartRate(heartRateData);
-
-        // Check if intraday data is also available
-        if (responseBody["activities-heart-intraday"]) {
-          // Process intraday heart rate data
-          const intradayData = responseBody["activities-heart-intraday"];
-          const intradayChartData = processIntradayHeartRate(intradayData);
-          createChart(
-            "chartsContainer",
-            intradayChartData,
-            "Intraday Heart Rate",
-            false
-          );
-        }
-        console.log(heartChartData);
-        createChart(
-          "chartsContainer",
-          heartChartData,
-          "Resting Heart Rate",
-          false
+        heartRateDataAggregate.push(...responseItem.body["activities-heart"]);
+      }
+      if (responseItem.body["activities-heart-intraday"]) {
+        intradayDataAggregate.push(
+          ...responseItem.body["activities-heart-intraday"].dataset
         );
       }
     }
   });
+
+  if (stepsDataAggregate.length > 0) {
+    const chartData = processSteps(stepsDataAggregate);
+    createChart("stepsChartContainer", chartData, "Daily Steps", true);
+  }
+
+  if (heartRateDataAggregate.length > 0) {
+    const heartChartData = processHeartRate(heartRateDataAggregate);
+    createChart(
+      "heartRateChartContainer",
+      heartChartData,
+      "Resting Heart Rate",
+      false
+    );
+  }
+
+  if (intradayDataAggregate.length > 0) {
+    const intradayChartData = processIntradayHeartRate({
+      dataset: intradayDataAggregate,
+    });
+    createChart(
+      "intradayHeartChartContainer",
+      intradayChartData,
+      "Intraday Heart Rate",
+      false
+    );
+  }
 }
 
 function displayErrorMessage(message) {
