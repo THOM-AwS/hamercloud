@@ -48,7 +48,7 @@ function createChart(containerId, data, label) {
       animations: {
         tension: {
           duration: 1000,
-          easing: "linear",
+          easing: "easeOutBounce",
           from: 1,
           to: 0,
           loop: true,
