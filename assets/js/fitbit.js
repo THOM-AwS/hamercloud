@@ -48,7 +48,6 @@ function createChart(containerId, data, label) {
       animation: {
         duration: 5000,
         easing: "easeInOutElastic",
-        y: { from: 0, to: 1 },
       },
       hover: { mode: "nearest", intersect: true, animationDuration: 400 },
       tooltips: { mode: "nearest", intersect: true, animationDuration: 400 },
