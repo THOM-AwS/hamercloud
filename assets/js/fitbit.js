@@ -45,7 +45,11 @@ function createChart(containerId, data, label) {
     },
     options: {
       scales: { y: { beginAtZero: true } },
-      animation: { duration: 5000, easing: "easeInOutElastic", y: { from: 0 } },
+      animation: {
+        duration: 5000,
+        easing: "easeInOutElastic",
+        y: { from: 0, to: 1 },
+      },
       hover: { mode: "nearest", intersect: true, animationDuration: 400 },
       tooltips: { mode: "nearest", intersect: true, animationDuration: 400 },
       responsive: true,
@@ -57,15 +61,27 @@ function createChart(containerId, data, label) {
               type: "line",
               yMin: 7500,
               yMax: 7500,
-              borderColor: "rgba(255, 193, 7, 1)", // Amber color
-              borderWidth: 2,
+              borderColor: "rgba(255, 193, 7, 0.2)", // Amber color
+              borderWidth: 1,
+              label: {
+                content: "Minor Goal",
+                enabled: true,
+                position: "end",
+                backgroundColor: "rgba(255, 193, 7, 0.2)", // Semi-transparent amber
+              },
             },
             line2: {
               type: "line",
               yMin: 12500,
               yMax: 12500,
-              borderColor: "rgba(0, 128, 0, 1)", // Green color
-              borderWidth: 2,
+              borderColor: "rgba(0, 128, 0, 0.2)", // Green color
+              borderWidth: 1,
+              label: {
+                content: "Major Goal",
+                enabled: true,
+                position: "end",
+                backgroundColor: "rgba(0, 128, 0, 0.2)", // Semi-transparent green
+              },
             },
           },
         },
