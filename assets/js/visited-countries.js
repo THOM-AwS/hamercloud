@@ -113,7 +113,7 @@ var visitedCountries = [
   //"Jamaica",
   //"Jersey",
   //"Jordan",
-  //"Japan",
+  "Japan",
   //"Kazakhstan",
   //"Kenya",
   //"Kyrgyzstan",
