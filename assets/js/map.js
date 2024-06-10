@@ -52,27 +52,20 @@ function initMap() {
       });
 
       map.data.forEach(function (feature) {
+        var countryName = feature.getProperty("ADMIN");
         var centroid = getCentroid(feature.getGeometry());
-        var countryName = feature.getProperty("ADMIN"); // Use 'ADMIN' to get the country name
 
-        // Check if countryName is defined and is a string
         if (typeof countryName === "string") {
           // Create a marker for the label
-          var marker = new google.maps.marker({
+          const marker = new google.maps.marker.AdvancedMarkerElement({
             position: centroid,
             map: map,
-            label: {
-              text: countryName, // Use countryName as label text
-              color: "black", // Adjust label style as needed
-              fontSize: "12px",
-            },
-            icon: {
-              path: google.maps.SymbolPath.CIRCLE,
-              fillOpacity: 0,
-              strokeOpacity: 0,
-              scale: 0, // to create an invisible icon
-            },
+            title: countryName, // Use countryName as label text
+            content: document.createElement("div"), // Create a div for the marker content
           });
+          marker.content.textContent = countryName; // Set the text content of the div
+          marker.content.style.color = "black"; // Adjust label style as needed
+          marker.content.style.fontSize = "12px";
         }
       });
     })
