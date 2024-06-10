@@ -58,7 +58,7 @@ function initMap() {
         // Check if countryName is defined and is a string
         if (typeof countryName === "string") {
           // Create a marker for the label
-          var marker = new google.maps.marker.AdvancedMarkerElement({
+          var marker = new google.maps.marker({
             position: centroid,
             map: map,
             label: {
