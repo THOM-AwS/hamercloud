@@ -23,8 +23,7 @@ function initMap() {
   });
 
   // listener for updating map polys
-  const geoJsonUrl =
-    "https://datahub.io/core/geo-countries/r/countries.geojson";
+  const geoJsonUrl = "./assets/js/geojsondata.js";
   google.maps.event.addListener(map, "bounds_changed", function () {
     // Call your render function
     renderPolylines(map, pathCoordinates);
@@ -40,7 +39,7 @@ function initMap() {
   fetch(geoJsonUrl)
     .then((response) => response.json())
     .then((data) => {
-      // console.log("GeoJSON data loaded:", data);
+      console.log("GeoJSON data loaded:", data);
       map.data.addGeoJson(data, { idPropertyName: "ADMIN" });
       map.data.setStyle(function (feature) {
         var countryName = feature.getProperty("ADMIN");
@@ -59,7 +58,7 @@ function initMap() {
         // Check if countryName is defined and is a string
         if (typeof countryName === "string") {
           // Create a marker for the label
-          var marker = new google.maps.Marker({
+          var marker = new google.maps.marker.AdvancedMarkerElement({
             position: centroid,
             map: map,
             label: {
