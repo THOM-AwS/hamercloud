@@ -64,35 +64,35 @@ function createChart(containerId, data, label, includeAnnotations = false) {
 
   const annotations = includeAnnotations
     ? {
-        annotations: {
-          line1: {
-            type: "line",
-            yMin: 7500,
-            yMax: 7500,
-            borderColor: "rgba(255, 193, 7, 0.2)", // Amber color
-            borderWidth: 1,
-            label: {
-              content: "Minor Goal",
-              enabled: true,
-              position: "end",
-              backgroundColor: "rgba(255, 193, 7, 0.2)", // Semi-transparent amber
-            },
-          },
-          line2: {
-            type: "line",
-            yMin: 12500,
-            yMax: 12500,
-            borderColor: "rgba(0, 128, 0, 0.2)", // Green color
-            borderWidth: 1,
-            label: {
-              content: "Major Goal",
-              enabled: true,
-              position: "end",
-              backgroundColor: "rgba(0, 128, 0, 0.2)", // Semi-transparent green
-            },
+      annotations: {
+        line1: {
+          type: "line",
+          yMin: 7500,
+          yMax: 7500,
+          borderColor: "rgba(255, 193, 7, 0.2)", // Amber color
+          borderWidth: 1,
+          label: {
+            content: "Minor Goal",
+            enabled: true,
+            position: "end",
+            backgroundColor: "rgba(255, 193, 7, 0.2)", // Semi-transparent amber
           },
         },
-      }
+        line2: {
+          type: "line",
+          yMin: 12500,
+          yMax: 12500,
+          borderColor: "rgba(0, 128, 0, 0.2)", // Green color
+          borderWidth: 1,
+          label: {
+            content: "Major Goal",
+            enabled: true,
+            position: "end",
+            backgroundColor: "rgba(0, 128, 0, 0.2)", // Semi-transparent green
+          },
+        },
+      },
+    }
     : {};
 
   new Chart(ctx, {
@@ -172,17 +172,17 @@ function processFitbitData(apiResponse) {
     createChart("chartsContainer", heartChartData, "Resting Heart Rate", false);
   }
 
-  if (intradayDataAggregate.length > 0) {
-    const intradayChartData = processIntradayHeartRate({
-      dataset: intradayDataAggregate,
-    });
-    createChart(
-      "chartsContainer",
-      intradayChartData,
-      "Intraday Heart Rate",
-      false
-    );
-  }
+  // if (intradayDataAggregate.length > 1) {
+  //   const intradayChartData = processIntradayHeartRate({
+  //     dataset: intradayDataAggregate,
+  //   });
+  //   createChart(
+  //     "chartsContainer",
+  //     intradayChartData,
+  //     "Intraday Heart Rate",
+  //     false
+  //   );
+  // }
 }
 
 function displayErrorMessage(message) {
