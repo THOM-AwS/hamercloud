@@ -25,27 +25,27 @@ function processHeartRate(heartRateData) {
   return { labels, values };
 }
 
-function processIntradayHeartRate(intradayData) {
-  // Extracting time and value from the dataset
-  const labels = intradayData.dataset.map((item) => item.time);
-  const dataPoints = intradayData.dataset.map((item) => item.value);
+// function processIntradayHeartRate(intradayData) {
+//   // Extracting time and value from the dataset
+//   const labels = intradayData.dataset.map((item) => item.time);
+//   const dataPoints = intradayData.dataset.map((item) => item.value);
 
-  // Creating a chart data object
-  const chartData = {
-    labels: labels,
-    datasets: [
-      {
-        label: "Heart Rate",
-        data: dataPoints,
-        fill: false,
-        borderColor: "rgb(75, 192, 192)",
-        tension: 0.1,
-      },
-    ],
-  };
+//   // Creating a chart data object
+//   const chartData = {
+//     labels: labels,
+//     datasets: [
+//       {
+//         label: "Heart Rate",
+//         data: dataPoints,
+//         fill: false,
+//         borderColor: "rgb(75, 192, 192)",
+//         tension: 0.1,
+//       },
+//     ],
+//   };
 
-  return chartData;
-}
+//   return chartData;
+// }
 
 function processSteps(stepsData) {
   const labels = stepsData.map((item) => {
@@ -144,7 +144,7 @@ function processFitbitData(apiResponse) {
 
   let stepsDataAggregate = [];
   let heartRateDataAggregate = [];
-  let intradayDataAggregate = [];
+  // let intradayDataAggregate = [];
 
   apiResponse.forEach((responseItem) => {
     if (responseItem.statusCode === 200) {
@@ -154,11 +154,11 @@ function processFitbitData(apiResponse) {
       if (responseItem.body["activities-heart"]) {
         heartRateDataAggregate.push(...responseItem.body["activities-heart"]);
       }
-      if (responseItem.body["activities-heart-intraday"]) {
-        intradayDataAggregate.push(
-          ...responseItem.body["activities-heart-intraday"].dataset
-        );
-      }
+      // if (responseItem.body["activities-heart-intraday"]) {
+      //   intradayDataAggregate.push(
+      //     ...responseItem.body["activities-heart-intraday"].dataset
+      //   );
+      // }
     }
   });
 
@@ -172,7 +172,7 @@ function processFitbitData(apiResponse) {
     createChart("chartsContainer", heartChartData, "Resting Heart Rate", false);
   }
 
-  // if (intradayDataAggregate.length > 1) {
+  // if (intradayDataAggregate.length > 0) {
   //   const intradayChartData = processIntradayHeartRate({
   //     dataset: intradayDataAggregate,
   //   });
