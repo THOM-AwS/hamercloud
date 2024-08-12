@@ -1670,3 +1670,13 @@ ul.icons {
 		body.is-preload #footer {
 			opacity: 0;
 		}
+
+.floated-image {
+	float: left; /* or float: right; depending on your layout */
+	margin-right: 15px; /* Add some margin if needed */
+	}
+	
+	.clear-list {
+	clear: both; /* This ensures the list starts below the floated image */
+	}
+	
