@@ -1679,29 +1679,33 @@ ul.icons {
 	.clear-list {
 	clear: both; /* This ensures the list starts below the floated image */
 	}
+
 	
-	#scrolling-lyrics {
-		position: fixed;
-		top: 0;
-		right: 0; /* Change left to right */
-		width: 100%;
-		height: 100%;
-		overflow: hidden;
-		z-index: -1; /* Ensure it's behind other content */
-		opacity: 0.2; /* Adjust opacity as needed */
-	  }
-	  
-	  
-	  .lyrics-content {
-		position: absolute;
-		top: 100%;
-		right: 0; /* Change left to right */
-		transform: none; /* Remove the translateX */
-		white-space: nowrap;
-		font-size: 8rem;
-		color: rgba(255, 255, 255, 1); /* Adjust color and opacity */
-		text-align: right; /* Align text to the right */
-		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-	  }
-	  
+#scrolling-lyrics {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	z-index: 10000; /* Increased z-index to be on top of everything */
+	pointer-events: none; /* Allows clicking through the text */
+	}
+	
+.lyrics-content {
+	position: absolute;
+	white-space: nowrap;
+	font-size: 4rem;
+	color: rgba(255, 255, 255, 0.1); /* Adjust color and opacity as needed */
+	animation: scrollText 60s linear infinite;
+}
+	
+@keyframes scrollText {
+	0% {
+		transform: translateY(100%);
+	}
+	100% {
+		transform: translateY(-100%);
+	}
+}
 	  
