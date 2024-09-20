@@ -1680,3 +1680,24 @@ ul.icons {
 	clear: both; /* This ensures the list starts below the floated image */
 	}
 	
+	#scrolling-lyrics {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		z-index: -1;
+		opacity: 0.2;
+	  }
+	  
+	  .lyrics-content {
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+		white-space: nowrap;
+		font-size: 3rem;
+		color: #888;
+	  }
+	  
