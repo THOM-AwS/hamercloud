@@ -1689,28 +1689,29 @@ ul.icons {
 	height: 100%;
 	overflow: hidden;
 	z-index: -1;
-	opacity: 0.1;
+	pointer-events: none;
 }
-	  
+  
 .lyrics-line {
 	position: absolute;
 	white-space: nowrap;
 	font-size: 3rem;
-	color: rgba(255, 255, 255, 0.3);
+	color: rgba(255, 255, 255, 0.1);
 	animation: scrollRight 30s linear infinite;
 }
-	  
+  
 .lyrics-line:nth-child(1) { top: 10%; }
 .lyrics-line:nth-child(2) { top: 30%; animation-delay: -7s; }
 .lyrics-line:nth-child(3) { top: 50%; animation-delay: -14s; }
 .lyrics-line:nth-child(4) { top: 70%; animation-delay: -21s; }
-	  
+  
 @keyframes scrollRight {
 	0% {
-		transform: translateX(100%);
+	  transform: translateX(100%);
 	}
 	100% {
-		transform: translateX(-100%);
+	  transform: translateX(-100%);
 	}
 }
+	  
 	  
