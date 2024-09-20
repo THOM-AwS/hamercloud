@@ -1683,21 +1683,24 @@ ul.icons {
 	#scrolling-lyrics {
 		position: fixed;
 		top: 0;
-		left: 0;
+		right: 0; /* Change left to right */
 		width: 100%;
 		height: 100%;
 		overflow: hidden;
-		z-index: 100;
-		opacity: 1;
+		z-index: -1; /* Ensure it's behind other content */
+		opacity: 0.2; /* Adjust opacity as needed */
 	  }
+	  
 	  
 	  .lyrics-content {
 		position: absolute;
 		top: 100%;
-		left: 50%;
-		transform: translateX(-50%);
+		right: 0; /* Change left to right */
+		transform: none; /* Remove the translateX */
 		white-space: nowrap;
 		font-size: 3rem;
-		color: #888;
+		color: rgba(255, 255, 255, 0.1); /* Adjust color and opacity */
+		text-align: right; /* Align text to the right */
 	  }
+	  
 	  
