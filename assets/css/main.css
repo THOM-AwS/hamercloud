@@ -1688,24 +1688,29 @@ ul.icons {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
-	z-index: 10000; /* Increased z-index to be on top of everything */
-	pointer-events: none; /* Allows clicking through the text */
-	}
-	
-.lyrics-content {
+	z-index: -1;
+	opacity: 0.1;
+}
+	  
+.lyrics-line {
 	position: absolute;
 	white-space: nowrap;
-	font-size: 4rem;
-	color: rgba(255, 255, 255, 0.1); /* Adjust color and opacity as needed */
-	animation: scrollText 60s linear infinite;
+	font-size: 3rem;
+	color: rgba(255, 255, 255, 0.3);
+	animation: scrollRight 30s linear infinite;
 }
-	
-@keyframes scrollText {
+	  
+.lyrics-line:nth-child(1) { top: 10%; }
+.lyrics-line:nth-child(2) { top: 30%; animation-delay: -7s; }
+.lyrics-line:nth-child(3) { top: 50%; animation-delay: -14s; }
+.lyrics-line:nth-child(4) { top: 70%; animation-delay: -21s; }
+	  
+@keyframes scrollRight {
 	0% {
-		transform: translateY(100%);
+		transform: translateX(100%);
 	}
 	100% {
-		transform: translateY(-100%);
+		transform: translateX(-100%);
 	}
 }
 	  
