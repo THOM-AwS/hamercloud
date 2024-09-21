@@ -1681,7 +1681,6 @@ ul.icons {
 	clear: both; /* This ensures the list starts below the floated image */
 	}
 
-	  
 #scrolling-container {
 	position: fixed;
 	top: 0;
@@ -1696,25 +1695,56 @@ ul.icons {
 .scrolling-text {
     position: absolute;
     white-space: nowrap;
-	font-family: "Courier New", monospace;
-	animation: scrollText 150s linear infinite;
-	font-size: 20px;
-	color: #00ff00;
-	text-shadow: 0 0 3px rgba(0, 255, 0, 0.7);
-	letter-spacing: 2px;
-	z-index: 2;
-	opacity: 0;
+    font-family: "Courier New", monospace;
+    font-size: 20px;
+    color: #00ff00;
+    text-shadow: 0 0 3px rgba(0, 255, 0, 0.7);
+    letter-spacing: 2px;
+    z-index: 2;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 2s ease-in, visibility 0s 2s;
 }
+
+
+.scrolling-text.animation-active {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 2s ease-in, visibility 0s;
+    animation: scrollText 150s linear infinite;
+}
+
 
 @keyframes scrollText {
     from { 
         transform: translateX(0%);
         opacity: 0; 
     }
+	4% {
+		opacity: 0.1;
+	}
+	5% { 
+		opacity: 0.2;
+	}
+	6% {
+		opacity: 0.1;
+	}
+	28% {
+		opacity: 0.1;
+	}
     30% { 
-        opacity: 0.1;
+        opacity: 0.4;
     }
-    75% { 
+	31% {
+		opacity: 0.1;
+	}
+	68% { 
+		opacity: 0.1;
+	}
+	70% { 
+		opacity: 0.4;
+	}
+    71% { 
         opacity: 0.1;
     }
     to { 
@@ -1722,3 +1752,51 @@ ul.icons {
         opacity: 0; 
     }
 }
+
+.matrix-char {
+    transition: color 0.1s ease, text-shadow 0.1s ease, opacity 0.1s ease;
+}
+
+.matrix-char.bright {
+    filter: brightness(1.1); /* Adjust this value to control the brightness increase */
+}
+
+
+.matrix-char.glow-1 {
+    color: #3f3;
+    text-shadow: 0 0 5px #0f0;
+}
+
+.matrix-char.glow-2 {
+	color: #6f6;
+    text-shadow: 0 0 5px #0f0, 0 0 10px #0f0;
+}
+
+.matrix-char.glow-3 {
+	color: #9f9;
+    text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 15px #0f0;
+}
+
+.matrix-char.glow-4 {
+	color: #45fd5a;
+    text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 15px #0f0, 0 0 20px #0f0;
+}
+.nav-item {
+    color: rgb(61, 67, 72);
+    font-size: 18px;
+    transition: color 0.5s ease;
+    position: relative;
+    display: inline-block;
+}
+
+.nav-item span {
+    display: inline-block;
+    opacity: 1; /* Ensure initial opacity is set */
+}
+
+.nav-item:hover,
+.nav-item.active {
+    color: rgb(0, 255, 0);
+	text-shadow: 0 0 3px rgba(0, 255, 110, 0.6);
+}
+

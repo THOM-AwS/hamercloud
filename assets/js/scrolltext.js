@@ -1,10 +1,11 @@
+const flickerFrequency = 0.3; // Adjust this value to control flickering frequency
+const brightnessFlickerFrequency = 0.05; // Adjust this value to control brightness flickering frequency
+
 document.addEventListener('DOMContentLoaded', function () {
     const container = document.getElementById('scrolling-container');
-    console.log("Container:", container);
     const textElements = container.getElementsByClassName('scrolling-text');
-    console.log("Text elements:", textElements, "Length:", textElements.length);
+    const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+{}[]|;:,.<>?áéíóúñÑ¿¡üÜöÖäÄßÇçØøÅåÆæœŒ€£¥¢¤αβγδεζηθικλμνξοπρστυφχψωΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ";
 
-    const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+{}[]|;:,.<>?";
 
     function setupMatrixText(element) {
         const originalText = element.textContent;
@@ -13,45 +14,67 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function animateText(element) {
         const chars = element.getElementsByClassName('matrix-char');
+
+        function updateChar(char) {
+            // Random character change 
+            if (Math.random() < 0.006) {
+                const originalChar = char.getAttribute('data-original');
+                if (char.textContent === originalChar) {
+                    char.textContent = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                    setTimeout(() => {
+                        char.textContent = originalChar;
+                    }, 500 + Math.random() * 1000);
+                }
+            }
+
+            // Random flickering effect
+            if (Math.random() < flickerFrequency) {
+                const glowLevel = Math.floor(Math.random() * 4) + 1;
+                const flickerOpacity = 0.3 + Math.random() * 0.7; // Random opacity between 0.3 and 1
+                char.className = `matrix-char glow-${glowLevel}`;
+                char.style.opacity = flickerOpacity.toString();
+
+                setTimeout(() => {
+                    char.className = 'matrix-char';
+                    char.style.opacity = '1';
+                }, 30 + Math.random() * 100);
+            }
+
+            // Random brightness flicker
+            if (Math.random() < brightnessFlickerFrequency) {
+                char.classList.add('bright');
+                setTimeout(() => {
+                    char.classList.remove('bright');
+                }, 50 + Math.random() * 150);
+            }
+        }
+
         setInterval(() => {
-            Array.from(chars).forEach(char => {
-                if (Math.random() < 0.005) {
-                    const originalChar = char.getAttribute('data-original');
-                    if (char.textContent === originalChar) {
-                        char.textContent = matrixChars[Math.floor(Math.random() * matrixChars.length)];
-                        setTimeout(() => {
-                            char.textContent = originalChar;
-                        }, 500 + Math.random() * 1000);
-                    }
-                }
-                if (Math.random() < 0.01) {
-                    char.style.opacity = '0.1';
-                    setTimeout(() => char.style.opacity = '1', 50);
-                }
-            });
-        }, 50);
+            Array.from(chars).forEach(updateChar);
+        }, 30);
     }
 
     Array.from(textElements).forEach((element, index) => {
-        console.log("Processing element:", element);
-
         setupMatrixText(element);
 
         const randomTop = Math.random() * (container.clientHeight - element.clientHeight);
-        console.log("Random top:", randomTop);
         element.style.top = `${randomTop}px`;
-        console.log("Set top to:", element.style.top);
 
-        element.style.animationDelay = `${index * 2}s`;
-        console.log("Set animation delay to:", element.style.animationDelay);
+        // Set initial opacity to 0 and visibility to hidden
+        element.style.opacity = '0';
+        element.style.visibility = 'hidden';
 
-        animateText(element);
+        // Delay the start of the animation and fade-in
+        setTimeout(() => {
+            element.classList.add('animation-active');
+            element.style.visibility = 'visible';
+            element.style.opacity = '1'; // This will trigger the fade-in transition
+            element.style.animationDelay = `${index * 2}s`; // Offset each line's animation start
 
-        // Use requestAnimationFrame to add the class after the next paint
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                element.classList.add('animation-active');
-            });
-        });
+            // Start the character animations after the fade-in
+            setTimeout(() => {
+                animateText(element);
+            }, 2000); // Wait for 2 seconds (duration of the fade-in)
+        }, index * 2000); // Start each line's animation 2 seconds after the previous one
     });
 });
