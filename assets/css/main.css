@@ -96,6 +96,7 @@ input, select, textarea {
 
 	body {
 		background: #1b1f22;
+		overflow-x: hidden;
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -1680,38 +1681,44 @@ ul.icons {
 	clear: both; /* This ensures the list starts below the floated image */
 	}
 
-	
-#scrolling-lyrics {
+	  
+#scrolling-container {
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
+	z-index: 2;
 	overflow: hidden;
-	z-index: -1;
-	pointer-events: none;
+	transition: opacity 0.5s ease;
 }
-  
-.lyrics-line {
-	position: absolute;
-	white-space: nowrap;
-	font-size: 3rem;
-	color: rgba(255, 255, 255, 0.1);
-	animation: scrollRight 30s linear infinite;
+
+.scrolling-text {
+    position: absolute;
+    white-space: nowrap;
+	font-family: "Courier New", monospace;
+	animation: scrollText 150s linear infinite;
+	font-size: 20px;
+	color: #00ff00;
+	text-shadow: 0 0 3px rgba(0, 255, 0, 0.7);
+	letter-spacing: 2px;
+	z-index: 2;
+	opacity: 0;
 }
-  
-.lyrics-line:nth-child(1) { top: 10%; }
-.lyrics-line:nth-child(2) { top: 30%; animation-delay: -7s; }
-.lyrics-line:nth-child(3) { top: 50%; animation-delay: -14s; }
-.lyrics-line:nth-child(4) { top: 70%; animation-delay: -21s; }
-  
-@keyframes scrollRight {
-	0% {
-	  transform: translateX(100%);
-	}
-	100% {
-	  transform: translateX(-100%);
-	}
+
+@keyframes scrollText {
+    from { 
+        transform: translateX(0%);
+        opacity: 0; 
+    }
+    30% { 
+        opacity: 0.1;
+    }
+    75% { 
+        opacity: 0.1;
+    }
+    to { 
+        transform: translateX(-100%);
+        opacity: 0; 
+    }
 }
-	  
-	  
