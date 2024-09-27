@@ -1,22 +1,22 @@
-const flickerFrequency = 0.3; // Adjust this value to control flickering frequency
-const brightnessFlickerFrequency = 0.05; // Adjust this value to control brightness flickering frequency
+import lyrics from './lyrics.js';
+
+const flickerFrequency = 0.3;
+const brightnessFlickerFrequency = 0.05;
 
 document.addEventListener('DOMContentLoaded', function () {
     const container = document.getElementById('scrolling-container');
-    const textElements = container.getElementsByClassName('scrolling-text');
     const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+{}[]|;:,.<>?áéíóúñÑ¿¡üÜöÖäÄßÇçØøÅåÆæœŒ€£¥¢¤αβγδεζηθικλμνξοπρστυφχψωΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ";
 
-
-    function setupMatrixText(element) {
-        const originalText = element.textContent;
-        element.innerHTML = originalText.split('').map(char => `<span class="matrix-char" data-original="${char}">${char}</span>`).join('');
+    function setupMatrixText(element, text) {
+        element.innerHTML = text.split('').map(char =>
+            `<span class="matrix-char" data-original="${char}">${char}</span>`
+        ).join('');
     }
 
     function animateText(element) {
         const chars = element.getElementsByClassName('matrix-char');
 
         function updateChar(char) {
-            // Random character change 
             if (Math.random() < 0.006) {
                 const originalChar = char.getAttribute('data-original');
                 if (char.textContent === originalChar) {
@@ -27,10 +27,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
 
-            // Random flickering effect
             if (Math.random() < flickerFrequency) {
                 const glowLevel = Math.floor(Math.random() * 4) + 1;
-                const flickerOpacity = 0.3 + Math.random() * 0.7; // Random opacity between 0.3 and 1
+                const flickerOpacity = 0.3 + Math.random() * 0.7;
                 char.className = `matrix-char glow-${glowLevel}`;
                 char.style.opacity = flickerOpacity.toString();
 
@@ -40,7 +39,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }, 30 + Math.random() * 100);
             }
 
-            // Random brightness flicker
             if (Math.random() < brightnessFlickerFrequency) {
                 char.classList.add('bright');
                 setTimeout(() => {
@@ -54,27 +52,28 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 30);
     }
 
-    Array.from(textElements).forEach((element, index) => {
-        setupMatrixText(element);
+    lyrics.forEach((lyric, index) => {
+        const element = document.createElement('div');
+        element.className = 'scrolling-text';
+        container.appendChild(element);
+
+        setupMatrixText(element, lyric);
 
         const randomTop = Math.random() * (container.clientHeight - element.clientHeight);
         element.style.top = `${randomTop}px`;
 
-        // Set initial opacity to 0 and visibility to hidden
         element.style.opacity = '0';
         element.style.visibility = 'hidden';
 
-        // Delay the start of the animation and fade-in
         setTimeout(() => {
             element.classList.add('animation-active');
             element.style.visibility = 'visible';
-            element.style.opacity = '1'; // This will trigger the fade-in transition
-            element.style.animationDelay = `${index * 2}s`; // Offset each line's animation start
+            element.style.opacity = '1';
+            element.style.animationDelay = `${index * 2}s`;
 
-            // Start the character animations after the fade-in
             setTimeout(() => {
                 animateText(element);
-            }, 2000); // Wait for 2 seconds (duration of the fade-in)
-        }, index * 2000); // Start each line's animation 2 seconds after the previous one
+            }, 2000);
+        }, index * 2000);
     });
 });
