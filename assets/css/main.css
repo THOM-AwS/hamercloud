@@ -1709,41 +1709,40 @@ ul.icons {
 
 .scrolling-text.animation-active {
     visibility: visible;
-    opacity: 1;
+    opacity: 0.5;
     transition: opacity 2s ease-in, visibility 0s;
     animation: scrollText 150s linear infinite;
 }
-
 
 @keyframes scrollText {
     from { 
         transform: translateX(0%);
         opacity: 0; 
     }
-	4% {
-		opacity: 0.1;
-	}
-	5% { 
-		opacity: 0.2;
-	}
-	6% {
-		opacity: 0.1;
-	}
-	28% {
-		opacity: 0.1;
-	}
+    1% {
+        opacity: 0.1;
+    }
+    5% { 
+        opacity: 0.2;
+    }
+    6% {
+        opacity: 0.1;
+    }
+    28% {
+        opacity: 0.1;
+    }
     30% { 
         opacity: 0.4;
     }
-	31% {
-		opacity: 0.1;
-	}
-	68% { 
-		opacity: 0.1;
-	}
-	70% { 
-		opacity: 0.4;
-	}
+    31% {
+        opacity: 0.1;
+    }
+    68% { 
+        opacity: 0.1;
+    }
+    70% { 
+        opacity: 0.4;
+    }
     71% { 
         opacity: 0.1;
     }
@@ -1753,14 +1752,19 @@ ul.icons {
     }
 }
 
+.scrolling-text {
+    animation: scrollText 60s linear infinite;
+    white-space: nowrap;
+    position: absolute;
+}
+
 .matrix-char {
     transition: color 0.1s ease, text-shadow 0.1s ease, opacity 0.1s ease;
 }
 
 .matrix-char.bright {
-    filter: brightness(1.1); /* Adjust this value to control the brightness increase */
+    filter: brightness(1.2);
 }
-
 
 .matrix-char.glow-1 {
     color: #3f3;
@@ -1768,35 +1772,51 @@ ul.icons {
 }
 
 .matrix-char.glow-2 {
-	color: #6f6;
+    color: #6f6;
     text-shadow: 0 0 5px #0f0, 0 0 10px #0f0;
 }
 
 .matrix-char.glow-3 {
-	color: #9f9;
+    color: #9f9;
     text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 15px #0f0;
 }
 
 .matrix-char.glow-4 {
-	color: #45fd5a;
+    color: #45fd5a;
     text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 15px #0f0, 0 0 20px #0f0;
 }
+
 .nav-item {
-    color: rgb(61, 67, 72);
+    color: #3f3;
     font-size: 18px;
-    transition: color 0.5s ease;
+    transition: color 0.5s ease, text-shadow 0.5s ease;
     position: relative;
     display: inline-block;
 }
 
 .nav-item span {
     display: inline-block;
-    opacity: 1; /* Ensure initial opacity is set */
+    opacity: 1;
 }
 
 .nav-item:hover,
 .nav-item.active {
     color: rgb(0, 255, 0);
-	text-shadow: 0 0 3px rgba(0, 255, 110, 0.6);
+    opacity: 1;
+    text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 15px #0f0, 0 0 20px #0f0;
 }
 
+@keyframes flicker {
+    0%, 100% { 
+        opacity: 1;
+        text-shadow: 0 0 10px rgba(0, 255, 0, 1);
+    }
+    50% { 
+        opacity: 0.3;
+        text-shadow: 0 0 2px rgba(0, 255, 0, 0.5);
+    }
+}
+
+.nav-char.flicker {
+    animation: flicker 0.2s ease-in-out infinite;
+}

@@ -61,19 +61,49 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const randomTop = Math.random() * (container.clientHeight - element.clientHeight);
         element.style.top = `${randomTop}px`;
+        element.style.left = '50%';
 
         element.style.opacity = '0';
-        element.style.visibility = 'hidden';
+        element.style.transition = 'opacity 5s ease-in, left 60s linear';
 
         setTimeout(() => {
-            element.classList.add('animation-active');
             element.style.visibility = 'visible';
-            element.style.opacity = '1';
-            element.style.animationDelay = `${index * 2}s`;
+            element.style.opacity = '0.3'; // Fade in to a lower opacity
+            element.style.left = '-100%'; // Scroll to the left
 
             setTimeout(() => {
                 animateText(element);
             }, 2000);
         }, index * 2000);
     });
+});
+
+
+document.querySelectorAll('.nav-item').forEach(item => {
+    item.innerHTML = item.textContent.split('').map(char =>
+        `<span class="nav-char">${char}</span>`
+    ).join('');
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.innerHTML = item.textContent.split('').map(char =>
+            `<span class="nav-char">${char}</span>`
+        ).join('');
+    });
+
+    function randomFlicker() {
+        const chars = document.querySelectorAll('.nav-char');
+        chars.forEach(char => {
+            if (Math.random() < 0.01) { // Adjust this value to control frequency
+                char.classList.add('flicker');
+                setTimeout(() => {
+                    char.classList.remove('flicker');
+                }, 100 + Math.random() * 200); // Random duration between 100-300ms
+            }
+        });
+    }
+
+    setInterval(randomFlicker, 50); // Run every 50ms
 });
