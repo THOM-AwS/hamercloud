@@ -30,10 +30,10 @@ function applyMatrixEffect(element) {
             chars.forEach(char => {
                 if (isNavItem) {
                     // Nav item animation
-                    const baseBrightness = 0.8; // Higher brightness for nav items
-                    const baseOpacity = 0.9; // Higher opacity for nav items
-                    const brightnessVariation = 0.2;
-                    const opacityVariation = 0.2;
+                    const baseBrightness = 0.8;
+                    const baseOpacity = 0.9;
+                    const brightnessVariation = 0.1;
+                    const opacityVariation = 0.1;
 
                     const brightness = baseBrightness + (Math.random() * brightnessVariation - brightnessVariation / 2);
                     const opacity = baseOpacity + (Math.random() * opacityVariation - opacityVariation / 2);
@@ -41,13 +41,21 @@ function applyMatrixEffect(element) {
                     char.style.color = `rgba(0, ${Math.floor(255 * brightness)}, 0, ${opacity})`;
                     char.style.textShadow = `0 0 2px rgba(0, ${Math.floor(255 * brightness)}, 0, ${opacity})`;
 
-                    // Less frequent character change for nav items
-                    if (Math.random() < 0.01) {
+                    // Character change for nav items
+                    if (Math.random() < 0.005) { // Increased chance for more noticeable effect
                         const originalChar = char.textContent;
+                        const originalColor = char.style.color;
+                        const originalShadow = char.style.textShadow;
+
                         char.textContent = getRandomChar();
+                        char.style.color = `rgba(0, 255, 0, 1)`; // Bright green
+                        char.style.textShadow = `0 0 5px rgba(0, 255, 0, 1)`;
+
                         setTimeout(() => {
                             char.textContent = originalChar;
-                        }, 100 + Math.random() * 200);
+                            char.style.color = originalColor;
+                            char.style.textShadow = originalShadow;
+                        }, 100); // Revert after 100ms
                     }
                 } else {
                     // Background text animation (unchanged)
@@ -100,7 +108,6 @@ function applyMatrixEffect(element) {
         });
     }
 }
-
 
 // Scrolling text setup and animation
 
