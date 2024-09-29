@@ -1680,7 +1680,7 @@ ul.icons {
 	.clear-list {
 	clear: both; /* This ensures the list starts below the floated image */
 	}
-
+/* 
 #scrolling-container {
 	position: fixed;
 	top: 0;
@@ -1701,50 +1701,51 @@ ul.icons {
     text-shadow: 0 0 3px rgba(0, 255, 0, 0.7);
     letter-spacing: 2px;
     z-index: 2;
-    opacity: 0;
+    opacity: 0.1;
     visibility: hidden;
-    transition: opacity 2s ease-in, visibility 0s 2s;
+    transition: opacity 5s ease-in, visibility 0s 5s;
 }
+
 
 
 .scrolling-text.animation-active {
     visibility: visible;
     opacity: 0.5;
     transition: opacity 2s ease-in, visibility 0s;
-    animation: scrollText 150s linear infinite;
+    animation: scrollText 100s linear infinite;
 }
 
 @keyframes scrollText {
     from { 
-        transform: translateX(0%);
+        transform: translateX(50%);
         opacity: 0; 
     }
     1% {
         opacity: 0.1;
     }
     5% { 
-        opacity: 0.2;
+        opacity: 1;
     }
     6% {
-        opacity: 0.1;
+        opacity: 0.2;
     }
     28% {
-        opacity: 0.1;
+        opacity: 0.2;
     }
     30% { 
         opacity: 0.4;
     }
     31% {
-        opacity: 0.1;
+        opacity: 0.2;
     }
     68% { 
-        opacity: 0.1;
+        opacity: 0.2;
     }
     70% { 
         opacity: 0.4;
     }
     71% { 
-        opacity: 0.1;
+        opacity: 0.2;
     }
     to { 
         transform: translateX(-100%);
@@ -1819,4 +1820,36 @@ ul.icons {
 
 .nav-char.flicker {
     animation: flicker 0.2s ease-in-out infinite;
+} */
+
+#scrolling-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.scrolling-text {
+    position: absolute;
+    white-space: nowrap;
+    font-family: "Courier New", monospace;
+    font-size: 20px;
+    color: #00ff00;
+    text-shadow: 0 0 3px rgba(0, 255, 0, 0.7);
+    z-index: 1001;
+}
+
+.matrix-char {
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.nav-item {
+    color: #00ff00;
+    font-size: 18px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    cursor: pointer;
 }

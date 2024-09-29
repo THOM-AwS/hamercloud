@@ -39,7 +39,6 @@ function initMap() {
   fetch(geoJsonUrl)
     .then((response) => response.json())
     .then((data) => {
-      console.log("GeoJSON data loaded:", data);
       map.data.addGeoJson(data, { idPropertyName: "ADMIN" });
       map.data.setStyle(function (feature) {
         var countryName = feature.getProperty("ADMIN");
@@ -57,7 +56,7 @@ function initMap() {
 
         if (typeof countryName === "string") {
           // Create a marker for the label
-          const marker = new google.maps.marker.AdvancedMarkerElement({
+          const marker = new google.maps.marker({
             position: centroid,
             map: map,
             title: countryName, // Use countryName as label text
