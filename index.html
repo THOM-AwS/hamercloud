@@ -302,9 +302,6 @@
 			<!-- about -->
 			<article id="about">
 				<h2 class="major">about</h2>
-				<script src="assets/js/fitbit.js"></script>
-				<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-				<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.0.2"></script>
 
 				<h3>Lifespan</h3>
 				<p>I have been alive for <br><span id="timeLived" style="font-weight: bold;"></span>.</p>
@@ -312,13 +309,14 @@
 						style="font-weight: bold;"></span> <br>left to make the positive impact I want on the world.
 				</p>
 
-				<h3>Vital stats</h3>
-				<div id="chartsContainer"></div><br><br>
 
 				<h3>Visited Countries</h3>
 				<b>
 					<p id="countriesCount"></p>
 				</b>
+				<div id="worldMap" style="height: 400px; width: 100%; margin: 20px 0;"></div>
+				<!-- Google Maps API -->
+				<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxyRHImShMxEssA12vkUWDYhv0Q6X7q1Y&callback=initMap"></script>
 				<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
 				<script src="assets/js/visited-countries.js"></script>
 			</article>

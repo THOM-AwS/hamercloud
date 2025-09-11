@@ -248,3 +248,123 @@ var visitedCountries = [
   //"Zambia",
   //"Zimbabwe",
 ];
+
+// Google Maps initialization
+let map;
+let countryPolygons = [];
+
+function initMap() {
+    // Initialize the map
+    map = new google.maps.Map(document.getElementById('worldMap'), {
+        center: { lat: 20, lng: 0 },
+        zoom: 2,
+        styles: [
+            {
+                featureType: 'water',
+                elementType: 'geometry',
+                stylers: [{ color: '#193341' }]
+            },
+            {
+                featureType: 'landscape',
+                elementType: 'geometry',
+                stylers: [{ color: '#2c5aa0' }]
+            },
+            {
+                featureType: 'road',
+                stylers: [{ visibility: 'off' }]
+            },
+            {
+                featureType: 'transit',
+                stylers: [{ visibility: 'off' }]
+            },
+            {
+                featureType: 'poi',
+                stylers: [{ visibility: 'off' }]
+            },
+            {
+                featureType: 'administrative',
+                elementType: 'geometry.stroke',
+                stylers: [{ color: '#4b6878', weight: 0.5 }]
+            }
+        ]
+    });
+
+    // Load and color countries
+    loadCountryBoundaries();
+}
+
+async function loadCountryBoundaries() {
+    try {
+        // Use Google Maps Data layer for country boundaries
+        map.data.loadGeoJson('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson');
+        
+        map.data.setStyle(function(feature) {
+            const countryName = feature.getProperty('NAME');
+            const isVisited = visitedCountries.includes(countryName);
+            
+            return {
+                fillColor: isVisited ? '#00ff00' : '#ff0000',
+                fillOpacity: 0.6,
+                strokeColor: '#ffffff',
+                strokeWeight: 1
+            };
+        });
+
+        // Add hover effects
+        map.data.addListener('mouseover', function(event) {
+            map.data.revertStyle();
+            map.data.overrideStyle(event.feature, {
+                fillOpacity: 0.8,
+                strokeWeight: 2
+            });
+        });
+
+        map.data.addListener('mouseout', function() {
+            map.data.revertStyle();
+        });
+
+        // Add info window on click
+        const infoWindow = new google.maps.InfoWindow();
+        map.data.addListener('click', function(event) {
+            const countryName = event.feature.getProperty('NAME');
+            const isVisited = visitedCountries.includes(countryName);
+            const status = isVisited ? 'Visited ✅' : 'Not visited yet ❌';
+            
+            infoWindow.setContent(`
+                <div>
+                    <h3>${countryName}</h3>
+                    <p>${status}</p>
+                </div>
+            `);
+            infoWindow.setPosition(event.latLng);
+            infoWindow.open(map);
+        });
+
+    } catch (error) {
+        console.error('Error loading country boundaries:', error);
+        // Fallback: just show the count
+        updateCountriesCount();
+    }
+}
+
+function updateCountriesCount() {
+    const visitedCount = visitedCountries.length;
+    const totalCountries = 195; // Approximate number of countries
+    const percentage = ((visitedCount / totalCountries) * 100).toFixed(1);
+    
+    document.getElementById('countriesCount').innerHTML = 
+        `I have visited ${visitedCount} out of ${totalCountries} countries (${percentage}%)`;
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    updateCountriesCount();
+    
+    // If Google Maps API hasn't loaded yet, the initMap will be called by the callback
+    if (typeof google !== 'undefined' && google.maps) {
+        initMap();
+    }
+});
+
+// Make sure initMap is available globally for Google Maps callback
+window.initMap = initMap;
