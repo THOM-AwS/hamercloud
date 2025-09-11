@@ -25,41 +25,47 @@ function applyMatrixEffect(element) {
 
     const isNavItem = element.classList.contains('nav-item');
 
-    function animateMatrix() {
-        if (!isHovered) {
+    let animationFrameId;
+    let lastUpdate = 0;
+    const ANIMATION_INTERVAL = 100; // Update every 100ms instead of every frame
+
+    function animateMatrix(timestamp) {
+        if (timestamp - lastUpdate >= ANIMATION_INTERVAL && !isHovered) {
             chars.forEach(char => {
                 if (isNavItem) {
-                    // Nav item animation
-                    const baseBrightness = 0.8;
-                    const baseOpacity = 0.9;
-                    const brightnessVariation = 0.1;
-                    const opacityVariation = 0.1;
+                    // Nav item animation - reduced frequency
+                    if (Math.random() < 0.1) { // 10% chance instead of 100%
+                        const baseBrightness = 0.8;
+                        const baseOpacity = 0.9;
+                        const brightnessVariation = 0.1;
+                        const opacityVariation = 0.1;
 
-                    const brightness = baseBrightness + (Math.random() * brightnessVariation - brightnessVariation / 2);
-                    const opacity = baseOpacity + (Math.random() * opacityVariation - opacityVariation / 2);
+                        const brightness = baseBrightness + (Math.random() * brightnessVariation - brightnessVariation / 2);
+                        const opacity = baseOpacity + (Math.random() * opacityVariation - opacityVariation / 2);
 
-                    char.style.color = `rgba(0, ${Math.floor(255 * brightness)}, 0, ${opacity})`;
-                    char.style.textShadow = `0 0 2px rgba(0, ${Math.floor(255 * brightness)}, 0, ${opacity})`;
+                        char.style.color = `rgba(0, ${Math.floor(255 * brightness)}, 0, ${opacity})`;
+                        char.style.textShadow = `0 0 2px rgba(0, ${Math.floor(255 * brightness)}, 0, ${opacity})`;
+                    }
 
-                    // Character change for nav items
-                    if (Math.random() < 0.005) { // Increased chance for more noticeable effect
+                    // Character change for nav items - much reduced frequency
+                    if (Math.random() < 0.001) {
                         const originalChar = char.textContent;
                         const originalColor = char.style.color;
                         const originalShadow = char.style.textShadow;
 
                         char.textContent = getRandomChar();
-                        char.style.color = `rgba(0, 255, 0, 1)`; // Bright green
+                        char.style.color = `rgba(0, 255, 0, 1)`;
                         char.style.textShadow = `0 0 5px rgba(0, 255, 0, 1)`;
 
                         setTimeout(() => {
                             char.textContent = originalChar;
                             char.style.color = originalColor;
                             char.style.textShadow = originalShadow;
-                        }, 100); // Revert after 100ms
+                        }, 100);
                     }
                 } else {
-                    // Background text animation (unchanged)
-                    if (Math.random() < 0.005) {
+                    // Background text animation - reduced frequency
+                    if (Math.random() < 0.002) {
                         char.textContent = getRandomChar();
 
                         const brightness = 0.2 + Math.random() * 0.2;
@@ -75,19 +81,20 @@ function applyMatrixEffect(element) {
                         }, 200 + Math.random() * 300);
                     }
 
-                    if (Math.random() < 0.05) {
+                    if (Math.random() < 0.02) { // Reduced from 0.05
                         const subtleBrightness = 0.2 + Math.random() * 0.1;
                         const subtleOpacity = 0.1 + Math.random() * 0.1;
                         char.style.color = `rgba(0, ${Math.floor(255 * subtleBrightness)}, 0, ${subtleOpacity})`;
                     }
                 }
             });
+            lastUpdate = timestamp;
         }
 
-        requestAnimationFrame(animateMatrix);
+        animationFrameId = requestAnimationFrame(animateMatrix);
     }
 
-    animateMatrix();
+    animateMatrix(performance.now());
 
     // Hover effect for nav items
     if (isNavItem) {
