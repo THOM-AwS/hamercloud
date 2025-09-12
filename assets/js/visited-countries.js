@@ -269,7 +269,7 @@ function initMap() {
             {
                 featureType: 'landscape',
                 elementType: 'geometry',
-                stylers: [{ color: '#2c5aa0' }]
+                stylers: [{ visibility: 'on' }]
             },
             {
                 featureType: 'road',
@@ -313,7 +313,7 @@ function initMap() {
 async function loadCountryBoundaries() {
     try {
         // Use Google Maps Data layer for country boundaries
-        map.data.loadGeoJson('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson');
+        map.data.loadGeoJson('https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson');
         
         map.data.setStyle(function(feature) {
             const countryName = feature.getProperty('name');

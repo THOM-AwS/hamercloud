@@ -499,7 +499,7 @@
 						<a href="https://twitter.com/intent/tweet?url=https://hamer.cloud/&text=Expert%20AWS%20Solutions%20Architect%20Professional%20-%20Cloud%20Consulting%20Services" target="_blank" rel="noopener" class="share-btn twitter" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: #1da1f2; color: white; text-decoration: none; border-radius: 4px;">
 							<i class="fab fa-twitter"></i> Share on Twitter
 						</a>
-						<button onclick="copyToClipboard('https://hamer.cloud/')" class="share-btn copy" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: #666; color: white; border: none; border-radius: 4px; cursor: pointer;">
+						<button onclick="copyToClipboard(event, 'https://hamer.cloud/')" class="share-btn copy" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: #666; color: white; border: none; border-radius: 4px; cursor: pointer;">
 							<i class="fas fa-link"></i> Copy Link
 						</button>
 					</div>
@@ -731,7 +731,7 @@
 	
 	<script>
 		// Copy to clipboard functionality
-		function copyToClipboard(text) {
+		function copyToClipboard(event, text) {
 			navigator.clipboard.writeText(text).then(function() {
 				// Show success feedback
 				const button = event.target.closest('button');

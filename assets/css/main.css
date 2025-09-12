@@ -1839,7 +1839,7 @@ ul.icons {
     font-size: 20px;
     color: #00ff00;
     text-shadow: 0 0 3px rgba(0, 255, 0, 0.7);
-    z-index: 1001;
+    z-index: 1;
 }
 
 .matrix-char {
