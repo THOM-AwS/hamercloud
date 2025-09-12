@@ -1849,7 +1849,13 @@ ul.icons {
 /* Google Maps container - should appear above matrix text */
 #worldMap {
     position: relative;
-    z-index: 1100;
+    z-index: 9999;
+}
+
+/* Ensure the about article also has proper z-index */
+article#about {
+    position: relative;
+    z-index: 1000;
 }
 
 .nav-item {
