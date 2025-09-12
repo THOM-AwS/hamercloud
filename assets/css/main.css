@@ -1846,6 +1846,12 @@ ul.icons {
     transition: color 0.3s, text-shadow 0.3s;
 }
 
+/* Google Maps container - should appear above matrix text */
+#worldMap {
+    position: relative;
+    z-index: 1050;
+}
+
 .nav-item {
     color: #00ff00;
     font-size: 18px;

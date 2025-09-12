@@ -254,10 +254,12 @@ let map;
 let countryPolygons = [];
 
 function initMap() {
-    // Initialize the map
+    // Initialize the map centered over Australia at equator
     map = new google.maps.Map(document.getElementById('worldMap'), {
-        center: { lat: 20, lng: 0 },
+        center: { lat: 0, lng: 134 }, // Australia longitude at equator
         zoom: 2,
+        disableDefaultUI: true, // Remove all default controls
+        gestureHandling: 'cooperative', // Better mobile experience
         styles: [
             {
                 featureType: 'water',
@@ -299,7 +301,7 @@ async function loadCountryBoundaries() {
         map.data.loadGeoJson('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson');
         
         map.data.setStyle(function(feature) {
-            const countryName = feature.getProperty('NAME');
+            const countryName = feature.getProperty('name');
             const isVisited = visitedCountries.includes(countryName);
             
             return {
@@ -326,7 +328,7 @@ async function loadCountryBoundaries() {
         // Add info window on click
         const infoWindow = new google.maps.InfoWindow();
         map.data.addListener('click', function(event) {
-            const countryName = event.feature.getProperty('NAME');
+            const countryName = event.feature.getProperty('name');
             const isVisited = visitedCountries.includes(countryName);
             const status = isVisited ? 'Visited ✅' : 'Not visited yet ❌';
             
