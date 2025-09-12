@@ -40,7 +40,7 @@ var visitedCountries = [
   "Canada",
   "Switzerland",
   //"Chile",
-  //"China",
+  "China",
   //"Ivory Coast",
   //"Clipperton Island",
   //"Cameroon",
@@ -117,13 +117,13 @@ var visitedCountries = [
   //"Kazakhstan",
   //"Kenya",
   //"Kyrgyzstan",
-  //"Cambodia",
+  "Cambodia",
   //"Kiribati",
   //"Saint Kitts and Nevis",
   //"South Korea Republic of Korea",
   //"Kosovo",
   //"Kuwait",
-  //"Laos",
+  "Laos",
   //"Lebanon",
   //"Liberia",
   //"Libya",
@@ -264,7 +264,7 @@ function initMap() {
             {
                 featureType: 'water',
                 elementType: 'geometry',
-                stylers: [{ color: '#193341' }]
+                stylers: [{ visibility: 'on' }]
             },
             {
                 featureType: 'landscape',
