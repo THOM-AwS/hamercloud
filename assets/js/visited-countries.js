@@ -57,7 +57,7 @@ var visitedCountries = [
   //"Cayman Islands",
   //"Northern Cyprus",
   //"Cyprus",
-  "Czech Republic",
+  "Czechia",
   "Germany",
   //"Djibouti",
   //"Dominica",
