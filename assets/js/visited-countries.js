@@ -287,6 +287,21 @@ function initMap() {
                 featureType: 'administrative',
                 elementType: 'geometry.stroke',
                 stylers: [{ color: '#4b6878', weight: 0.5 }]
+            },
+            {
+                featureType: 'administrative',
+                elementType: 'labels',
+                stylers: [{ visibility: 'off' }]
+            },
+            {
+                featureType: 'administrative.country',
+                elementType: 'labels',
+                stylers: [{ visibility: 'off' }]
+            },
+            {
+                featureType: 'administrative.locality',
+                elementType: 'labels',
+                stylers: [{ visibility: 'off' }]
             }
         ]
     });
