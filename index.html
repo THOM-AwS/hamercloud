@@ -509,7 +509,7 @@
 			<!-- Family History -->
 			<article id="family">
 				<h2 class="major">Family History</h2>
-				<span class="image main"><img src="images/900952.avif" alt="Hamer Family Crest" style="width:100%;height:100%;" loading="lazy" /></span>
+				<span class="image main"><img src="images/900952.avif" alt="Hamer Family Crest" style="width:50%;height:50%;" loading="lazy" /></span>
 				
 				<h3>The Hamer Family Legacy</h3>
 				<p>The Hamer family has a rich history spanning centuries, with roots tracing back to Lancashire, England, and eventual migration to Australia in the mid-19th century.</p>
@@ -814,6 +814,11 @@
 		document.addEventListener('DOMContentLoaded', function() {
 			if (document.getElementById('hamer-family-tree')) {
 				var familyTree = new FamilyTree(document.getElementById("hamer-family-tree"), {
+					mouseScrool: FamilyTree.action.scroll,
+					showYScroll: FamilyTree.scroll.visible,
+					showXScroll: FamilyTree.scroll.visible,
+					enableSearch: true,
+					template: "john",
 					nodeBinding: {
 						field_0: "name",
 						field_1: "title",
@@ -821,11 +826,10 @@
 					},
 					editForm: {
 						readOnly: true
-					},
-					enableSearch: true,
-					scaleInitial: 0.7,
-					template: "tommy",
-					nodes: [
+					}
+				});
+
+				familyTree.load([
 						// Historical Early Ancestors
 						{id: "richard1296", name: "Richard Hamer", title: "First recorded Hamer\nSussex Subsidy Rolls (1296)", gender: "male"},
 						{id: "john1401", name: "John of the Hamore", title: "Lancashire Assize Rolls (1401)", gender: "male"},
@@ -907,14 +911,13 @@
 						{id: "robert", name: "Robert Tearne", title: "", gender: "male"},
 						
 						// Thomas's Generation
-						{id: "thomas", name: "Thomas C Hamer", title: "Royal Australian Navy\nPersian Gulf GWOT Deployment\n(Service No. R174493/M8118116)\n(1983-Living)", gender: "male", mid: "jan", fid: "graham"},
+						{id: "thomas", name: "Thomas C Hamer", title: "Royal Australian Navy\nPersian Gulf GWOT Deployment\n(Service No. R174493/M8118116)\n(1983-Living)", gender: "male", mid: "jan", fid: "peter"},
 						{id: "lauren", name: "Lauren P J Hamer", title: "(86-Living)", gender: "female", mid: "jan", fid: "graham"},
 						{id: "benjamin", name: "Benjamin Tearne", title: "(76-Living)", gender: "male", mid: "jan", fid: "robert"},
 						{id: "andrea", name: "Andrea Simpson", title: "(Living)", gender: "female", mid: "clemens", fid: "james"},
 						{id: "kylie", name: "Kylie Simpson", title: "(Living)", gender: "female", mid: "clemens", fid: "james"},
 						{id: "michael", name: "Michael Simpson", title: "(Living)", gender: "male", mid: "clemens", fid: "james"}
-					]
-				});
+				]);
 			}
 		});
 	</script>
