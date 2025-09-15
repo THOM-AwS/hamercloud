@@ -808,116 +808,182 @@
 	</script>
 	
 	<!-- Family Tree JS -->
-	<script src="https://balkan.app/js/familytree.js"></script>
+	<script src="https://unpkg.com/gojs@2.3.17/release/go.js"></script>
 	<script>
-		// Initialize Family Tree when page loads
+		// Initialize GoJS Family Tree when page loads
 		document.addEventListener('DOMContentLoaded', function() {
 			if (document.getElementById('hamer-family-tree')) {
-				var familyTree = new FamilyTree(document.getElementById("hamer-family-tree"), {
-					mouseScrool: FamilyTree.action.scroll,
-					showYScroll: FamilyTree.scroll.visible,
-					showXScroll: FamilyTree.scroll.visible,
-					enableSearch: true,
-					template: "john",
-					nodeBinding: {
-						field_0: "name",
-						field_1: "title",
-						img_0: "img"
-					},
-					editForm: {
-						readOnly: true
-					}
+				const $ = go.GraphObject.make;
+				
+				// Initialize the diagram
+				const myDiagram = $(go.Diagram, "hamer-family-tree", {
+					"undoManager.isEnabled": true,
+					layout: $(go.TreeLayout, {
+						angle: 90,
+						layerSpacing: 35,
+						arrangement: go.TreeLayout.ArrangementHorizontal
+					}),
+					"toolManager.mouseWheelBehavior": go.ToolManager.WheelZoom,
+					allowZoom: true,
+					allowHorizontalScroll: true,
+					allowVerticalScroll: true,
+					hasHorizontalScrollbar: true,
+					hasVerticalScrollbar: true,
+					initialScale: 0.8
 				});
 
-				familyTree.load([
-						// Historical Early Ancestors
-						{id: "richard1296", name: "Richard Hamer", title: "First recorded Hamer\nSussex Subsidy Rolls (1296)", gender: "male"},
-						{id: "john1401", name: "John of the Hamore", title: "Lancashire Assize Rolls (1401)", gender: "male"},
-						
-						// Early English Academic Line
-						{id: "samuel", name: "Samuel Hamer", title: "Oxford University BA (1593), MA (1596)\nFellow at Brasenose College", gender: "male"},
-						{id: "james_bd", name: "James Hamer", title: "Bachelor of Divinity (1669)\nMaster of Magdalene College", gender: "male"},
-						
-						// Australian Pioneer Settlers - Andrew Hamer Line
-						{id: "andrew", name: "Andrew Hamer", title: "Pioneer Settler (1841)\nQueen Charlotte's Vale, Bathurst\n(11 Nov 1812 - 01 Aug 1893)", gender: "male"},
-						{id: "sarah_stott", name: "Sarah Jane Stott", title: "Lancashire, England\n(23 Mar 1817 - 08 Mar 1855)", gender: "female", pids: ["andrew"]},
-						{id: "alice", name: "Alice Hamer", title: "Born Bolton Parish (1839)", gender: "female", mid: "sarah_stott", fid: "andrew"},
-						
-						// Michael Elias Hamer Branch
-						{id: "michael", name: "Michael Elias Hamer", title: "Farmer\n(24 Feb 1846 - 06 Aug 1929)", gender: "male", mid: "sarah_stott", fid: "andrew"},
-						{id: "sarah_cheney", name: "Sarah Prudence Cheney", title: "(13 Jul 1851 - 25 Apr 1935)", gender: "female", pids: ["michael"]},
-						
-						// The 12 Children of Michael & Sarah
-						{id: "anne", name: "Anne Letitia Hill", title: "(b. 1871)", gender: "female", mid: "sarah_cheney", fid: "michael"},
-						{id: "rachel", name: "Rachel Hamer", title: "(b. 1873)", gender: "female", mid: "sarah_cheney", fid: "michael"},
-						{id: "mary_rachel", name: "Mary Rachel Hamer", title: "(b. 1873)", gender: "female", mid: "sarah_cheney", fid: "michael"},
-						{id: "ada", name: "Ada Emily Hamer", title: "(b. 1875)", gender: "female", mid: "sarah_cheney", fid: "michael"},
-						{id: "sarah_jane", name: "Sarah Jane Hamer", title: "(b. 1877)", gender: "female", mid: "sarah_cheney", fid: "michael"},
-						{id: "ernest", name: "Ernest George Hamer", title: "Farmer, Morbell & Canowindra\n(24 Jul 1879 - 13 Mar 1955)", gender: "male", mid: "sarah_cheney", fid: "michael"},
-						{id: "ellen", name: "Ellen Rose Hamer", title: "(b. 1881)", gender: "female", mid: "sarah_cheney", fid: "michael"},
-						{id: "arthur", name: "Arthur Henry Hamer", title: "(b. 1883)", gender: "male", mid: "sarah_cheney", fid: "michael"},
-						{id: "herbert_william", name: "Herbert William E Hamer", title: "(b. 1890)", gender: "male", mid: "sarah_cheney", fid: "michael"},
-						{id: "alma", name: "Alma Prudence Hamer", title: "(b. 1892)", gender: "female", mid: "sarah_cheney", fid: "michael"},
-						{id: "alfred_1893", name: "Alfred Hamer", title: "(b. 1893)", gender: "male", mid: "sarah_cheney", fid: "michael"},
-						
-						// Ernest's Family - Possible Reynolds Connection
-						{id: "mary_reynolds", name: "Mary Jane Reynolds", title: "Married 1906, Blayney NSW\n(Possible relation to Mary Jane Reynolds - Lloyd's mother)", gender: "female", pids: ["ernest"]},
-						{id: "dudley", name: "Dudley Ernest Hamer", title: "(b. 1907)", gender: "male", mid: "mary_reynolds", fid: "ernest"},
-						{id: "nena", name: "Nena Eileen Simmons", title: "(b. 1908)", gender: "female", mid: "mary_reynolds", fid: "ernest"},
-						{id: "aubrey", name: "Aubrey Ellis Hamer", title: "(b. 1910)", gender: "male", mid: "mary_reynolds", fid: "ernest"},
-						
-						// Melbourne Professional Hamer Family
-						{id: "daniel_hamer", name: "Daniel Jones Hamer", title: "Manchester, England", gender: "male"},
-						{id: "sarah_harman", name: "Sarah Harman", title: "", gender: "female", pids: ["daniel_hamer"]},
-						{id: "ethel_swinburne", name: "Ethel (Hamer) Swinburne", title: "Sister of Hubert\n(b. 1868)", gender: "female", mid: "sarah_harman", fid: "daniel_hamer"},
-						{id: "hubert", name: "Hubert Ralph Hamer", title: "Barrister & Solicitor, Melbourne\nPartner J.M. Smith & Emmerton\n(1870-1948)", gender: "male", mid: "sarah_harman", fid: "daniel_hamer"},
-						{id: "elizabeth_mcluckie", name: "Elizabeth Ann McLuckie", title: "Married 1915, Victoria\n(Known as Nancy)", gender: "female", pids: ["hubert"]},
-						
-						{id: "rupert", name: "Sir Rupert James Hamer", title: "Premier of Victoria (1972-1981)\nMajor, 2nd/43rd Battalion AIF\n'Rat of Tobruk'\n(Service No. VX13528/213040)\n(1916-2004)", gender: "male", mid: "elizabeth_mcluckie", fid: "hubert"},
-						{id: "alan", name: "Alan William Hamer", title: "Rhodes Scholar, Oxford Chemistry\nICI Executive Director & Managing Director\nFederal Science Adviser\n(1917-2012)", gender: "male", mid: "elizabeth_mcluckie", fid: "hubert"},
-						{id: "alison", name: "Alison Patrick", title: "French Revolution Historian\nUniversity of Melbourne\n(1921-2009)", gender: "female", mid: "elizabeth_mcluckie", fid: "hubert"},
-						{id: "david_john", name: "David John Hamer", title: "Captain RAN, DSC\nLiberal Senator for Victoria\nChairman of Committees\n(1923-2002)", gender: "male", mid: "elizabeth_mcluckie", fid: "hubert"},
-						
-						// Other Notable Military Service Members - Likely Connected to NSW Hamer Families
-						{id: "harold", name: "Harold Hamer", title: "WO2, 2/1 Pioneer Battalion\n'Rat of Tobruk'\n(Service No. NX32961)\n(1911-2000)\nLikely descendant of Andrew Hamer settlers", gender: "male"},
-						{id: "herbert", name: "Herbert Hamer", title: "Sapper, Australian Army\nEnlisted age 50\n(Service No. N272454)\n(1891-1943)\nPossibly connected to Andrew Hamer line", gender: "male"},
-						{id: "clive", name: "Clive Arthur Hamer AM", title: "Private, 2 Advanced Ordnance Depot\nAuthor 'Hope of the Vale'\nOrder of Australia (1985)\n(Service No. NX141383/N276632)\n(1923-2015)\nSame birth year as David Hamer - possible cousin", gender: "male"},
-						
-						// Contemporary Politicians
-						{id: "paul_hamer", name: "Paul Hamer", title: "Labor Party MP\nVictorian Legislative Assembly\nBox Hill (2018-present)", gender: "male"},
-						
-						// Your Direct Family Line
-						// Great-Grandparents Generation
-						{id: "james_weir", name: "James S Weir", title: "", gender: "male"},
-						{id: "thomas_h_gillings_sr", name: "Thomas H Gillings", title: "", gender: "male"},
-						{id: "alfred_francisco", name: "Alfred J Francisco", title: "", gender: "male"},
-						{id: "jessie_evans", name: "Jessie E Evans", title: "", gender: "female", pids: ["alfred_francisco"]},
-						{id: "mary_jane_reynolds_lloyd", name: "Mary Jane Reynolds", title: "", gender: "female"},
-						
-						// Grandparents Generation
-						{id: "lloyd", name: "Lloyd G Hamer", title: "(1919-2012)", gender: "male", mid: "mary_jane_reynolds_lloyd"},
-						{id: "monica", name: "Monica Mary Francisco", title: "(-2016)", gender: "female", pids: ["lloyd"], fid: "alfred_francisco", mid: "jessie_evans"},
-						{id: "thomas_gillings", name: "Thomas H C Gillings", title: "Merchant Sailor, WWII Hero\nSurvived 2 torpedo attacks\nSS Limerick survivor\n(Service No. 171243)", gender: "male", fid: "thomas_h_gillings_sr"},
-						{id: "joan", name: "Joan Weir", title: "", gender: "female", pids: ["thomas_gillings"], fid: "james_weir"},
-						
-						// Parents Generation
-						{id: "graham", name: "Graham Hamer", title: "(Living)", gender: "male", mid: "monica", fid: "lloyd"},
-						{id: "peter", name: "Peter Lloyd Hamer", title: "(Living)", gender: "male", mid: "monica", fid: "lloyd"},
-						{id: "jan", name: "Jan P Gillings", title: "(52-Living)", gender: "female", mid: "joan", fid: "thomas_gillings", pids: ["graham"]},
-						{id: "phillip", name: "Phillip Cullen", title: "", gender: "male", pids: ["jan"]},
-						{id: "clemens", name: "Clemens Gillings", title: "(Living)", gender: "male", mid: "joan", fid: "thomas_gillings"},
-						{id: "james", name: "James Simpson", title: "", gender: "male", pids: ["clemens"]},
-						{id: "vaughn", name: "Vaughn Gillings", title: "(Living)", gender: "female", mid: "joan", fid: "thomas_gillings"},
-						{id: "robert", name: "Robert Tearne", title: "", gender: "male"},
-						
-						// Thomas's Generation
-						{id: "thomas", name: "Thomas C Hamer", title: "Royal Australian Navy\nPersian Gulf GWOT Deployment\n(Service No. R174493/M8118116)\n(1983-Living)", gender: "male", mid: "jan", fid: "peter"},
-						{id: "lauren", name: "Lauren P J Hamer", title: "(86-Living)", gender: "female", mid: "jan", fid: "graham"},
-						{id: "benjamin", name: "Benjamin Tearne", title: "(76-Living)", gender: "male", mid: "jan", fid: "robert"},
-						{id: "andrea", name: "Andrea Simpson", title: "(Living)", gender: "female", mid: "clemens", fid: "james"},
-						{id: "kylie", name: "Kylie Simpson", title: "(Living)", gender: "female", mid: "clemens", fid: "james"},
-						{id: "michael", name: "Michael Simpson", title: "(Living)", gender: "male", mid: "clemens", fid: "james"}
-				]);
+				// Define the node template with site's dark theme colors
+				myDiagram.nodeTemplate =
+					$(go.Node, "Auto",
+						{
+							locationSpot: go.Spot.Center,
+							mouseEnter: function(e, obj) {
+								obj.findObject("SHAPE").fill = "#333";
+							},
+							mouseLeave: function(e, obj) {
+								obj.findObject("SHAPE").fill = "#1b1f22";
+							}
+						},
+						$(go.Shape, "RoundedRectangle",
+							{
+								name: "SHAPE",
+								fill: "#1b1f22",
+								stroke: "#666",
+								strokeWidth: 2,
+								minSize: new go.Size(120, 60)
+							}),
+						$(go.Panel, "Vertical",
+							{margin: 8},
+							$(go.TextBlock,
+								{
+									font: "bold 14px sans-serif",
+									stroke: "#ffffff",
+									margin: new go.Margin(0, 0, 5, 0),
+									wrap: go.TextBlock.WrapFit,
+									width: 110
+								},
+								new go.Binding("text", "name")),
+							$(go.TextBlock,
+								{
+									font: "11px sans-serif",
+									stroke: "#cccccc",
+									wrap: go.TextBlock.WrapFit,
+									width: 110
+								},
+								new go.Binding("text", "title"))
+						)
+					);
+
+				// Define the link template
+				myDiagram.linkTemplate =
+					$(go.Link,
+						{
+							routing: go.Link.Orthogonal,
+							corner: 5
+						},
+						$(go.Shape, {
+							strokeWidth: 2,
+							stroke: "#666"
+						}));
+
+				// Define the model data
+				const familyData = [
+					// Historical Early Ancestors
+					{key: "richard1296", name: "Richard Hamer", title: "First recorded Hamer\nSussex Subsidy Rolls (1296)"},
+					{key: "john1401", name: "John of the Hamore", title: "Lancashire Assize Rolls (1401)", parent: "richard1296"},
+					
+					// Early English Academic Line  
+					{key: "samuel", name: "Samuel Hamer", title: "Oxford University BA (1593), MA (1596)\nFellow at Brasenose College", parent: "john1401"},
+					{key: "james_bd", name: "James Hamer", title: "Bachelor of Divinity (1669)\nMaster of Magdalene College", parent: "samuel"},
+					
+					// Australian Pioneer Settlers - Andrew Hamer Line
+					{key: "andrew", name: "Andrew Hamer", title: "Pioneer Settler (1841)\nQueen Charlotte's Vale, Bathurst\n(11 Nov 1812 - 01 Aug 1893)", parent: "james_bd"},
+					{key: "sarah_stott", name: "Sarah Jane Stott", title: "Lancashire, England\n(23 Mar 1817 - 08 Mar 1855)"},
+					{key: "alice", name: "Alice Hamer", title: "Born Bolton Parish (1839)\n(Parents: Andrew & Sarah)", parent: "andrew"},
+					
+					// Michael Elias Hamer Branch
+					{key: "michael", name: "Michael Elias Hamer", title: "Farmer\n(24 Feb 1846 - 06 Aug 1929)\n(Parents: Andrew & Sarah)", parent: "andrew"},
+					{key: "sarah_cheney", name: "Sarah Prudence Cheney", title: "(13 Jul 1851 - 25 Apr 1935)"},
+					
+					// The 12 Children of Michael & Sarah
+					{key: "anne", name: "Anne Letitia Hill", title: "(b. 1871)\n(Parents: Michael & Sarah)", parent: "michael"},
+					{key: "rachel", name: "Rachel Hamer", title: "(b. 1873)\n(Parents: Michael & Sarah)", parent: "michael"},
+					{key: "mary_rachel", name: "Mary Rachel Hamer", title: "(b. 1873)\n(Parents: Michael & Sarah)", parent: "michael"},
+					{key: "ada", name: "Ada Emily Hamer", title: "(b. 1875)\n(Parents: Michael & Sarah)", parent: "michael"},
+					{key: "sarah_jane", name: "Sarah Jane Hamer", title: "(b. 1877)\n(Parents: Michael & Sarah)", parent: "michael"},
+					{key: "ernest", name: "Ernest George Hamer", title: "Farmer, Morbell & Canowindra\n(24 Jul 1879 - 13 Mar 1955)\n(Parents: Michael & Sarah)", parent: "michael"},
+					{key: "ellen", name: "Ellen Rose Hamer", title: "(b. 1881)\n(Parents: Michael & Sarah)", parent: "michael"},
+					{key: "arthur", name: "Arthur Henry Hamer", title: "(b. 1883)\n(Parents: Michael & Sarah)", parent: "michael"},
+					{key: "herbert_william", name: "Herbert William E Hamer", title: "(b. 1890)\n(Parents: Michael & Sarah)", parent: "michael"},
+					{key: "alma", name: "Alma Prudence Hamer", title: "(b. 1892)\n(Parents: Michael & Sarah)", parent: "michael"},
+					{key: "alfred_1893", name: "Alfred Hamer", title: "(b. 1893)\n(Parents: Michael & Sarah)", parent: "michael"},
+					
+					// Ernest's Family
+					{key: "mary_reynolds", name: "Mary Jane Reynolds", title: "Married 1906, Blayney NSW\n(Possible relation to Mary Jane Reynolds)"},
+					{key: "dudley", name: "Dudley Ernest Hamer", title: "(b. 1907)\n(Parents: Ernest & Mary Reynolds)", parent: "ernest"},
+					{key: "nena", name: "Nena Eileen Simmons", title: "(b. 1908)\n(Parents: Ernest & Mary Reynolds)", parent: "ernest"},
+					{key: "aubrey", name: "Aubrey Ellis Hamer", title: "(b. 1910)\n(Parents: Ernest & Mary Reynolds)", parent: "ernest"},
+					
+					// Melbourne Professional Hamer Family
+					{key: "daniel_hamer", name: "Daniel Jones Hamer", title: "Manchester, England"},
+					{key: "sarah_harman", name: "Sarah Harman", title: ""},
+					{key: "ethel_swinburne", name: "Ethel (Hamer) Swinburne", title: "Sister of Hubert\n(b. 1868)\n(Parents: Daniel & Sarah)", parent: "daniel_hamer"},
+					{key: "hubert", name: "Hubert Ralph Hamer", title: "Barrister & Solicitor, Melbourne\nPartner J.M. Smith & Emmerton\n(1870-1948)\n(Parents: Daniel & Sarah)", parent: "daniel_hamer"},
+					{key: "elizabeth_mcluckie", name: "Elizabeth Ann McLuckie", title: "Married 1915, Victoria\n(Known as Nancy)"},
+					
+					{key: "rupert", name: "Sir Rupert James Hamer", title: "Premier of Victoria (1972-1981)\nMajor, 2nd/43rd Battalion AIF\n'Rat of Tobruk'\n(1916-2004)\n(Parents: Hubert & Elizabeth)", parent: "hubert"},
+					{key: "alan", name: "Alan William Hamer", title: "Rhodes Scholar, Oxford Chemistry\nICI Executive Director\n(1917-2012)\n(Parents: Hubert & Elizabeth)", parent: "hubert"},
+					{key: "alison", name: "Alison Patrick", title: "French Revolution Historian\nUniversity of Melbourne\n(1921-2009)\n(Parents: Hubert & Elizabeth)", parent: "hubert"},
+					{key: "david_john", name: "David John Hamer", title: "Captain RAN, DSC\nLiberal Senator for Victoria\n(1923-2002)\n(Parents: Hubert & Elizabeth)", parent: "hubert"},
+					
+					// Other Notable Military Service Members
+					{key: "harold", name: "Harold Hamer", title: "WO2, 2/1 Pioneer Battalion\n'Rat of Tobruk'\n(1911-2000)"},
+					{key: "herbert", name: "Herbert Hamer", title: "Sapper, Australian Army\nEnlisted age 50\n(1891-1943)"},
+					{key: "clive", name: "Clive Arthur Hamer AM", title: "Private, 2 Advanced Ordnance Depot\nAuthor 'Hope of the Vale'\n(1923-2015)"},
+					
+					// Contemporary Politicians
+					{key: "paul_hamer", name: "Paul Hamer", title: "Labor Party MP\nVictorian Legislative Assembly\nBox Hill (2018-present)"},
+					
+					// Your Direct Family Line - Great-Grandparents
+					{key: "james_weir", name: "James S Weir", title: ""},
+					{key: "thomas_h_gillings_sr", name: "Thomas H Gillings", title: ""},
+					{key: "alfred_francisco", name: "Alfred J Francisco", title: ""},
+					{key: "jessie_evans", name: "Jessie E Evans", title: ""},
+					{key: "mary_jane_reynolds_lloyd", name: "Mary Jane Reynolds", title: ""},
+					
+					// Grandparents Generation
+					{key: "lloyd", name: "Lloyd G Hamer", title: "(1919-2012)\n(Parents: Mary Jane Reynolds)", parent: "mary_jane_reynolds_lloyd"},
+					{key: "monica", name: "Monica Mary Francisco", title: "(-2016)\n(Parents: Alfred & Jessie)", parent: "alfred_francisco"},
+					{key: "thomas_gillings", name: "Thomas H C Gillings", title: "Merchant Sailor, WWII Hero\nSurvived 2 torpedo attacks\n(Service No. 171243)\n(Parents: Thomas H Gillings Sr)", parent: "thomas_h_gillings_sr"},
+					{key: "joan", name: "Joan Weir", title: "(Parents: James S Weir)", parent: "james_weir"},
+					
+					// Parents Generation
+					{key: "graham", name: "Graham Hamer", title: "(Living)\n(Parents: Lloyd & Monica)", parent: "lloyd"},
+					{key: "peter", name: "Peter Lloyd Hamer", title: "(Living)\n(Parents: Lloyd & Monica)", parent: "lloyd"},
+					{key: "jan", name: "Jan P Gillings", title: "(52-Living)\n(Parents: Thomas & Joan)", parent: "thomas_gillings"},
+					{key: "phillip", name: "Phillip Cullen", title: ""},
+					{key: "clemens", name: "Clemens Gillings", title: "(Living)\n(Parents: Thomas & Joan)", parent: "thomas_gillings"},
+					{key: "james", name: "James Simpson", title: ""},
+					{key: "vaughn", name: "Vaughn Gillings", title: "(Living)\n(Parents: Thomas & Joan)", parent: "thomas_gillings"},
+					{key: "robert", name: "Robert Tearne", title: ""},
+					
+					// Thomas's Generation
+					{key: "thomas", name: "Thomas C Hamer", title: "Royal Australian Navy\nPersian Gulf GWOT Deployment\n(Parents: Jan & Peter)\n(1983-Living)", parent: "jan"},
+					{key: "lauren", name: "Lauren P J Hamer", title: "(Parents: Jan & Peter)\n(86-Living)", parent: "jan"},
+					{key: "benjamin", name: "Benjamin Tearne", title: "(Parents: Jan & Robert)\n(76-Living)", parent: "jan"},
+					{key: "andrea", name: "Andrea Simpson", title: "(Living)\n(Parents: Clemens & James)", parent: "clemens"},
+					{key: "kylie", name: "Kylie Simpson", title: "(Living)\n(Parents: Clemens & James)", parent: "clemens"},
+					{key: "michael", name: "Michael Simpson", title: "(Living)\n(Parents: Clemens & James)", parent: "clemens"}
+				];
+
+				// Set the model
+				myDiagram.model = $(go.TreeModel, {
+					nodeDataArray: familyData,
+					nodeParentKeyProperty: "parent"
+				});
+
+				// Center the diagram
+				myDiagram.zoomToFit();
 			}
 		});
 	</script>
