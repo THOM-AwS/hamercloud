@@ -563,6 +563,10 @@
 				</ul>
 				<p>From 16th-century Oxford scholars to 20th-century political leaders, from pioneering Australian settlers to distinguished military officers, the Hamer family legacy represents centuries of service, scholarship, and leadership. The naming of one of Australia's premier concert venues in the family's honor demonstrates the lasting impact of their contributions to Australian culture and society. This heritage of military service, political leadership, academic excellence, and community contribution reflects the family's longstanding commitment to service and duty—values that continue to influence the family today.</p>
 				
+				<h4>Interactive Family Tree</h4>
+				<p>Explore the Hamer family connections through this interactive genealogy chart:</p>
+				<div id="hamer-family-tree" style="width: 100%; height: 600px; border: 1px solid #ddd; margin: 20px 0; background: #f9f9f9;"></div>
+				
 				<p><strong>Learn More:</strong> For detailed genealogical information and historical records, visit the comprehensive <a href="https://ourrelatives.info/leaving-old-england/the-hamer-family" target="_blank" rel="noopener">Hamer Family History</a> documentation and <a href="https://catalogue.nla.gov.au/catalog/2359920" target="_blank" rel="noopener">"Hope of the Vale" by Clive Arthur Hamer</a>.</p>
 				
 				<h4>Sources & References</h4>
@@ -803,6 +807,85 @@
 		});
 	</script>
 	
+	<!-- Family Tree JS -->
+	<script src="https://balkan.app/js/familytree.js"></script>
+	<script>
+		// Initialize Family Tree when page loads
+		document.addEventListener('DOMContentLoaded', function() {
+			if (document.getElementById('hamer-family-tree')) {
+				var familyTree = new FamilyTree(document.getElementById("hamer-family-tree"), {
+					nodeBinding: {
+						field_0: "name",
+						field_1: "title",
+						img_0: "img"
+					},
+					editForm: {
+						readOnly: true
+					},
+					enableSearch: true,
+					scaleInitial: 0.7,
+					template: "tommy",
+					nodes: [
+						// Historical Early Ancestors
+						{id: "richard1296", name: "Richard Hamer", title: "First recorded Hamer\nSussex Subsidy Rolls (1296)", gender: "male"},
+						{id: "john1401", name: "John of the Hamore", title: "Lancashire Assize Rolls (1401)", gender: "male"},
+						
+						// Early English Academic Line
+						{id: "samuel", name: "Samuel Hamer", title: "Oxford University BA (1593), MA (1596)\nFellow at Brasenose College", gender: "male"},
+						{id: "james_bd", name: "James Hamer", title: "Bachelor of Divinity (1669)\nMaster of Magdalene College", gender: "male"},
+						
+						// Australian Pioneer Settlers
+						{id: "andrew", name: "Andrew Hamer", title: "Pioneer Settler (1841)\nQueen Charlotte's Vale, Bathurst", gender: "male"},
+						{id: "sarah", name: "Sarah Hamer", title: "Pioneer Settler\nDaughter Alice born 1839", gender: "female", pids: ["andrew"]},
+						{id: "alice", name: "Alice Hamer", title: "Born Bolton Parish (1839)", gender: "female", mid: "sarah", fid: "andrew"},
+						
+						// Distinguished 20th Century Hamer Siblings
+						{id: "hubert", name: "Hubert Hamer", title: "English-born Solicitor", gender: "male"},
+						{id: "elizabeth_mcluckie", name: "Elizabeth (Nancy) McLuckie", title: "Nurse", gender: "female", pids: ["hubert"]},
+						
+						{id: "rupert", name: "Sir Rupert James Hamer", title: "Premier of Victoria (1972-1981)\nMajor, 2nd/43rd Battalion AIF\n'Rat of Tobruk'\n(Service No. VX13528/213040)\n(1916-2004)", gender: "male", mid: "elizabeth_mcluckie", fid: "hubert"},
+						{id: "alan", name: "Alan William Hamer", title: "Rhodes Scholar, Oxford Chemistry\nICI Executive Director & Managing Director\nFederal Science Adviser\n(1917-2012)", gender: "male", mid: "elizabeth_mcluckie", fid: "hubert"},
+						{id: "alison", name: "Alison Patrick", title: "French Revolution Historian\nUniversity of Melbourne\n(1921-2009)", gender: "female", mid: "elizabeth_mcluckie", fid: "hubert"},
+						{id: "david_john", name: "David John Hamer", title: "Captain RAN, DSC\nLiberal Senator for Victoria\nChairman of Committees\n(1923-2002)", gender: "male", mid: "elizabeth_mcluckie", fid: "hubert"},
+						
+						// Other Notable Military Service Members
+						{id: "harold", name: "Harold Hamer", title: "WO2, 2/1 Pioneer Battalion\n'Rat of Tobruk'\n(Service No. NX32961)\n(1911-2000)", gender: "male"},
+						{id: "herbert", name: "Herbert Hamer", title: "Sapper, Australian Army\nEnlisted age 50\n(Service No. N272454)\n(1891-1943)", gender: "male"},
+						{id: "clive", name: "Clive Arthur Hamer AM", title: "Private, 2 Advanced Ordnance Depot\nAuthor 'Hope of the Vale'\nOrder of Australia (1985)\n(Service No. NX141383/N276632)\n(1923-2015)", gender: "male"},
+						
+						// Contemporary Politicians
+						{id: "paul_hamer", name: "Paul Hamer", title: "Labor Party MP\nVictorian Legislative Assembly\nBox Hill (2018-present)", gender: "male"},
+						
+						// Your Direct Family Line
+						// Grandparents Generation
+						{id: "lloyd", name: "Lloyd G Hamer", title: "(1919-2012)", gender: "male"},
+						{id: "monica", name: "Monica Mary Francisco", title: "(-2016)", gender: "female", pids: ["lloyd"]},
+						{id: "thomas_gillings", name: "Thomas H C Gillings", title: "Merchant Sailor, WWII Hero\nSurvived 2 torpedo attacks\nSS Limerick survivor\n(Service No. 171243)", gender: "male"},
+						{id: "joan", name: "Joan Weir", title: "", gender: "female", pids: ["thomas_gillings"]},
+						
+						// Parents Generation
+						{id: "graham", name: "Graham Hamer", title: "(Living)", gender: "male", mid: "monica", fid: "lloyd"},
+						{id: "peter", name: "Peter Lloyd Hamer", title: "(Living)", gender: "male", mid: "monica", fid: "lloyd"},
+						{id: "jan", name: "Jan P Gillings", title: "(52-Living)", gender: "female", mid: "joan", fid: "thomas_gillings", pids: ["graham"]},
+						{id: "phillip", name: "Phillip Cullen", title: "", gender: "male", pids: ["jan"]},
+						{id: "clemens", name: "Clemens Gillings", title: "(Living)", gender: "male", mid: "joan", fid: "thomas_gillings"},
+						{id: "james", name: "James Simpson", title: "", gender: "male", pids: ["clemens"]},
+						{id: "vaughn", name: "Vaughn Gillings", title: "(Living)", gender: "female", mid: "joan", fid: "thomas_gillings"},
+						{id: "robert", name: "Robert Tearne", title: "", gender: "male"},
+						
+						// Thomas's Generation
+						{id: "thomas", name: "Thomas C Hamer", title: "Royal Australian Navy\nPersian Gulf GWOT Deployment\n(Service No. R174493/M8118116)\n(1983-Living)", gender: "male", mid: "jan", fid: "graham"},
+						{id: "lauren", name: "Lauren P J Hamer", title: "(86-Living)", gender: "female", mid: "jan", fid: "graham"},
+						{id: "benjamin", name: "Benjamin Tearne", title: "(76-Living)", gender: "male", mid: "jan", fid: "robert"},
+						{id: "andrea", name: "Andrea Simpson", title: "(Living)", gender: "female", mid: "clemens", fid: "james"},
+						{id: "kylie", name: "Kylie Simpson", title: "(Living)", gender: "female", mid: "clemens", fid: "james"},
+						{id: "michael", name: "Michael Simpson", title: "(Living)", gender: "male", mid: "clemens", fid: "james"}
+					]
+				});
+			}
+		});
+	</script>
+
 	<script>
 		// Copy to clipboard functionality
 		function copyToClipboard(event, text) {
