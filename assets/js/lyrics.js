@@ -198,6 +198,10 @@ hoping that you'd stay (Baby, we both know)
 That the nights were mainly made for saying things that you can't say tomorrow day (Do I wanna know?) Too
 busy being yours to fall(Sad to see you go)
 Ever thought of calling darling ? (Do I wanna know ?) Do you want me crawling back to you ?`,
+
+    `Then I heard the voice of the Lord saying, “Whom shall I send? And who will go for us?” And I said, “Here am I. Send me!”`,
+
+    ``,
 ]
 
 export default content;
