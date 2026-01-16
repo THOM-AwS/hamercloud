@@ -1,9 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+    <!-- Homepage -->
     <url>
         <loc>https://hamer.cloud/</loc>
-        <lastmod>2025-09-12</lastmod>
+        <lastmod>2026-01-16</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://hamer.cloud/images/thomas.jpg</image:loc>
+            <image:title>Thomas Hamer - Staff Engineer and AWS Solutions Architect</image:title>
+            <image:caption>Thomas Hamer, Staff Engineer at Commonwealth Bank and AWS Solutions Architect Professional</image:caption>
+        </image:image>
     </url>
+
+    <!-- About Section -->
+    <url>
+        <loc>https://hamer.cloud/#about</loc>
+        <lastmod>2026-01-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Work/Portfolio Section -->
+    <url>
+        <loc>https://hamer.cloud/#work</loc>
+        <lastmod>2026-01-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <image:image>
+            <image:loc>https://hamer.cloud/images/aws.png</image:loc>
+            <image:title>AWS Solutions Architect Professional Badge</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://hamer.cloud/images/amplifyvod.png</image:loc>
+            <image:title>AWS Amplify Video on Demand Architecture</image:title>
+            <image:caption>Architecture diagram for Netflix-style video streaming platform built with AWS Amplify</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://hamer.cloud/images/vpccog.png</image:loc>
+            <image:title>AWS VPC Architecture Diagram</image:title>
+            <image:caption>Three-tier VPC architecture with Cognito authentication</image:caption>
+        </image:image>
+    </url>
+
+    <!-- Contact Section -->
+    <url>
+        <loc>https://hamer.cloud/#contact</loc>
+        <lastmod>2026-01-16</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Personal Section -->
+    <url>
+        <loc>https://hamer.cloud/#personal</loc>
+        <lastmod>2026-01-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <image:image>
+            <image:loc>https://hamer.cloud/images/boarding.jpg</image:loc>
+            <image:title>Thomas Hamer Snowboarding</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://hamer.cloud/images/suitNgongs.jpg</image:loc>
+            <image:title>Thomas Hamer Travel Photo</image:title>
+        </image:image>
+    </url>
+
+    <!-- Family History Section -->
+    <url>
+        <loc>https://hamer.cloud/#family</loc>
+        <lastmod>2026-01-16</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+        <image:image>
+            <image:loc>https://hamer.cloud/images/900952.avif</image:loc>
+            <image:title>Hamer Family Crest</image:title>
+            <image:caption>Historical Hamer family coat of arms from Lancashire, England</image:caption>
+        </image:image>
+    </url>
+
 </urlset>

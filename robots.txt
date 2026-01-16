@@ -1,3 +1,68 @@
+# robots.txt for hamer.cloud
+# Thomas Hamer - Staff Engineer | AWS Solutions Architect Professional
+
+# Allow all search engines
 User-agent: *
-allow: /
-sitemap: https://hamer.cloud/sitemap.xml
+Allow: /
+
+# Specific directives for major crawlers
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+# Block AI training crawlers (optional - keeps content for search but not AI training)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+# Block known bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+# Disallow assets directories from indexing (they're not content)
+User-agent: *
+Disallow: /assets/sass/
+Disallow: /assets/webfonts/
+
+# Sitemap location
+Sitemap: https://hamer.cloud/sitemap.xml
+
+# Host directive (canonical domain)
+Host: https://hamer.cloud
