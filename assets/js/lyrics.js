@@ -203,7 +203,7 @@ Ever thought of calling darling ? (Do I wanna know ?) Do you want me crawling ba
 
     `Harshness that protects the innocent is mercy, softness that tolerates evil is cruelty and cowardice.`,
 
-    ``,
+    `So I strive always to keep my consience clear before God and man.`,
 ]
 
 export default content;
