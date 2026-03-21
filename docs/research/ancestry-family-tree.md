@@ -77,17 +77,71 @@ Domingos F Canedo (1825-1905) ── m. Mary M Francisco S (1839-1928)
         └── Monica Mary Francisco (1929-2016) ── m. Lloyd George Hamer (1919-2012)
 ```
 
-### Maternal Gillings Line (Thomas's mother)
+### Maternal Gillings Line (Thomas's mother — Jan P Gillings)
 
 ```
-Thomas H Gillings ── m. Jane A C Brown (~1896-1973)
+John Carson (1730-1800)
+└── William Carson (1795-1877) × Margaret Hawthorn (1803-1858)
+    └── Joseph Carson (1833-1883) × Catherine Gay (1829-1912)
+        │  ← William H Gay (1796-1832) × Eleanor McFarland (1794-1876)
+        └── Robert Breen (1846-1901) × Elizabeth Carson (1861-1936)
+            └── Jane A C Breen (1886-1973)
+
+John Wornham (1740-1781) × Mary Wornham (1740-1838)
+└── Stephen Stammer (1770-1866) × Mary Wornham (1777-1855)
+    └── William Stammer (1810-1881) × Sarah Ann Willson (1801-1887)
+        └── Ellen Stammer (1846-1920)
+
+Thomas H Gillings (1886-1938) ── m. Jane A C Breen (1886-1973)
+│  Gillings parents: John William Gillings × Sara Chesterfield
+│  Breen parents: Robert Breen (1846-1901) × Elizabeth Carson (1861-1936)
 │
 └── Thomas Henry Carson Gillings (171243) ── m. Joan Weir
-    │  Merchant Navy WWII officer. Survived two torpedo attacks.
+    │  Born ~1920. Merchant Navy WWII officer. Survived two torpedo attacks.
     │  Awards: 1939-45 Star, Africa Star, Pacific Star, War Medal, ASM
-    │  Died 24 Aug 2002
-    │
-    │  Weir parents: James B Weir (~1904-1952) × May Ellen Fl[int?] (~1904-1964)
+    │  Died 24 Aug 2002 at Wamberal pub
     │
     └── Jan P Gillings (~1974-) ── m. Peter Lloyd Hamer
 ```
+
+#### Weir Line (Jan's maternal side)
+
+```
+George Keir (1790-1864)
+Thomas Mac Kenzie (1806-1849) × Frances Nicholson (1805-1898)
+
+James C Weir (1843-1911) ── m. Frances I Mackenzie (1846-1939)
+│  Scottish heritage through Mackenzie/Keir lines
+│
+└── James S Weir (1884-1952) ── m. May Ellen Flint (1899-1964)
+    │
+    │  Flint/Knight line:
+    │  Thomas F Knight (1848-1900) × Lucy Dent Kingston (1845-1918)
+    │  └── Lilla Knight (1875-1899) — died age 24
+    │      × William F Flint (1874-?)
+    │      └── May Ellen Flint (1899-1964)
+    │
+    │  Stammer line:
+    │  Stephen Stammer (1770-1866) × Mary Wornham (1777-1855)
+    │  └── William Stammer (1810-1881) × Sarah Ann Willson (1801-1887)
+    │      └── Ellen Stammer (1846-1920) — connects to Flint/Knight
+    │
+    └── Joan Weir ── m. Thomas Henry Carson Gillings
+```
+
+### Heritage Summary
+
+| Line | Origin | Earliest Ancestor | Date |
+|------|--------|-------------------|------|
+| Hamer (paternal) | Lancashire, England | Richard Hamer (weaver) | ~1755 |
+| Stott/Entwistle | Lancashire, England | Thomas Bromley | 1710 |
+| Cheney/Downing/Cork | NSW (colonial) | John Cork | d. 1768 |
+| Reynolds/Martin | NSW | William Reynolds | 1832 |
+| Francisco/Canedo | Portuguese | Domingos F Canedo | 1825 |
+| Whye/Reed | NSW (colonial) | James Reed | 1800 |
+| Evans/Colless | NSW | William J Evans | 1827 |
+| Gillings/Chesterfield | NSW | John William Gillings | — |
+| Breen/Carson | Irish heritage | John Carson | 1730 |
+| Weir/Mackenzie | Scottish heritage | George Keir | 1790 |
+| Flint/Knight/Kingston | NSW | Thomas F Knight | 1848 |
+| Stammer/Wornham | English | John Wornham | 1740 |
