@@ -702,7 +702,7 @@
 
 				<h3>Snowboarding</h3>
 				<img src="images/boarding.jpg" alt="Thomas Hamer snowboarding in southern Europe" class="floated-image"
-					style="width:200px;float:left;padding: 20px;" loading="lazy" width="728" height="970" />
+					style="width:200px;float:left;padding: 20px;" loading="lazy" />
 				<p>I love snowboarding. I've spent a few seasons boarding in southern Europe, with trips to Queenstown, New Zealand, and Hakuba, Japan. <i class="fas fa-snowboarding"></i></p>
 
 				<div style="clear: both;"></div>
@@ -740,10 +740,38 @@
 				<p>I have been alive for <span id="timeLived" style="font-weight: bold;"></span>.</p>
 				<p>The average human lifespan is 83 years, so I have approximately <span id="timeLeft" style="font-weight: bold;"></span> left to make the positive impact I want on the world.</p>
 
-				<h3>Other</h3>
-				<ul>
-					<li><a href="https://www.chess.com/member/spartan00117"><i class="fas fa-chess"></i> Chess.com</a></li>
-				</ul>
+				<h3>Health & Fitness</h3>
+				<p id="fitbit-updated" style="color: rgba(255,255,255,0.5); font-size: 0.85em;"></p>
+				<div id="fitbit-dashboard">
+					<p id="fitbit-loading" style="text-align: center; color: rgba(255,255,255,0.5);">Loading health data...</p>
+					<div id="fitbit-charts" style="display: none;">
+						<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em; margin-bottom: 1.5em;">
+							<div>
+								<p style="margin-bottom: 0.3em;"><strong>Steps</strong> <span style="color: rgba(255,255,255,0.5); font-size: 0.85em;">Today: <span id="fitbit-steps-today">--</span> | Avg: <span id="fitbit-steps-avg">--</span></span></p>
+								<div style="height: 200px;"><canvas id="fitbit-steps-chart"></canvas></div>
+							</div>
+							<div>
+								<p style="margin-bottom: 0.3em;"><strong>Resting Heart Rate</strong> <span style="color: rgba(255,255,255,0.5); font-size: 0.85em;">Latest: <span id="fitbit-hr-latest">--</span> | Avg: <span id="fitbit-hr-avg">--</span></span></p>
+								<div style="height: 200px;"><canvas id="fitbit-hr-chart"></canvas></div>
+							</div>
+						</div>
+						<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em; margin-bottom: 1.5em;">
+							<div>
+								<p style="margin-bottom: 0.3em;"><strong>Active Minutes</strong> <span style="color: rgba(255,255,255,0.5); font-size: 0.85em;">Today: <span id="fitbit-active-today">--</span></span></p>
+								<div style="height: 200px;"><canvas id="fitbit-active-chart"></canvas></div>
+							</div>
+							<div>
+								<p style="margin-bottom: 0.3em;"><strong>Sleep</strong> <span style="color: rgba(255,255,255,0.5); font-size: 0.85em;">Last: <span id="fitbit-sleep-last">--</span></span></p>
+								<div style="height: 200px;"><canvas id="fitbit-sleep-chart"></canvas></div>
+							</div>
+						</div>
+						<div>
+							<p style="margin-bottom: 0.3em;"><strong>Distance & Weight</strong> <span style="color: rgba(255,255,255,0.5); font-size: 0.85em;">Distance: <span id="fitbit-dist-today">--</span> | Weight: <span id="fitbit-weight-latest">--</span></span></p>
+							<div style="height: 200px;"><canvas id="fitbit-dw-chart"></canvas></div>
+						</div>
+					</div>
+				</div>
+
 			</article>
 
 			<!-- Family History -->
@@ -992,6 +1020,8 @@
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
 	<script src="assets/js/date.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+	<script src="assets/js/fitbit-dashboard.js" defer></script>
 	
 	<!-- ============================================
 		 COMPREHENSIVE GOOGLE ANALYTICS 4 TRACKING
