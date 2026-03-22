@@ -145,3 +145,50 @@ James C Weir (1843-1911) ── m. Frances I Mackenzie (1846-1939)
 | Weir/Mackenzie | Scottish heritage | George Keir | 1790 |
 | Flint/Knight/Kingston | NSW | Thomas F Knight | 1848 |
 | Stammer/Wornham | English | John Wornham | 1740 |
+
+### Bromley/Wilson Line (earliest known ancestors)
+
+```
+John Bromley (1671-?) ── m. Hannah Wilson (1679-?)
+│  Born during reign of Charles II — earliest documented ancestor (355 years)
+│
+└── Thomas Bromley (1710-1780)
+    └── Mary Bromley (1736-1775)
+        └── Isaac Entwisle (1766-1839) × Sarah Greenhalgh (1770-1843)
+            └── Mary Entwistle (1795-1871)
+                └── [married Edward Stott → Sarah Jane Stott → Andrew Hamer]
+```
+
+### Reynolds/Pendavis Line (Mary Jane Reynolds' ancestry)
+
+```
+John Reynolds (1719-1762) ── m. Bridget Pendavis (1722-1763)
+│
+└── John Reynolds (1748-?) ── m. Mary Philips (1758-?)
+    │
+    └── Henry Reynolds (1792-1851) ── m. Dorothy Stickland (1795-1848)
+        │
+        └── William Reynolds (1832-1912) ── m. Emma Jane Martin (1851-1937)
+            │  Martin parents: William Martin (1812-1863) × Caroline E Rogers (1819-1873)
+            │
+            └── Mary Jane Reynolds (1882-1942) ── m. Ernest George Hamer (1880-1955)
+```
+
+### Updated Heritage Summary
+
+| Line | Origin | Earliest Ancestor | Date |
+|------|--------|-------------------|------|
+| **Bromley/Wilson** | **England** | **John Bromley** | **1671** |
+| Gay | Unknown | James Gay | 1703 |
+| Reynolds/Pendavis | England | John Reynolds | 1719 |
+| Hamer (paternal) | Lancashire, England | Richard Hamer (weaver) | ~1755 |
+| Carson | Unknown | John Carson | 1730 |
+| Wornham | England | John Wornham | 1740 |
+| Stammer | England | Stephen Stammer | 1770 |
+| Entwisle/Greenhalgh | Lancashire | Isaac Entwisle | 1766 |
+| Cheney | NSW (colonial) | James Cheney | 1796 |
+| Downing/Cork | NSW | John Cork | d. 1768 |
+| Francisco/Canedo | Portuguese | Domingos F Canedo | 1825 |
+| Weir/Mackenzie | Scottish | George Keir | 1790 |
+| Breen/Crooks | Irish | James Breen | 1790 |
+| Reed/Heazel | NSW | James Reed | 1800 |
