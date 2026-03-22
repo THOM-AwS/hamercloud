@@ -192,3 +192,53 @@ John Reynolds (1719-1762) ── m. Bridget Pendavis (1722-1763)
 | Weir/Mackenzie | Scottish | George Keir | 1790 |
 | Breen/Crooks | Irish | James Breen | 1790 |
 | Reed/Heazel | NSW | James Reed | 1800 |
+
+### Perthville Uniting Church Cemetery Records (17 Hamer graves)
+
+Source: Australian Cemeteries Index (austcemindex.com, cemetery ID 306)
+
+| Name | Born | Died | Details |
+|------|------|------|---------|
+| Andrew Hamer | 11 Nov 1812 | 1 Aug 1893 | "son/Thomas & Mary (Briggs); b. Bolton, Lancashire" |
+| Sarah (Stott) Hamer | 3 Mar 1817 | 8 Mar 1855 | "dau/Edward & Mary (Entwisle); b. Bolton, Lancashire" |
+| Michael Elias Hamer | 24 Feb 1846 | 6 Aug 1929 | "son/Andrew & Sarah (Stott); b. Queen Charlotte's Vale" |
+| Sarah Prudence (Cheney) Hamer | 13 Jul 1851 | 25 Apr 1935 | wife of Michael Elias |
+| Sarah Jane Hamer | 11 Jul 1877 | 12 May 1951 | dau/Michael Elias & Sarah Prudence |
+| Ellen Rose (Hamer) Shute | 1881 | 18 Oct 1963 | dau/Michael Elias & Sarah Prudence |
+| Arthur Henry Hamer | 25 Jul 1883 | 1 Apr 1956 | son/Michael Elias & Sarah Prudence |
+| Isabel (Loudon) Hamer | 18 Jun 1882 | 22 Sep 1957 | wife of Arthur Henry |
+| Alma Prudence (Hamer) Turnbull | 14 Oct 1893 | 8 Jun 1978 | dau/Michael Elias & Sarah Prudence |
+| Alfred Hamer | Sep 1893 | 26 Mar 1895 | "son/Elias & Sarah Prudence" — died age 1 |
+| Ralph Henry Hamer | 19 Jul 1913 | 15 Feb 2003 | son/Arthur Henry & Isabel (Loudon), NX32095 |
+| Madge (Dunford) Hamer | 21 Nov 1919 | 26 Sep 2011 | wife of Ralph Henry |
+| Clive Arthur Hamer AM | 4 Oct 1923 | 1 May 2015 | son/Arthur Henry & Isabel (Loudon), NX141383 |
+| Joan Muriel (Ashcroft) Hamer | 6 Aug 1930 | 12 Aug 2010 | wife of Clive Arthur |
+| Thomas Joseph Hamer | 1870 | 29 Mar 1883 | son/Thomas & Emma — separate Thomas Hamer family |
+| William Andrew Hamer | Apr 1875 | 25 Mar 1876 | son/Thomas & Emma — infant |
+| Emma (Bell) Hamer | 25 Nov 1850 | 1899 | wife of Thomas — separate family |
+
+### Key Family Relationship Confirmed
+
+Ernest George Hamer (1879-1955) and Arthur Henry Hamer (1883-1956) were BROTHERS
+(both sons of Michael Elias & Sarah Prudence Cheney).
+
+Arthur Henry's sons: Ralph Henry Hamer (NX32095) and Clive Arthur Hamer AM (NX141383)
+Ernest George's son: Lloyd George "Bill" Hamer (1919-2012)
+
+Therefore: Lloyd George Hamer and Clive Arthur Hamer AM were FIRST COUSINS.
+
+### Michael Elias Hamer — Complete Children List (from WikiTree + cemetery records)
+
+| # | Name | Born | Died | Married | Notes |
+|---|------|------|------|---------|-------|
+| 1 | Anne Letitia Hamer | 1871 | ? | Hill | |
+| 2 | Rachel Hamer | 1873 | ? | | |
+| 3 | Mary Rachel Hamer | 1873 | ? | | Twins with Rachel? |
+| 4 | Ada Emily Hamer | 1875 | ? | | |
+| 5 | Sarah Jane Hamer | 11 Jul 1877 | 12 May 1951 | — | Buried Perthville |
+| 6 | **Ernest George Hamer** | **1879** | **1955** | **Mary Jane Reynolds** | **Thomas's great-grandfather** |
+| 7 | Ellen Rose Hamer | 1881 | 18 Oct 1963 | Shute | Buried Perthville |
+| 8 | **Arthur Henry Hamer** | **25 Jul 1883** | **1 Apr 1956** | **Isabel Loudon** | **Clive's father. Buried Perthville** |
+| 9 | Herbert William E Hamer | 1890 | ? | Amy | N272454, Sapper WWII. Eva & Edward's father |
+| 10 | Alma Prudence Hamer | 14 Oct 1893 | 8 Jun 1978 | Turnbull | Buried Perthville |
+| 11 | Alfred Hamer | Sep 1893 | 26 Mar 1895 | — | Died infant. Buried Perthville |
