@@ -242,3 +242,33 @@ Therefore: Lloyd George Hamer and Clive Arthur Hamer AM were FIRST COUSINS.
 | 9 | Herbert William E Hamer | 1890 | ? | Amy | N272454, Sapper WWII. Eva & Edward's father |
 | 10 | Alma Prudence Hamer | 14 Oct 1893 | 8 Jun 1978 | Turnbull | Buried Perthville |
 | 11 | Alfred Hamer | Sep 1893 | 26 Mar 1895 | — | Died infant. Buried Perthville |
+
+### Hamer Hall — Heritage Gateway + The Peerage
+
+**Heritage Gateway Record (UID 46048):**
+- Hamer Hall, Rochdale, Lancashire (Grid Ref: SD9056014490)
+- Held by Hamer family from medieval period
+- Henry Hamer documented 1597-8
+- Rebuilt 1755 by Samuel Hamer as "a large red brick 18th century building"
+- Demolished 1908
+- Source: Heritage Gateway, OS mapping, History of Rochdale (1889)
+
+**The Peerage (thepeerage.com):**
+- Sir Thomas Hamer (1790-1860) — knight
+- John Hamer (31 Dec 1815 - 31 Oct 1876) — born AND died at Hamer Hall, Rochdale
+  - Wife: Anne Catherine Ward (1820-1880)
+  - Father-in-law: William Ward of Little Houghton House, Northamptonshire
+- Arthur Hamer (1753-1829)
+- Dorothy Hamer (1728-1823)
+
+This is the direct Hamer Hall gentry line — the Lords of the Manor from medieval times through to the Victorian era.
+
+### Crusades Research
+
+No primary source evidence found for any Hamer personally crusading. John de Heymer was Lord of the Manor during the Third Crusade (1189-1192) period. Geoffrey Hamer's book "The History of Hamer" (1994) would be the definitive source — available at FamilySearch Library, Salt Lake City.
+
+### Key Research Sources Not Yet Consulted
+- Geoffrey Hamer, "The History of Hamer: The Origins of the Name and a Lancashire Family" (1994)
+- Baines, "History of Lancashire" (cited for John de Heymer 1461 reference)
+- Lancashire Pipe Rolls (National Archives, Kew)
+- Rochdale manorial records
