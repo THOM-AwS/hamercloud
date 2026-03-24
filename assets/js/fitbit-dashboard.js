@@ -65,9 +65,9 @@
     var result = {};
     var key;
     for (key in target) {
-      if (target.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(target, key)) {
         if (typeof target[key] === 'object' && target[key] !== null && !Array.isArray(target[key]) &&
-            source.hasOwnProperty(key) && typeof source[key] === 'object' && source[key] !== null) {
+            Object.prototype.hasOwnProperty.call(source, key) && typeof source[key] === 'object' && source[key] !== null) {
           result[key] = deepMerge(target[key], source[key]);
         } else {
           result[key] = target[key];
@@ -75,7 +75,7 @@
       }
     }
     for (key in source) {
-      if (source.hasOwnProperty(key) && !result.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(source, key) && !Object.prototype.hasOwnProperty.call(result, key)) {
         result[key] = source[key];
       }
     }
