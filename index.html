@@ -12,6 +12,30 @@
 					'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
 		})(window, document, 'script', 'dataLayer', 'GTM-M9HCPGN');</script>
 	<!-- End Google Tag Manager -->
+	<!-- GA4 gtag.js — enables virtual pageview tracking for SPA hash navigation -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6MXJ4EVYZ2"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-6MXJ4EVYZ2', { send_page_view: false });
+
+		// Fire page_view on initial load with hash
+		var initialHash = window.location.hash.substring(1);
+		gtag('event', 'page_view', {
+			page_path: initialHash ? '/' + initialHash : '/',
+			page_title: document.title + (initialHash ? ' - ' + initialHash : '')
+		});
+
+		// Fire page_view on hash changes (SPA section navigation)
+		window.addEventListener('hashchange', function() {
+			var section = window.location.hash.substring(1) || 'home';
+			gtag('event', 'page_view', {
+				page_path: '/' + section,
+				page_title: document.title + ' - ' + section
+			});
+		});
+	</script>
 	<title>Thomas Hamer | Staff Engineer | AWS Solutions Architect Professional</title>
 	<link rel="icon" href="images/favicon-32x32.png" sizes="32x32" type="image/png" />
 	<link rel="icon" href="images/favicon-16x16.png" sizes="16x16" type="image/png" />
