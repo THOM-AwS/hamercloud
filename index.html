@@ -461,24 +461,6 @@
 	}
 	</script>
 
-	<!-- Structured Data: VideoObject for YouTube talk -->
-	<script type="application/ld+json">
-	{
-		"@context": "https://schema.org",
-		"@type": "VideoObject",
-		"name": "SSH Security Talk - Zero-Days Meetup",
-		"description": "Thomas Hamer presents on SSH security best practices, covering Ed25519 keys, hardening sshd_config, jump hosts, and certificate-based authentication at the Zero-Days Meetup in Sydney.",
-		"thumbnailUrl": "https://img.youtube.com/vi/fc3J2VU4YMs/maxresdefault.jpg",
-		"uploadDate": "2020-01-01T00:00:00+11:00",
-		"duration": "PT25M",
-		"contentUrl": "https://www.youtube.com/watch?v=fc3J2VU4YMs",
-		"embedUrl": "https://www.youtube.com/embed/fc3J2VU4YMs",
-		"author": {
-			"@id": "https://hamer.cloud/#person"
-		}
-	}
-	</script>
-
 </head>
 
 <body class="is-preload">
@@ -624,31 +606,55 @@
 
 				<p>Currently working at Commonwealth Bank on enterprise AWS platform engineering. Previously consulted for clients across healthcare, finance, blockchain, mining, oil and gas, telecommunications, retail, and food & beverage.</p>
 
-				<p>I'm the founder of the <a href="https://www.meetup.com/en-AU/Zero-Days/">Zero-Days Meetup</a> where I share AWS and cloud security knowledge. Here's my talk on SSH security:</p>
+				<p>I'm the founder of the <a href="https://www.meetup.com/en-AU/Zero-Days/">Zero-Days Meetup</a> where I share AWS and cloud security knowledge. I've also presented to the Royal United Service Institute of NSW on data protection and national security.</p>
 
 				<style>
-					.embed-container {
-						position: relative;
-						padding-bottom: 56.25%;
-						height: 0;
-						overflow: hidden;
-						max-width: 100%;
+					.talks-cta {
+						display: flex;
+						gap: 1rem;
+						align-items: center;
+						padding: 1rem 1.25rem;
+						background: rgba(255, 255, 255, 0.04);
+						border: 1px solid rgba(255, 255, 255, 0.1);
+						border-radius: 6px;
+						text-decoration: none;
+						color: inherit;
+						transition: border-color 0.2s, transform 0.2s;
+						margin: 1rem 0 1.5rem;
 					}
-
-					.embed-container iframe,
-					.embed-container object,
-					.embed-container embed {
-						position: absolute;
-						top: 0;
-						left: 0;
-						width: 100%;
-						height: 100%;
+					.talks-cta:hover {
+						border-color: rgba(255, 255, 255, 0.3);
+						transform: translateY(-1px);
 					}
+					.talks-cta-thumbs {
+						display: flex;
+						flex-shrink: 0;
+					}
+					.talks-cta-thumbs img {
+						width: 64px;
+						height: 36px;
+						object-fit: cover;
+						border-radius: 3px;
+						border: 1px solid rgba(255, 255, 255, 0.15);
+					}
+					.talks-cta-thumbs img + img { margin-left: -8px; }
+					.talks-cta-text { flex: 1; min-width: 0; }
+					.talks-cta-text strong { display: block; font-size: 1rem; }
+					.talks-cta-text span { display: block; font-size: 0.85rem; opacity: 0.65; }
+					.talks-cta-arrow { opacity: 0.5; font-size: 1.25rem; }
 				</style>
-				<div class='embed-container'><iframe src='https://www.youtube.com/embed/fc3J2VU4YMs'
-						allowfullscreen loading="lazy"></iframe></div>
+				<a class="talks-cta" href="videos/index.html">
+					<span class="talks-cta-thumbs">
+						<img src="https://img.youtube.com/vi/5r82TS2kPUc/hqdefault.jpg" alt="Clouded Views talk thumbnail" loading="lazy" width="480" height="360">
+						<img src="https://img.youtube.com/vi/fc3J2VU4YMs/hqdefault.jpg" alt="SSH talk thumbnail" loading="lazy" width="480" height="360">
+					</span>
+					<span class="talks-cta-text">
+						<strong>Watch my talks &rarr;</strong>
+						<span>2 talks &middot; SSH security, data protection &amp; national security</span>
+					</span>
+					<span class="talks-cta-arrow">&rsaquo;</span>
+				</a>
 
-				<br>
 				<div class="github-card" data-github="thom-aws" data-width="100%" data-height="152"
 					data-theme="default">
 				</div>

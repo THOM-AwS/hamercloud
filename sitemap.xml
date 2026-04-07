@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 
     <!-- Homepage -->
     <url>
         <loc>https://hamer.cloud/</loc>
-        <lastmod>2026-03-21</lastmod>
+        <lastmod>2026-04-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
         <image:image>
@@ -19,7 +20,7 @@
     <!-- About Section -->
     <url>
         <loc>https://hamer.cloud/#about</loc>
-        <lastmod>2026-03-21</lastmod>
+        <lastmod>2026-04-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -27,7 +28,7 @@
     <!-- Work/Portfolio Section -->
     <url>
         <loc>https://hamer.cloud/#work</loc>
-        <lastmod>2026-03-21</lastmod>
+        <lastmod>2026-04-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
         <image:image>
@@ -49,7 +50,7 @@
     <!-- Contact Section -->
     <url>
         <loc>https://hamer.cloud/#contact</loc>
-        <lastmod>2026-03-21</lastmod>
+        <lastmod>2026-04-07</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -57,7 +58,7 @@
     <!-- Personal Section -->
     <url>
         <loc>https://hamer.cloud/#personal</loc>
-        <lastmod>2026-03-21</lastmod>
+        <lastmod>2026-04-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
         <image:image>
@@ -73,7 +74,7 @@
     <!-- Family History Section -->
     <url>
         <loc>https://hamer.cloud/#family</loc>
-        <lastmod>2026-03-21</lastmod>
+        <lastmod>2026-04-07</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
         <image:image>
@@ -81,6 +82,55 @@
             <image:title>Hamer Family Crest</image:title>
             <image:caption>Historical Hamer family coat of arms from Lancashire, England</image:caption>
         </image:image>
+    </url>
+
+    <!-- Talks Archive (Index) -->
+    <url>
+        <loc>https://hamer.cloud/videos/</loc>
+        <lastmod>2026-04-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Talk: Clouded Views (RUSI NSW, 2024) -->
+    <url>
+        <loc>https://hamer.cloud/videos/clouded-views-data-protection.html</loc>
+        <lastmod>2026-04-07</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.7</priority>
+        <video:video>
+            <video:thumbnail_loc>https://img.youtube.com/vi/5r82TS2kPUc/maxresdefault.jpg</video:thumbnail_loc>
+            <video:title>Clouded Views - data protection in today's electronic world</video:title>
+            <video:description>Thomas Hamer presents to the Royal United Service Institute of NSW on cyberspace, data protection, and shortcomings that could threaten national security. Q&amp;A included.</video:description>
+            <video:content_loc>https://www.youtube.com/watch?v=5r82TS2kPUc</video:content_loc>
+            <video:player_loc>https://www.youtube.com/embed/5r82TS2kPUc</video:player_loc>
+            <video:publication_date>2024-10-30T00:00:00+11:00</video:publication_date>
+            <video:family_friendly>yes</video:family_friendly>
+            <video:requires_subscription>no</video:requires_subscription>
+            <video:live>no</video:live>
+            <video:uploader info="https://www.youtube.com/@royalunitedserviceinstitut6194">Royal United Service Institute of New South Wales</video:uploader>
+        </video:video>
+    </url>
+
+    <!-- Talk: SSH Security Zero Days (CMD Solutions, 2019) -->
+    <url>
+        <loc>https://hamer.cloud/videos/ssh-security-zero-days.html</loc>
+        <lastmod>2026-04-07</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.7</priority>
+        <video:video>
+            <video:thumbnail_loc>https://img.youtube.com/vi/fc3J2VU4YMs/maxresdefault.jpg</video:thumbnail_loc>
+            <video:title>Thomas Hamer and Secure Shell (SSH) | Zero Days</video:title>
+            <video:description>Thomas Hamer gives an intro on SSH, the Secure Shell, covering all kinds of interesting ways that SSH can be used. There is something for everyone, new and old in this video.</video:description>
+            <video:content_loc>https://www.youtube.com/watch?v=fc3J2VU4YMs</video:content_loc>
+            <video:player_loc>https://www.youtube.com/embed/fc3J2VU4YMs</video:player_loc>
+            <video:duration>1500</video:duration>
+            <video:publication_date>2019-10-25T00:00:00+11:00</video:publication_date>
+            <video:family_friendly>yes</video:family_friendly>
+            <video:requires_subscription>no</video:requires_subscription>
+            <video:live>no</video:live>
+            <video:uploader info="https://www.youtube.com/@cmdsolutions_aws">CMD Solutions</video:uploader>
+        </video:video>
     </url>
 
 </urlset>

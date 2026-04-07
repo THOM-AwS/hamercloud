@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Google Tag Manager -->
+	<script>(function (w, d, s, l, i) {
+			w[l] = w[l] || []; w[l].push({
+				'gtm.start':
+					new Date().getTime(), event: 'gtm.js'
+			}); var f = d.getElementsByTagName(s)[0],
+				j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+					'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+		})(window, document, 'script', 'dataLayer', 'GTM-M9HCPGN');</script>
+	<!-- End Google Tag Manager -->
+	<!-- GA4 gtag.js -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6MXJ4EVYZ2"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-6MXJ4EVYZ2');
+	</script>
+
+	<meta charset="utf-8" />
+	<title>Thomas Hamer and Secure Shell (SSH) | Zero Days Talk | Thomas Hamer</title>
+	<meta name="description" content="Thomas Hamer presents an introduction to SSH (Secure Shell) at the Zero Days Meetup in Sydney. Covering practical SSH usage, hardening, and patterns for both new and experienced users.">
+	<meta name="author" content="Thomas Hamer">
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+	<meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+	<link rel="canonical" href="https://hamer.cloud/videos/ssh-security-zero-days.html">
+
+	<link rel="icon" href="../images/favicon-32x32.png" sizes="32x32" type="image/png" />
+	<link rel="icon" href="../images/favicon-16x16.png" sizes="16x16" type="image/png" />
+	<link rel="apple-touch-icon" href="../images/apple-touch-icon.png" />
+	<link rel="shortcut icon" href="../images/favicon.ico" />
+
+	<meta name="theme-color" content="#1b1f22">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<!-- Open Graph -->
+	<meta property="og:type" content="video.other">
+	<meta property="og:url" content="https://hamer.cloud/videos/ssh-security-zero-days.html">
+	<meta property="og:title" content="Thomas Hamer and Secure Shell (SSH) | Zero Days Talk">
+	<meta property="og:description" content="Thomas Hamer presents an introduction to SSH at the Zero Days Meetup in Sydney. Practical SSH usage, hardening, and patterns for new and experienced users.">
+	<meta property="og:image" content="https://img.youtube.com/vi/fc3J2VU4YMs/maxresdefault.jpg">
+	<meta property="og:video" content="https://www.youtube.com/embed/fc3J2VU4YMs">
+	<meta property="og:video:type" content="text/html">
+	<meta property="og:video:width" content="1280">
+	<meta property="og:video:height" content="720">
+	<meta property="og:site_name" content="Thomas Hamer">
+	<meta property="og:locale" content="en_AU">
+
+	<!-- Twitter -->
+	<meta name="twitter:card" content="player">
+	<meta name="twitter:title" content="Thomas Hamer and Secure Shell (SSH) | Zero Days Talk">
+	<meta name="twitter:description" content="Thomas Hamer presents an introduction to SSH at the Zero Days Meetup in Sydney.">
+	<meta name="twitter:image" content="https://img.youtube.com/vi/fc3J2VU4YMs/maxresdefault.jpg">
+	<meta name="twitter:player" content="https://www.youtube.com/embed/fc3J2VU4YMs">
+	<meta name="twitter:player:width" content="1280">
+	<meta name="twitter:player:height" content="720">
+
+	<!-- Preconnect hints -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preconnect" href="https://www.youtube.com">
+	<link rel="preconnect" href="https://i.ytimg.com">
+
+	<link rel="preload" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;600&display=swap"></noscript>
+
+	<!-- Structured Data: VideoObject -->
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "VideoObject",
+		"@id": "https://hamer.cloud/videos/ssh-security-zero-days.html#video",
+		"name": "Thomas Hamer and Secure Shell (SSH) | Zero Days",
+		"description": "Thomas Hamer gives an intro on SSH, the Secure Shell, covering all kinds of interesting ways that SSH can be used. There is something for everyone, new and old in this video. The talk was delivered at the Zero Days Meetup in Sydney, founded by Thomas Hamer.",
+		"thumbnailUrl": [
+			"https://img.youtube.com/vi/fc3J2VU4YMs/maxresdefault.jpg",
+			"https://img.youtube.com/vi/fc3J2VU4YMs/hqdefault.jpg"
+		],
+		"uploadDate": "2019-10-25",
+		"duration": "PT25M",
+		"contentUrl": "https://www.youtube.com/watch?v=fc3J2VU4YMs",
+		"embedUrl": "https://www.youtube.com/embed/fc3J2VU4YMs",
+		"inLanguage": "en",
+		"isFamilyFriendly": true,
+		"author": {
+			"@type": "Person",
+			"@id": "https://hamer.cloud/#person",
+			"name": "Thomas Hamer",
+			"url": "https://hamer.cloud/"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "CMD Solutions",
+			"url": "https://www.youtube.com/@cmdsolutions_aws",
+			"description": "CMD Solutions is an AWS Premier Consulting Partner."
+		},
+		"interactionStatistic": {
+			"@type": "InteractionCounter",
+			"interactionType": "https://schema.org/WatchAction",
+			"userInteractionCount": 148
+		},
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://hamer.cloud/videos/ssh-security-zero-days.html"
+		}
+	}
+	</script>
+
+	<!-- Structured Data: BreadcrumbList -->
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		"itemListElement": [
+			{
+				"@type": "ListItem",
+				"position": 1,
+				"name": "Home",
+				"item": "https://hamer.cloud/"
+			},
+			{
+				"@type": "ListItem",
+				"position": 2,
+				"name": "Talks",
+				"item": "https://hamer.cloud/videos/"
+			},
+			{
+				"@type": "ListItem",
+				"position": 3,
+				"name": "Thomas Hamer and Secure Shell (SSH) | Zero Days"
+			}
+		]
+	}
+	</script>
+
+	<style>
+		body {
+			background: #1b1f22;
+			color: #ffffff;
+			font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+			font-weight: 300;
+			margin: 0;
+			line-height: 1.5;
+			-webkit-font-smoothing: antialiased;
+		}
+		.watch-page {
+			max-width: 960px;
+			margin: 0 auto;
+			padding: 2rem 1.25rem;
+		}
+		.back-link {
+			display: inline-block;
+			color: #ffffff;
+			opacity: 0.65;
+			text-decoration: none;
+			margin-bottom: 1.5rem;
+			font-size: 0.95rem;
+			letter-spacing: 0.05em;
+		}
+		.back-link:hover { opacity: 1; }
+		h1 {
+			font-size: clamp(1.5rem, 3vw, 2.25rem);
+			font-weight: 600;
+			color: #ffffff;
+			margin: 0 0 1.25rem;
+			letter-spacing: -0.01em;
+		}
+		.video-wrapper {
+			position: relative;
+			padding-bottom: 56.25%;
+			height: 0;
+			overflow: hidden;
+			background: #000;
+			border-radius: 4px;
+			margin-bottom: 1.5rem;
+			box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+		}
+		.video-wrapper iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			border: 0;
+		}
+		.meta {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 1rem 1.5rem;
+			margin-bottom: 1.5rem;
+			padding-bottom: 1.25rem;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+			color: rgba(255, 255, 255, 0.65);
+			font-size: 0.9rem;
+		}
+		.meta strong {
+			color: #ffffff;
+			font-weight: 600;
+			margin-right: 0.35rem;
+		}
+		.description {
+			font-size: 1.05rem;
+			line-height: 1.65;
+			color: rgba(255, 255, 255, 0.88);
+		}
+		.description p { margin: 0 0 1rem; }
+		.description a { color: #ffffff; }
+		.credit {
+			margin-top: 2.5rem;
+			padding-top: 1.25rem;
+			border-top: 1px solid rgba(255, 255, 255, 0.1);
+			font-size: 0.85rem;
+			color: rgba(255, 255, 255, 0.55);
+		}
+		.credit a { color: rgba(255, 255, 255, 0.85); }
+	</style>
+</head>
+
+<body>
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M9HCPGN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+	<main class="watch-page">
+		<a href="../" class="back-link">&larr; Back to hamer.cloud</a>
+
+		<h1>Thomas Hamer and Secure Shell (SSH) | Zero Days</h1>
+
+		<div class="video-wrapper">
+			<iframe
+				src="https://www.youtube.com/embed/fc3J2VU4YMs"
+				title="Thomas Hamer and Secure Shell (SSH) | Zero Days"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+				referrerpolicy="strict-origin-when-cross-origin"
+				allowfullscreen></iframe>
+		</div>
+
+		<div class="meta">
+			<span><strong>Speaker:</strong> Thomas Hamer</span>
+			<span><strong>Published:</strong> 25 October 2019</span>
+			<span><strong>Duration:</strong> ~25 min</span>
+			<span><strong>Hosted by:</strong> CMD Solutions</span>
+		</div>
+
+		<div class="description">
+			<p>Thomas Hamer gives an intro on SSH, the Secure Shell, covering all kinds of interesting ways that SSH can be used. There is something for everyone, new and old in this video.</p>
+			<p>The talk was delivered at the Zero Days Meetup in Sydney, founded by Thomas Hamer, where AWS and cloud security topics are discussed. The session was recorded and published by CMD Solutions, an AWS Premier Consulting Partner that hosted the meetup.</p>
+		</div>
+
+		<div class="credit">
+			<p>Recorded and published by <a href="https://www.youtube.com/@cmdsolutions_aws" target="_blank" rel="noopener">CMD Solutions</a>, an AWS Premier Consulting Partner. Embedded here with attribution. <a href="../">More about Thomas Hamer &rarr;</a></p>
+		</div>
+	</main>
+</body>
+
+</html>
