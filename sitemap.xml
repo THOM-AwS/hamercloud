@@ -86,7 +86,7 @@
 
     <!-- Talks Archive (Index) -->
     <url>
-        <loc>https://hamer.cloud/videos/</loc>
+        <loc>https://hamer.cloud/videos/index.html</loc>
         <lastmod>2026-04-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
