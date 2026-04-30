@@ -71,5 +71,19 @@ function formatTime(time) {
   return `${time.years} years, ${time.months} months, ${time.days} days, ${time.hours} hours, ${time.minutes} minutes, and ${time.seconds} seconds`;
 }
 
+function updateYearsInAustralia() {
+  // Andrew Hamer arrived Liverpool -> Port Jackson aboard "Brothers", 1841.
+  // First Hamer presence in Australia.
+  const arrivalYear = 1841;
+  const target = document.getElementById("yearsInAustralia");
+  if (!target) return;
+  const now = new Date();
+  // Anniversary not known to a finer granularity than year, so use whole years.
+  target.textContent = String(now.getUTCFullYear() - arrivalYear);
+}
+
 // Call the function on page load
-window.onload = calculateLifeTime;
+window.addEventListener("load", () => {
+  calculateLifeTime();
+  updateYearsInAustralia();
+});
