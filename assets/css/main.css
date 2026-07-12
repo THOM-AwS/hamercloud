@@ -1864,3 +1864,23 @@ article#about {
     transition: color 0.3s ease, text-shadow 0.3s ease;
     cursor: pointer;
 }
+
+/* --- Hero location + consulting cross-link --- */
+
+.hero-location {
+	margin: 0.25rem 0 0;
+	font-size: 0.8rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	opacity: 0.75;
+}
+
+.consulting-link {
+	margin: 0.75rem 0 0;
+	font-size: 0.9rem;
+}
+
+.consulting-link a {
+	border-bottom: dotted 1px;
+	text-decoration: none;
+}
