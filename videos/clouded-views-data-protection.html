@@ -294,6 +294,26 @@
 			<p>Recorded and published by the <a href="https://www.youtube.com/@royalunitedserviceinstitut6194" target="_blank" rel="noopener">Royal United Service Institute of New South Wales</a>. Embedded here with attribution. <a href="../">More about Thomas Hamer &rarr;</a></p>
 		</div>
 	</main>
+
+	<!-- Core Web Vitals RUM: field LCP/INP/CLS sent to GA4 as events. -->
+	<script defer src="../assets/js/web-vitals-5.1.0.iife.js"></script>
+	<script>
+		addEventListener('DOMContentLoaded', function () {
+			if (!window.webVitals || typeof gtag !== 'function') { return; }
+			function report(metric) {
+				gtag('event', metric.name, {
+					value: metric.delta,
+					metric_id: metric.id,
+					metric_value: metric.value,
+					metric_rating: metric.rating,
+					non_interaction: true
+				});
+			}
+			webVitals.onLCP(report);
+			webVitals.onINP(report);
+			webVitals.onCLS(report);
+		});
+	</script>
 </body>
 
 </html>
