@@ -1,0 +1,27 @@
+# Thomas Hamer
+
+> Personal site of Thomas Hamer — Staff Engineer and AWS Solutions Architect Professional at
+> Commonwealth Bank, based in Sydney, Australia. Enterprise AWS platform engineering across
+> networking, observability, and identity. Royal Australian Navy veteran (Afghanistan
+> deployment).
+
+## About
+
+This is a personal profile and portfolio site, not a company site. For IT consulting
+services (identity and access management, networking, infrastructure, email security), see
+Thomas's consultancy: https://hamertechnical.com.au/
+
+## Content on this site
+
+- Professional background and AWS certifications
+- Selected work: cloud architecture case studies (video-on-demand platform, VPC/Cognito
+  architecture)
+- Conference talks: SSH security (CMD Solutions Zero Days, 2019), data protection and
+  national security (Royal United Service Institute of NSW, 2024) — see
+  https://hamer.cloud/videos/index.html
+- Personal interests and Hamer family history research
+
+## Contact
+
+- Web: https://hamer.cloud/
+- Consulting enquiries: https://hamertechnical.com.au/

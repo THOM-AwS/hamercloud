@@ -30,23 +30,29 @@ Allow: /
 User-agent: Twitterbot
 Allow: /
 
-# Block AI training crawlers (optional - keeps content for search but not AI training)
+# Explicitly welcome AI answer-engine and agentic crawlers.
 User-agent: GPTBot
-Disallow: /
+Allow: /
 
 User-agent: ChatGPT-User
-Disallow: /
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
 
 User-agent: CCBot
-Disallow: /
+Allow: /
 
 User-agent: anthropic-ai
-Disallow: /
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
 
 User-agent: Google-Extended
-Disallow: /
+Allow: /
 
-# Block known bad bots
+# Block known bad bots (unrelated to AI/agents — SEO scrapers)
 User-agent: AhrefsBot
 Disallow: /
 
