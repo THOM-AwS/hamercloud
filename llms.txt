@@ -1,7 +1,7 @@
 # Thomas Hamer
 
 > Personal site of Thomas Hamer — Staff Engineer and AWS Solutions Architect Professional at
-> Commonwealth Bank, based in Sydney, Australia. Enterprise AWS platform engineering across
+> financial services, based in Sydney, Australia. Enterprise AWS platform engineering across
 > networking, observability, and identity. Royal Australian Navy veteran (Afghanistan
 > deployment).
 
