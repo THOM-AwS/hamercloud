@@ -206,6 +206,10 @@ Ever thought of calling darling ? (Do I wanna know ?) Do you want me crawling ba
     `So I strive always to keep my consience clear before God and man.`,
 
     `You have no enemies, you say? Alas, my friend, the boast is poor. He who has mingled in the fray of duty that the brave endure, must have made foes. If you have none, small is the work that you have done. You've hit no traitor on the hip. You've dashed no cup from perjured lip. You've never turned the wrong to right. You've been a coward in the fight.`,
+
+    `The men that conquered this land slept in mud and their grandchildren complain about the temperature of wine.`,
+
+    `Now we suffer the evils of a long peace; luxury, more savage than war, has fallen upon us and avenges the conquered world.`,
 ]
 
 export default content;
