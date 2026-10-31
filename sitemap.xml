@@ -9,22 +9,17 @@
          consolidated here rather than listed under separate fragment URLs. -->
     <url>
         <loc>https://hamer.cloud/</loc>
-        <lastmod>2026-07-13</lastmod>
+        <lastmod>2026-10-31</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
         <image:image>
             <image:loc>https://hamer.cloud/images/thomas.jpg</image:loc>
-            <image:title>Thomas Hamer - Staff Engineer and AWS Solutions Architect</image:title>
-            <image:caption>Thomas Hamer, Staff Engineer in financial services and AWS Solutions Architect Professional</image:caption>
+            <image:title>Thomas Hamer - Principal Engineer and AWS Solutions Architect</image:title>
+            <image:caption>Thomas Hamer, Principal Engineer at Hamer Technical and AWS Solutions Architect Professional</image:caption>
         </image:image>
         <image:image>
             <image:loc>https://hamer.cloud/images/aws.png</image:loc>
             <image:title>AWS Solutions Architect Professional Badge</image:title>
-        </image:image>
-        <image:image>
-            <image:loc>https://hamer.cloud/images/amplifyvod.png</image:loc>
-            <image:title>AWS Amplify Video on Demand Architecture</image:title>
-            <image:caption>Architecture diagram for Netflix-style video streaming platform built with AWS Amplify</image:caption>
         </image:image>
         <image:image>
             <image:loc>https://hamer.cloud/images/vpccog.png</image:loc>
