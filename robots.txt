@@ -1,5 +1,5 @@
 # robots.txt for hamer.cloud
-# Thomas Hamer - Staff Engineer | AWS Solutions Architect Professional
+# Thomas Hamer - Principal Engineer | AWS Solutions Architect Professional
 
 # Allow all search engines
 User-agent: *

@@ -1,8 +1,8 @@
 # Thomas Hamer
 
-> Personal site of Thomas Hamer — Staff Engineer and AWS Solutions Architect Professional at
-> financial services, based in Sydney, Australia. Enterprise AWS platform engineering across
-> networking, observability, and identity. Royal Australian Navy veteran (Afghanistan
+> Personal site of Thomas Hamer, Principal Engineer at Hamer Technical and AWS Solutions
+> Architect Professional, based in Sydney, Australia. Leads AWS platform work in financial
+> services and is building an autonomous UAV platform. Royal Australian Navy veteran (Afghanistan
 > deployment).
 
 ## About
@@ -14,8 +14,7 @@ Thomas's consultancy: https://hamertechnical.com.au/
 ## Content on this site
 
 - Professional background and AWS certifications
-- Selected work: cloud architecture case studies (video-on-demand platform, VPC/Cognito
-  architecture)
+- Selected work: cloud architecture case studies (VPC/Cognito architecture)
 - Conference talks: SSH security (CMD Solutions Zero Days, 2019), data protection and
   national security (Royal United Service Institute of NSW, 2024) — see
   https://hamer.cloud/videos/index.html
