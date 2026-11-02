@@ -1,1 +1,13 @@
 .DS_Store
+
+# Terraform
+infra/**/.terraform/
+infra/**/*.tfstate
+infra/**/*.tfstate.*
+infra/**/tfplan
+infra/**/plan-summary.txt
+infra/**/terraform.tfvars
+# archive_file outputs (built on every plan)
+infra/fitbit_api.zip
+infra/fitbit_fetch.zip
+infra/secheader.py.zip
